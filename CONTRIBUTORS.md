@@ -14,7 +14,15 @@
   
 * **[Кумеркин Максим](https://github.com/Kumerkin)**
 
-  * Технолог со стороны [заказчика](http://www.ecookna.ru/company/)  
+  * Технолог со стороны [заказчика](http://www.ecookna.ru/company/) по алюминию
+  
+* **[Шимко Андрей](#)**
+
+  * Технолог со стороны [заказчика](http://www.ecookna.ru/company/) по ПВХ
+  
+* **[Сухов Андрей](#)**
+
+  * Разработчик со стороны [заказчика](http://www.ecookna.ru/company/) (1С, javascript)
   
 * **[Маляров Евгений](https://github.com/unpete)**
 
