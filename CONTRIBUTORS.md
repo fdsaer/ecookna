@@ -18,9 +18,9 @@
   
 * **[Шимко Андрей](https://github.com/A-Shimko)**
 
-  * Технолог со стороны [заказчика](http://www.ecookna.ru/company/) по ПВХ
+  * Главный технолог со стороны [заказчика](http://www.ecookna.ru/company/)
   
-* **[Сухов Андрей](#)**
+* **[Сухов Андрей](https://github.com/Sehktel)**
 
   * Разработчик со стороны [заказчика](http://www.ecookna.ru/company/) (1С, javascript)
   
