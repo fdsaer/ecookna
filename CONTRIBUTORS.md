@@ -16,7 +16,7 @@
 
   * Технолог со стороны [заказчика](http://www.ecookna.ru/company/) по алюминию
   
-* **[Шимко Андрей](#)**
+* **[Шимко Андрей](https://github.com/A-Shimko)**
 
   * Технолог со стороны [заказчика](http://www.ecookna.ru/company/) по ПВХ
   
