@@ -1,34 +1,6 @@
 # Команда проекта
 
-* **[Морзаков Роман](https://github.com/morzakov)**
+[Заказчик](http://www.ecookna.ru/company/) | [Исполнитель](https://github.com/oknosoft)
+--- | --- 
+[Широков Максим](https://github.com/BigShmax) - Руководитель проекта <br /> [Ковалева Татьяна](https://github.com/Felishia) - Руководитель проекта <br /> [Морзаков Роман](https://github.com/morzakov) - Руководитель службы ИТ <br /> [Кумеркин Максим](https://github.com/Kumerkin) - Технолог <br />  [Шимко Андрей](https://github.com/A-Shimko) - Технолог <br /> [Сухов Андрей](https://github.com/Sehktel) - Разработчик (1С, javascript) | [Маляров Евгений](https://github.com/unpete) - Программист и координатор <br /> [Машков Александр](https://github.com/afmas) - Технолог<br />[Бесов Дмитрий](#) - Технолог<br />
 
-  * Руководитель службы ИТ  
-  
-* **[Ковалева Татьяна](https://github.com/Felishia)**
-
-  * Руководитель проекта со сороны [заказчика](http://www.ecookna.ru/company/)
-  
-* **[Широков Максим](https://github.com/BigShmax)**
-
-  * Руководитель проекта
-  
-* **[Кумеркин Максим](https://github.com/Kumerkin)**
-
-  * Технолог со стороны [заказчика](http://www.ecookna.ru/company/) по алюминию
-  
-* **[Шимко Андрей](https://github.com/A-Shimko)**
-
-  * Главный технолог со стороны [заказчика](http://www.ecookna.ru/company/)
-  
-* **[Сухов Андрей](https://github.com/Sehktel)**
-
-  * Разработчик со стороны [заказчика](http://www.ecookna.ru/company/) (1С, javascript)
-  
-* **[Маляров Евгений](https://github.com/unpete)**
-
-  * Программист и координатор со сороны [исполнителя](https://github.com/oknosoft)
-  
-* **[Машков Александр](https://github.com/afmas)**
-
-  * Технолог со стороны [исполнителя](https://github.com/oknosoft)
-  
