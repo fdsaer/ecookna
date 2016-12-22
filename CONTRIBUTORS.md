@@ -27,3 +27,8 @@
 * **[Маляров Евгений](https://github.com/unpete)**
 
   * Программист и координатор со сороны [исполнителя](https://github.com/oknosoft)
+  
+* **[Машков Александр](https://github.com/afmas)**
+
+  * Технолог со стороны [исполнителя](https://github.com/oknosoft)
+  
