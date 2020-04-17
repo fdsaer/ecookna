@@ -24,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/oknosoft/windowbuilder/issues"
   },
-  "homepage": "https://light.oknosoft.ru/",
+  "homepage": "https://start.ecookna.ru/",
   "proxy": "http://localhost:3016/",
   "dependencies": {
     "@material-ui/lab": "^4.0.0-alpha.49",
