@@ -17,6 +17,8 @@ import SchemeSettingsTabs from 'metadata-react/SchemeSettings/SchemeSettingsTabs
 import Confirm from 'metadata-react/App/Confirm';
 import {Helmet} from 'react-helmet';
 
+import MenuPrint from '../PrintingPlates/Menu';
+
 const LIMIT = 200;
 const ROW_HEIGHT = 33;
 //const OVERSCAN_ROW = 2;
@@ -401,11 +403,7 @@ class DirectList extends MDNRComponent {
   handleEdit = () => {
     const {_meta, selectedRow: row, props: {handlers, _mgr}} = this;
     if(!row || $p.utils.is_empty_guid(row.ref)) {
-      handlers.handleIfaceState({
-        component: '',
-        name: 'alert',
-        value: {open: true, text: 'Укажите строку для редактирования', title: _meta.synonym}
-      });
+      $p.ui.dialogs.alert({text: 'Укажите строку для редактирования', title: _meta.synonym});
     }
     else if(handlers.handleEdit) {
       handlers.handleEdit({row, ref: row.ref, _mgr});
@@ -417,11 +415,7 @@ class DirectList extends MDNRComponent {
     const {_meta, selectedRow: row, props: {handlers, _mgr}} = this;
 
     if(!row || $p.utils.is_empty_guid(row.ref)) {
-      handlers.handleIfaceState({
-        component: '',
-        name: 'alert',
-        value: {open: true, text: 'Укажите строку для удаления', title: _meta.synonym}
-      });
+      $p.ui.dialogs.alert({text: 'Укажите строку для удаления', title: _meta.synonym});
     }
     else if(handlers.handleMarkDeleted) {
       this._handleRemove = () => {
@@ -438,8 +432,16 @@ class DirectList extends MDNRComponent {
 
   // обработчик печати теущей строки
   handlePrint = (model) => {
-    const {selectedRow: row, props: {_mgr}} = this;
-    row && _mgr.print(row.ref, model);
+    const {selectedRow: row, props: {_mgr}, _meta} = this;
+    if(!row) {
+      $p.ui.dialogs.alert({text: 'Укажите строку для печати', title: _meta.synonym});
+    }
+    else if(model instanceof React.Component) {
+      $p.ui.dialogs.alert({text: model.name, title: _meta.synonym});
+    }
+    else {
+      _mgr.print(row.ref, model);
+    };
   };
 
   // обработчик вложений теущей строки
@@ -489,17 +491,19 @@ class DirectList extends MDNRComponent {
       //btns: _mgr.metadata('partner') && <SearchPartner scheme={scheme} handleFilterChange={handleFilterChange}/>,
       ...others,
       settings_open,
+      setting_in_menu: true,
+      denyDel: true,
+      end_btns: <MenuPrint handlePrint={this.handlePrint}/>,
       handleSelect: this.handleSelect,
       handleAdd: this.handleAdd,
       handleEdit: this.handleEdit,
       handleRemove: this.handleRemove,
-      handlePrint: this.handlePrint,
-      //handleAttachments: this.handleAttachments,
+      //handlePrint: this.handlePrint,
+      handleAttachments: this.handleAttachments,
       handleSettingsOpen: this.handleSettingsOpen,
       handleSettingsClose: this.handleSettingsClose,
       handleSchemeChange,
       handleFilterChange,
-      denyDel: true,
     };
 
     return <div>
