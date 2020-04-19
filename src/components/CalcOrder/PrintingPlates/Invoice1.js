@@ -8,6 +8,16 @@
 
 import React from 'react';
 
-export default function Invoice1() {
-  return <div>123</div>;
+class Invoice1 extends React.Component {
+
+  // идентификатор - должен быть уникальным для каждой виртуальной формулы
+  static ref = '80ecfed0-8263-11ea-a364-7bbe5c31efe8';
+
+  static title = 'Демо счет вирт. формула';
+
+  render() {
+    return <div>123</div>;
+  }
 }
+
+export default Invoice1;

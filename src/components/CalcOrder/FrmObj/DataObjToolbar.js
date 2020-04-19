@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Toolbar from '@material-ui/core/Toolbar';
@@ -7,7 +7,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import MenuPrint from '../PrintingPlates/Menu';
 
 import SaveIcon from '@material-ui/icons/Save';
 import SendIcon from '@material-ui/icons/Send';
@@ -16,10 +15,11 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import PrintIcon from '@material-ui/icons/Print';
 import AttachIcon from '@material-ui/icons/AttachFile';
 
+import MenuPrint from 'metadata-react/DynList/MenuPrint';
 import withStyles from 'metadata-react/Header/toolbar';
 import classnames from 'classnames';
 
-class DataObjToolbar extends Component {
+class DataObjToolbar extends React.Component {
 
   static propTypes = {
 
@@ -37,10 +37,21 @@ class DataObjToolbar extends Component {
 
   };
 
-  state = {
-    anchorEl: undefined,
-    open: false,
-  };
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      anchorEl: undefined,
+      open: false,
+    };
+
+    this.scheme = {
+      child_meta() {
+        return {_mgr: $p.doc.calc_order};
+      }
+    }
+  }
+
 
   handleClick = event => {
     this.setState({open: true, anchorEl: event.currentTarget});
@@ -51,7 +62,7 @@ class DataObjToolbar extends Component {
   };
 
   render() {
-    const {props} = this;
+    const {props, state: {anchorEl}, scheme} = this;
     const showMenu = props.showMenu || props.handleAttachments || props.handlePrint;
     return (
 
@@ -71,15 +82,15 @@ class DataObjToolbar extends Component {
         <Typography variant="h6" color="inherit" className={props.classes.flex}> </Typography>
 
         <MenuPrint
-          handlePrint={(ref) => {
-            return props.handlePrint(ref);
-          }}
+          handlePrint={props.handlePrint}
+          scheme={scheme}
+          variant="button"
         />
 
         {showMenu && <IconButton onClick={this.handleClick} title="Дополнительно"><MoreVertIcon/></IconButton>}
 
         <Menu
-          anchorEl={this.state.anchorEl}
+          anchorEl={anchorEl}
           open={this.state.open}
           onClose={this.handleRequestClose}
         >

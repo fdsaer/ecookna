@@ -17,7 +17,7 @@ import SchemeSettingsTabs from 'metadata-react/SchemeSettings/SchemeSettingsTabs
 import Confirm from 'metadata-react/App/Confirm';
 import {Helmet} from 'react-helmet';
 
-import MenuPrint from '../PrintingPlates/Menu';
+import MenuPrint from 'metadata-react/DynList/MenuPrint';
 
 const LIMIT = 200;
 const ROW_HEIGHT = 33;
@@ -493,7 +493,7 @@ class DirectList extends MDNRComponent {
       settings_open,
       setting_in_menu: true,
       denyDel: true,
-      end_btns: <MenuPrint handlePrint={this.handlePrint}/>,
+      end_btns: <MenuPrint handlePrint={this.handlePrint} scheme={scheme} variant="button"/>,
       handleSelect: this.handleSelect,
       handleAdd: this.handleAdd,
       handleEdit: this.handleEdit,
