@@ -16,19 +16,21 @@ export const predefined = {
   'rusokon.': {
     zone: 19,
     host: 'https://rusokon.oknosoft.ru/',
-    splash: {css: 'splash21', title: false},
     keys: keys21,
   },
-  'kaleva.': {
+  'zakaz.kaleva.': {
     zone: 8,
     host: 'https://zakaz.kaleva.ru/',
-    splash: {css: 'splash21', title: false},
     keys: keys21,
   },
-  'ecookna.': {
+  'zakaz.ecookna.': {
     zone: 21,
     host: 'https://zakaz.ecookna.ru/',
-    splash: {css: 'splash21', title: false},
+    keys: keys21,
+  },
+  'dvlp.ecookna.': {
+    zone: 10,
+    host: 'https://dvlp.ecookna.ru/',
     keys: keys21,
   },
 }
@@ -59,8 +61,10 @@ export function patch_cnn() {
   for (const elm in predefined) {
     const prm = predefined[elm];
     if(location.host.match(elm)) {
-      prm.zone && !wsql.get_user_param('zone') && wsql.set_user_param('zone', prm.zone);
-      'log_level,splash,templates,keys,crazy_ram'.split(',').forEach((name) => {
+      if(prm.zone) {
+        (!wsql.get_user_param('zone') || elm.includes('dvlp')) && wsql.set_user_param('zone', prm.zone);
+      }
+      'log_level,splash,templates,keys'.split(',').forEach((name) => {
         if(prm.hasOwnProperty(name)) {
           if(typeof job_prm[name] === 'object') {
             Object.assign(job_prm[name], prm[name]);
