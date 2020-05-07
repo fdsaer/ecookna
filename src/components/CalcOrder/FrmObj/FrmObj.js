@@ -114,7 +114,7 @@ class CalcOrderObj extends DataObj {
       }
       else {
         // это изделие построителя
-        res.push(<OrderRow key={`or-${row.row}`} row={row} handlers={handlers}/>);
+        res.push(<OrderRow key={`or-${row.row}`} row={row} handlers={handlers} is_technologist={is_technologist}/>);
       }
     });
     return res;

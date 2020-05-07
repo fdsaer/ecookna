@@ -442,7 +442,7 @@ class DirectList extends MDNRComponent {
     }
     else {
       _mgr.print(row.ref, model);
-    };
+    }
   };
 
   // обработчик вложений теущей строки

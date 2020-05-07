@@ -12,12 +12,10 @@ import SaveIcon from '@material-ui/icons/Save';
 import SendIcon from '@material-ui/icons/Send';
 import CloseIcon from '@material-ui/icons/Close';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import PrintIcon from '@material-ui/icons/Print';
 import AttachIcon from '@material-ui/icons/AttachFile';
 
 import MenuPrint from 'metadata-react/DynList/MenuPrint';
 import withStyles from 'metadata-react/Header/toolbar';
-import classnames from 'classnames';
 
 class DataObjToolbar extends React.Component {
 
@@ -49,7 +47,7 @@ class DataObjToolbar extends React.Component {
       child_meta() {
         return {_mgr: $p.doc.calc_order};
       }
-    }
+    };
   }
 
 
