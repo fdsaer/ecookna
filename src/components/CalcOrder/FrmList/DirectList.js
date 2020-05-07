@@ -18,6 +18,7 @@ import Confirm from 'metadata-react/App/Confirm';
 import {Helmet} from 'react-helmet';
 
 import MenuPrint from 'metadata-react/DynList/MenuPrint';
+import QuickFilter from './QuickFilter';
 
 const LIMIT = 200;
 const ROW_HEIGHT = 33;
@@ -488,11 +489,12 @@ class DirectList extends MDNRComponent {
 
     const toolbar_props = {
       scheme,
-      //btns: _mgr.metadata('partner') && <SearchPartner scheme={scheme} handleFilterChange={handleFilterChange}/>,
       ...others,
       settings_open,
       setting_in_menu: true,
       denyDel: true,
+      //btns: _mgr.metadata('partner') && <SearchPartner scheme={scheme} handleFilterChange={handleFilterChange}/>,
+      btns: <QuickFilter scheme={scheme} handleFilterChange={handleFilterChange}/>,
       end_btns: <MenuPrint handlePrint={this.handlePrint} scheme={scheme} variant="button"/>,
       handleSelect: this.handleSelect,
       handleAdd: this.handleAdd,

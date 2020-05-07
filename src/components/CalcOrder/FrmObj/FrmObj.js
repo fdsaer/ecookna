@@ -1,6 +1,5 @@
 import React from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
-import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
@@ -13,18 +12,13 @@ import TabularSection from 'metadata-react/TabularSection';
 import DataObj from 'metadata-react/FrmObj/DataObj';
 import withStyles600 from 'metadata-react/styles/paper600';
 
+import Tip from '../../Builder/Tip';
+import AntTabs from '../../Builder/AntTabs';
+
 import DataObjToolbar from './DataObjToolbar';
 import OrderRow from './OrderRow';
 import Parametric from './Parametric';
-import Tip from '../../Builder/Tip';
 import {path, prm} from '../../App/menu_items';
-
-export const AntTabs = withStyles({
-  root: {
-    borderBottom: '1px solid #e8e8e8',
-    marginBottom: 8,
-  },
-})(Tabs);
 
 class CalcOrderObj extends DataObj {
 
@@ -49,7 +43,7 @@ class CalcOrderObj extends DataObj {
     let h1 = height < 420 ? 420 : height;
     h1 -= 146;
 
-    return <div style={{/*width: 'calc(100vw - 8px)',*/ paddingBottom: 32}}>
+    return <div style={{paddingBottom: 32}}>
       <AntTabs
         value={tab}
         onChange={this.handleChangeTab}
@@ -93,6 +87,7 @@ class CalcOrderObj extends DataObj {
   }
 
   renderProd(_obj, handlers) {
+    const is_technologist = $p.current_user.role_available('ИзменениеТехнологическойНСИ');
     const res = [
       <Button
         key="add-prod"
@@ -114,7 +109,7 @@ class CalcOrderObj extends DataObj {
       else if(row.characteristic.coordinates.count() == 0) {
         // возможно, это подчиненное изделие рисовалки
         if(row.characteristic.leading_product.calc_order == calc_order) {
-          res.push(<OrderRow key={`or-${row.row}`} row={row} handlers={handlers}/>);
+          res.push(<OrderRow key={`or-${row.row}`} row={row} handlers={handlers} is_technologist={is_technologist}/>);
         }
       }
       else {

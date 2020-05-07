@@ -10,12 +10,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Tip from '../Tip';
+import AntTabs from '../AntTabs';
 import Product from './Product';
 import Flap from './Flap';
 import LayersTree from './LayersTree';
 import ElmProps from './ElmProps';
 import ToolWnd from '../ToolWnds/ToolWnd';
-import {AntTabs} from '../../CalcOrder/FrmObj/FrmObj';
 import Tab from '@material-ui/core/Tab';
 import { withStyles } from '@material-ui/core/styles';
 
