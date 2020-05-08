@@ -1,5 +1,6 @@
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import Popper from '@material-ui/core/Popper';
@@ -7,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import DialogActions from '@material-ui/core/DialogActions';
 import Tip from '../../Builder/Tip';
 import Params from './Params';
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -52,5 +54,10 @@ export default function QuickFilter({scheme, handleFilterChange}) {
         </DialogActions>
       </div>
     </Popper>
-  </div>
+  </div>;
 }
+
+QuickFilter.propTypes = {
+  scheme: PropTypes.object.isRequired,
+  handleFilterChange: PropTypes.func.isRequired,
+};

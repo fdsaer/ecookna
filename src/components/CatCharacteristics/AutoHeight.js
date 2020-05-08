@@ -38,7 +38,7 @@ const WithAutoHeight = (BaseComponent) => class extends React.Component {
         autoHeight={autoHeight}
       />
     </div>;
-  };
+  }
 
   static get displayName() {
     return `WithAutoHeight(${getDisplayName(BaseComponent)})`;

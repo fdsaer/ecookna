@@ -7,7 +7,6 @@ import LinkedProps from './LinkedProps';
 function Flap({editor}) {
   const {project} = editor;
   const {activeLayer: contour, ox} = project;
-  const is_flap = contour.layer;
   const disabled = contour.layer ? '' : 'gl disabled';
   const {utils} = $p;
 

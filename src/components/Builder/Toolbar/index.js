@@ -41,5 +41,6 @@ BuilderToolbar.propTypes = {
   editor: PropTypes.object.isRequired,
   handleClose: PropTypes.func,
   openTemplate: PropTypes.func,
+  open_ox: PropTypes.func,
   classes: PropTypes.object.isRequired,
 };
