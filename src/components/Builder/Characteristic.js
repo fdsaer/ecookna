@@ -1,7 +1,7 @@
 
 import React from 'react';
 import Dialog from 'metadata-react/App/Dialog';
-import FrmObj from '../CatCharacteristics/FrmObj'
+import FrmObj from '../CatCharacteristics/FrmObj';
 
 export default function ({editor, handleClose, windowHeight}) {
 
