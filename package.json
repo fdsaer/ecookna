@@ -30,16 +30,16 @@
     "@material-ui/lab": "^4.0.0-alpha.51",
     "@turf/points-within-polygon": "^5.1.5",
     "md5-file": "^4.0",
-    "metadata-abstract-ui": "2.0.22-beta.6",
-    "metadata-core": "2.0.22-beta.6",
-    "metadata-pouchdb": "2.0.22-beta.6",
-    "metadata-react": "2.0.22-beta.6",
-    "metadata-redux": "2.0.22-beta.6",
-    "metadata-superlogin": "2.0.22-beta.6",
+    "metadata-abstract-ui": "2.0.22-beta.7",
+    "metadata-core": "2.0.22-beta.7",
+    "metadata-pouchdb": "2.0.22-beta.7",
+    "metadata-react": "2.0.22-beta.7",
+    "metadata-redux": "2.0.22-beta.7",
+    "metadata-superlogin": "2.0.22-beta.7",
     "paper-jsdom-canvas": "^0.12.4",
     "react-highlight-words": "^0.16.0",
     "redux-dynamic-middlewares": "^2.0.0",
-    "windowbuilder": "github:oknosoft/windowbuilder-core#176049cc4e14402364e5e64465ccda7790fcc26a"
+    "windowbuilder": "github:oknosoft/windowbuilder-core#6692734e65e61787699f81590e1c013965548d67"
   },
   "devDependencies": {
     "@babel/core": "7.9.0",

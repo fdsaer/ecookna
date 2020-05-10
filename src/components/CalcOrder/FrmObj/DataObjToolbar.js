@@ -19,22 +19,6 @@ import withStyles from 'metadata-react/Header/toolbar';
 
 class DataObjToolbar extends React.Component {
 
-  static propTypes = {
-
-    handleSave: PropTypes.func.isRequired,        // обработчик добавления объекта
-    handlePost: PropTypes.func,                   // обработчик проведения
-    handleMarkDeleted: PropTypes.func.isRequired, // обработчик пометки удаления
-    handlePrint: PropTypes.func,                  // обработчик открытия диалога печати
-    handleAttachments: PropTypes.func,            // обработчик открытия диалога присоединенных файлов
-    handleClose: PropTypes.func,                  // команда Закрыть форму
-
-    postable: PropTypes.bool,                     // объект можно провести-распровести
-    posted: PropTypes.bool,                       // объект проведён
-    deletable: PropTypes.bool,                    // объект можно пометить на удаление или снять пометку
-    deleted: PropTypes.bool,                      // объект помечен на удаление
-
-  };
-
   constructor(props, context) {
     super(props, context);
 
@@ -101,6 +85,22 @@ class DataObjToolbar extends React.Component {
       </Toolbar>
     );
   }
+};
+
+DataObjToolbar.propTypes = {
+  handleSave: PropTypes.func.isRequired,        // обработчик добавления объекта
+  handlePost: PropTypes.func,                   // обработчик проведения
+  handleMarkDeleted: PropTypes.func.isRequired, // обработчик пометки удаления
+  handlePrint: PropTypes.func,                  // обработчик открытия диалога печати
+  handleAttachments: PropTypes.func,            // обработчик открытия диалога присоединенных файлов
+  handleClose: PropTypes.func,                  // команда Закрыть форму
+  handleSaveClose: PropTypes.func,
+
+  postable: PropTypes.bool,                     // объект можно провести-распровести
+  posted: PropTypes.bool,                       // объект проведён
+  deletable: PropTypes.bool,                    // объект можно пометить на удаление или снять пометку
+  showMenu: PropTypes.bool,
+  classes: PropTypes.object,
 };
 
 export default withStyles(DataObjToolbar);

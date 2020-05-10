@@ -84,7 +84,7 @@ class LinkedProps extends React.Component {
 
 LinkedProps.propTypes = {
   ts: PropTypes.object.isRequired,
-  cnstr: PropTypes.numner,
+  cnstr: PropTypes.number,
   inset: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 

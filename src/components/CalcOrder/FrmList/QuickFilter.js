@@ -44,7 +44,9 @@ export default function QuickFilter({scheme, handleFilterChange}) {
       open={open}
       anchorEl={anchorEl}
       placement="bottom-start"
-      onClose={handleClick}>
+      onClose={handleClick}
+      style={{zIndex: 1}}
+    >
       <div className={classes.paper}>
         <Params scheme={scheme} handleFilterChange={handleFilterChange}/>
         <DialogActions>

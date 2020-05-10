@@ -3,7 +3,7 @@ import React from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import DataField from 'metadata-react/DataField';
 import TabularSection from 'metadata-react/TabularSection';
-import withAutoHeight from './AutoHeight';
+import withAutoHeight from 'metadata-react/App/AutoHeight';
 
 function renderHead(_obj, classes) {
   return [
@@ -39,16 +39,24 @@ function  renderGlasses(_obj, classes, schemas, autoHeight) {
   const minHeight = Math.floor(autoHeight / 2);
   return [
     <div key="ts_glasses" style={{height: minHeight}}>
-      <TabularSection  _obj={_obj} _tabular="glasses" scheme={schemas.glasses} denyReorder/>
+      <TabularSection  _obj={_obj} _tabular="glasses" scheme={schemas.glasses} denyAddDel denyReorder/>
     </div>,
     <div key="ts_glass_spec" style={{height: minHeight}}>
-      <TabularSection _obj={_obj} _tabular="glass_specification" scheme={schemas.glass_specification} denyReorder/>
+      <TabularSection _obj={_obj} _tabular="glass_specification" scheme={schemas.glass_specification} denyAddDel denyReorder/>
     </div>
   ];
 }
 
 function Tabular({_obj, schemas, name, ...others}) {
-  return <TabularSection key={`ts_${name}`} _obj={_obj} _tabular={name} scheme={schemas[name]} denyReorder {...others}/>;
+  return <TabularSection
+    key={`ts_${name}`}
+    _obj={_obj}
+    _tabular={name}
+    scheme={schemas[name]}
+    denyAddDel
+    denyReorder
+    {...others}
+  />;
 }
 
 function TabContent({tab, _obj, classes, schemas, autoHeight}) {
