@@ -11,6 +11,8 @@ import drawer from 'windowbuilder/dist/drawer';
 import tools from './tools';
 import align from './align';
 import StableZoom from './StableZoom';
+import History from './History';
+import Deformer from './Deformer';
 
 export default function ($p) {
 
@@ -24,10 +26,14 @@ export default function ($p) {
       super();
       this._canvas = canvas;
       new EditorInvisible.Scheme(this._canvas, this, typeof window === 'undefined');
-      //this.create_scheme();
+
+      this._stable_zoom = new StableZoom(this);
+      this._history = new History(this);
+      this._deformer = new Deformer(this);
+
       this.project._dp.value_change = this.dp_value_change.bind(this);
       this._recalc_timer = 0;
-      this._stable_zoom = new StableZoom(this);
+
       this.eve.on('coordinates_calculated', this.coordinates_calculated);
       this._canvas.addEventListener('touchstart', this.canvas_touchstart, false);
       this._canvas.addEventListener('mousewheel', this._stable_zoom.mousewheel, false);
@@ -94,6 +100,15 @@ export default function ($p) {
       if(redraw) {
         this.deffered_recalc();
       }
+    }
+
+    /**
+     * Выполняет команду редактирования
+     * @param type
+     * @param attr
+     */
+    cmd(type, ...attr) {
+      this._deformer[type] && this._deformer[type](...attr);
     }
 
     /**
