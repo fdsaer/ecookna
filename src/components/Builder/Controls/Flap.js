@@ -11,7 +11,7 @@ function Flap({editor}) {
   const {utils} = $p;
 
   return <div>
-    <FlapToolbar contour={contour} disabled={disabled}/>
+    <FlapToolbar editor={editor} contour={contour} disabled={disabled}/>
     <div className={disabled}>
       <PropField _obj={contour} _fld="furn" />
       <PropField _obj={contour} _fld="direction" />

@@ -20,14 +20,9 @@ export default function BuilderToolbar({editor, handleClose, openTemplate, open_
       <IconButton onClick={() => editor.project.zoom_fit && editor.project.zoom_fit()}><i className="tb_cursor-zoom" /></IconButton>
     </Tip>
     <SelectTool editor={editor} />
-    <Divider orientation="vertical" flexItem />
-    <Tip title="Шаг назад">
-      <IconButton disabled onClick={() => null}><i className="fa fa-undo" /></IconButton>
+    <Tip title="История редактирования">
+      <IconButton disabled onClick={() => null}><i className="fa fa-history" /></IconButton>
     </Tip>
-    <Tip title="Шаг вперёд">
-      <IconButton disabled onClick={() => null}><i className="fa fa-repeat" /></IconButton>
-    </Tip>
-    <Divider orientation="vertical" flexItem />
     <Tip title="Открыть спецификацию изделия">
       <IconButton onClick={open_ox}><i className="fa fa-table fa-fw" /></IconButton>
     </Tip>

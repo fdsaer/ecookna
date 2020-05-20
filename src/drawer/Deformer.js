@@ -8,7 +8,7 @@ export default class Deformer {
   }
 
   get history() {
-    return this.editor._history;
+    return this.editor._undo;
   }
 
   /**
@@ -33,9 +33,37 @@ export default class Deformer {
   }
 
   /**
+   * Объединяет вершины
+   */
+  merge() {
+
+  }
+
+  /**
+   * Отрывает вершину из узла
+   */
+  separate() {
+
+  }
+
+  /**
+   * Делит профиль на два
+   */
+  split() {
+
+  }
+
+  /**
    * Добавляет элемент, слой или вложенную вставку
    */
   add() {
+
+  }
+
+  /**
+   * Удаляет элемент, слой или вложенную вставку
+   */
+  remove() {
 
   }
 

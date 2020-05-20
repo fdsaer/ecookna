@@ -27,7 +27,7 @@ function TabContent({tab, _obj, classes, schemas, autoHeight}) {
   case 1:
     return <Tabular _obj={_obj} schemas={schemas} name="params"/>;
   case 2:
-    return <Spec _obj={_obj} schemas={schemas}/>;
+    return <Spec _obj={_obj} scheme={schemas.specification}/>;
   case 3:
     return <Tabular _obj={_obj} schemas={schemas} name="constructions"/>;
   case 4:

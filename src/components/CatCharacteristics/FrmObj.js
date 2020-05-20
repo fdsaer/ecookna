@@ -1,15 +1,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Tab from '@material-ui/core/Tab';
 import {withIface} from 'metadata-redux';
 import DataObj from 'metadata-react/FrmObj/DataObj';
 import withStyles600 from 'metadata-react/styles/paper600';
-
-import AntTabs from '../Builder/AntTabs';
+import Tab from '@material-ui/core/Tab';
+import {Tabs} from '../Builder/AntTabs';
 import TabContent from './TabContent';
-
-
 
 
 class CatCharacteristicsObj extends DataObj {
@@ -40,7 +37,7 @@ class CatCharacteristicsObj extends DataObj {
     const {state: {_obj, tab}, props: {classes, windowHeight}}  = this;
 
     return <div>
-      <AntTabs
+      <Tabs
         value={tab}
         onChange={this.handleChangeTab}
         indicatorColor="primary"
@@ -55,7 +52,7 @@ class CatCharacteristicsObj extends DataObj {
         <Tab label="Соединения"/>
         <Tab label="Заполнения"/>
         <Tab label="Вставки"/>
-      </AntTabs>
+      </Tabs>
       <TabContent tab={tab} _obj={_obj} classes={classes} schemas={this.schemas} windowHeight={windowHeight} />
     </div>;
   }

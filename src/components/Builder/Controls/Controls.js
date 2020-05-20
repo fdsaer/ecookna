@@ -10,22 +10,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Tip from '../Tip';
-import AntTabs from '../AntTabs';
+import {Tabs, Tab} from '../AntTabs';
 import Product from './Product';
 import Flap from './Flap';
 import LayersTree from './LayersTree';
 import ElmProps from './ElmProps';
+import BProps from './BProps';
 import ToolWnd from '../ToolWnds/ToolWnd';
-import Tab from '@material-ui/core/Tab';
-import { withStyles } from '@material-ui/core/styles';
-
-const styles = () => ({
-  tabRoot: {
-    '@media (min-width: 600px)': {
-      minWidth: 72
-    }
-  }
-});
 
 class Controls extends React.Component {
 
@@ -118,7 +109,7 @@ class Controls extends React.Component {
     const {props: {editor, classes}, state: {tab, elm1, elm2}}  = this;
     //const {_dp} = editor ? editor.project : {};
     return <div>
-      <AntTabs
+      <Tabs
         value={tab}
         onChange={this.handleChangeTab}
         indicatorColor="primary"
@@ -126,46 +117,48 @@ class Controls extends React.Component {
         variant="scrollable"
       >
         <Tab
-          classes={{root: classes.tabRoot}}
           label={
             <Tip title="Слои изделия" placement="top">
               <i className="fa fa-sitemap fa-fw"></i>
             </Tip>
           }/>
         <Tab
-          classes={{root: classes.tabRoot}}
           label={
             <Tip title="Свойства элемента" placement="top">
               <i className="fa fa-puzzle-piece fa-fw"></i>
             </Tip>
           }/>
         <Tab
-          classes={{root: classes.tabRoot}}
           label={
             <Tip title="Свойства створки" placement="top">
               <i className="fa fa-object-ungroup fa-fw"></i>
             </Tip>
           }/>
         <Tab
-          classes={{root: classes.tabRoot}}
           label={
             <Tip title="Свойства изделия" placement="top">
               <i className="fa fa-picture-o fa-fw"></i>
             </Tip>
           }/>
         <Tab
-          classes={{root: classes.tabRoot}}
           label={
             <Tip title="Свойства инструмента" placement="top">
               <i className="fa fa-cogs fa-fw"></i>
             </Tip>
           }/>
-      </AntTabs>
+        <Tab
+          label={
+            <Tip title="Настройки" placement="top">
+              <i className="fa fa-sliders fa-fw"></i>
+            </Tip>
+          }/>
+      </Tabs>
       {tab === 0 && <LayersTree editor={editor}/>}
       {tab === 1 && <ElmProps editor={editor} elm1={elm1} elm2={elm2}/>}
       {tab === 2 && <Flap editor={editor}/>}
       {tab === 3 && <Product editor={editor}/>}
       {tab === 4 && <ToolWnd editor={editor}/>}
+      {tab === 5 && <BProps editor={editor}/>}
     </div>;
   }
 }
@@ -176,4 +169,4 @@ Controls.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Controls);
+export default Controls;

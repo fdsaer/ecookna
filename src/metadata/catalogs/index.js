@@ -1,6 +1,7 @@
 // модификаторы справочников
 
 import CharacteristicsFrmObj from '../../components/CatCharacteristics/FrmObj';
+import SpecFragment from '../../components/CatCharacteristics/Spec';
 
 export default function ({cat}) {
   cat.forEach((mgr) => {
@@ -10,4 +11,5 @@ export default function ({cat}) {
   });
 
   cat.characteristics.FrmObj = CharacteristicsFrmObj;
+  cat.characteristics.SpecFragment = SpecFragment;
 }

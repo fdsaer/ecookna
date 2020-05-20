@@ -1,6 +1,5 @@
 import React from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
-import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
@@ -13,7 +12,7 @@ import DataObj from 'metadata-react/FrmObj/DataObj';
 import withStyles600 from 'metadata-react/styles/paper600';
 
 import Tip from '../../Builder/Tip';
-import AntTabs from '../../Builder/AntTabs';
+import {Tabs, Tab} from '../../Builder/AntTabs';
 
 import DataObjToolbar from './DataObjToolbar';
 import OrderRow from './OrderRow';
@@ -44,7 +43,7 @@ class CalcOrderObj extends DataObj {
     h1 -= 146;
 
     return <div style={{paddingBottom: 32}}>
-      <AntTabs
+      <Tabs
         value={tab}
         onChange={this.handleChangeTab}
         indicatorColor="primary"
@@ -55,7 +54,7 @@ class CalcOrderObj extends DataObj {
         <Tab label={<Tip title="Изделия построителя"><i className="fa fa-object-ungroup fa-fw"></i></Tip>}/>
         <Tab label={<Tip title="Параметрические изделия"><i className="fa fa-gavel fa-fw"></i></Tip>}/>
         <Tab label={<Tip title="Материалы и услуги без спецификации"><i className="fa fa-cube fa-fw"></i></Tip>}/>
-      </AntTabs>
+      </Tabs>
       {tab === 0 && this.renderHead(_obj, classes)}
       {tab === 1 && this.renderProd(_obj, handlers)}
       {tab === 2 && <Parametric _obj={_obj} height={h1} scheme={this.scheme_parametric}/>}

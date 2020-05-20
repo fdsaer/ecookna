@@ -10,8 +10,8 @@ export default class History {
     this.pos = -1;
   }
 
-  push(command) {
-
+  push(type, attr) {
+    this.history.push({time: new Date(), type, attr});
   }
 
   buttons_accessibility() {
@@ -40,4 +40,9 @@ export default class History {
       this.pos++;
     }
   }
+
+  /**
+   * Для совместимости со старым интерфейсом
+   */
+  save_snapshot() {}
 }

@@ -142,14 +142,14 @@ class Frame extends React.Component {
         open_ox={this.open_ox}
       />}
       <Grid container>
-        <Grid item xs={12} sm={12} lg={8} xl={9}>
+        <Grid item xs={12} sm={12} lg={8}>
           <Builder
             height={height}
             classes={classes}
             registerChild={this.registerChild}
           />
         </Grid>
-        <Grid item xs={12} sm={12} lg={4} xl={3}>
+        <Grid item xs={12} sm={12} lg={4}>
           {editor && <Controls editor={editor}/>}
         </Grid>
       </Grid>

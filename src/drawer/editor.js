@@ -28,7 +28,7 @@ export default function ($p) {
       new EditorInvisible.Scheme(this._canvas, this, typeof window === 'undefined');
 
       this._stable_zoom = new StableZoom(this);
-      this._history = new History(this);
+      this._undo = new History(this);
       this._deformer = new Deformer(this);
 
       this.project._dp.value_change = this.dp_value_change.bind(this);
@@ -108,7 +108,10 @@ export default function ($p) {
      * @param attr
      */
     cmd(type, ...attr) {
-      this._deformer[type] && this._deformer[type](...attr);
+      if(this._deformer[type]) {
+        this._undo.push(type, attr);
+        this._deformer[type](...attr);
+      }
     }
 
     /**
@@ -187,6 +190,22 @@ export default function ($p) {
       });
       rect.guide = true;
       return rect;
+    }
+
+    fragment_spec(elm, name) {
+      const {ui: {dialogs}, cat: {characteristics}} = $p;
+      if(elm) {
+        return dialogs.alert({
+          timeout: 0,
+          title: `Спецификация ${elm >= 0 ? 'элемента' : 'слоя'} №${Math.abs(elm)} (${name})`,
+          Component: characteristics.SpecFragment,
+          props: {_obj: this.project.ox, elm},
+          initFullScreen: true,
+          hide_btn: true,
+          noSpace: true,
+        });
+      }
+      dialogs.alert({text: 'Элемент не выбран', title: $p.msg.main_title});
     }
 
     unload() {
