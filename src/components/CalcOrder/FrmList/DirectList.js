@@ -53,14 +53,14 @@ class DirectList extends MDNRComponent {
   }
 
   // при изменении менеджера данных
-  handleManagerChange({_mgr, _meta, _ref}) {
+  handleManagerChange({_mgr, _meta, _ref, scheme}) {
     const {class_name} = _mgr;
     this._meta = _meta || _mgr.metadata();
     const newState = {ref: _ref || '', scrollSetted: false};
     this.setState(newState);
 
     (_mgr.direct_load ? _mgr.direct_load() : Promise.resolve())
-      .then(() => $p.cat.scheme_settings.get_scheme(class_name))
+      .then(() => scheme || $p.cat.scheme_settings.get_scheme(class_name))
       .then(this.handleSchemeChange);
   }
 

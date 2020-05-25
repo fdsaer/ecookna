@@ -33,7 +33,7 @@ class Controls extends React.Component {
     editor.eve.on('tool_activated', this.tool_activated);
     editor.eve.on('elm_activated', this.elm_activated);
     editor.eve.on('elm_dblclick', this.elm_dblclick);
-    editor.eve.on('contour_redrawed', this.contour_redrawed);
+    //editor.eve.on('contour_redrawed', this.contour_redrawed);
   }
 
   layer_activated = (contour, custom) => {
@@ -77,24 +77,6 @@ class Controls extends React.Component {
     this.handleChangeTab(event, 1);
   }
 
-  contour_redrawed = () => {
-    const {props, _reflect_id} = this;
-    if(props.editor){
-      _reflect_id && clearTimeout(_reflect_id);
-      this._reflect_id = setTimeout(this.reflect_changes, 100);
-    }
-  };
-
-  reflect_changes = () => {
-    const {props: {editor}} = this;
-    if(editor && editor.project) {
-      const {_dp, bounds, area} = editor.project;
-      _dp.len = bounds.width.round();
-      _dp.height = bounds.height.round();
-      _dp.s = area;
-    }
-  };
-
   onDataChange = (obj, fields) => {
     if(obj === this.props.editor.project._dp && ('len' in fields || 'height' in fields)) {
       this.forceUpdate();
@@ -106,7 +88,7 @@ class Controls extends React.Component {
   };
 
   render() {
-    const {props: {editor, classes}, state: {tab, elm1, elm2}}  = this;
+    const {props: {editor}, state: {tab, elm1, elm2}}  = this;
     //const {_dp} = editor ? editor.project : {};
     return <div>
       <Tabs
@@ -166,7 +148,6 @@ class Controls extends React.Component {
 
 Controls.propTypes = {
   editor: PropTypes.object,
-  classes: PropTypes.object.isRequired,
 };
 
 export default Controls;

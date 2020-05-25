@@ -27,6 +27,7 @@ function FlapToolbar({editor, contour, disabled, classes}) {
 }
 
 FlapToolbar.propTypes = {
+  editor: PropTypes.object,
   contour: PropTypes.object,
   disabled: PropTypes.string,
   classes: PropTypes.object.isRequired,
