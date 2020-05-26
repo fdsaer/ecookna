@@ -73,9 +73,11 @@ class DirectList extends MDNRComponent {
     }
 
     if(scheme) {
-      scheme.set_standard_period(true);
-      scheme.set_default();
-      handlers.handleSchemeChange && handlers.handleSchemeChange(scheme);
+      if(!this.props.scheme) {
+        scheme.set_standard_period(true);
+        scheme.set_default();
+        handlers.handleSchemeChange && handlers.handleSchemeChange(scheme);
+      }
 
       // пересчитываем и перерисовываем динсписок
       const columns = scheme.rx_columns({mode: 'ts', fields, _mgr});
