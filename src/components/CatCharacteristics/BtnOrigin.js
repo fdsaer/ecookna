@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import FindIcon from '@material-ui/icons/FindInPage';
-import Tip from '../Builder/Tip';
+import Tip from 'windowbuilder-forms/dist/Common/Tip';
 
 const useStyles = makeStyles((theme) => ({
   root: {

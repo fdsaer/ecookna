@@ -5,7 +5,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import DataField from 'metadata-react/DataField';
 import Toolbar from '@material-ui/core/Toolbar';
 import withStyles, {extClasses} from 'metadata-react/DataField/stylesPropertyGrid';
-import Tip from '../Tip';
+import Tip from 'windowbuilder-forms/dist/Common/Tip';
 
 
 function SelectNodeWnd({editor, classes}) {
