@@ -34,3 +34,7 @@ export default function BProps({editor}) {
 
 
 }
+
+BProps.propTypes = {
+  editor: PropTypes.object.isRequired,
+};
