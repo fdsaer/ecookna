@@ -27,15 +27,6 @@ function addLayers(contours, activeLayer) {
     null;
 }
 
-const bprops = {
-  auto_lines: "Авторазмерные линии",
-  custom_lines: "Доп. размерные линии",
-  cnns: "Соединители",
-  visualization: "Визуализация",
-  txts: "Комментарии",
-};
-
-
 export default function LayersTree({editor, classes}) {
   const {project} = editor;
   const {contours, ox, activeLayer} = project;

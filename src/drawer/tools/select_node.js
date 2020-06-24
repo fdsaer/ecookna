@@ -74,6 +74,8 @@ export default function select_node (Editor) {
 
       this.mode = null;
       this.changed = false;
+      const select = [];
+      const deselect = [];
 
       if(event.event && event.event.which && event.event.which > 1){
         //
@@ -92,35 +94,41 @@ export default function select_node (Editor) {
 
         if (item && (this.hitItem.type == 'fill' || this.hitItem.type == 'stroke')) {
           if(shift) {
-            item.selected = !item.selected;
+            if(item.selected) {
+              deselect.push({elm: item.elm, node: null, shift});
+            }
+            else {
+              select.push({elm: item.elm, node: null, shift});
+            }
           }
           else {
-            project.deselectAll();
-            item.selected = true;
+            deselect.push({elm: null, shift});
+            select.push({elm: item.elm, node: null, shift});
           }
-          if (item.selected) {
+          if (select.length) {
             this.mode = consts.move_shapes;
-            project.deselect_all_points();
             this.mouseStartPos = event.point.clone();
             this.originalContent = this._scope.capture_selection_state();
-
-            if(item.layer){
-              this.eve.emit('layer_activated', item.layer);
-            }
           }
 
         }
         else if (this.hitItem.type == 'segment') {
+          const node = item.generatrix.firstSegment.point.is_nearest(event.point, true) ? 'b' : 'e';
           if (shift) {
-            this.hitItem.segment.selected = !this.hitItem.segment.selected;
-          } else {
-            if (!this.hitItem.segment.selected){
-              project.deselect_all_points();
-              project.deselectAll();
+            if(this.hitItem.segment.selected) {
+              deselect.push({elm: item.elm, node, shift});
             }
-            this.hitItem.segment.selected = true;
+            else {
+              select.push({elm: item.elm, node, shift});
+            }
           }
-          if (this.hitItem.segment.selected) {
+          else {
+            if (!this.hitItem.segment.selected){
+              deselect.push({elm: null, shift});
+              select.push({elm: item.elm, node, shift});
+            }
+          }
+          if (select.length) {
             this.mode = consts.move_points;
             this.mouseStartPos = event.point.clone();
             this.originalContent = this._scope.capture_selection_state();
@@ -146,22 +154,24 @@ export default function select_node (Editor) {
         // подключаем диадог свойств элемента
         if(item instanceof ProfileItem || item instanceof Filling){
           this.profile = item;
-          this.eve.emit('elm_activated', item, shift);
         }
 
         this._scope.clear_selection_bounds();
 
-      } else {
+      }
+      else {
         // Clicked on and empty area, engage box select.
         this.mouseStartPos = event.point.clone();
         this.mode = 'box-select';
 
         if(!shift && this.profile){
-          this.eve.emit('elm_activated', null, shift);
           delete this.profile;
         }
 
       }
+
+      deselect.length && this._scope.cmd('deselect', deselect);
+      select.length && this._scope.cmd('select', select);
     }
 
     mouseup(event) {
