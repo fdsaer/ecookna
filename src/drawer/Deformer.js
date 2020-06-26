@@ -64,7 +64,8 @@ export default class Deformer {
    * Смещает выделенные объекты
    */
   move(delta) {
-
+    const {project, editor: {Point}} = this;
+    project.move_points(new Point(delta));
   }
 
   /**
