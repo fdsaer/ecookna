@@ -13,6 +13,10 @@ export default class Deformer {
     return this.editor._undo;
   }
 
+  get project() {
+    return this.editor.project;
+  }
+
   /**
    * Выделяет элемент или узел
    */
@@ -110,8 +114,5 @@ export default class Deformer {
 
   }
 
-  get project() {
-    return this.editor.project;
-  }
 
 }
