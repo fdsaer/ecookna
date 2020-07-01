@@ -153,7 +153,7 @@ export default function select_node (Editor) {
            */
         }
 
-        // подключаем диадог свойств элемента
+        // подключаем диалог свойств элемента
         if(item instanceof ProfileItem || item instanceof Filling){
           this.profile = item;
         }
@@ -472,6 +472,7 @@ export default function select_node (Editor) {
 
       const hitSize = 6;
       const {project} = this;
+      const canvas_cursor = this._scope.canvas_cursor.bind(this._scope);
       this.hitItem = null;
 
       if (point) {
@@ -508,26 +509,25 @@ export default function select_node (Editor) {
       const {hitItem} = this;
       if (hitItem) {
         if (hitItem.type == 'fill' || hitItem.type == 'stroke') {
-
           if (hitItem.item.parent instanceof DimensionLine) {
             // размерные линии сами разберутся со своими курсорами
           }
           else if (hitItem.item instanceof PointText) {
-            !(hitItem.item instanceof EditableText) && this._scope.canvas_cursor('cursor-text');     // указатель с черным Т
+            !(hitItem.item instanceof EditableText) && canvas_cursor('cursor-text');     // указатель с черным Т
           }
           else if (hitItem.item.selected) {
-            this._scope.canvas_cursor('cursor-arrow-small');
+            canvas_cursor('cursor-arrow-small');
           }
           else {
-            this._scope.canvas_cursor('cursor-arrow-white-shape');
+            canvas_cursor('cursor-arrow-white-shape');
           }
         }
         else if (hitItem.type == 'segment' || hitItem.type == 'handle-in' || hitItem.type == 'handle-out') {
           if (hitItem.segment.selected) {
-            this._scope.canvas_cursor('cursor-arrow-small-point');
+            canvas_cursor('cursor-arrow-small-point');
           }
           else {
-            this._scope.canvas_cursor('cursor-arrow-white-point');
+            canvas_cursor('cursor-arrow-white-point');
           }
         }
       }
@@ -536,10 +536,10 @@ export default function select_node (Editor) {
         const hit = project.hitTest(point, {stroke: true, visible: true, tolerance: 16});
         if (hit && hit.item.parent instanceof Sectional){
           this.hitItem = hit;
-          this._scope.canvas_cursor('cursor-arrow-white-shape');
+          canvas_cursor('cursor-arrow-white-shape');
         }
         else{
-          this._scope.canvas_cursor('cursor-arrow-white');
+          canvas_cursor('cursor-arrow-white');
         }
       }
 

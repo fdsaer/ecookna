@@ -29,6 +29,7 @@ export default function ($p) {
       this._stable_zoom = new StableZoom(this);
       this._deformer = new Deformer(this);
 
+      this.project._use_skeleton = true;
       this.project._dp.value_change = this.dp_value_change.bind(this);
       this._recalc_timer = 0;
 
