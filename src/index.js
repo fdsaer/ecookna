@@ -7,19 +7,21 @@
  * Created by Evgeniy Malyarov on 19.04.2020.
  */
 
-import orderForms from './CalcOrder';
-import characteristicsForms from './CatCharacteristics';
+import orderForms from './CalcOrder/index.js';
+import characteristicsForms from './CatCharacteristics/index.js';
 
 const all = [].concat(orderForms).concat(characteristicsForms);
+const {cat: {formulas}, adapters: {pouch}} = $p;
 
+// фильтрует список печатных форм с учетом свойств пользователя
 export function items() {
   const {current_user, job_prm} = $p;
-
-  return all.filter((v) => {
+  return all.filter(v => {
     return true;
   });
 }
 
+// после загрузки данных, подключаем виртуальные формулы печатных форм
 function create_formula(formulas, Component) {
   const formula = formulas.create({
     ref: Component.ref,
@@ -34,13 +36,8 @@ function create_formula(formulas, Component) {
   return formula;
 }
 
-
-export default function ({cat: {formulas}, adapters: {pouch}}) {
-
-  // после загрузки данных, создаём виртуальную формулу
-  pouch.once('pouch_doc_ram_loaded', () => {
-    const components = items().map((Component) => create_formula(formulas, Component));
-    formulas.load_formulas(components);
-  });
-
-};
+// после загрузки данных, создаём виртуальную формулу
+pouch.once('pouch_doc_ram_loaded', () => {
+  const components = items().map(Component => create_formula(formulas, Component));
+  formulas.load_formulas(components);
+});

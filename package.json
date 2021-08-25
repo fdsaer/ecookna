@@ -44,6 +44,7 @@
     "LICENSE",
     "LICENSE.ru.md"
   ],
+  "main": "dist",
   "scripts": {
     "build": "cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ./babel.config.js ./src --out-dir ./dist && node ./copy-files"
   },

@@ -56,6 +56,7 @@ module.exports = {
       // It's most likely a babel bug.
       // We are using this ignore option in the CLI command but that has no effect.
       ignore: ['**/*.test.js'],
+      comments: false,
     },
     production: {
       plugins: [

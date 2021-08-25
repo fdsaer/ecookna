@@ -1,14 +1,14 @@
-/**
- * Подключает список печатных форм,
- * обрезанный по подразделению или иным свойствам текущего пользователя
- *
- * @module items
- *
- * Created by Evgeniy Malyarov on 19.04.2020.
- */
-import orderForms from './CalcOrder';
-import characteristicsForms from './CatCharacteristics';
+import orderForms from './CalcOrder/index.js';
+import characteristicsForms from './CatCharacteristics/index.js';
 const all = [].concat(orderForms).concat(characteristicsForms);
+const {
+  cat: {
+    formulas
+  },
+  adapters: {
+    pouch
+  }
+} = $p;
 export function items() {
   const {
     current_user,
@@ -37,18 +37,7 @@ function create_formula(formulas, Component) {
   return formula;
 }
 
-export default function ({
-  cat: {
-    formulas
-  },
-  adapters: {
-    pouch
-  }
-}) {
-  // после загрузки данных, создаём виртуальную формулу
-  pouch.once('pouch_doc_ram_loaded', () => {
-    const components = items().map(Component => create_formula(formulas, Component));
-    formulas.load_formulas(components);
-  });
-}
-;
+pouch.once('pouch_doc_ram_loaded', () => {
+  const components = items().map(Component => create_formula(formulas, Component));
+  formulas.load_formulas(components);
+});

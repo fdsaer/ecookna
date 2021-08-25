@@ -1,5 +1,5 @@
 
-import Spec1 from './Spec1';
+import Spec1 from './Spec1.js';
 
 const all = [Spec1];
 
