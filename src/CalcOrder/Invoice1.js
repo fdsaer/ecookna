@@ -7,12 +7,23 @@
  */
 
 const {React, Typography} = $p.ui;
+import StyledFrame from '../StyledFrame/index.js';
+import Header from '../Header/index.js';
+import Footer from '../Footer/index.js';
 
 class Invoice1 extends React.Component {
 
   render() {
     const {attr, obj, print} = this.props;
-    return <Typography>{obj.toString()}</Typography>;
+    return <StyledFrame obj={obj}>
+      <Header {...this.props} />
+      {/*
+      <Middle {...this.props} />
+      <Table1 {...this.props} />
+      <Table2 {...this.props} />
+      */}
+      <Footer {...this.props} />
+    </StyledFrame>;
   }
 }
 

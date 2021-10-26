@@ -2,6 +2,9 @@ const {
   React,
   Typography
 } = $p.ui;
+import StyledFrame from '../StyledFrame/index.js';
+import Header from '../Header/index.js';
+import Footer from '../Footer/index.js';
 
 class Invoice1 extends React.Component {
   render() {
@@ -10,7 +13,9 @@ class Invoice1 extends React.Component {
       obj,
       print
     } = this.props;
-    return React.createElement(Typography, null, obj.toString());
+    return React.createElement(StyledFrame, {
+      obj: obj
+    }, React.createElement(Header, this.props), React.createElement(Footer, this.props));
   }
 
 }
