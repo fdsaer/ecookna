@@ -2,14 +2,22 @@ export default function styles(theme) {
   return {
     root: {
       fontFamily: 'Verdana, Arial, Helvetica, sans-serif',
-      marginLeft: theme.spacing(),
-      marginRight: theme.spacing()
+      marginLeft: '24mm',
+      marginRight: '12mm',
+      width: '297mm',
+      '& hr': {
+        marginTop: '4mm'
+      },
+      '& h3': {
+        fontSize: '2rem',
+        paddingBottom: '4mm'
+      }
     },
     head: {
       fontSize: 'small'
     },
     footer: {
-      fontSize: 'x-small'
+      fontSize: 'small'
     },
     flex: {
       display: 'flex'

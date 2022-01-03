@@ -2,9 +2,14 @@
  * Маршрутизатор подвалов
  */
 
-const {React} = $p.ui;
-
+const {React, Divider, Typography} = $p.ui;
 
 export default function Footer(props) {
-  return 'Footer';
+  const {obj, classes} = props;
+  return <>
+    <Divider light />
+    <div className={`${classes.footer} ${classes.flex}`}>
+      <Typography>{`Распечатано ${moment().format('DD MMMM YYYY, hh:mm')}`}</Typography>
+    </div>
+  </>;
 }
