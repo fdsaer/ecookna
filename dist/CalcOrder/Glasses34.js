@@ -1,6 +1,7 @@
 const {
   React
 } = $p.ui;
+import PrnProto from '../PrnProto.js';
 const StyledFrame = React.lazy(() => import('../StyledFrame/Base.js'));
 const Header = React.lazy(() => import('../Header/HeaderGlasses.js'));
 const Footer = React.lazy(() => import('../Footer/index.js'));
@@ -9,31 +10,53 @@ const Product = React.lazy(() => import('../Glasses/ProductGlasses.js'));
 
 var _ref = React.createElement(Footer, null);
 
-class Glasses34 extends React.Component {
-  constructor(props) {
-    super(props);
-    props.skipCss && props.skipCss();
-    this.state = {
-      imgs: null,
-      loaded: false
-    };
-
-    this.setClasses = classes => {
-      this.classes = classes;
-      props.copyStyles && props.copyStyles();
-    };
-  }
-
+class Glasses34 extends PrnProto {
   componentDidMount() {
     const {
       attr,
       obj,
       print
     } = this.props;
-    obj.load_linked_refs().then(() => {
+    obj.load_linked_refs().then(async () => {
       this.setState({
-        loaded: true,
-        imgs: {}
+        loaded: true
+      });
+      const imgs = new Map();
+
+      for (const {
+        characteristic
+      } of obj.production) {
+        for (const {
+          elm,
+          is_rectangular
+        } of characteristic.glasses) {
+          if (!is_rectangular || characteristic.coordinates.find({
+            parent: elm
+          })) {
+            if (imgs.has(characteristic)) {
+              imgs.get(characteristic).push(elm);
+            } else {
+              imgs.set(characteristic, [elm]);
+            }
+          }
+        }
+      }
+
+      const attr = {
+        res: new Map()
+      };
+
+      for (const [ox, elm] of imgs) {
+        attr.elm = elm;
+        await ox.draw(attr);
+      }
+
+      this.setState({
+        imgs: attr.res
+      });
+    }).catch(err => {
+      this.setState({
+        err: err.message
       });
     });
   }
@@ -46,7 +69,8 @@ class Glasses34 extends React.Component {
       },
       state: {
         imgs,
-        loaded
+        loaded,
+        err
       },
       classes
     } = this;
@@ -63,7 +87,8 @@ class Glasses34 extends React.Component {
       classes: classes,
       setClasses: this.setClasses,
       title: title,
-      loading: loading
+      loading: loading,
+      err: err
     }, React.createElement(Header, {
       title: title
     }), React.createElement(Products, {

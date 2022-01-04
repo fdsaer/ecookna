@@ -7,23 +7,14 @@
  */
 
 const {React} = $p.ui;
+import PrnProto from '../PrnProto.js';
 const StyledFrame = React.lazy(() => import('../StyledFrame/Base.js'));
 const Header = React.lazy(() => import('../Header/HeaderGlasses.js'));
 const Footer = React.lazy(() => import('../Footer/index.js'));
 const Products = React.lazy(() => import('./Products.js'));
 const Product = React.lazy(() => import('../Glasses/ProductGlasses.js'));
 
-class Glasses34 extends React.Component {
-
-  constructor(props) {
-    super(props);
-    props.skipCss && props.skipCss();
-    this.state = {imgs: null, loaded: false};
-    this.setClasses = (classes) => {
-      this.classes = classes;
-      props.copyStyles && props.copyStyles();
-    };
-  }
+class Glasses34 extends PrnProto {
 
   componentDidMount() {
     const {attr, obj, print} = this.props;
@@ -57,13 +48,13 @@ class Glasses34 extends React.Component {
   }
 
   render() {
-    const {props: {obj, attr}, state: {imgs, loaded}, classes} = this;
+    const {props: {obj, attr}, state: {imgs, loaded, err}, classes} = this;
     const totals = {imgs};
     const title = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format('DD.MM.YYYY')}`;
     let loading = loaded ?  (imgs ? '' : 'Формируем эскизы заполнений...') : 'Читаем продукции заказа...';
 
     return <React.Suspense fallback="Загрузка...">
-      <StyledFrame obj={obj} attr={attr} classes={classes} setClasses={this.setClasses} title={title} loading={loading}>
+      <StyledFrame obj={obj} attr={attr} classes={classes} setClasses={this.setClasses} title={title} loading={loading} err={err}>
         <Header title={title}/>
         <Products Product={Product} totals={totals} />
         <Footer />
