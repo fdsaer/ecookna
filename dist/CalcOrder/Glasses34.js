@@ -2,21 +2,27 @@ const {
   React,
   Typography
 } = $p.ui;
-import StyledFrame from '../StyledFrame/Base.js';
-import Header from '../Header/HeaderGlasses.js';
-import Footer from '../Footer/index.js';
-import Products from './Products.js';
-import Product from '../Glasses/ProductGlasses.js';
+import Loading from '../StyledFrame/Loading.js';
+const StyledFrame = React.lazy(() => import('../StyledFrame/Base.js'));
+const Header = React.lazy(() => import('../Header/HeaderGlasses.js'));
+const Footer = React.lazy(() => import('../Footer/index.js'));
+const Products = React.lazy(() => import('./Products.js'));
+const Product = React.lazy(() => import('../Glasses/ProductGlasses.js'));
 
-var _ref = React.createElement(Header, null);
-
-var _ref2 = React.createElement(Footer, null);
+var _ref = React.createElement(Footer, null);
 
 class Glasses34 extends React.Component {
   constructor(props) {
     super(props);
+    props.skipCss && props.skipCss();
     this.state = {
-      imgs: {}
+      imgs: null,
+      loaded: false
+    };
+
+    this.setClasses = classes => {
+      this.classes = classes;
+      props.copyStyles && props.copyStyles();
     };
   }
 
@@ -26,6 +32,12 @@ class Glasses34 extends React.Component {
       obj,
       print
     } = this.props;
+    obj.load_linked_refs().then(() => {
+      this.setState({
+        loaded: true,
+        imgs: {}
+      });
+    });
   }
 
   render() {
@@ -35,19 +47,34 @@ class Glasses34 extends React.Component {
         attr
       },
       state: {
-        imgs
-      }
+        imgs,
+        loaded
+      },
+      classes
     } = this;
     const totals = {
       imgs
     };
-    return React.createElement(StyledFrame, {
+    const title = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format('DD.MM.YYYY')}`;
+    return React.createElement(React.Suspense, {
+      fallback: "Загрузка..."
+    }, React.createElement(StyledFrame, {
       obj: obj,
-      attr: attr
-    }, _ref, React.createElement(Products, {
+      attr: attr,
+      classes: classes,
+      setClasses: this.setClasses
+    }, loaded ? null : React.createElement(Loading, {
+      title: title,
+      text: "Читаем продукции заказа..."
+    }), loaded && !imgs ? React.createElement(Loading, {
+      title: title,
+      text: "Формируем эскизы заполнений..."
+    }) : null, loaded && imgs ? React.createElement(Header, {
+      title: title
+    }) : null, loaded && imgs ? React.createElement(Products, {
       Product: Product,
       totals: totals
-    }), _ref2);
+    }) : null, loaded && imgs ? _ref : null));
   }
 
 }

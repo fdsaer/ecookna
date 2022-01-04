@@ -7,23 +7,26 @@
  */
 
 const {React, Typography} = $p.ui;
-import StyledFrame from '../StyledFrame/index.js';
-import Header from '../Header/index.js';
-import Footer from '../Footer/index.js';
+const StyledFrame = React.lazy(() => import('../StyledFrame/Base.js'));
+const Header = React.lazy(() => import('../Header/index.js'));
+const Footer = React.lazy(() => import('../Footer/index.js'));
 
 class Invoice1 extends React.Component {
 
   render() {
     const {attr, obj, print} = this.props;
-    return <StyledFrame obj={obj}>
-      <Header {...this.props} />
-      {/*
+
+    return <React.Suspense fallback={<div>Загрузка...</div>}>
+      <StyledFrame obj={obj} attr={attr}>
+        <Header {...this.props} />
+        {/*
       <Middle {...this.props} />
       <Table1 {...this.props} />
       <Table2 {...this.props} />
       */}
-      <Footer {...this.props} />
-    </StyledFrame>;
+        <Footer {...this.props} />
+      </StyledFrame>
+    </React.Suspense>;
   }
 }
 

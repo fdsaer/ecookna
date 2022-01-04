@@ -11,6 +11,10 @@ export default function styles(theme) {
       '& h3': {
         fontSize: '2rem',
         paddingBottom: '4mm'
+      },
+      '& h4': {
+        fontSize: '1rem',
+        paddingBottom: '4mm'
       }
     },
     head: {
@@ -24,6 +28,9 @@ export default function styles(theme) {
     },
     full: {
       flex: 1
+    },
+    w100: {
+      width: '100%'
     }
   };
 }

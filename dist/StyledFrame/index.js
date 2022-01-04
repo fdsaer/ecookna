@@ -31,8 +31,8 @@ export default function StyledFrame({
   return React.createElement("div", {
     className: classes.root
   }, React.Children.map(children, child => {
-    return React.cloneElement(child, {
+    return child ? React.cloneElement(child, { ...props,
       classes
-    });
+    }) : null;
   }));
 }

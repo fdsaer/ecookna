@@ -2,9 +2,11 @@ const {
   React,
   Typography
 } = $p.ui;
-import StyledFrame from '../StyledFrame/index.js';
-import Header from '../Header/index.js';
-import Footer from '../Footer/index.js';
+const StyledFrame = React.lazy(() => import('../StyledFrame/Base.js'));
+const Header = React.lazy(() => import('../Header/index.js'));
+const Footer = React.lazy(() => import('../Footer/index.js'));
+
+var _ref = React.createElement("div", null, "Загрузка...");
 
 class Invoice1 extends React.Component {
   render() {
@@ -13,9 +15,12 @@ class Invoice1 extends React.Component {
       obj,
       print
     } = this.props;
-    return React.createElement(StyledFrame, {
-      obj: obj
-    }, React.createElement(Header, this.props), React.createElement(Footer, this.props));
+    return React.createElement(React.Suspense, {
+      fallback: _ref
+    }, React.createElement(StyledFrame, {
+      obj: obj,
+      attr: attr
+    }, React.createElement(Header, this.props), React.createElement(Footer, this.props)));
   }
 
 }

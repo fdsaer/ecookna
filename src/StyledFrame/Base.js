@@ -5,12 +5,15 @@
 const {React, makeStyles} = $p.ui;
 import stylesBase from './stylesBase.js';
 
-export default function StyledFrame({children, ...props}) {
-  const classes = makeStyles(stylesBase)();
+export default function StyledFrame({children, classes, setClasses, ...props}) {
+  if(!classes) {
+    classes = makeStyles(stylesBase)();
+    setClasses(classes);
+  }
 
   return <div className={classes.root}>
     {React.Children.map(children, (child) => {
-      return React.cloneElement(child, {...props, classes});
+      return child ? React.cloneElement(child, {...props, classes}) : null;
     })}
   </div>;
 }
