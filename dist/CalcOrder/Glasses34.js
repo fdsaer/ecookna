@@ -1,8 +1,6 @@
 const {
-  React,
-  Typography
+  React
 } = $p.ui;
-import Loading from '../StyledFrame/Loading.js';
 const StyledFrame = React.lazy(() => import('../StyledFrame/Base.js'));
 const Header = React.lazy(() => import('../Header/HeaderGlasses.js'));
 const Footer = React.lazy(() => import('../Footer/index.js'));
@@ -56,25 +54,22 @@ class Glasses34 extends React.Component {
       imgs
     };
     const title = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format('DD.MM.YYYY')}`;
+    let loading = loaded ? imgs ? '' : 'Формируем эскизы заполнений...' : 'Читаем продукции заказа...';
     return React.createElement(React.Suspense, {
       fallback: "Загрузка..."
     }, React.createElement(StyledFrame, {
       obj: obj,
       attr: attr,
       classes: classes,
-      setClasses: this.setClasses
-    }, loaded ? null : React.createElement(Loading, {
+      setClasses: this.setClasses,
       title: title,
-      text: "Читаем продукции заказа..."
-    }), loaded && !imgs ? React.createElement(Loading, {
-      title: title,
-      text: "Формируем эскизы заполнений..."
-    }) : null, loaded && imgs ? React.createElement(Header, {
+      loading: loading
+    }, React.createElement(Header, {
       title: title
-    }) : null, loaded && imgs ? React.createElement(Products, {
+    }), React.createElement(Products, {
       Product: Product,
       totals: totals
-    }) : null, loaded && imgs ? _ref : null));
+    }), _ref));
   }
 
 }

@@ -6,8 +6,7 @@
  * Created by Evgeniy Malyarov on 03.01.2022.
  */
 
-const {React, Typography} = $p.ui;
-import Loading from '../StyledFrame/Loading.js';
+const {React} = $p.ui;
 const StyledFrame = React.lazy(() => import('../StyledFrame/Base.js'));
 const Header = React.lazy(() => import('../Header/HeaderGlasses.js'));
 const Footer = React.lazy(() => import('../Footer/index.js'));
@@ -29,8 +28,31 @@ class Glasses34 extends React.Component {
   componentDidMount() {
     const {attr, obj, print} = this.props;
     obj.load_linked_refs()
-      .then(() => {
-        this.setState({loaded: true, imgs: {}});
+      .then(async () => {
+        this.setState({loaded: true});
+        // получим список заполнений, которым нужны эскизы
+        const imgs = new Map();
+        for(const {characteristic} of obj.production) {
+          for(const {elm, is_rectangular} of characteristic.glasses) {
+            if(!is_rectangular || characteristic.coordinates.find({parent: elm})) {
+              if(imgs.has(characteristic)) {
+                imgs.get(characteristic).push(elm);
+              }
+              else {
+                imgs.set(characteristic, [elm]);
+              }
+            }
+          }
+        }
+        const attr = {res: new Map()};
+        for(const [ox, elm] of imgs) {
+          attr.elm = elm;
+          await ox.draw(attr);
+        }
+        this.setState({imgs: attr.res});
+      })
+      .catch((err) => {
+        this.setState({err: err.message});
       });
   }
 
@@ -38,14 +60,13 @@ class Glasses34 extends React.Component {
     const {props: {obj, attr}, state: {imgs, loaded}, classes} = this;
     const totals = {imgs};
     const title = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format('DD.MM.YYYY')}`;
+    let loading = loaded ?  (imgs ? '' : 'Формируем эскизы заполнений...') : 'Читаем продукции заказа...';
 
     return <React.Suspense fallback="Загрузка...">
-      <StyledFrame obj={obj} attr={attr} classes={classes} setClasses={this.setClasses}>
-        {loaded ? null : <Loading title={title} text="Читаем продукции заказа..." />}
-        {loaded && !imgs ? <Loading title={title} text="Формируем эскизы заполнений..." /> : null}
-        {loaded && imgs ? <Header title={title}/> : null}
-        {loaded && imgs ? <Products Product={Product} totals={totals} /> : null}
-        {loaded && imgs ? <Footer /> : null}
+      <StyledFrame obj={obj} attr={attr} classes={classes} setClasses={this.setClasses} title={title} loading={loading}>
+        <Header title={title}/>
+        <Products Product={Product} totals={totals} />
+        <Footer />
       </StyledFrame>
     </React.Suspense>;
   }

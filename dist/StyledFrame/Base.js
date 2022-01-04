@@ -3,10 +3,13 @@ const {
   makeStyles
 } = $p.ui;
 import stylesBase from './stylesBase.js';
+import Loading from './Loading.js';
 export default function StyledFrame({
   children,
   classes,
   setClasses,
+  title,
+  loading,
   ...props
 }) {
   if (!classes) {
@@ -16,9 +19,11 @@ export default function StyledFrame({
 
   return React.createElement("div", {
     className: classes.root
-  }, React.Children.map(children, child => {
-    return child ? React.cloneElement(child, { ...props,
-      classes
-    }) : null;
-  }));
+  }, loading ? React.createElement(Loading, {
+    classes: classes,
+    title: title,
+    text: loading
+  }) : React.Children.map(children, child => child ? React.cloneElement(child, { ...props,
+    classes
+  }) : null));
 }
