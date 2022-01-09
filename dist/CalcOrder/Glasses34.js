@@ -1,12 +1,16 @@
 const {
-  React
+  React,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow
 } = $p.ui;
 import PrnProto from '../PrnProto.js';
 const StyledFrame = React.lazy(() => import('../StyledFrame/Base.js'));
 const Header = React.lazy(() => import('../Header/HeaderGlasses.js'));
 const Footer = React.lazy(() => import('../Footer/index.js'));
-const Products = React.lazy(() => import('./Products.js'));
-const Product = React.lazy(() => import('../Glasses/ProductGlasses.js'));
+const Products = React.lazy(() => import('../Glasses/Products.js'));
 
 var _ref = React.createElement(Footer, null);
 
@@ -75,7 +79,10 @@ class Glasses34 extends PrnProto {
       classes
     } = this;
     const totals = {
-      imgs
+      imgs,
+      q: new Map(),
+      s: new Map(),
+      m: new Map()
     };
     const title = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format('DD.MM.YYYY')}`;
     let loading = loaded ? imgs ? '' : 'Формируем эскизы заполнений...' : 'Читаем продукции заказа...';
@@ -92,7 +99,6 @@ class Glasses34 extends PrnProto {
     }, React.createElement(Header, {
       title: title
     }), React.createElement(Products, {
-      Product: Product,
       totals: totals
     }), _ref));
   }

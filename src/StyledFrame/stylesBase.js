@@ -5,19 +5,16 @@
 export default function styles(theme){
   return {
     root: {
-      fontFamily: 'Verdana, Arial, Helvetica, sans-serif',
-      marginLeft: '24mm',
-      marginRight: '12mm',
-      width: '297mm',
+      width: '100%',
       '& hr': {
         marginTop: '4mm',
       },
       '& h3': {
-        fontSize: '2rem',
+        fontSize: '1.7rem',
         paddingBottom: '4mm',
       },
       '& h4': {
-        fontSize: '1rem',
+        fontSize: '0.9rem',
         paddingBottom: '4mm',
       },
     },
@@ -25,10 +22,23 @@ export default function styles(theme){
       fontSize: 'small',
     },
     footer: {
-      fontSize: 'small'
+      position: 'absolute',
+      bottom: 0,
+      fontSize: '0.6rem',
     },
     flex: {
       display: 'flex',
+    },
+    tableCell: {
+      border: '1px solid rgba(224, 224, 224, 1)',
+      padding: 4,
+    },
+    table: {
+      borderCollapse: 'collapse',
+      fontSize: '0.8rem',
+    },
+    alignRight: {
+      textAlign: 'right',
     },
     full: {
       flex: 1,

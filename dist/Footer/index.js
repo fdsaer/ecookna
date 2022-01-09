@@ -13,7 +13,9 @@ export default function Footer(props) {
     obj,
     classes
   } = props;
-  return React.createElement(React.Fragment, null, _ref, React.createElement("div", {
-    className: `${classes.footer} ${classes.flex}`
+  return React.createElement("div", {
+    className: `${classes.footer} ${classes.w100}`
+  }, _ref, React.createElement("div", {
+    className: classes.flex
   }, React.createElement(Typography, null, `Распечатано ${moment().format('DD MMMM YYYY, hh:mm')}`)));
 }

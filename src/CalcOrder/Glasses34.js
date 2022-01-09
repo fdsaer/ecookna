@@ -6,13 +6,12 @@
  * Created by Evgeniy Malyarov on 03.01.2022.
  */
 
-const {React} = $p.ui;
+const {React, Table, TableBody, TableCell,  TableHead, TableRow} = $p.ui;
 import PrnProto from '../PrnProto.js';
-const StyledFrame = React.lazy(() => import('../StyledFrame/Base.js'));
-const Header = React.lazy(() => import('../Header/HeaderGlasses.js'));
-const Footer = React.lazy(() => import('../Footer/index.js'));
-const Products = React.lazy(() => import('./Products.js'));
-const Product = React.lazy(() => import('../Glasses/ProductGlasses.js'));
+const StyledFrame = React.lazy(() => import('../StyledFrame/Base.js')); // стили могут зависеть от организации, офиса и т.д.
+const Header = React.lazy(() => import('../Header/HeaderGlasses.js'));  // заголовок
+const Footer = React.lazy(() => import('../Footer/index.js'));          // подвал
+const Products = React.lazy(() => import('../Glasses/Products.js'));    // табчасть
 
 class Glasses34 extends PrnProto {
 
@@ -49,14 +48,15 @@ class Glasses34 extends PrnProto {
 
   render() {
     const {props: {obj, attr}, state: {imgs, loaded, err}, classes} = this;
-    const totals = {imgs};
+    // в totals накопим итоги
+    const totals = {imgs, q: new Map(), s: new Map(), m: new Map()};
     const title = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format('DD.MM.YYYY')}`;
     let loading = loaded ?  (imgs ? '' : 'Формируем эскизы заполнений...') : 'Читаем продукции заказа...';
 
     return <React.Suspense fallback="Загрузка...">
       <StyledFrame obj={obj} attr={attr} classes={classes} setClasses={this.setClasses} title={title} loading={loading} err={err}>
         <Header title={title}/>
-        <Products Product={Product} totals={totals} />
+        <Products totals={totals} />
         <Footer />
       </StyledFrame>
     </React.Suspense>;
