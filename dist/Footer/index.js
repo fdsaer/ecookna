@@ -1,7 +1,6 @@
 const {
   React,
-  Divider,
-  Typography
+  Divider
 } = $p.ui;
 
 var _ref = React.createElement(Divider, {
@@ -13,9 +12,9 @@ export default function Footer(props) {
     obj,
     classes
   } = props;
-  return React.createElement("div", {
+  return React.createElement("footer", {
     className: `${classes.footer} ${classes.w100}`
   }, _ref, React.createElement("div", {
     className: classes.flex
-  }, React.createElement(Typography, null, `Распечатано ${moment().format('DD MMMM YYYY, hh:mm')}`)));
+  }, React.createElement("span", null, `Распечатано ${moment().format('DD MMMM YYYY, hh:mm')}`)));
 }

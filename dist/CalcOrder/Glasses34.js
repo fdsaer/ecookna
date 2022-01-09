@@ -1,3 +1,5 @@
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 const {
   React,
   Table,
@@ -86,6 +88,14 @@ class Glasses34 extends PrnProto {
     };
     const title = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format('DD.MM.YYYY')}`;
     let loading = loaded ? imgs ? '' : 'Формируем эскизы заполнений...' : 'Читаем продукции заказа...';
+
+    const Cell = ({
+      right,
+      ...props
+    }) => React.createElement(TableCell, _extends({
+      className: `${classes.tableCell} ${right ? classes.alignRight : ''}`
+    }, props));
+
     return React.createElement(React.Suspense, {
       fallback: "Загрузка..."
     }, React.createElement(StyledFrame, {
@@ -99,7 +109,8 @@ class Glasses34 extends PrnProto {
     }, React.createElement(Header, {
       title: title
     }), React.createElement(Products, {
-      totals: totals
+      totals: totals,
+      Cell: Cell
     }), _ref));
   }
 

@@ -13,20 +13,16 @@ const {React, Table, TableBody, TableCell,  TableHead, TableRow} = $p.ui;
 const cond = ({characteristic}) => characteristic.constructions.count();
 
 export default function Products(props) {
-  let {obj, condition, totals, Totals, classes} = props;
+  let {obj, condition, totals, Cell, classes} = props;
   if(!condition) {
     condition = cond;
   }
   const children = [];
   for(const row of obj.production) {
     if(condition(row)) {
-      children.push(<Product key={`prod-${row.row}`} classes={classes} row={row} totals={totals} />)
+      children.push(<Product key={`prod-${row.row}`} classes={classes} row={row} totals={totals} Cell={Cell}/>);
     }
   }
-  if(Totals) {
-    children.push(<Totals key={`totals`} classes={classes} obj={obj} totals={totals} />)
-  }
-  const Cell = ({right, ...props}) => <TableCell className={`${classes.tableCell} ${right ? classes.alignRight : ''}`} {...props}/>;
 
   return <Table size="small" className={`${classes.table} ${classes.w100}`}>
     <TableHead>

@@ -6,51 +6,38 @@
  * Created by Evgeniy Malyarov on 03.01.2022.
  */
 
-
-
 const {React, Typography, TableCell, TableRow} = $p.ui;
+import GlassRow from './GlassRow.js';
+import ProdTotalsRow from './ProdTotalsRow.js';
 
+export default function ProductGlasses({row, totals, Cell, classes}) {
+  const {characteristic: ox} = row;
 
-
-export default function ProductGlasses({row, totals, classes}) {
-  const {nom, characteristic, quantity} = row;
-  const Cell = ({right, ...props}) => <TableCell className={`${classes.tableCell} ${right ? classes.alignRight : ''}`} {...props}/>;
   // добавляем строку продукции
   const children = [
     <TableRow key={`prod-${row.row}`}>
-      <Cell colspan={6}>{characteristic.name}</Cell>
+      <Cell colSpan={6}>{ox.name}</Cell>
     </TableRow>
   ];
 
-  totals.q.set(characteristic, 0);
-  totals.s.set(characteristic, 0);
-  totals.m.set(characteristic, 0);
+  // начальные значения итогов
+  for(const prop of 'qsm') totals[prop].set(ox, 0);
+  const img = totals.imgs.get(ox);
 
-  for(const glr of characteristic.glasses) {
-    const key = `${row.row}-${glr.row}`;
-    // копим итоги
-    const m = characteristic.elm_weight(glr.elm).round(1);
-    totals.q.set(characteristic, totals.q.get(characteristic) + quantity);
-    totals.s.set(characteristic, totals.s.get(characteristic) + quantity * glr.s);
-    totals.m.set(characteristic, totals.m.get(characteristic) + quantity * m);
+  for(const glr of ox.glasses) {
     // добавляем строку заполнения
-    children.push(<TableRow key={`prod-${key}`}>
-      <Cell>{key}</Cell>
-      <Cell>{glr.formula}</Cell>
-      <Cell right>{`${glr.width.round()}x${glr.height.round()} (${glr.thickness})`}</Cell>
-      <Cell right>{quantity}</Cell>
-      <Cell right>{glr.s.round(3)}</Cell>
-      <Cell right>{m}</Cell>
-    </TableRow>);
+    children.push(<GlassRow
+      key={`gl-${row.row}-${glr.row}`}
+      row={row}
+      glr={glr}
+      totals={totals}
+      svg={img && img.imgs[`g${glr.elm}`]}
+      Cell={Cell}
+      classes={classes}
+    />);
   }
-  // если есть раскладка или кривоугольность
 
   // добавляем строку итогов по изделию
-  children.push(<TableRow key={`tot-${row.row}`}>
-    <Cell colspan={3}>Итого по изделию:</Cell>
-    <Cell right>{totals.q.get(characteristic).round()}</Cell>
-    <Cell right>{totals.s.get(characteristic).round(3)}</Cell>
-    <Cell right>{totals.m.get(characteristic).round(1)}</Cell>
-  </TableRow>);
+  children.push(<ProdTotalsRow key={`tot-${row.row}`} row={row} totals={totals} Cell={Cell}/>);
   return children;
 }

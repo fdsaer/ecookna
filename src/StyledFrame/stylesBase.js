@@ -22,16 +22,20 @@ export default function styles(theme){
       fontSize: 'small',
     },
     footer: {
-      position: 'absolute',
+      position: 'fixed',
       bottom: 0,
       fontSize: '0.6rem',
+      display: 'table-footer-group'
+    },
+    noBreak: {
+      pageBreakInside: 'avoid'
     },
     flex: {
       display: 'flex',
     },
     tableCell: {
       border: '1px solid rgba(224, 224, 224, 1)',
-      padding: 4,
+      padding: 6,
     },
     table: {
       borderCollapse: 'collapse',
