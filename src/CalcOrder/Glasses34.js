@@ -68,6 +68,6 @@ class Glasses34 extends PrnProto {
 // идентификатор - должен быть уникальным для каждой виртуальной формулы
 Glasses34.ref = 'cefdf4d0-6c86-11ec-bee3-8b4e33301a47';
 Glasses34.destination = 'doc.calc_order';
-Glasses34.title = '3.4 Заполнения (jsx)';
+Glasses34.title = '3.4 Заполнения_ (jsx)';
 
 export default Glasses34;
