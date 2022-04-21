@@ -53,7 +53,7 @@ class Glasses34 extends PrnProto {
     const title = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format('DD.MM.YYYY')}`;
     let loading = loaded ?  (imgs ? '' : 'Формируем эскизы заполнений...') : 'Читаем продукции заказа...';
 
-    const Cell = ({right, ...props}) => <TableCell className={`${classes.tableCell} ${right ? classes.alignRight : ''}`} {...props}/>;
+    const Cell = ({right, ...props}) => <TableCell  className={`${classes.tableCell} ${right ? classes.alignRight : ''}`} {...props}/>;
 
     return <React.Suspense fallback="Загрузка...">
       <StyledFrame obj={obj} attr={attr} classes={classes} setClasses={this.setClasses} title={title} loading={loading} err={err}>

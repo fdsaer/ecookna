@@ -10,6 +10,9 @@ export default function StyledFrame({children, classes, setClasses, title, loadi
 
   if(!classes) {
     classes = makeStyles(stylesBase)();
+    if(!loading) {
+      loading = 'Загрузка...';
+    }
     setClasses(classes);
   }
 

@@ -8,8 +8,10 @@ export default function ImgRow({
 }) {
   const __html = $p.utils.scale_svg(svg, 200, 0);
 
-  return React.createElement(TableRow, null, React.createElement(Cell, {
-    colSpan: 2
+  return React.createElement(TableRow, {
+    className: "no-break"
+  }, React.createElement(Cell, {
+    colSpan: 3
   }, React.createElement("div", {
     style: {
       marginTop: 8

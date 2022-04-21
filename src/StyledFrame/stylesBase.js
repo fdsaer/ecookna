@@ -28,7 +28,7 @@ export default function styles(theme){
       display: 'table-footer-group'
     },
     noBreak: {
-      pageBreakInside: 'avoid'
+      breakInside: 'avoid'
     },
     flex: {
       display: 'flex',

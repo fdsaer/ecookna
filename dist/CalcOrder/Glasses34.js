@@ -93,7 +93,7 @@ class Glasses34 extends PrnProto {
       right,
       ...props
     }) => React.createElement(TableCell, _extends({
-      className: `${classes.tableCell} ${right ? classes.alignRight : ''}`
+      className: `${classes?.tableCell || ''} ${right ? classes?.alignRight || '' : ''}`
     }, props));
 
     return React.createElement(React.Suspense, {

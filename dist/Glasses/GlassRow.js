@@ -19,11 +19,7 @@ export default function GlassRow({
   totals.q.set(ox, totals.q.get(ox) + quantity);
   totals.s.set(ox, totals.s.get(ox) + quantity * glr.s);
   totals.m.set(ox, totals.m.get(ox) + quantity * m);
-  return svg ? React.createElement(React.Fragment, null, React.createElement(TableRow, {
-    className: classes.noBreak
-  }, React.createElement(Cell, {
-    rowSpan: 2
-  }, `${row.row}-${glr.row}`), React.createElement(Cell, null, glr.formula), React.createElement(Cell, {
+  return React.createElement(React.Fragment, null, React.createElement(TableRow, null, React.createElement(Cell, null, `${row.row}-${glr.row}`), React.createElement(Cell, null, glr.formula), React.createElement(Cell, {
     right: true
   }, `${glr.width.round()}x${glr.height.round()} (${glr.thickness})`), React.createElement(Cell, {
     right: true
@@ -31,17 +27,9 @@ export default function GlassRow({
     right: true
   }, glr.s.round(3)), React.createElement(Cell, {
     right: true
-  }, m)), React.createElement(ImgRow, {
+  }, m)), svg ? React.createElement(ImgRow, {
     key: `img-${row.row}-${glr.row}`,
     svg: svg,
     Cell: Cell
-  })) : React.createElement(TableRow, null, React.createElement(Cell, null, `${row.row}-${glr.row}`), React.createElement(Cell, null, glr.formula), React.createElement(Cell, {
-    right: true
-  }, `${glr.width.round()}x${glr.height.round()} (${glr.thickness})`), React.createElement(Cell, {
-    right: true
-  }, quantity), React.createElement(Cell, {
-    right: true
-  }, glr.s.round(3)), React.createElement(Cell, {
-    right: true
-  }, m));
+  }) : null);
 }

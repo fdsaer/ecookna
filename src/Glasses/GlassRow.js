@@ -18,18 +18,7 @@ export default function GlassRow({row, glr, totals, Cell, classes, svg}) {
   totals.s.set(ox, totals.s.get(ox) + quantity * glr.s);
   totals.m.set(ox, totals.m.get(ox) + quantity * m);
   // добавляем строку заполнения
-  return svg ?
-    <>
-      <TableRow className={classes.noBreak}>
-        <Cell rowSpan={2}>{`${row.row}-${glr.row}`}</Cell>
-        <Cell>{glr.formula}</Cell>
-        <Cell right>{`${glr.width.round()}x${glr.height.round()} (${glr.thickness})`}</Cell>
-        <Cell right>{quantity}</Cell>
-        <Cell right>{glr.s.round(3)}</Cell>
-        <Cell right>{m}</Cell>
-      </TableRow>
-      <ImgRow key={`img-${row.row}-${glr.row}`} svg={svg} Cell={Cell}/>
-    </> :
+  return <>
     <TableRow>
       <Cell>{`${row.row}-${glr.row}`}</Cell>
       <Cell>{glr.formula}</Cell>
@@ -37,5 +26,7 @@ export default function GlassRow({row, glr, totals, Cell, classes, svg}) {
       <Cell right>{quantity}</Cell>
       <Cell right>{glr.s.round(3)}</Cell>
       <Cell right>{m}</Cell>
-    </TableRow>;
+    </TableRow>
+    {svg ? <ImgRow key={`img-${row.row}-${glr.row}`} svg={svg} Cell={Cell}/> : null}
+  </>;
 }
