@@ -35,6 +35,18 @@ const Svg = ({ source }) => {
 };
 
 const Products = ({ props, product }) => {
+  const constructionCount = product.characteristic.constructions._obj.length;
+  const extendedParams = {};
+  for (let i = 0; i <= constructionCount; i += 1) {
+    extendedParams[i] = product.characteristic.params
+      .map((param) => {
+        if (param.cnstr === i) return null;
+        return param;
+      })
+      .filter((param) => param !== null && param.param.include_to_description)
+      .map((param) => [param.param.name, param.value.name]);
+  }
+  console.log(Object.entries(extendedParams));
   const glasses = product.characteristic.glasses;
   const prod_nom = product.prod_nom;
   const glassesWeight = glasses
@@ -77,12 +89,18 @@ const Products = ({ props, product }) => {
                 <b>Цвет:</b> {product.characteristic.clr.presentation}
               </li>
             </ul>
-            <p>Дополнительные параметры:</p>
-            <ul>
-              <li>
-                <b>Цвет уплотнения:</b> Серый
-              </li>
-            </ul>
+            {extendedParams['0'] && extendedParams['0'].length > 0 && (
+              <>
+                <p>Дополнительные параметры:</p>
+                <ul>
+                  {extendedParams['0'].map(([key, val]) => (
+                    <li class="green">
+                      <b>{key}:</b> {val}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
             {glasses && (
               <>
                 <p>Стеклопакеты:</p>
@@ -108,6 +126,25 @@ const Products = ({ props, product }) => {
                 <b>Микропроветривание:</b> щелевое
               </li>
             </ul>
+            {Object.entries(extendedParams) &&
+              Object.entries(extendedParams).length > 1 &&
+              Object.entries(extendedParams)
+                .filter(([ff, params]) => ff !== '0')
+                .map(
+                  ([ff, params]) =>
+                    params.length && (
+                      <>
+                        <p>{ff}:</p>
+                        <ul>
+                          {params.map(([ee, val]) => (
+                            <li class="green">
+                              <b>{ee}:</b> {val}
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    )
+                )}
             {product.note && (
               <>
                 <p>Примечание:</p>
