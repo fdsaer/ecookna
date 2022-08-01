@@ -34,21 +34,62 @@ const Svg = ({ source }) => {
   );
 };
 
+const ExtendedParams = ({ paramsArr }) =>
+  paramsArr.length > 0 &&
+  paramsArr.map(
+    ([constructionName, params]) =>
+      params.length > 0 && (
+        <>
+          <p>{constructionName}:</p>
+          <ul>
+            {params.map(([paramName, paramValue]) => (
+              <li class="green">
+                <b>{paramName}:</b> {paramValue}
+              </li>
+            ))}
+          </ul>
+        </>
+      )
+  );
+
 const Products = ({ props, product }) => {
   const constructionCount = product.characteristic.constructions._obj.length;
   const extendedParams = {};
   for (let i = 0; i <= constructionCount; i += 1) {
-    extendedParams[i] = product.characteristic.params
-      .map((param) => {
-        if (param.cnstr === i) return null;
+    let key = '';
+    if (i === 0) {
+      key = 'Дополнительные параметры';
+    } else {
+      const currentConstruction = product.characteristic.constructions.get(
+        i - 1
+      );
+      key = currentConstruction?.furn?.name
+        ? `${
+            currentConstruction.furn.name
+          } Исполнение - ${currentConstruction.direction.name.toLowerCase()}`
+        : '';
+    }
+    console.log(
+      product.characteristic.params.map((param) => {
+        if (param.cnstr !== i) return null;
         return param;
       })
-      .filter((param) => param !== null && param.param.include_to_description)
+    );
+    extendedParams[key] = product.characteristic.params
+      .map((param) => {
+        if (param.cnstr !== i) return null;
+        return param;
+      })
+      .filter((param) => param !== null && !param.hide)
       .map((param) => [param.param.name, param.value.name]);
   }
-  console.log(Object.entries(extendedParams));
+  const commonExtendedParams = Object.entries(extendedParams).filter(
+    ([key]) => key === 'Дополнительные параметры'
+  );
+  const extendedParamsByConstruction = Object.entries(extendedParams).filter(
+    ([key]) => key && key !== 'Дополнительные параметры'
+  );
   const glasses = product.characteristic.glasses;
-  const prod_nom = product.prod_nom;
   const glassesWeight = glasses
     .map((glass) => product.characteristic.elm_weight(glass.elm))
     .reduce((acc, glassWeight) => (acc += glassWeight), 0)
@@ -89,18 +130,7 @@ const Products = ({ props, product }) => {
                 <b>Цвет:</b> {product.characteristic.clr.presentation}
               </li>
             </ul>
-            {extendedParams['0'] && extendedParams['0'].length > 0 && (
-              <>
-                <p>Дополнительные параметры:</p>
-                <ul>
-                  {extendedParams['0'].map(([key, val]) => (
-                    <li class="green">
-                      <b>{key}:</b> {val}
-                    </li>
-                  ))}
-                </ul>
-              </>
-            )}
+            <ExtendedParams paramsArr={commonExtendedParams} />
             {glasses && (
               <>
                 <p>Стеклопакеты:</p>
@@ -111,40 +141,7 @@ const Products = ({ props, product }) => {
                 </ul>
               </>
             )}
-            <p>201 GU UNI JET Пов/Откидное:</p>
-            <ul>
-              <li class="red">
-                <b>Ручка/Цвет:</b> Maco Rhapsody/Белый
-              </li>
-              <li class="red">
-                <b>Цвет накладок:</b> Белый
-              </li>
-              <li class="red">
-                <b>Тип Оконных петель:</b> Стандарт
-              </li>
-              <li class="red">
-                <b>Микропроветривание:</b> щелевое
-              </li>
-            </ul>
-            {Object.entries(extendedParams) &&
-              Object.entries(extendedParams).length > 1 &&
-              Object.entries(extendedParams)
-                .filter(([ff, params]) => ff !== '0')
-                .map(
-                  ([ff, params]) =>
-                    params.length && (
-                      <>
-                        <p>{ff}:</p>
-                        <ul>
-                          {params.map(([ee, val]) => (
-                            <li class="green">
-                              <b>{ee}:</b> {val}
-                            </li>
-                          ))}
-                        </ul>
-                      </>
-                    )
-                )}
+            <ExtendedParams paramsArr={extendedParamsByConstruction} />
             {product.note && (
               <>
                 <p>Примечание:</p>
@@ -155,25 +152,6 @@ const Products = ({ props, product }) => {
             )}
           </div>
         </div>
-      </div>
-      <div class="o-details__21">
-        <table>
-          <colgroup>
-            <col width="60%" />
-            <col width="15%" />
-            <col width="15%" />
-          </colgroup>
-          <tr>
-            <th>Наименование</th>
-            <th>Цвет</th>
-            <th>Кол-во, шт.</th>
-          </tr>
-          <tr>
-            <td>Подставочный профиль Veka</td>
-            <td></td>
-            <td>1</td>
-          </tr>
-        </table>
       </div>
     </>
   );
@@ -273,9 +251,7 @@ class Offer59 extends PrnProto {
                 <p class="o-cover__7">Ваш персональный менеджер:</p>
                 <div class="o-cover__8">
                   <div class="o-cover__10">
-                    <div class="o-cover__11 green">
-                      {obj.leading_manager.name}
-                    </div>
+                    <div class="o-cover__11 green">{obj.manager.name}</div>
                     <div class="o-cover__12">Телефон менеджера</div>
                   </div>
                   <div class="o-cover__13">Почта менеджера</div>

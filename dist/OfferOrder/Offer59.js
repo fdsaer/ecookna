@@ -27,6 +27,12 @@ const Svg = ({
   });
 };
 
+const ExtendedParams = ({
+  paramsArr
+}) => paramsArr.length > 0 && paramsArr.map(([constructionName, params]) => params.length > 0 && React.createElement(React.Fragment, null, React.createElement("p", null, constructionName, ":"), React.createElement("ul", null, params.map(([paramName, paramValue]) => React.createElement("li", {
+  class: "green"
+}, React.createElement("b", null, paramName, ":"), " ", paramValue)))));
+
 var _ref = React.createElement("b", null, "Масса общ/зап, кг:");
 
 var _ref2 = React.createElement("b", null, "Количество, шт:");
@@ -39,33 +45,9 @@ var _ref4 = React.createElement("li", {
 
 var _ref5 = React.createElement("b", null, "Цвет:");
 
-var _ref6 = React.createElement("p", null, "Дополнительные параметры:");
+var _ref6 = React.createElement("p", null, "Стеклопакеты:");
 
-var _ref7 = React.createElement("p", null, "Стеклопакеты:");
-
-var _ref8 = React.createElement("p", null, "201 GU UNI JET Пов/Откидное:");
-
-var _ref9 = React.createElement("ul", null, React.createElement("li", {
-  class: "red"
-}, React.createElement("b", null, "Ручка/Цвет:"), " Maco Rhapsody/Белый"), React.createElement("li", {
-  class: "red"
-}, React.createElement("b", null, "Цвет накладок:"), " Белый"), React.createElement("li", {
-  class: "red"
-}, React.createElement("b", null, "Тип Оконных петель:"), " Стандарт"), React.createElement("li", {
-  class: "red"
-}, React.createElement("b", null, "Микропроветривание:"), " щелевое"));
-
-var _ref10 = React.createElement("p", null, "Примечание:");
-
-var _ref11 = React.createElement("div", {
-  class: "o-details__21"
-}, React.createElement("table", null, React.createElement("colgroup", null, React.createElement("col", {
-  width: "60%"
-}), React.createElement("col", {
-  width: "15%"
-}), React.createElement("col", {
-  width: "15%"
-})), React.createElement("tr", null, React.createElement("th", null, "Наименование"), React.createElement("th", null, "Цвет"), React.createElement("th", null, "Кол-во, шт.")), React.createElement("tr", null, React.createElement("td", null, "Подставочный профиль Veka"), React.createElement("td", null), React.createElement("td", null, "1"))));
+var _ref7 = React.createElement("p", null, "Примечание:");
 
 const Products = ({
   props,
@@ -75,15 +57,28 @@ const Products = ({
   const extendedParams = {};
 
   for (let i = 0; i <= constructionCount; i += 1) {
-    extendedParams[i] = product.characteristic.params.map(param => {
-      if (param.cnstr === i) return null;
+    let key = '';
+
+    if (i === 0) {
+      key = 'Дополнительные параметры';
+    } else {
+      const currentConstruction = product.characteristic.constructions.get(i - 1);
+      key = currentConstruction?.furn?.name ? `${currentConstruction.furn.name} Исполнение - ${currentConstruction.direction.name.toLowerCase()}` : '';
+    }
+
+    console.log(product.characteristic.params.map(param => {
+      if (param.cnstr !== i) return null;
       return param;
-    }).filter(param => param !== null && param.param.include_to_description).map(param => [param.param.name, param.value.name]);
+    }));
+    extendedParams[key] = product.characteristic.params.map(param => {
+      if (param.cnstr !== i) return null;
+      return param;
+    }).filter(param => param !== null && !param.hide).map(param => [param.param.name, param.value.name]);
   }
 
-  console.log(Object.entries(extendedParams));
+  const commonExtendedParams = Object.entries(extendedParams).filter(([key]) => key === 'Дополнительные параметры');
+  const extendedParamsByConstruction = Object.entries(extendedParams).filter(([key]) => key && key !== 'Дополнительные параметры');
   const glasses = product.characteristic.glasses;
-  const prod_nom = product.prod_nom;
   const glassesWeight = glasses.map(glass => product.characteristic.elm_weight(glass.elm)).reduce((acc, glassWeight) => acc += glassWeight, 0).round();
   const constructionsWeight = product.characteristic.constructions.map(construction => product.characteristic.elm_weight(-1 * construction.cnstr)).reduce((acc, constructionWeight) => acc += constructionWeight, 0).round();
   return React.createElement(React.Fragment, null, React.createElement("div", {
@@ -110,80 +105,80 @@ const Products = ({
     class: "green"
   }, _ref3, " ", product.characteristic.prod_nom.name), _ref4, React.createElement("li", {
     class: "green"
-  }, _ref5, " ", product.characteristic.clr.presentation)), extendedParams['0'] && extendedParams['0'].length > 0 && React.createElement(React.Fragment, null, _ref6, React.createElement("ul", null, extendedParams['0'].map(([key, val]) => React.createElement("li", {
+  }, _ref5, " ", product.characteristic.clr.presentation)), React.createElement(ExtendedParams, {
+    paramsArr: commonExtendedParams
+  }), glasses && React.createElement(React.Fragment, null, _ref6, React.createElement("ul", null, glasses.map(glass => React.createElement("li", {
     class: "green"
-  }, React.createElement("b", null, key, ":"), " ", val)))), glasses && React.createElement(React.Fragment, null, _ref7, React.createElement("ul", null, glasses.map(glass => React.createElement("li", {
+  }, `${glass.formula} (${glass.thickness} мм)`)))), React.createElement(ExtendedParams, {
+    paramsArr: extendedParamsByConstruction
+  }), product.note && React.createElement(React.Fragment, null, _ref7, React.createElement("ul", null, React.createElement("li", {
     class: "green"
-  }, `${glass.formula} (${glass.thickness} мм)`)))), _ref8, _ref9, Object.entries(extendedParams) && Object.entries(extendedParams).length > 1 && Object.entries(extendedParams).filter(([ff, params]) => ff !== '0').map(([ff, params]) => params.length && React.createElement(React.Fragment, null, React.createElement("p", null, ff, ":"), React.createElement("ul", null, params.map(([ee, val]) => React.createElement("li", {
-    class: "green"
-  }, React.createElement("b", null, ee, ":"), " ", val))))), product.note && React.createElement(React.Fragment, null, _ref10, React.createElement("ul", null, React.createElement("li", {
-    class: "green"
-  }, product.note)))))), _ref11);
+  }, product.note)))))));
 };
 
-var _ref12 = React.createElement(OCover1, null);
+var _ref8 = React.createElement(OCover1, null);
 
-var _ref13 = React.createElement("h1", {
+var _ref9 = React.createElement("h1", {
   class: "o-cover__2"
 }, "Коммерческое ", React.createElement("br", null), " предложение");
 
-var _ref14 = React.createElement("p", {
+var _ref10 = React.createElement("p", {
   class: "o-cover__3"
 }, "по изготовлению и установке ", React.createElement("br", null), "светопрозрачных конструкций");
 
-var _ref15 = React.createElement("p", {
+var _ref11 = React.createElement("p", {
   class: "o-cover__5"
 }, "Предложение действительно в течении 10 календарных дней");
 
-var _ref16 = React.createElement("p", {
+var _ref12 = React.createElement("p", {
   class: "o-cover__7"
 }, "Ваш персональный менеджер:");
 
-var _ref17 = React.createElement("div", {
+var _ref13 = React.createElement("div", {
   class: "o-cover__12"
 }, "Телефон менеджера");
 
-var _ref18 = React.createElement("div", {
+var _ref14 = React.createElement("div", {
   class: "o-cover__13"
 }, "Почта менеджера");
 
-var _ref19 = React.createElement("p", {
+var _ref15 = React.createElement("p", {
   class: "o-cover__14"
 }, "Офис продаж:");
 
-var _ref20 = React.createElement("div", {
+var _ref16 = React.createElement("div", {
   class: "o-cover__15"
 }, "Адрес офиса");
 
-var _ref21 = React.createElement("div", {
+var _ref17 = React.createElement("div", {
   class: "o-cover__16"
 }, React.createElement(OCover17, null), React.createElement("p", {
   class: "o-cover__18"
 }, "ecookna.ru"));
 
-var _ref22 = React.createElement("div", {
+var _ref18 = React.createElement("div", {
   class: "o-details__2"
 }, React.createElement(ODetails3, null));
 
-var _ref23 = React.createElement("div", {
+var _ref19 = React.createElement("div", {
   class: "o-details__11"
 }, "Ваш персональный ", React.createElement("br", null), " менеджер:");
 
-var _ref24 = React.createElement("br", null);
+var _ref20 = React.createElement("br", null);
 
-var _ref25 = React.createElement("span", {
+var _ref21 = React.createElement("span", {
   class: "red"
 }, "+7 916 358-56-98, kolesnikov@ecookna.ru");
 
-var _ref26 = React.createElement("p", {
+var _ref22 = React.createElement("p", {
   class: "o-details__5"
 }, "В комплектацию Вашего заказа входит:");
 
-var _ref27 = React.createElement("div", {
+var _ref23 = React.createElement("div", {
   class: "o-details__6"
 });
 
-var _ref28 = React.createElement("colgroup", null, React.createElement("col", {
+var _ref24 = React.createElement("colgroup", null, React.createElement("col", {
   width: "25%"
 }), React.createElement("col", null), React.createElement("col", {
   width: "13%"
@@ -197,13 +192,13 @@ var _ref28 = React.createElement("colgroup", null, React.createElement("col", {
   width: "13%"
 }));
 
-var _ref29 = React.createElement("tr", null, React.createElement("td", null, "Изделия"), React.createElement("td", null, "Цвет"), React.createElement("td", null, "Кол-во, шт."), React.createElement("td", null, "Площадь, кв.м."), React.createElement("td", null, "Цена ", React.createElement("br", null), "без скидки"), React.createElement("td", null, "Скидка, %"), React.createElement("td", null, "Сумма"));
+var _ref25 = React.createElement("tr", null, React.createElement("td", null, "Изделия"), React.createElement("td", null, "Цвет"), React.createElement("td", null, "Кол-во, шт."), React.createElement("td", null, "Площадь, кв.м."), React.createElement("td", null, "Цена ", React.createElement("br", null), "без скидки"), React.createElement("td", null, "Скидка, %"), React.createElement("td", null, "Сумма"));
 
-var _ref30 = React.createElement("td", {
+var _ref26 = React.createElement("td", {
   colspan: "2"
 }, "Всего");
 
-var _ref31 = React.createElement("colgroup", null, React.createElement("col", {
+var _ref27 = React.createElement("colgroup", null, React.createElement("col", {
   width: "61%"
 }), React.createElement("col", {
   width: "13%"
@@ -213,19 +208,19 @@ var _ref31 = React.createElement("colgroup", null, React.createElement("col", {
   width: "13%"
 }));
 
-var _ref32 = React.createElement("th", null, "ИТОГО");
+var _ref28 = React.createElement("th", null, "ИТОГО");
 
-var _ref33 = React.createElement("th", null, "0");
+var _ref29 = React.createElement("th", null, "0");
 
-var _ref34 = React.createElement("p", {
+var _ref30 = React.createElement("p", {
   class: "o-details__22"
 }, "*Предложение действительно в течение 10 календарных дней.");
 
-var _ref35 = React.createElement("p", {
+var _ref31 = React.createElement("p", {
   class: "o-details__23"
 }, "Для вашего удобства, точный расчет стоимости, заключение договора и оплата могут быть осуществлены на объекте в день проведения замера.");
 
-var _ref36 = React.createElement("div", {
+var _ref32 = React.createElement("div", {
   class: "o-details__24"
 }, React.createElement("div", {
   class: "o-details__25"
@@ -237,7 +232,7 @@ var _ref36 = React.createElement("div", {
   href: "https://www.ecookna.ru/clients/napisat-otzyv/"
 }, "Оставить отзыв")));
 
-var _ref37 = React.createElement("div", {
+var _ref33 = React.createElement("div", {
   class: "o-info"
 }, React.createElement("div", {
   class: "o-info__top"
@@ -350,31 +345,31 @@ class Offer59 extends PrnProto {
       loading: loading
     }, React.createElement("div", {
       class: "o-cover"
-    }, _ref12, _ref13, _ref14, React.createElement("p", {
+    }, _ref8, _ref9, _ref10, React.createElement("p", {
       class: "o-cover__4 green"
-    }, title), _ref15, React.createElement("div", {
+    }, title), _ref11, React.createElement("div", {
       class: "o-cover__6"
     }, React.createElement("div", {
       class: "o-cover__9"
-    }, _ref16, React.createElement("div", {
+    }, _ref12, React.createElement("div", {
       class: "o-cover__8"
     }, React.createElement("div", {
       class: "o-cover__10"
     }, React.createElement("div", {
       class: "o-cover__11 green"
-    }, obj.leading_manager.name), _ref17), _ref18), _ref19, _ref20, ' '), _ref21)), React.createElement("div", {
+    }, obj.manager.name), _ref13), _ref14), _ref15, _ref16, ' '), _ref17)), React.createElement("div", {
       class: "o-details"
     }, React.createElement("div", {
       class: "o-details__1"
-    }, _ref22, React.createElement("div", {
+    }, _ref18, React.createElement("div", {
       class: "o-details__4"
     }, React.createElement("p", {
       class: "o-details__13"
     }, title), React.createElement("div", {
       class: "o-details__10"
-    }, _ref23, React.createElement("div", {
+    }, _ref19, React.createElement("div", {
       class: "o-details__12 green"
-    }, obj.manager.name, " ", _ref24, _ref25)))), _ref26, _ref27, React.createElement("div", {
+    }, obj.manager.name, " ", _ref20, _ref21)))), _ref22, _ref23, React.createElement("div", {
       class: "o-details__7"
     }, React.createElement("div", {
       class: "o-details__8"
@@ -388,7 +383,7 @@ class Offer59 extends PrnProto {
       product: product
     })), React.createElement("div", {
       class: "o-details__21 o-details__21--2"
-    }, React.createElement("table", null, _ref28, _ref29, products && products.map(product => React.createElement("tr", null, React.createElement("td", {
+    }, React.createElement("table", null, _ref24, _ref25, products && products.map(product => React.createElement("tr", null, React.createElement("td", {
       class: "green"
     }, product.characteristic.prod_nom.name_full), React.createElement("td", {
       class: "green"
@@ -402,7 +397,7 @@ class Offer59 extends PrnProto {
       class: "green"
     }, product.discount_percent), React.createElement("td", {
       class: "green"
-    }, product.price * product.quantity * (1 - product.discount)))), React.createElement("tr", null, _ref30, React.createElement("td", {
+    }, product.price * product.quantity * (1 - product.discount)))), React.createElement("tr", null, _ref26, React.createElement("td", {
       class: "green"
     }, products && products.map(product => product.quantity).reduce((acc, quantity) => acc += quantity, 0)), React.createElement("td", {
       class: "green"
@@ -414,11 +409,11 @@ class Offer59 extends PrnProto {
       class: "green"
     }, products && products.map(product => product.price * product.quantity * (1 - product.discount)).reduce((acc, price) => acc += price, 0))))), React.createElement("div", {
       class: "o-details__21 o-details__21--3"
-    }, React.createElement("table", null, _ref31, React.createElement("tr", null, _ref32, React.createElement("th", {
+    }, React.createElement("table", null, _ref27, React.createElement("tr", null, _ref28, React.createElement("th", {
       class: "green"
-    }, products && products.map(product => product.price * product.quantity).reduce((acc, price) => acc += price, 0)), _ref33, React.createElement("th", {
+    }, products && products.map(product => product.price * product.quantity).reduce((acc, price) => acc += price, 0)), _ref29, React.createElement("th", {
       class: "green"
-    }, products && products.map(product => product.price * product.quantity * (1 - product.discount)).reduce((acc, price) => acc += price, 0))))), _ref34, _ref35, _ref36), _ref37));
+    }, products && products.map(product => product.price * product.quantity * (1 - product.discount)).reduce((acc, price) => acc += price, 0))))), _ref30, _ref31, _ref32), _ref33));
   }
 
 }
