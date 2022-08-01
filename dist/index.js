@@ -1,6 +1,7 @@
 import orderForms from './CalcOrder/index.js';
 import characteristicsForms from './CatCharacteristics/index.js';
-const all = [].concat(orderForms).concat(characteristicsForms);
+import offerForm from './OfferOrder/index.js';
+const all = [...offerForm];
 const {
   cat: {
     formulas

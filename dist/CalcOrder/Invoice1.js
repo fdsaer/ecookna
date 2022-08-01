@@ -5,10 +5,11 @@ const {
 const StyledFrame = React.lazy(() => import('../StyledFrame/Base.js'));
 const Header = React.lazy(() => import('../Header/index.js'));
 const Footer = React.lazy(() => import('../Footer/index.js'));
+import PrnProto from '../PrnProto.js';
 
 var _ref = React.createElement("div", null, "Загрузка...");
 
-class Invoice1 extends React.Component {
+class Invoice1 extends PrnProto {
   render() {
     const {
       attr,
@@ -19,7 +20,9 @@ class Invoice1 extends React.Component {
       fallback: _ref
     }, React.createElement(StyledFrame, {
       obj: obj,
-      attr: attr
+      attr: attr,
+      setClasses: this.setClasses,
+      classes: this.classes
     }, React.createElement(Header, this.props), React.createElement(Footer, this.props)));
   }
 

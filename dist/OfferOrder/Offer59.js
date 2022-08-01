@@ -10,13 +10,10 @@ const {
 } = $p.ui;
 import PrnProto from '../PrnProto.js';
 const StyledFrame = React.lazy(() => import('../StyledFrame/Base.js'));
-const Header = React.lazy(() => import('../Header/HeaderGlasses.js'));
-const Footer = React.lazy(() => import('../Footer/index.js'));
-const Products = React.lazy(() => import('../Glasses/Products.js'));
 
-var _ref = React.createElement(Footer, null);
+var _ref = React.createElement("div", null, "Лалалалалаал");
 
-class Glasses34 extends PrnProto {
+class Offer59 extends PrnProto {
   componentDidMount() {
     const {
       attr,
@@ -106,17 +103,12 @@ class Glasses34 extends PrnProto {
       title: title,
       loading: loading,
       err: err
-    }, React.createElement(Header, {
-      title: title
-    }), React.createElement(Products, {
-      totals: totals,
-      Cell: Cell
-    }), _ref));
+    }, _ref));
   }
 
 }
 
-Glasses34.ref = 'cefdf4d0-6c86-11ec-bee3-8b4e33301a47';
-Glasses34.destination = 'doc.calc_order';
-Glasses34.title = '3.4 Заполнения_ (jsx)';
-export default Glasses34;
+Offer59.ref = 'cefdf4d0-6c86-11ec-bee3-8b4e33301a47';
+Offer59.destination = 'doc.calc_order';
+Offer59.title = '5.9 КП Калева (jsx)';
+export default Offer59;

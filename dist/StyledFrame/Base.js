@@ -14,6 +14,11 @@ export default function StyledFrame({
 }) {
   if (!classes) {
     classes = makeStyles(stylesBase)();
+
+    if (!loading) {
+      loading = 'Загрузка...';
+    }
+
     setClasses(classes);
   }
 
