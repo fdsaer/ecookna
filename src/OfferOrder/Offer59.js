@@ -69,12 +69,6 @@ const Products = ({ props, product }) => {
           } Исполнение - ${currentConstruction.direction.name.toLowerCase()}`
         : '';
     }
-    console.log(
-      product.characteristic.params.map((param) => {
-        if (param.cnstr !== i) return null;
-        return param;
-      })
-    );
     extendedParams[key] = product.characteristic.params
       .map((param) => {
         if (param.cnstr !== i) return null;
@@ -183,7 +177,12 @@ class Offer59 extends PrnProto {
       state: { loaded, products },
       classes,
     } = this;
-    const managerContacts = { phone: '', email: '' };
+    const managerContacts = {
+      phone_number: '',
+      email_address: '',
+      address: '',
+    };
+    const officeContacts = { phone_number: '', email_address: '', address: '' };
     const fullSquare =
       products &&
       products
@@ -202,14 +201,48 @@ class Offer59 extends PrnProto {
         .map((product) => getProductWeight(product) * product.quantity)
         .reduce((acc, productWeight) => (acc += productWeight), 0)
         .round();
-    obj.leading_manager.contact_information.forEach((contact) => {
-      if (contact.type === 'Телефон')
-        managerContacts.phone = contact.presentation;
-      if (contact.type === 'АдресЭлектроннойПочты')
-        managerContacts.email = contact.presentation;
+    obj.manager.contact_information.forEach((row) => {
+      switch (row.type.name) {
+        case 'Адрес':
+          if (row.presentation && !managerContacts.address) {
+            managerContacts.address = row.presentation;
+          }
+          break;
+        case 'Телефон':
+          if (row.presentation && !managerContacts.phone_number) {
+            managerContacts.phone_number = row.presentation;
+          }
+          break;
+        case 'АдресЭлектроннойПочты':
+          if (row.presentation && !managerContacts.email_address) {
+            managerContacts.email_address = row.presentation;
+          }
+          break;
+        default:
+      }
     });
 
-    console.log({ managerContacts });
+    obj.organization.contact_information.forEach((row) => {
+      switch (row.type.name) {
+        case 'Адрес':
+          if (row.presentation && !officeContacts.address) {
+            officeContacts.address = row.presentation;
+          }
+          break;
+        case 'Телефон':
+          if (row.presentation && !officeContacts.phone_number) {
+            officeContacts.phone_number = row.presentation;
+          }
+          break;
+        case 'АдресЭлектроннойПочты':
+          if (row.presentation && !officeContacts.email_address) {
+            officeContacts.email_address = row.presentation;
+          }
+          break;
+        default:
+      }
+    });
+
     const title = `Заполнения заказа №${obj.number_doc} от ${moment(
       obj.date
     ).format('DD MMMM YYYY')} г.`;
@@ -252,13 +285,22 @@ class Offer59 extends PrnProto {
                 <div class="o-cover__8">
                   <div class="o-cover__10">
                     <div class="o-cover__11 green">{obj.manager.name}</div>
-                    <div class="o-cover__12">Телефон менеджера</div>
+                    <div class="o-cover__12 green">
+                      {managerContacts.phone_number}
+                    </div>
                   </div>
-                  <div class="o-cover__13">Почта менеджера</div>
+                  <div class="o-cover__13 green">
+                    {managerContacts.email_address}
+                  </div>
                 </div>
-                <p class="o-cover__14">Офис продаж:</p>
-                <div class="o-cover__15">Адрес офиса</div>{' '}
-                {/* Как получить данные офиса и контакты менеджера? */}
+                {officeContacts.address && (
+                  <>
+                    <p class="o-cover__14">Офис продаж:</p>
+                    <div class="o-cover__15 green">
+                      {officeContacts.address}
+                    </div>{' '}
+                  </>
+                )}
               </div>
               <div class="o-cover__16">
                 <OCover17 />
@@ -280,10 +322,12 @@ class Offer59 extends PrnProto {
                   </div>
                   <div class="o-details__12 green">
                     {obj.manager.name} <br />
-                    {/* span Ниже нужен только для того, чтобы прописать в него класс, в верстке его не было */}
-                    <span class="red">
-                      +7 916 358-56-98, kolesnikov@ecookna.ru
-                    </span>
+                    {[
+                      managerContacts.phone_number,
+                      managerContacts.email_address,
+                    ]
+                      .filter((value) => value !== '')
+                      .join(', ')}
                   </div>
                 </div>
               </div>
@@ -320,7 +364,7 @@ class Offer59 extends PrnProto {
                     Цена <br />
                     без скидки
                   </td>
-                  <td>Скидка, %</td>
+                  <td>Скидка</td>
                   <td>Сумма</td>
                 </tr>
                 {products &&
@@ -337,7 +381,7 @@ class Offer59 extends PrnProto {
                         {(product.s * product.quantity).round(2)}
                       </td>
                       <td class="green">{product.price * product.quantity}</td>
-                      <td class="green">{product.discount_percent}</td>
+                      <td class="green">{product.price * product.discount}</td>
                       <td class="green">
                         {product.price *
                           product.quantity *
@@ -367,10 +411,12 @@ class Offer59 extends PrnProto {
                         .reduce((acc, price) => (acc += price), 0)}
                   </td>
                   <td class="green">
-                    {/* не понятно как суммировать скидку */}
                     {products &&
                       products
-                        .map((product) => product.discount_percent)
+                        .map(
+                          (product) =>
+                            product.price * product.quantity * product.discount
+                        )
                         .reduce((acc, discount) => (acc += discount), 0)}
                   </td>
                   <td class="green">

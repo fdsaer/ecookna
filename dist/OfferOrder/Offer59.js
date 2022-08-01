@@ -66,10 +66,6 @@ const Products = ({
       key = currentConstruction?.furn?.name ? `${currentConstruction.furn.name} Исполнение - ${currentConstruction.direction.name.toLowerCase()}` : '';
     }
 
-    console.log(product.characteristic.params.map(param => {
-      if (param.cnstr !== i) return null;
-      return param;
-    }));
     extendedParams[key] = product.characteristic.params.map(param => {
       if (param.cnstr !== i) return null;
       return param;
@@ -134,51 +130,35 @@ var _ref12 = React.createElement("p", {
   class: "o-cover__7"
 }, "Ваш персональный менеджер:");
 
-var _ref13 = React.createElement("div", {
-  class: "o-cover__12"
-}, "Телефон менеджера");
-
-var _ref14 = React.createElement("div", {
-  class: "o-cover__13"
-}, "Почта менеджера");
-
-var _ref15 = React.createElement("p", {
+var _ref13 = React.createElement("p", {
   class: "o-cover__14"
 }, "Офис продаж:");
 
-var _ref16 = React.createElement("div", {
-  class: "o-cover__15"
-}, "Адрес офиса");
-
-var _ref17 = React.createElement("div", {
+var _ref14 = React.createElement("div", {
   class: "o-cover__16"
 }, React.createElement(OCover17, null), React.createElement("p", {
   class: "o-cover__18"
 }, "ecookna.ru"));
 
-var _ref18 = React.createElement("div", {
+var _ref15 = React.createElement("div", {
   class: "o-details__2"
 }, React.createElement(ODetails3, null));
 
-var _ref19 = React.createElement("div", {
+var _ref16 = React.createElement("div", {
   class: "o-details__11"
 }, "Ваш персональный ", React.createElement("br", null), " менеджер:");
 
-var _ref20 = React.createElement("br", null);
+var _ref17 = React.createElement("br", null);
 
-var _ref21 = React.createElement("span", {
-  class: "red"
-}, "+7 916 358-56-98, kolesnikov@ecookna.ru");
-
-var _ref22 = React.createElement("p", {
+var _ref18 = React.createElement("p", {
   class: "o-details__5"
 }, "В комплектацию Вашего заказа входит:");
 
-var _ref23 = React.createElement("div", {
+var _ref19 = React.createElement("div", {
   class: "o-details__6"
 });
 
-var _ref24 = React.createElement("colgroup", null, React.createElement("col", {
+var _ref20 = React.createElement("colgroup", null, React.createElement("col", {
   width: "25%"
 }), React.createElement("col", null), React.createElement("col", {
   width: "13%"
@@ -192,13 +172,13 @@ var _ref24 = React.createElement("colgroup", null, React.createElement("col", {
   width: "13%"
 }));
 
-var _ref25 = React.createElement("tr", null, React.createElement("td", null, "Изделия"), React.createElement("td", null, "Цвет"), React.createElement("td", null, "Кол-во, шт."), React.createElement("td", null, "Площадь, кв.м."), React.createElement("td", null, "Цена ", React.createElement("br", null), "без скидки"), React.createElement("td", null, "Скидка, %"), React.createElement("td", null, "Сумма"));
+var _ref21 = React.createElement("tr", null, React.createElement("td", null, "Изделия"), React.createElement("td", null, "Цвет"), React.createElement("td", null, "Кол-во, шт."), React.createElement("td", null, "Площадь, кв.м."), React.createElement("td", null, "Цена ", React.createElement("br", null), "без скидки"), React.createElement("td", null, "Скидка"), React.createElement("td", null, "Сумма"));
 
-var _ref26 = React.createElement("td", {
+var _ref22 = React.createElement("td", {
   colspan: "2"
 }, "Всего");
 
-var _ref27 = React.createElement("colgroup", null, React.createElement("col", {
+var _ref23 = React.createElement("colgroup", null, React.createElement("col", {
   width: "61%"
 }), React.createElement("col", {
   width: "13%"
@@ -208,19 +188,19 @@ var _ref27 = React.createElement("colgroup", null, React.createElement("col", {
   width: "13%"
 }));
 
-var _ref28 = React.createElement("th", null, "ИТОГО");
+var _ref24 = React.createElement("th", null, "ИТОГО");
 
-var _ref29 = React.createElement("th", null, "0");
+var _ref25 = React.createElement("th", null, "0");
 
-var _ref30 = React.createElement("p", {
+var _ref26 = React.createElement("p", {
   class: "o-details__22"
 }, "*Предложение действительно в течение 10 календарных дней.");
 
-var _ref31 = React.createElement("p", {
+var _ref27 = React.createElement("p", {
   class: "o-details__23"
 }, "Для вашего удобства, точный расчет стоимости, заключение договора и оплата могут быть осуществлены на объекте в день проведения замера.");
 
-var _ref32 = React.createElement("div", {
+var _ref28 = React.createElement("div", {
   class: "o-details__24"
 }, React.createElement("div", {
   class: "o-details__25"
@@ -232,7 +212,7 @@ var _ref32 = React.createElement("div", {
   href: "https://www.ecookna.ru/clients/napisat-otzyv/"
 }, "Оставить отзыв")));
 
-var _ref33 = React.createElement("div", {
+var _ref29 = React.createElement("div", {
   class: "o-info"
 }, React.createElement("div", {
   class: "o-info__top"
@@ -309,20 +289,71 @@ class Offer59 extends PrnProto {
       classes
     } = this;
     const managerContacts = {
-      phone: '',
-      email: ''
+      phone_number: '',
+      email_address: '',
+      address: ''
+    };
+    const officeContacts = {
+      phone_number: '',
+      email_address: '',
+      address: ''
     };
     const fullSquare = products && products.map(product => product.s * product.quantity).reduce((acc, productSquare) => acc += productSquare, 0).round(2);
 
     const getProductWeight = product => product.characteristic.constructions.map(construction => product.characteristic.elm_weight(-1 * construction.cnstr)).reduce((acc, constructionWeight) => acc += constructionWeight, 0);
 
     const fullWeight = products && products.map(product => getProductWeight(product) * product.quantity).reduce((acc, productWeight) => acc += productWeight, 0).round();
-    obj.leading_manager.contact_information.forEach(contact => {
-      if (contact.type === 'Телефон') managerContacts.phone = contact.presentation;
-      if (contact.type === 'АдресЭлектроннойПочты') managerContacts.email = contact.presentation;
+    obj.manager.contact_information.forEach(row => {
+      switch (row.type.name) {
+        case 'Адрес':
+          if (row.presentation && !managerContacts.address) {
+            managerContacts.address = row.presentation;
+          }
+
+          break;
+
+        case 'Телефон':
+          if (row.presentation && !managerContacts.phone_number) {
+            managerContacts.phone_number = row.presentation;
+          }
+
+          break;
+
+        case 'АдресЭлектроннойПочты':
+          if (row.presentation && !managerContacts.email_address) {
+            managerContacts.email_address = row.presentation;
+          }
+
+          break;
+
+        default:
+      }
     });
-    console.log({
-      managerContacts
+    obj.organization.contact_information.forEach(row => {
+      switch (row.type.name) {
+        case 'Адрес':
+          if (row.presentation && !officeContacts.address) {
+            officeContacts.address = row.presentation;
+          }
+
+          break;
+
+        case 'Телефон':
+          if (row.presentation && !officeContacts.phone_number) {
+            officeContacts.phone_number = row.presentation;
+          }
+
+          break;
+
+        case 'АдресЭлектроннойПочты':
+          if (row.presentation && !officeContacts.email_address) {
+            officeContacts.email_address = row.presentation;
+          }
+
+          break;
+
+        default:
+      }
     });
     const title = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format('DD MMMM YYYY')} г.`;
     let loading = '';
@@ -357,19 +388,25 @@ class Offer59 extends PrnProto {
       class: "o-cover__10"
     }, React.createElement("div", {
       class: "o-cover__11 green"
-    }, obj.manager.name), _ref13), _ref14), _ref15, _ref16, ' '), _ref17)), React.createElement("div", {
+    }, obj.manager.name), React.createElement("div", {
+      class: "o-cover__12 green"
+    }, managerContacts.phone_number)), React.createElement("div", {
+      class: "o-cover__13 green"
+    }, managerContacts.email_address)), officeContacts.address && React.createElement(React.Fragment, null, _ref13, React.createElement("div", {
+      class: "o-cover__15 green"
+    }, officeContacts.address), ' ')), _ref14)), React.createElement("div", {
       class: "o-details"
     }, React.createElement("div", {
       class: "o-details__1"
-    }, _ref18, React.createElement("div", {
+    }, _ref15, React.createElement("div", {
       class: "o-details__4"
     }, React.createElement("p", {
       class: "o-details__13"
     }, title), React.createElement("div", {
       class: "o-details__10"
-    }, _ref19, React.createElement("div", {
+    }, _ref16, React.createElement("div", {
       class: "o-details__12 green"
-    }, obj.manager.name, " ", _ref20, _ref21)))), _ref22, _ref23, React.createElement("div", {
+    }, obj.manager.name, " ", _ref17, [managerContacts.phone_number, managerContacts.email_address].filter(value => value !== '').join(', '))))), _ref18, _ref19, React.createElement("div", {
       class: "o-details__7"
     }, React.createElement("div", {
       class: "o-details__8"
@@ -383,7 +420,7 @@ class Offer59 extends PrnProto {
       product: product
     })), React.createElement("div", {
       class: "o-details__21 o-details__21--2"
-    }, React.createElement("table", null, _ref24, _ref25, products && products.map(product => React.createElement("tr", null, React.createElement("td", {
+    }, React.createElement("table", null, _ref20, _ref21, products && products.map(product => React.createElement("tr", null, React.createElement("td", {
       class: "green"
     }, product.characteristic.prod_nom.name_full), React.createElement("td", {
       class: "green"
@@ -395,9 +432,9 @@ class Offer59 extends PrnProto {
       class: "green"
     }, product.price * product.quantity), React.createElement("td", {
       class: "green"
-    }, product.discount_percent), React.createElement("td", {
+    }, product.price * product.discount), React.createElement("td", {
       class: "green"
-    }, product.price * product.quantity * (1 - product.discount)))), React.createElement("tr", null, _ref26, React.createElement("td", {
+    }, product.price * product.quantity * (1 - product.discount)))), React.createElement("tr", null, _ref22, React.createElement("td", {
       class: "green"
     }, products && products.map(product => product.quantity).reduce((acc, quantity) => acc += quantity, 0)), React.createElement("td", {
       class: "green"
@@ -405,15 +442,15 @@ class Offer59 extends PrnProto {
       class: "green"
     }, products && products.map(product => product.price * product.quantity).reduce((acc, price) => acc += price, 0)), React.createElement("td", {
       class: "green"
-    }, products && products.map(product => product.discount_percent).reduce((acc, discount) => acc += discount, 0)), React.createElement("td", {
+    }, products && products.map(product => product.price * product.quantity * product.discount).reduce((acc, discount) => acc += discount, 0)), React.createElement("td", {
       class: "green"
     }, products && products.map(product => product.price * product.quantity * (1 - product.discount)).reduce((acc, price) => acc += price, 0))))), React.createElement("div", {
       class: "o-details__21 o-details__21--3"
-    }, React.createElement("table", null, _ref27, React.createElement("tr", null, _ref28, React.createElement("th", {
+    }, React.createElement("table", null, _ref23, React.createElement("tr", null, _ref24, React.createElement("th", {
       class: "green"
-    }, products && products.map(product => product.price * product.quantity).reduce((acc, price) => acc += price, 0)), _ref29, React.createElement("th", {
+    }, products && products.map(product => product.price * product.quantity).reduce((acc, price) => acc += price, 0)), _ref25, React.createElement("th", {
       class: "green"
-    }, products && products.map(product => product.price * product.quantity * (1 - product.discount)).reduce((acc, price) => acc += price, 0))))), _ref30, _ref31, _ref32), _ref33));
+    }, products && products.map(product => product.price * product.quantity * (1 - product.discount)).reduce((acc, price) => acc += price, 0))))), _ref26, _ref27, _ref28), _ref29));
   }
 
 }
