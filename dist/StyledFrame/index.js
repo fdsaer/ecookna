@@ -25,7 +25,7 @@ export default function StyledFrame({
       break;
 
     default:
-      classes = makeStyles(stylesBase)();
+      classes = makeStyles(stylesOrg2)();
   }
 
   return React.createElement("div", {

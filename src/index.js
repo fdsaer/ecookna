@@ -11,7 +11,7 @@ import orderForms from './CalcOrder/index.js';
 import characteristicsForms from './CatCharacteristics/index.js';
 import offerForm from './OfferOrder/index.js';
 
-const all = [...offerForm];
+const all = [...offerForm, ...orderForms];
 const {
   cat: { formulas },
   adapters: { pouch },

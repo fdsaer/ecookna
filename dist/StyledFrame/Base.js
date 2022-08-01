@@ -2,7 +2,7 @@ const {
   React,
   makeStyles
 } = $p.ui;
-import stylesBase from './stylesBase.js';
+import stylesBase from './stylesOrg2.js';
 import Loading from './Loading.js';
 export default function StyledFrame({
   children,
