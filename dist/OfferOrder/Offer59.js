@@ -6,7 +6,10 @@ const {
   TableBody,
   TableCell,
   TableHead,
-  TableRow
+  TableRow,
+  Typography,
+  Link,
+  Box
 } = $p.ui;
 import PrnProto from '../PrnProto.js';
 import { OCover1, OCover17, ODetails, ODetails3, OInfo1, OInfo4, OInfo6, OInfo7, OInfo10_1, OInfo10_2, OInfo10_3, OInfo10_4 } from '../img/index.js';
@@ -29,7 +32,7 @@ const Svg = ({
 
 const ExtendedParams = ({
   paramsArr
-}) => paramsArr.length > 0 && paramsArr.map(([constructionName, params]) => params.length > 0 && React.createElement(React.Fragment, null, React.createElement("p", null, constructionName, ":"), React.createElement("ul", null, params.map(([paramName, paramValue]) => React.createElement("li", {
+}) => paramsArr.length > 0 && paramsArr.map(([constructionName, params]) => params.length > 0 && React.createElement(React.Fragment, null, React.createElement(Typography, null, constructionName, ":"), React.createElement("ul", null, params.map(([paramName, paramValue]) => React.createElement("li", {
   class: "green"
 }, React.createElement("b", null, paramName, ":"), " ", paramValue)))));
 
@@ -45,9 +48,9 @@ var _ref4 = React.createElement("li", {
 
 var _ref5 = React.createElement("b", null, "Цвет:");
 
-var _ref6 = React.createElement("p", null, "Стеклопакеты:");
+var _ref6 = React.createElement(Typography, null, "Стеклопакеты:");
 
-var _ref7 = React.createElement("p", null, "Примечание:");
+var _ref7 = React.createElement(Typography, null, "Примечание:");
 
 const Products = ({
   props,
@@ -81,7 +84,7 @@ const Products = ({
     class: "o-details__14"
   }, React.createElement("div", {
     class: "o-details__15"
-  }, React.createElement("p", {
+  }, React.createElement(Typography, {
     class: "o-details__20 green"
   }, "Номер: ", product.row), React.createElement("div", {
     class: "o-details__18"
@@ -89,7 +92,7 @@ const Products = ({
     source: product.characteristic.svg
   }))), React.createElement("div", {
     class: "o-details__16"
-  }, React.createElement("p", {
+  }, React.createElement(Typography, {
     class: "o-details__19 green"
   }, "Позиция: ", product.row), React.createElement("div", {
     class: "o-details__17"
@@ -114,29 +117,30 @@ const Products = ({
 
 var _ref8 = React.createElement(OCover1, null);
 
-var _ref9 = React.createElement("h1", {
+var _ref9 = React.createElement(Typography, {
+  variant: "h1",
   class: "o-cover__2"
 }, "Коммерческое ", React.createElement("br", null), " предложение");
 
-var _ref10 = React.createElement("p", {
+var _ref10 = React.createElement(Typography, {
   class: "o-cover__3"
 }, "по изготовлению и установке ", React.createElement("br", null), "светопрозрачных конструкций");
 
-var _ref11 = React.createElement("p", {
+var _ref11 = React.createElement(Typography, {
   class: "o-cover__5"
 }, "Предложение действительно в течении 10 календарных дней");
 
-var _ref12 = React.createElement("p", {
+var _ref12 = React.createElement(Typography, {
   class: "o-cover__7"
 }, "Ваш персональный менеджер:");
 
-var _ref13 = React.createElement("p", {
+var _ref13 = React.createElement(Typography, {
   class: "o-cover__14"
 }, "Офис продаж:");
 
 var _ref14 = React.createElement("div", {
   class: "o-cover__16"
-}, React.createElement(OCover17, null), React.createElement("p", {
+}, React.createElement(OCover17, null), React.createElement(Typography, {
   class: "o-cover__18"
 }, "ecookna.ru"));
 
@@ -150,7 +154,7 @@ var _ref16 = React.createElement("div", {
 
 var _ref17 = React.createElement("br", null);
 
-var _ref18 = React.createElement("p", {
+var _ref18 = React.createElement(Typography, {
   class: "o-details__5"
 }, "В комплектацию Вашего заказа входит:");
 
@@ -192,21 +196,21 @@ var _ref24 = React.createElement("th", null, "ИТОГО");
 
 var _ref25 = React.createElement("th", null, "0");
 
-var _ref26 = React.createElement("p", {
+var _ref26 = React.createElement(Typography, {
   class: "o-details__22"
 }, "*Предложение действительно в течение 10 календарных дней.");
 
-var _ref27 = React.createElement("p", {
+var _ref27 = React.createElement(Typography, {
   class: "o-details__23"
 }, "Для вашего удобства, точный расчет стоимости, заключение договора и оплата могут быть осуществлены на объекте в день проведения замера.");
 
 var _ref28 = React.createElement("div", {
   class: "o-details__24"
-}, React.createElement("div", {
+}, React.createElement(Typography, {
   class: "o-details__25"
 }, "Будем рады вашему отзыву о работе наших специалистов"), React.createElement("div", {
   class: "o-details__26"
-}, React.createElement("a", {
+}, React.createElement(Link, {
   class: "o-details__27",
   target: "_blank",
   href: "https://www.ecookna.ru/clients/napisat-otzyv/"
@@ -216,11 +220,11 @@ var _ref29 = React.createElement("div", {
   class: "o-info"
 }, React.createElement("div", {
   class: "o-info__top"
-}, React.createElement(OInfo1, null), React.createElement("p", {
+}, React.createElement(OInfo1, null), React.createElement(Typography, {
   class: "o-info__2"
-}, "Мы производим особенные окна для Вас. Учитываем не только интерьерные и экстерьерные особенности помещения, но и функциональную нагрузку каждой комнаты и строения."), React.createElement("p", {
+}, "Мы производим особенные окна для Вас. Учитываем не только интерьерные и экстерьерные особенности помещения, но и функциональную нагрузку каждой комнаты и строения."), React.createElement(Typography, {
   class: "o-info__3"
-}, "Что мы предлагаем? - Тысячи комбинаций окон, дверей и других продуктов, для самых взыскательных заказчиков."), React.createElement(OInfo4, null), React.createElement("p", {
+}, "Что мы предлагаем? - Тысячи комбинаций окон, дверей и других продуктов, для самых взыскательных заказчиков."), React.createElement(OInfo4, null), React.createElement(Typography, {
   class: "o-info__5"
 }, "Комплектующие от мировых лидеров:")), React.createElement("div", {
   class: "o-info__6"
@@ -230,25 +234,27 @@ var _ref29 = React.createElement("div", {
   class: "o-info__11"
 }, React.createElement("div", {
   class: "o-info__9"
-}, React.createElement("span", null, "Переходите"), " по сылкам:"), React.createElement("div", {
+}, React.createElement(Typography, {
+  component: "span"
+}, "Переходите"), " по сылкам:"), React.createElement("div", {
   class: "o-info__8"
 }, React.createElement("div", {
   class: "o-info__10"
-}, React.createElement("a", {
+}, React.createElement(Link, {
   href: "https://www.youtube.com/watch?v=X6lQcjH1Jc4"
-}, React.createElement("div", null, React.createElement(OInfo10_1, null)), React.createElement("p", null, "Собственное производство "))), React.createElement("div", {
+}, React.createElement("div", null, React.createElement(OInfo10_1, null)), React.createElement(Typography, null, "Собственное производство "))), React.createElement("div", {
   class: "o-info__10"
-}, React.createElement("a", {
+}, React.createElement(Link, {
   href: "https://www.ecookna.ru/clients/3d/"
-}, React.createElement("div", null, React.createElement(OInfo10_2, null)), React.createElement("p", null, "Панорама нашего шоу-рума "))), React.createElement("div", {
+}, React.createElement("div", null, React.createElement(OInfo10_2, null)), React.createElement(Typography, null, "Панорама нашего шоу-рума "))), React.createElement("div", {
   class: "o-info__10"
-}, React.createElement("a", {
+}, React.createElement(Link, {
   href: "https://www.youtube.com/watch?v=pHthiLw2RpA"
-}, React.createElement("div", null, React.createElement(OInfo10_3, null)), React.createElement("p", null, "Производство окон ПВХ"))), React.createElement("div", {
+}, React.createElement("div", null, React.createElement(OInfo10_3, null)), React.createElement(Typography, null, "Производство окон ПВХ"))), React.createElement("div", {
   class: "o-info__10"
-}, React.createElement("a", {
+}, React.createElement(Link, {
   href: "https://www.youtube.com/watch?v=zkKJTZ90QVo"
-}, React.createElement("div", null, React.createElement(OInfo10_4, null)), React.createElement("p", null, "Постоянный участник телепроектов")))))));
+}, React.createElement("div", null, React.createElement(OInfo10_4, null)), React.createElement(Typography, null, "Постоянный участник телепроектов")))))));
 
 class Offer59 extends PrnProto {
   componentDidMount() {
@@ -376,7 +382,7 @@ class Offer59 extends PrnProto {
       loading: loading
     }, React.createElement("div", {
       class: "o-cover"
-    }, _ref8, _ref9, _ref10, React.createElement("p", {
+    }, _ref8, _ref9, _ref10, React.createElement(Typography, {
       class: "o-cover__4 green"
     }, title), _ref11, React.createElement("div", {
       class: "o-cover__6"
@@ -400,7 +406,7 @@ class Offer59 extends PrnProto {
       class: "o-details__1"
     }, _ref15, React.createElement("div", {
       class: "o-details__4"
-    }, React.createElement("p", {
+    }, React.createElement(Typography, {
       class: "o-details__13"
     }, title), React.createElement("div", {
       class: "o-details__10"
@@ -410,11 +416,13 @@ class Offer59 extends PrnProto {
       class: "o-details__7"
     }, React.createElement("div", {
       class: "o-details__8"
-    }, "Площадь изделий, кв.м: ", React.createElement("span", {
+    }, "Площадь изделий, кв.м:", ' ', React.createElement(Typography, {
+      component: "span",
       class: "green"
     }, fullSquare)), React.createElement("div", {
       class: "o-details__9"
-    }, "Масса изделий, кг: ", React.createElement("span", {
+    }, "Масса изделий, кг:", ' ', React.createElement(Typography, {
+      component: "span",
       class: "green"
     }, fullWeight))), products && products.map(product => React.createElement(Products, {
       product: product

@@ -2,7 +2,7 @@
  * Пример стилей по умолчанию
  */
 
-export default function styles(theme){
+export default function styles(theme) {
   return {
     root: {
       width: '100%',
@@ -25,10 +25,10 @@ export default function styles(theme){
       position: 'fixed',
       bottom: 0,
       fontSize: '0.6rem',
-      display: 'table-footer-group'
+      display: 'table-footer-group',
     },
     noBreak: {
-      breakInside: 'avoid'
+      breakInside: 'avoid',
     },
     flex: {
       display: 'flex',
@@ -48,7 +48,7 @@ export default function styles(theme){
       flex: 1,
     },
     w100: {
-      width: '100%'
-    }
+      width: '100%',
+    },
   };
 }

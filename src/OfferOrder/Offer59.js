@@ -6,7 +6,17 @@
  * Created by Evgeniy Malyarov on 03.01.2022.
  */
 
-const { React, Table, TableBody, TableCell, TableHead, TableRow } = $p.ui;
+const {
+  React,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Typography,
+  Link,
+  Box,
+} = $p.ui;
 import PrnProto from '../PrnProto.js';
 import {
   OCover1,
@@ -40,7 +50,7 @@ const ExtendedParams = ({ paramsArr }) =>
     ([constructionName, params]) =>
       params.length > 0 && (
         <>
-          <p>{constructionName}:</p>
+          <Typography>{constructionName}:</Typography>
           <ul>
             {params.map(([paramName, paramValue]) => (
               <li class="green">
@@ -98,13 +108,17 @@ const Products = ({ props, product }) => {
     <>
       <div class="o-details__14">
         <div class="o-details__15">
-          <p class="o-details__20 green">Номер: {product.row}</p>
+          <Typography class="o-details__20 green">
+            Номер: {product.row}
+          </Typography>
           <div class="o-details__18">
             <Svg source={product.characteristic.svg} />
           </div>
         </div>
         <div class="o-details__16">
-          <p class="o-details__19 green">Позиция: {product.row}</p>
+          <Typography class="o-details__19 green">
+            Позиция: {product.row}
+          </Typography>
           <div class="o-details__17">
             <ul>
               <li class="green">
@@ -127,7 +141,7 @@ const Products = ({ props, product }) => {
             <ExtendedParams paramsArr={commonExtendedParams} />
             {glasses && (
               <>
-                <p>Стеклопакеты:</p>
+                <Typography>Стеклопакеты:</Typography>
                 <ul>
                   {glasses.map((glass) => (
                     <li class="green">{`${glass.formula} (${glass.thickness} мм)`}</li>
@@ -138,7 +152,7 @@ const Products = ({ props, product }) => {
             <ExtendedParams paramsArr={extendedParamsByConstruction} />
             {product.note && (
               <>
-                <p>Примечание:</p>
+                <Typography>Примечание:</Typography>
                 <ul>
                   <li class="green">{product.note}</li>
                 </ul>
@@ -173,7 +187,6 @@ class Offer59 extends PrnProto {
   render() {
     const {
       props: { obj, attr },
-      // state: { imgs, loaded, err },
       state: { loaded, products },
       classes,
     } = this;
@@ -268,20 +281,22 @@ class Offer59 extends PrnProto {
         >
           <div class="o-cover">
             <OCover1 />
-            <h1 class="o-cover__2">
+            <Typography variant="h1" class="o-cover__2">
               Коммерческое <br /> предложение
-            </h1>
-            <p class="o-cover__3">
+            </Typography>
+            <Typography class="o-cover__3">
               по изготовлению и установке <br />
               светопрозрачных конструкций
-            </p>
-            <p class="o-cover__4 green">{title}</p>
-            <p class="o-cover__5">
+            </Typography>
+            <Typography class="o-cover__4 green">{title}</Typography>
+            <Typography class="o-cover__5">
               Предложение действительно в течении 10 календарных дней
-            </p>
+            </Typography>
             <div class="o-cover__6">
               <div class="o-cover__9">
-                <p class="o-cover__7">Ваш персональный менеджер:</p>
+                <Typography class="o-cover__7">
+                  Ваш персональный менеджер:
+                </Typography>
                 <div class="o-cover__8">
                   <div class="o-cover__10">
                     <div class="o-cover__11 green">{obj.manager.name}</div>
@@ -295,7 +310,7 @@ class Offer59 extends PrnProto {
                 </div>
                 {officeContacts.address && (
                   <>
-                    <p class="o-cover__14">Офис продаж:</p>
+                    <Typography class="o-cover__14">Офис продаж:</Typography>
                     <div class="o-cover__15 green">
                       {officeContacts.address}
                     </div>{' '}
@@ -304,7 +319,7 @@ class Offer59 extends PrnProto {
               </div>
               <div class="o-cover__16">
                 <OCover17 />
-                <p class="o-cover__18">ecookna.ru</p>
+                <Typography class="o-cover__18">ecookna.ru</Typography>
               </div>
             </div>
           </div>
@@ -315,7 +330,7 @@ class Offer59 extends PrnProto {
                 <ODetails3 />
               </div>
               <div class="o-details__4">
-                <p class="o-details__13">{title}</p>
+                <Typography class="o-details__13">{title}</Typography>
                 <div class="o-details__10">
                   <div class="o-details__11">
                     Ваш персональный <br /> менеджер:
@@ -332,14 +347,22 @@ class Offer59 extends PrnProto {
                 </div>
               </div>
             </div>
-            <p class="o-details__5">В комплектацию Вашего заказа входит:</p>
+            <Typography class="o-details__5">
+              В комплектацию Вашего заказа входит:
+            </Typography>
             <div class="o-details__6"></div>
             <div class="o-details__7">
               <div class="o-details__8">
-                Площадь изделий, кв.м: <span class="green">{fullSquare}</span>
+                Площадь изделий, кв.м:{' '}
+                <Typography component="span" class="green">
+                  {fullSquare}
+                </Typography>
               </div>
               <div class="o-details__9">
-                Масса изделий, кг: <span class="green">{fullWeight}</span>
+                Масса изделий, кг:{' '}
+                <Typography component="span" class="green">
+                  {fullWeight}
+                </Typography>
               </div>
             </div>
             {products &&
@@ -464,26 +487,26 @@ class Offer59 extends PrnProto {
                 </tr>
               </table>
             </div>
-            <p class="o-details__22">
+            <Typography class="o-details__22">
               *Предложение действительно в течение 10 календарных дней.
-            </p>
-            <p class="o-details__23">
+            </Typography>
+            <Typography class="o-details__23">
               Для вашего удобства, точный расчет стоимости, заключение договора
               и оплата могут быть осуществлены на объекте в день проведения
               замера.
-            </p>
+            </Typography>
             <div class="o-details__24">
-              <div class="o-details__25">
+              <Typography class="o-details__25">
                 Будем рады вашему отзыву о работе наших специалистов
-              </div>
+              </Typography>
               <div class="o-details__26">
-                <a
+                <Link
                   class="o-details__27"
                   target="_blank"
                   href="https://www.ecookna.ru/clients/napisat-otzyv/"
                 >
                   Оставить отзыв
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -491,17 +514,19 @@ class Offer59 extends PrnProto {
           <div class="o-info">
             <div class="o-info__top">
               <OInfo1 />
-              <p class="o-info__2">
+              <Typography class="o-info__2">
                 Мы производим особенные окна для Вас. Учитываем не только
                 интерьерные и экстерьерные особенности помещения, но и
                 функциональную нагрузку каждой комнаты и строения.
-              </p>
-              <p class="o-info__3">
+              </Typography>
+              <Typography class="o-info__3">
                 Что мы предлагаем? - Тысячи комбинаций окон, дверей и других
                 продуктов, для самых взыскательных заказчиков.
-              </p>
+              </Typography>
               <OInfo4 />
-              <p class="o-info__5">Комплектующие от мировых лидеров:</p>
+              <Typography class="o-info__5">
+                Комплектующие от мировых лидеров:
+              </Typography>
             </div>
             <div class="o-info__6">
               <OInfo6 />
@@ -510,40 +535,41 @@ class Offer59 extends PrnProto {
               <OInfo7 />
               <div class="o-info__11">
                 <div class="o-info__9">
-                  <span>Переходите</span> по сылкам:
+                  <Typography component="span">Переходите</Typography> по
+                  сылкам:
                 </div>
                 <div class="o-info__8">
                   <div class="o-info__10">
-                    <a href="https://www.youtube.com/watch?v=X6lQcjH1Jc4">
+                    <Link href="https://www.youtube.com/watch?v=X6lQcjH1Jc4">
                       <div>
                         <OInfo10_1 />
                       </div>
-                      <p>Собственное производство </p>
-                    </a>
+                      <Typography>Собственное производство </Typography>
+                    </Link>
                   </div>
                   <div class="o-info__10">
-                    <a href="https://www.ecookna.ru/clients/3d/">
+                    <Link href="https://www.ecookna.ru/clients/3d/">
                       <div>
                         <OInfo10_2 />
                       </div>
-                      <p>Панорама нашего шоу-рума </p>
-                    </a>
+                      <Typography>Панорама нашего шоу-рума </Typography>
+                    </Link>
                   </div>
                   <div class="o-info__10">
-                    <a href="https://www.youtube.com/watch?v=pHthiLw2RpA">
+                    <Link href="https://www.youtube.com/watch?v=pHthiLw2RpA">
                       <div>
                         <OInfo10_3 />
                       </div>
-                      <p>Производство окон ПВХ</p>
-                    </a>
+                      <Typography>Производство окон ПВХ</Typography>
+                    </Link>
                   </div>
                   <div class="o-info__10">
-                    <a href="https://www.youtube.com/watch?v=zkKJTZ90QVo">
+                    <Link href="https://www.youtube.com/watch?v=zkKJTZ90QVo">
                       <div>
                         <OInfo10_4 />
                       </div>
-                      <p>Постоянный участник телепроектов</p>
-                    </a>
+                      <Typography>Постоянный участник телепроектов</Typography>
+                    </Link>
                   </div>
                 </div>
               </div>

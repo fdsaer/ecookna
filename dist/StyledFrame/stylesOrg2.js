@@ -3,6 +3,7 @@ export default function styles(theme) {
     root: {
       lineHeight: 1.15,
       width: '100%',
+      color: theme.palette.primary.main,
       '& hr': {
         boxSizing: 'content-box',
         height: 0,

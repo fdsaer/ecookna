@@ -1,7 +1,9 @@
 const {
   React,
-  makeStyles
+  makeStyles,
+  ThemeProvider
 } = $p.ui;
+import { theme } from '../MuiThemes/index.js';
 import stylesBase from './stylesOrg2.js';
 import Loading from './Loading.js';
 export default function StyledFrame({
@@ -13,7 +15,7 @@ export default function StyledFrame({
   ...props
 }) {
   if (!classes) {
-    classes = makeStyles(stylesBase)();
+    classes = makeStyles(() => stylesBase(theme))();
 
     if (!loading) {
       loading = 'Загрузка...';
@@ -22,7 +24,9 @@ export default function StyledFrame({
     setClasses(classes);
   }
 
-  return React.createElement("div", {
+  return React.createElement(ThemeProvider, {
+    theme: theme
+  }, React.createElement("div", {
     className: classes.root
   }, loading ? React.createElement(Loading, {
     classes: classes,
@@ -30,5 +34,5 @@ export default function StyledFrame({
     text: loading
   }) : React.Children.map(children, child => child ? React.cloneElement(child, { ...props,
     classes
-  }) : null));
+  }) : null)));
 }

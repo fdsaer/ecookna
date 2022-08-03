@@ -1,7 +1,9 @@
 const {
   React,
-  makeStyles
+  makeStyles,
+  ThemeProvider
 } = $p.ui;
+import { theme } from '../MuiThemes/index.js';
 import stylesBase from './stylesBase.js';
 import stylesOrg1 from './stylesOrg1.js';
 import stylesOrg2 from './stylesOrg2.js';
@@ -28,11 +30,13 @@ export default function StyledFrame({
       classes = makeStyles(stylesOrg2)();
   }
 
-  return React.createElement("div", {
+  return React.createElement(React.StrictMode, null, React.createElement(ThemeProvider, {
+    theme: theme
+  }, React.createElement("div", {
     className: classes.root
   }, React.Children.map(children, child => {
     return child ? React.cloneElement(child, { ...props,
       classes
     }) : null;
-  }));
+  }))));
 }

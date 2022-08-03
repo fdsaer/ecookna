@@ -2,7 +2,8 @@
  * Маршрутизатор стилей верхнего уровня
  */
 
-const { React, makeStyles } = $p.ui;
+const { React, makeStyles, ThemeProvider } = $p.ui;
+import { theme } from '../MuiThemes/index.js';
 import stylesBase from './stylesBase.js';
 import stylesOrg1 from './stylesOrg1.js';
 import stylesOrg2 from './stylesOrg2.js';
@@ -28,10 +29,16 @@ export default function StyledFrame({ children, ...props }) {
   }
 
   return (
-    <div className={classes.root}>
-      {React.Children.map(children, (child) => {
-        return child ? React.cloneElement(child, { ...props, classes }) : null;
-      })}
-    </div>
+    <React.StrictMode>
+      <ThemeProvider theme={theme}>
+        <div className={classes.root}>
+          {React.Children.map(children, (child) => {
+            return child
+              ? React.cloneElement(child, { ...props, classes })
+              : null;
+          })}
+        </div>
+      </ThemeProvider>
+    </React.StrictMode>
   );
 }
