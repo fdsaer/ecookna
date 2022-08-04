@@ -30,7 +30,15 @@ export default function StyledFrame({
         {loading ? (
           <Loading classes={classes} title={title} text={loading} />
         ) : (
-          React.Children.map(children, (child) => (child ? child : null))
+          React.Children.map(children, (child) =>
+            child
+              ? React.cloneElement(child, {
+                  ...props,
+                  classes,
+                  style: { ...child.props.style },
+                })
+              : null
+          )
         )}
       </div>
     </ThemeProvider>
