@@ -22,15 +22,21 @@ const StyledFrame = React.lazy(() => import('../StyledFrame/Base.js'));
 const theme = createTheme();
 
 class TestForm extends PrnProto {
-  componentDidMount() {}
+  componentDidMount() {
+    this.setState({
+      loaded: true
+    });
+  }
 
   render() {
     console.log('############');
     console.log(theme);
+    let loading = 'Читаем продукции заказа...';
     return React.createElement(React.Suspense, {
       fallback: "Загрузка..."
     }, React.createElement(StyledFrame, {
-      setClasses: this.setClasses
+      setClasses: this.setClasses,
+      loading: loading
     }, React.createElement(Box, {
       color: "blue",
       bgcolor: "background.paper",
