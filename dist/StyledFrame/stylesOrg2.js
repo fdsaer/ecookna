@@ -1,4 +1,5 @@
 export default function styles(theme) {
+  console.log(theme);
   return {
     root: {
       lineHeight: 1.15,

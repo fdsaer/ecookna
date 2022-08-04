@@ -116,10 +116,10 @@ const Products = ({ props, product }) => {
           </div>
         </div>
         <div class="o-details__16">
-          <Typography class="o-details__19 green">
+          <Typography color="yellow" class="o-details__19 green">
             Позиция: {product.row}
           </Typography>
-          <div class="o-details__17">
+          <Box color="primary.main" class="o-details__17">
             <ul>
               <li class="green">
                 <b>Масса общ/зап, кг:</b>
@@ -158,7 +158,7 @@ const Products = ({ props, product }) => {
                 </ul>
               </>
             )}
-          </div>
+          </Box>
         </div>
       </div>
     </>
@@ -281,10 +281,10 @@ class Offer59 extends PrnProto {
         >
           <div class="o-cover">
             <OCover1 />
-            <Typography variant="h1" class="o-cover__2">
+            <Typography variant="h1" component="h1" color="blue">
               Коммерческое <br /> предложение
             </Typography>
-            <Typography class="o-cover__3">
+            <Typography className="o-cover__3">
               по изготовлению и установке <br />
               светопрозрачных конструкций
             </Typography>
@@ -292,7 +292,15 @@ class Offer59 extends PrnProto {
             <Typography class="o-cover__5">
               Предложение действительно в течении 10 календарных дней
             </Typography>
-            <div class="o-cover__6">
+            <Box
+              //  class="o-cover__6"
+              display="flex"
+              flexDirection={{
+                xs: 'column',
+                sm: 'row',
+              }}
+              p={{ xs: 2, sm: 3, md: 4 }}
+            >
               <div class="o-cover__9">
                 <Typography class="o-cover__7">
                   Ваш персональный менеджер:
@@ -321,7 +329,7 @@ class Offer59 extends PrnProto {
                 <OCover17 />
                 <Typography class="o-cover__18">ecookna.ru</Typography>
               </div>
-            </div>
+            </Box>
           </div>
 
           <div class="o-details">
@@ -531,7 +539,7 @@ class Offer59 extends PrnProto {
             <div class="o-info__6">
               <OInfo6 />
             </div>
-            <div class="o-info__bottom">
+            <Box color="yellow" class="o-info__bottom">
               <OInfo7 />
               <div class="o-info__11">
                 <div class="o-info__9">
@@ -573,7 +581,7 @@ class Offer59 extends PrnProto {
                   </div>
                 </div>
               </div>
-            </div>
+            </Box>
           </div>
         </StyledFrame>
       </React.Suspense>

@@ -93,8 +93,10 @@ const Products = ({
   }))), React.createElement("div", {
     class: "o-details__16"
   }, React.createElement(Typography, {
+    color: "yellow",
     class: "o-details__19 green"
-  }, "Позиция: ", product.row), React.createElement("div", {
+  }, "Позиция: ", product.row), React.createElement(Box, {
+    color: "primary.main",
     class: "o-details__17"
   }, React.createElement("ul", null, React.createElement("li", {
     class: "green"
@@ -119,11 +121,12 @@ var _ref8 = React.createElement(OCover1, null);
 
 var _ref9 = React.createElement(Typography, {
   variant: "h1",
-  class: "o-cover__2"
+  component: "h1",
+  color: "blue"
 }, "Коммерческое ", React.createElement("br", null), " предложение");
 
 var _ref10 = React.createElement(Typography, {
-  class: "o-cover__3"
+  className: "o-cover__3"
 }, "по изготовлению и установке ", React.createElement("br", null), "светопрозрачных конструкций");
 
 var _ref11 = React.createElement(Typography, {
@@ -228,7 +231,8 @@ var _ref29 = React.createElement("div", {
   class: "o-info__5"
 }, "Комплектующие от мировых лидеров:")), React.createElement("div", {
   class: "o-info__6"
-}, React.createElement(OInfo6, null)), React.createElement("div", {
+}, React.createElement(OInfo6, null)), React.createElement(Box, {
+  color: "yellow",
   class: "o-info__bottom"
 }, React.createElement(OInfo7, null), React.createElement("div", {
   class: "o-info__11"
@@ -384,8 +388,17 @@ class Offer59 extends PrnProto {
       class: "o-cover"
     }, _ref8, _ref9, _ref10, React.createElement(Typography, {
       class: "o-cover__4 green"
-    }, title), _ref11, React.createElement("div", {
-      class: "o-cover__6"
+    }, title), _ref11, React.createElement(Box, {
+      display: "flex",
+      flexDirection: {
+        xs: 'column',
+        sm: 'row'
+      },
+      p: {
+        xs: 2,
+        sm: 3,
+        md: 4
+      }
     }, React.createElement("div", {
       class: "o-cover__9"
     }, _ref12, React.createElement("div", {

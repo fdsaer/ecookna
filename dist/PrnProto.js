@@ -5,7 +5,6 @@ const {
 class PrnProto extends React.Component {
   constructor(props) {
     super(props);
-    props.skipCss && props.skipCss();
     this.state = {
       loaded: false
     };

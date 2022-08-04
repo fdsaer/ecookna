@@ -32,7 +32,5 @@ export default function StyledFrame({
     classes: classes,
     title: title,
     text: loading
-  }) : React.Children.map(children, child => child ? React.cloneElement(child, { ...props,
-    classes
-  }) : null)));
+  }) : React.Children.map(children, child => child ? child : null)));
 }

@@ -7,6 +7,9 @@ export const theme = createTheme({
       fontSize: '1.4rem',
       fontWeight: 600,
     },
+    h1: {
+      color: 'yellow',
+    },
     body3: {
       fontFamily: ['Open Sans', 'sans-serif'].join(','),
       fontSize: '0.75rem',
@@ -21,9 +24,18 @@ export const theme = createTheme({
       shorter: 150,
     },
   },
+  breakpoints: {
+    values: {
+      xl: 1920,
+      lg: 1280,
+      md: 794,
+      sm: 640,
+      xs: 0,
+    },
+  },
   palette: {
     primary: {
-      main: '#000000',
+      main: '#800080',
     },
     secondary: {
       light: '#0066ff',
