@@ -6,6 +6,7 @@
  * Created by Evgeniy Malyarov on 03.01.2022.
  */
 
+import PrnProto from '../PrnProto.js';
 const {
   React,
   Table,
@@ -24,24 +25,7 @@ const {
   typography,
   Box,
 } = $p.ui;
-import PrnProto from '../PrnProto.js';
-import {
-  OCover1,
-  OCover17,
-  ODetails,
-  ODetails3,
-  OInfo1,
-  OInfo4,
-  OInfo6,
-  OInfo7,
-  OInfo10_1,
-  OInfo10_2,
-  OInfo10_3,
-  OInfo10_4,
-} from '../img/index.js';
 const StyledFrame = React.lazy(() => import('../StyledFrame/Base.js'));
-
-const theme = createTheme();
 
 class TestForm extends PrnProto {
   componentDidMount() {
@@ -49,13 +33,16 @@ class TestForm extends PrnProto {
   }
 
   render() {
+    const { classes } = this;
     console.log('############');
-    console.log(theme);
-    let loading = 'Читаем продукции заказа...';
+    let loading = '';
     return (
       <React.Suspense fallback="Загрузка...">
-        <StyledFrame setClasses={this.setClasses} loading={loading}>
-          {/* <ThemeProvider theme={theme}> */}
+        <StyledFrame
+          setClasses={this.setClasses}
+          classes={classes}
+          loading={loading}
+        >
           <Box
             color="blue"
             bgcolor="background.paper"
@@ -69,7 +56,6 @@ class TestForm extends PrnProto {
           >
             Hello!!!!
           </Box>
-          {/* </ThemeProvider> */}
         </StyledFrame>
       </React.Suspense>
     );
