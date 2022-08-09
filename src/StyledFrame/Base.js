@@ -21,8 +21,8 @@ export default function StyledFrame({
     if (!loading) {
       loading = 'Загрузка...';
     }
-    setClasses(classes);
   }
+  setClasses(classes);
 
   return (
     <ThemeProvider theme={theme}>

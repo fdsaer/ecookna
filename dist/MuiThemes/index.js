@@ -3,22 +3,39 @@ const {
 } = $p.ui;
 export const theme = createTheme({
   typography: {
-    fontFamily: ['Arial', 'sans-serif'].join(','),
+    fontFamily: ['Museo', 'Open Sans', 'Arial', 'sans-serif'].join(','),
+    lineHeight: 1.15,
+    h1: {
+      fontSize: '53px'
+    },
+    h3: {
+      fontSize: '1.7rem'
+    },
+    h4: {
+      fontSize: '0.9rem'
+    },
     h5: {
       fontSize: '1.4rem',
       fontWeight: 600
     },
-    h1: {
-      color: 'yellow'
-    },
-    body3: {
-      fontFamily: ['Open Sans', 'sans-serif'].join(','),
-      fontSize: '0.75rem',
+    body1: {
+      fontFamily: ['Museo', 'Open Sans', 'Arial', 'sans-serif'].join(','),
+      fontSize: '16px',
       fontWeight: 400,
-      lineHeight: 1.66,
-      letterSpacing: '0.03333em'
+      lineHeight: 1.15
     },
-    color: '#333333'
+    body2: {
+      fontFamily: ['Arial', 'sans-serif'].join(','),
+      fontSize: '12px',
+      fontWeight: 400,
+      lineHeight: 1.15
+    },
+    subtitle2: {
+      fontFamily: ['Arial', 'sans-serif'].join(','),
+      fontSize: '12px',
+      fontWeight: 700,
+      lineHeight: 1.15
+    }
   },
   transitions: {
     duration: {
@@ -36,16 +53,14 @@ export const theme = createTheme({
   },
   palette: {
     primary: {
-      main: '#800080'
-    },
-    secondary: {
-      light: '#0066ff',
-      main: '#0044ff',
-      contrastText: '#ffcc00'
+      main: '#BFD7B5',
+      light: '#dddddd',
+      dark: '#999999'
     },
     mode: 'dark',
     text: {
-      primary: '#000'
+      primary: '#1A322C',
+      secondary: '#007455'
     }
   },
   shape: {

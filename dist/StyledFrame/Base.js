@@ -20,10 +20,9 @@ export default function StyledFrame({
     if (!loading) {
       loading = 'Загрузка...';
     }
-
-    setClasses(classes);
   }
 
+  setClasses(classes);
   return React.createElement(ThemeProvider, {
     theme: theme
   }, React.createElement("div", {

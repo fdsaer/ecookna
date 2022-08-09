@@ -1,26 +1,14 @@
 export default function styles(theme) {
   console.log(theme);
+  console.log(theme.spacing(5));
   return {
     root: {
       lineHeight: 1.15,
       width: '100%',
-      color: theme.palette.primary.main,
       '& hr': {
         boxSizing: 'content-box',
         height: 0,
         overflow: 'visible'
-      },
-      '& h1': {
-        fontSize: '2em',
-        margin: '0.67em 0'
-      },
-      '& h3': {
-        fontSize: '1.7rem',
-        paddingBottom: '4mm'
-      },
-      '& h4': {
-        fontSize: '0.9rem',
-        paddingBottom: '4mm'
       },
       '& pre': {
         fontFamily: 'monospace, monospace',
@@ -34,27 +22,20 @@ export default function styles(theme) {
         height: 'auto',
         boxSizing: 'border-box'
       },
+      '& img': {
+        display: 'block'
+      },
       '& table': {
         borderCollapse: 'collapse'
       },
-      '& .o-cover': {
-        boxSizing: 'border-box',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        maxWidth: '794px',
-        paddingLeft: '60px',
-        paddingRight: '60px',
-        paddingBottom: '12px',
-        backgroundColor: '#BFD7B5'
-      },
+      '& .o-cover': {},
       '& .o-cover__1': {
         display: 'block',
         margin: '0 auto'
       },
       '& .o-cover__2': {
         fontSize: '53px',
-        marginTop: '46px',
-        color: '#1A322C'
+        marginTop: '46px'
       },
       '& .o-cover__3': {
         fontSize: '28px',
@@ -63,7 +44,6 @@ export default function styles(theme) {
       },
       '& .o-cover__4': {
         fontSize: '16px',
-        color: '#007455',
         marginTop: '34px'
       },
       '& .o-cover__5': {
@@ -73,14 +53,12 @@ export default function styles(theme) {
       '& .o-cover__6, & .o-cover__8': {
         display: 'flex',
         flexDirection: 'row',
-        fontFamily: 'Arial, sans-serif',
         fontSize: '15px'
       },
       '& .o-cover__7': {
         marginTop: '12px'
       },
       '& .o-cover__8': {
-        backgroundColor: '#fff',
         padding: '8px',
         marginTop: '-12px'
       },
@@ -99,7 +77,6 @@ export default function styles(theme) {
         verticalAlign: 'bottom'
       },
       '& .o-cover__15': {
-        backgroundColor: '#fff',
         padding: '8px',
         marginTop: '-12px'
       },
@@ -108,9 +85,6 @@ export default function styles(theme) {
       },
       '& .o-cover__16:nth-of-type(1n+2)': {
         marginLeft: '65px'
-      },
-      '& .o-cover__17': {
-        width: '184px'
       },
       '& .o-cover__18': {
         marginTop: '0',
@@ -157,7 +131,6 @@ export default function styles(theme) {
       },
       '& .o-details__8, & .o-details__9': {
         flex: '1 1 0%',
-        fontFamily: 'Arial, sans-serif',
         fontSize: '12px',
         fontWeight: '700'
       },
@@ -175,27 +148,22 @@ export default function styles(theme) {
         textAlign: 'right'
       },
       '& .o-details__12': {
-        fontFamily: 'Arial, sans-serif',
         flex: '1 1 0%'
       },
       '& .o-details__12:nth-of-type(1n+2)': {
         marginLeft: '20px'
       },
       '& .o-details__13': {
-        color: '#007455',
         fontSize: '22px',
-        fontFamily: 'Arial, sans-serif',
         marginTop: '-4px'
       },
       '& .o-details__14': {
         marginTop: '58px',
         display: 'flex',
         flexDirection: 'row',
-        fontFamily: 'Arial, sans-serif',
         fontSize: '12px'
       },
       '& .o-details__14 p': {
-        backgroundColor: '#ddd',
         padding: '7px',
         fontWeight: '700'
       },
@@ -247,20 +215,16 @@ export default function styles(theme) {
         width: '100%'
       },
       '& .o-details__21 table td, & .o-details__21 table th': {
-        border: '1px solid #999',
         padding: '4px',
-        fontFamily: 'Arial, sans-serif',
         fontSize: '12px'
       },
       '& .o-details__21 th': {
-        backgroundColor: '#ddd',
         textAlign: 'left'
       },
       '& .o-details__21--2': {
         marginTop: '70px'
       },
       '& .o-details__21--2 tr:first-child': {
-        backgroundColor: '#ddd',
         verticalAlign: 'top'
       },
       '& .o-details__21--2 tr:last-child': {
@@ -283,7 +247,6 @@ export default function styles(theme) {
       },
       '& .o-details__25': {
         flex: '1 1 0%',
-        color: '#007455',
         fontSize: '19px'
       },
       '& .o-details__26': {
@@ -296,8 +259,6 @@ export default function styles(theme) {
         fontSize: '20px',
         display: 'inline-block',
         padding: '5px 17px',
-        color: '#000',
-        backgroundColor: '#BFD7B5',
         textDecoration: 'none',
         cursor: 'pointer'
       },
@@ -315,7 +276,6 @@ export default function styles(theme) {
       },
       '& .o-info__3': {
         fontSize: '19px',
-        color: '#007455',
         marginTop: '30px'
       },
       '& .o-info__4': {
@@ -338,8 +298,7 @@ export default function styles(theme) {
       '& .o-info__5': {
         marginBottom: '0',
         marginTop: '30px',
-        fontSize: '19px',
-        color: '#007455'
+        fontSize: '19px'
       },
       '& .o-info__7': {
         marginTop: '30px'
@@ -351,7 +310,6 @@ export default function styles(theme) {
       '& .o-info__10 a': {
         display: 'flex',
         alignItems: 'center',
-        color: '#000',
         textDecoration: 'none',
         fontSize: '10px'
       },
