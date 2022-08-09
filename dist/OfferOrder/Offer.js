@@ -11,8 +11,32 @@ const {
   Paper,
   Typography,
   Link,
-  Box
+  Box,
+  withStyles
 } = $p.ui;
+const StyledTableRow = withStyles(theme => ({
+  root: {
+    backgroundColor: theme.palette.primary.light
+  }
+}))(TableRow);
+const StyledTotalTableCell = withStyles(theme => ({
+  root: {
+    padding: theme.spacing(0.5),
+    fontSize: theme.typography.body2.fontSize,
+    border: 'none',
+    lineHeight: theme.typography.lineHeight,
+    fontWeight: theme.typography.fontWeightBold
+  }
+}))(TableCell);
+const StyledTableCell = withStyles(theme => ({
+  root: {
+    padding: theme.spacing(0.5),
+    fontSize: theme.typography.body2.fontSize,
+    border: `1px solid ${theme.palette.primary.dark}`,
+    lineHeight: theme.typography.lineHeight,
+    fontWeight: theme.typography.fontWeightBold
+  }
+}))(TableCell);
 
 var _ref = React.createElement(OCover1, null);
 
@@ -82,71 +106,32 @@ var _ref11 = React.createElement(Box, {
   mb: 0.75
 }, React.createElement(Typography, null, "В комплектацию Вашего заказа входит:"));
 
-var _ref12 = React.createElement("div", {
-  class: "o-details__6"
-});
+var _ref12 = React.createElement(StyledTableCell, {
+  align: "left"
+}, "Цвет");
 
-var _ref13 = React.createElement("colgroup", null, React.createElement("col", {
-  width: "25%"
-}), React.createElement("col", null), React.createElement("col", {
-  width: "13%"
-}), React.createElement("col", {
-  width: "13%"
-}), React.createElement("col", {
-  width: "13%"
-}), React.createElement("col", {
-  width: "13%"
-}), React.createElement("col", {
-  width: "13%"
-}));
+var _ref13 = React.createElement("br", null);
 
-var _ref14 = React.createElement("tr", null, React.createElement("td", null, "Изделия"), React.createElement("td", null, "Цвет"), React.createElement("td", null, "Кол-во, шт."), React.createElement("td", null, "Площадь, кв.м."), React.createElement("td", null, "Цена ", React.createElement("br", null), "без скидки"), React.createElement("td", null, "Скидка"), React.createElement("td", null, "Сумма"));
-
-var _ref15 = React.createElement("td", {
-  colspan: "2"
+var _ref14 = React.createElement(StyledTableCell, {
+  align: "left",
+  colSpan: 2
 }, "Всего");
 
-var _ref16 = React.createElement("colgroup", null, React.createElement("col", {
-  width: "61%"
-}), React.createElement("col", {
-  width: "13%"
-}), React.createElement("col", {
-  width: "13%"
-}), React.createElement("col", {
-  width: "13%"
-}));
-
-var _ref17 = React.createElement("th", null, "ИТОГО");
-
-var _ref18 = React.createElement("th", null, "0");
-
-var _ref19 = React.createElement(TableContainer, {
-  component: Paper
-}, React.createElement(Table, null, React.createElement(TableBody, null, React.createElement(TableRow, null, React.createElement(TableCell, null, "Dessert (100g serving)"), React.createElement(TableCell, {
-  align: "right"
-}, "Calories"), React.createElement(TableCell, {
-  align: "right"
-}, "Fat (g)"), React.createElement(TableCell, {
-  align: "right"
-}, "Carbs (g)"), React.createElement(TableCell, {
-  align: "right"
-}, "Protein (g)")))));
-
-var _ref20 = React.createElement(Box, {
+var _ref15 = React.createElement(Box, {
   mt: 11.25,
   mb: 2.5
 }, React.createElement(Typography, null, "*Предложение действительно в течение 10 календарных дней."));
 
-var _ref21 = React.createElement(Box, {
+var _ref16 = React.createElement(Box, {
   mb: 2
 }, React.createElement(Typography, null, "Для вашего удобства, точный расчет стоимости, заключение договора и оплата могут быть осуществлены на объекте в день проведения замера."));
 
-var _ref22 = React.createElement(Typography, {
+var _ref17 = React.createElement(Typography, {
   color: "textSecondary",
   variant: "inherit"
 }, "Будем рады вашему отзыву о работе наших специалистов");
 
-var _ref23 = React.createElement(Box, {
+var _ref18 = React.createElement(Box, {
   ml: 0.6,
   p: 0.6,
   px: 2,
@@ -158,7 +143,7 @@ var _ref23 = React.createElement(Box, {
   href: "https://www.ecookna.ru/clients/napisat-otzyv/"
 }, "Оставить отзыв"));
 
-var _ref24 = React.createElement(Box, {
+var _ref19 = React.createElement(Box, {
   boxSizing: "border-box",
   pt: 2.5,
   pb: 2,
@@ -182,20 +167,20 @@ var _ref24 = React.createElement(Box, {
   color: "textSecondary"
 }, "Комплектующие от мировых лидеров:")));
 
-var _ref25 = React.createElement(Box, null, React.createElement(OInfo6, null));
+var _ref20 = React.createElement(Box, null, React.createElement(OInfo6, null));
 
-var _ref26 = React.createElement(Box, {
+var _ref21 = React.createElement(Box, {
   mt: 3.75
 }, React.createElement(OInfo7, null));
 
-var _ref27 = React.createElement(Typography, {
+var _ref22 = React.createElement(Typography, {
   component: "p",
   variant: "inherit"
 }, "Переходите", React.createElement("br", null), "по сылкам:");
 
-var _ref28 = React.createElement(OInfo10_1, null);
+var _ref23 = React.createElement(OInfo10_1, null);
 
-var _ref29 = React.createElement(Box, {
+var _ref24 = React.createElement(Box, {
   fontSize: 10,
   ml: 1.25,
   mt: 2.5,
@@ -206,9 +191,9 @@ var _ref29 = React.createElement(Box, {
   color: "inherit"
 }, "Собственное производство"));
 
-var _ref30 = React.createElement(OInfo10_2, null);
+var _ref25 = React.createElement(OInfo10_2, null);
 
-var _ref31 = React.createElement(Box, {
+var _ref26 = React.createElement(Box, {
   fontSize: 10,
   ml: 1.25,
   mt: 2.5,
@@ -219,9 +204,9 @@ var _ref31 = React.createElement(Box, {
   color: "inherit"
 }, "Панорама нашего шоу-рума"));
 
-var _ref32 = React.createElement(OInfo10_3, null);
+var _ref27 = React.createElement(OInfo10_3, null);
 
-var _ref33 = React.createElement(Box, {
+var _ref28 = React.createElement(Box, {
   fontSize: 10,
   ml: 1.25,
   mt: 2.5,
@@ -232,9 +217,9 @@ var _ref33 = React.createElement(Box, {
   color: "inherit"
 }, "Производство окон ПВХ"));
 
-var _ref34 = React.createElement(OInfo10_4, null);
+var _ref29 = React.createElement(OInfo10_4, null);
 
-var _ref35 = React.createElement(Box, {
+var _ref30 = React.createElement(Box, {
   fontSize: 10,
   ml: 1.25,
   mt: 2.5,
@@ -276,7 +261,7 @@ export default function Offer(props) {
     mt: 1.5,
     mb: 1
   }, _ref5, React.createElement(Box, {
-    bgcolor: "background.default",
+    bgcolor: "background.paper",
     p: 1,
     display: "flex"
   }, React.createElement(Box, {
@@ -290,7 +275,7 @@ export default function Offer(props) {
   }, managerContacts.phone_number)), React.createElement(Typography, {
     variant: "inherit"
   }, managerContacts.email_address)), officeContacts.address && React.createElement(React.Fragment, null, _ref6, React.createElement(Box, {
-    bgcolor: "background.default",
+    bgcolor: "background.paper",
     p: 1
   }, React.createElement(Typography, {
     variant: "inherit"
@@ -324,7 +309,13 @@ export default function Offer(props) {
       flex: '1 1 0%'
     },
     ml: 2.5
-  }, obj.manager.name, " ", _ref10, [managerContacts.phone_number, managerContacts.email_address].filter(value => value !== '').join(', '))))), _ref11, _ref12, React.createElement(Box, {
+  }, obj.manager.name, " ", _ref10, [managerContacts.phone_number, managerContacts.email_address].filter(value => value !== '').join(', '))))), _ref11, React.createElement(Box, {
+    p: 0.625,
+    sx: {
+      borderBottom: '1px solid #999'
+    },
+    mb: 2.5
+  }), React.createElement(Box, {
     display: "flex",
     flexDirection: "row",
     sx: {
@@ -355,29 +346,118 @@ export default function Offer(props) {
     key: product.row,
     product: product,
     classes: classes
-  })), React.createElement("div", {
-    class: "o-details__21 o-details__21--2"
-  }, React.createElement("table", null, _ref13, _ref14, products && products.map(product => React.createElement("tr", {
+  })), React.createElement(Box, {
+    mt: 2.5
+  }, React.createElement(Table, null, React.createElement(TableHead, null, React.createElement(StyledTableRow, null, React.createElement(StyledTableCell, {
+    style: {
+      width: '25%'
+    }
+  }, "Изделия"), _ref12, React.createElement(StyledTableCell, {
+    align: "left",
+    style: {
+      width: '13%'
+    }
+  }, "Кол-во, шт."), React.createElement(StyledTableCell, {
+    align: "left",
+    style: {
+      width: '13%'
+    }
+  }, "Площадь, кв.м."), React.createElement(StyledTableCell, {
+    align: "left",
+    style: {
+      width: '13%'
+    }
+  }, "Цена ", _ref13, "без скидки"), React.createElement(StyledTableCell, {
+    align: "left",
+    style: {
+      width: '13%'
+    }
+  }, "Скидка"), React.createElement(StyledTableCell, {
+    align: "left",
+    style: {
+      width: '13%'
+    }
+  }, "Сумма"))), React.createElement(TableBody, null, products && products.map(product => React.createElement(TableRow, {
     key: product.row
-  }, React.createElement("td", null, product.characteristic.prod_nom.name_full), React.createElement("td", null, product.characteristic.clr.presentation), React.createElement("td", null, product.quantity), React.createElement("td", null, (product.s * product.quantity).round(2)), React.createElement("td", null, product.price * product.quantity), React.createElement("td", null, product.price * product.discount), React.createElement("td", null, product.price * product.quantity * (1 - product.discount)))), React.createElement("tr", null, _ref15, React.createElement("td", null, products && products.map(product => product.quantity).reduce((acc, quantity) => acc += quantity, 0)), React.createElement("td", null, products && products.map(product => product.s * product.quantity).reduce((acc, square) => acc += square, 0).round(2)), React.createElement("td", null, products && products.map(product => product.price * product.quantity).reduce((acc, price) => acc += price, 0)), React.createElement("td", null, products && products.map(product => product.price * product.quantity * product.discount).reduce((acc, discount) => acc += discount, 0)), React.createElement("td", null, products && products.map(product => product.price * product.quantity * (1 - product.discount)).reduce((acc, price) => acc += price, 0))))), React.createElement(Box, {
-    mb: 2.5
-  }, React.createElement("table", null, _ref16, React.createElement("tr", null, _ref17, React.createElement("th", null, products && products.map(product => product.price * product.quantity).reduce((acc, price) => acc += price, 0)), _ref18, React.createElement("th", null, products && products.map(product => product.price * product.quantity * (1 - product.discount)).reduce((acc, price) => acc += price, 0)))), _ref19), _ref20, _ref21, React.createElement(Box, {
+  }, React.createElement(StyledTableCell, {
+    style: {
+      width: '25%'
+    }
+  }, product.characteristic.prod_nom.name_full), React.createElement(StyledTableCell, {
+    align: "left"
+  }, product.characteristic.clr.presentation), React.createElement(StyledTableCell, {
+    align: "left",
+    style: {
+      width: '13%'
+    }
+  }, product.quantity), React.createElement(StyledTableCell, {
+    align: "left",
+    style: {
+      width: '13%'
+    }
+  }, (product.s * product.quantity).round(2)), React.createElement(StyledTableCell, {
+    align: "left",
+    style: {
+      width: '13%'
+    }
+  }, product.price * product.quantity), React.createElement(StyledTableCell, {
+    align: "left",
+    style: {
+      width: '13%'
+    }
+  }, product.price * product.discount), React.createElement(StyledTableCell, {
+    align: "left",
+    style: {
+      width: '13%'
+    }
+  }, product.price * product.quantity * (1 - product.discount)))), React.createElement(TableRow, null, _ref14, React.createElement(StyledTableCell, {
+    align: "left"
+  }, products && products.map(product => product.quantity).reduce((acc, quantity) => acc += quantity, 0)), React.createElement(StyledTableCell, {
+    align: "left"
+  }, products && products.map(product => product.s * product.quantity).reduce((acc, square) => acc += square, 0).round(2)), React.createElement(StyledTableCell, {
+    align: "left"
+  }, products && products.map(product => product.price * product.quantity).reduce((acc, price) => acc += price, 0)), React.createElement(StyledTableCell, {
+    align: "left"
+  }, products && products.map(product => product.price * product.quantity * product.discount).reduce((acc, discount) => acc += discount, 0)), React.createElement(StyledTableCell, {
+    align: "left"
+  }, products && products.map(product => product.price * product.quantity * (1 - product.discount)).reduce((acc, price) => acc += price, 0)))))), React.createElement(Box, {
+    mt: 2.5
+  }, React.createElement(Table, null, React.createElement(TableHead, null, React.createElement(StyledTableRow, null, React.createElement(StyledTotalTableCell, {
+    style: {
+      width: '61%'
+    }
+  }, "ИТОГО"), React.createElement(StyledTotalTableCell, {
+    align: "left",
+    style: {
+      width: '13%'
+    }
+  }, ' ', products && products.map(product => product.price * product.quantity).reduce((acc, price) => acc += price, 0)), React.createElement(StyledTotalTableCell, {
+    align: "left",
+    style: {
+      width: '13%'
+    }
+  }, "0"), React.createElement(StyledTotalTableCell, {
+    align: "left",
+    style: {
+      width: '13%'
+    }
+  }, products && products.map(product => product.price * product.quantity * (1 - product.discount)).reduce((acc, price) => acc += price, 0)))))), _ref15, _ref16, React.createElement(Box, {
     display: "flex"
   }, React.createElement(Box, {
     fontSize: 19,
     sx: {
       flex: '1 1 0%'
     }
-  }, _ref22), _ref23)), React.createElement(Box, {
+  }, _ref17), _ref18)), React.createElement(Box, {
     mx: "auto",
     maxWidth: "794px",
     boxSizing: "border-box"
-  }, _ref24, _ref25, React.createElement(Box, {
+  }, _ref19, _ref20, React.createElement(Box, {
     boxSizing: "border-box",
     pt: 2.5,
     pb: 2,
     px: 3.75
-  }, _ref26, React.createElement(Box, {
+  }, _ref21, React.createElement(Box, {
     display: "flex",
     mt: 3
   }, React.createElement(Box, {
@@ -388,7 +468,7 @@ export default function Offer(props) {
     mt: 2.5,
     mb: 2.5,
     fontSize: 14
-  }, _ref27), React.createElement(Box, {
+  }, _ref22), React.createElement(Box, {
     display: "flex",
     sx: {
       flex: '1 1 0%'
@@ -406,7 +486,7 @@ export default function Offer(props) {
     sx: {
       flex: '0 0 60px'
     }
-  }, _ref28), _ref29)), React.createElement(Link, {
+  }, _ref23), _ref24)), React.createElement(Link, {
     underline: "none",
     color: "inherit",
     href: "https://www.ecookna.ru/clients/3d/"
@@ -420,7 +500,7 @@ export default function Offer(props) {
     sx: {
       flex: '0 0 60px'
     }
-  }, _ref30), _ref31)), React.createElement(Link, {
+  }, _ref25), _ref26)), React.createElement(Link, {
     underline: "none",
     color: "inherit",
     href: "https://www.youtube.com/watch?v=pHthiLw2RpA"
@@ -434,7 +514,7 @@ export default function Offer(props) {
     sx: {
       flex: '0 0 60px'
     }
-  }, _ref32), _ref33)), React.createElement(Link, {
+  }, _ref27), _ref28)), React.createElement(Link, {
     underline: "none",
     color: "inherit",
     href: "https://www.youtube.com/watch?v=zkKJTZ90QVo"
@@ -448,5 +528,5 @@ export default function Offer(props) {
     sx: {
       flex: '0 0 60px'
     }
-  }, _ref34), _ref35)))))));
+  }, _ref29), _ref30)))))));
 }

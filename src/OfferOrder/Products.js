@@ -114,28 +114,45 @@ export default function Products({ props, product, classes }) {
         <Box pl={5.25}>
           <List>
             <ListItem disableGutters dense="false">
-              <Typography variant="subtitle2" component="b">
-                Масса общ/зап, кг:
+              <Typography component="p">
+                <Typography variant="subtitle2" component="b">
+                  Масса общ/зап, кг:
+                </Typography>
+                {'    '}
+                <Typography variant="body2" component="span">
+                  {` ${constructionsWeight}/${glassesWeight}`}
+                </Typography>
               </Typography>
-              {` ${constructionsWeight}/${glassesWeight}`}
             </ListItem>
             <ListItem disableGutters dense="false">
-              <Typography variant="subtitle2" component="b">
-                Количество, шт:
-              </Typography>{' '}
-              {product.quantity}
+              <Typography component="p">
+                <Typography variant="subtitle2" component="b">
+                  Количество, шт:
+                </Typography>{' '}
+                <Typography variant="body2" component="span">
+                  {product.quantity}
+                </Typography>
+              </Typography>
             </ListItem>
             <ListItem disableGutters dense="false">
-              <Typography variant="subtitle2" component="b">
-                Проф.система:
-              </Typography>{' '}
-              {product.characteristic.prod_nom.name}
+              <Typography component="p">
+                <Typography variant="subtitle2" component="b">
+                  Проф.система:
+                </Typography>{' '}
+                <Typography variant="body2" component="span">
+                  {product.characteristic.prod_nom.name}
+                </Typography>
+              </Typography>
             </ListItem>
             <ListItem disableGutters dense="false">
-              <Typography variant="subtitle2" component="b">
-                Цвет:
-              </Typography>{' '}
-              {product.characteristic.clr.presentation}
+              <Typography component="p">
+                <Typography variant="subtitle2" component="b">
+                  Цвет:
+                </Typography>{' '}
+                <Typography variant="body2" component="span">
+                  {product.characteristic.clr.presentation}
+                </Typography>
+              </Typography>
             </ListItem>
           </List>
         </Box>

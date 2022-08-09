@@ -144,16 +144,36 @@ export default function Products({
   }, React.createElement(List, null, React.createElement(ListItem, {
     disableGutters: true,
     dense: "false"
-  }, _ref, ` ${constructionsWeight}/${glassesWeight}`), React.createElement(ListItem, {
+  }, React.createElement(Typography, {
+    component: "p"
+  }, _ref, '    ', React.createElement(Typography, {
+    variant: "body2",
+    component: "span"
+  }, ` ${constructionsWeight}/${glassesWeight}`))), React.createElement(ListItem, {
     disableGutters: true,
     dense: "false"
-  }, _ref2, ' ', product.quantity), React.createElement(ListItem, {
+  }, React.createElement(Typography, {
+    component: "p"
+  }, _ref2, ' ', React.createElement(Typography, {
+    variant: "body2",
+    component: "span"
+  }, product.quantity))), React.createElement(ListItem, {
     disableGutters: true,
     dense: "false"
-  }, _ref3, ' ', product.characteristic.prod_nom.name), React.createElement(ListItem, {
+  }, React.createElement(Typography, {
+    component: "p"
+  }, _ref3, ' ', React.createElement(Typography, {
+    variant: "body2",
+    component: "span"
+  }, product.characteristic.prod_nom.name))), React.createElement(ListItem, {
     disableGutters: true,
     dense: "false"
-  }, _ref4, ' ', product.characteristic.clr.presentation))), React.createElement(ExtendedParams, {
+  }, React.createElement(Typography, {
+    component: "p"
+  }, _ref4, ' ', React.createElement(Typography, {
+    variant: "body2",
+    component: "span"
+  }, product.characteristic.clr.presentation))))), React.createElement(ExtendedParams, {
     paramsArr: commonExtendedParams
   }), glasses && React.createElement(Box, {
     pl: 5.25

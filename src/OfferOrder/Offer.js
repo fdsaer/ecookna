@@ -33,7 +33,34 @@ const {
   Typography,
   Link,
   Box,
+  withStyles,
 } = $p.ui;
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    backgroundColor: theme.palette.primary.light,
+  },
+}))(TableRow);
+
+const StyledTotalTableCell = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(0.5),
+    fontSize: theme.typography.body2.fontSize,
+    border: 'none',
+    lineHeight: theme.typography.lineHeight,
+    fontWeight: theme.typography.fontWeightBold,
+  },
+}))(TableCell);
+
+const StyledTableCell = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(0.5),
+    fontSize: theme.typography.body2.fontSize,
+    border: `1px solid ${theme.palette.primary.dark}`,
+    lineHeight: theme.typography.lineHeight,
+    fontWeight: theme.typography.fontWeightBold,
+  },
+}))(TableCell);
 
 export default function Offer(props) {
   let {
@@ -82,7 +109,7 @@ export default function Offer(props) {
                 Ваш персональный менеджер:
               </Typography>
             </Box>
-            <Box bgcolor="background.default" p={1} display="flex">
+            <Box bgcolor="background.paper" p={1} display="flex">
               <Box sx={{ flex: '1 1 0%' }}>
                 <Typography variant="inherit">{obj.manager.name}</Typography>
                 <Typography variant="inherit">
@@ -98,7 +125,7 @@ export default function Offer(props) {
                 <Box mt={2.5} mb={1}>
                   <Typography variant="inherit">Офис продаж:</Typography>
                 </Box>
-                <Box bgcolor="background.default" p={1}>
+                <Box bgcolor="background.paper" p={1}>
                   <Typography variant="inherit">
                     {officeContacts.address}
                   </Typography>
@@ -153,7 +180,7 @@ export default function Offer(props) {
         <Box ml={18.25} mt={1.5} mb={0.75}>
           <Typography>В комплектацию Вашего заказа входит:</Typography>
         </Box>
-        <div class="o-details__6"></div>
+        <Box p={0.625} sx={{ borderBottom: '1px solid #999' }} mb={2.5}></Box>
         <Box display="flex" flexDirection="row" sx={{ flex: '0 0 400px' }}>
           <Box sx={{ flex: '0 0 400px' }}>
             <Typography variant="subtitle2" component="p">
@@ -176,130 +203,217 @@ export default function Offer(props) {
           products.map((product) => (
             <Products key={product.row} product={product} classes={classes} />
           ))}
-        <div class="o-details__21 o-details__21--2">
-          <table>
-            <colgroup>
-              <col width="25%" />
-              <col />
-              <col width="13%" />
-              <col width="13%" />
-              <col width="13%" />
-              <col width="13%" />
-              <col width="13%" />
-            </colgroup>
-            <tr>
-              <td>Изделия</td>
-              <td>Цвет</td>
-              <td>Кол-во, шт.</td>
-              <td>Площадь, кв.м.</td>
-              <td>
-                Цена <br />
-                без скидки
-              </td>
-              <td>Скидка</td>
-              <td>Сумма</td>
-            </tr>
-            {products &&
-              products.map((product) => (
-                <tr key={product.row}>
-                  <td>{product.characteristic.prod_nom.name_full}</td>
-                  <td>{product.characteristic.clr.presentation}</td>
-                  <td>{product.quantity}</td>
-                  <td>{(product.s * product.quantity).round(2)}</td>
-                  <td>{product.price * product.quantity}</td>
-                  <td>{product.price * product.discount}</td>
-                  <td>
-                    {product.price * product.quantity * (1 - product.discount)}
-                  </td>
-                </tr>
-              ))}
-            <tr>
-              <td colspan="2">Всего</td>
-              <td>
-                {products &&
-                  products
-                    .map((product) => product.quantity)
-                    .reduce((acc, quantity) => (acc += quantity), 0)}
-              </td>
-              <td>
-                {products &&
-                  products
-                    .map((product) => product.s * product.quantity)
-                    .reduce((acc, square) => (acc += square), 0)
-                    .round(2)}
-              </td>
-              <td>
-                {products &&
-                  products
-                    .map((product) => product.price * product.quantity)
-                    .reduce((acc, price) => (acc += price), 0)}
-              </td>
-              <td>
-                {products &&
-                  products
-                    .map(
-                      (product) =>
-                        product.price * product.quantity * product.discount
-                    )
-                    .reduce((acc, discount) => (acc += discount), 0)}
-              </td>
-              <td>
-                {products &&
-                  products
-                    .map(
-                      (product) =>
-                        product.price *
+
+        <Box mt={2.5}>
+          <Table>
+            <TableHead>
+              <StyledTableRow>
+                <StyledTableCell
+                  style={{
+                    width: '25%',
+                  }}
+                >
+                  Изделия
+                </StyledTableCell>
+                <StyledTableCell align="left">Цвет</StyledTableCell>
+                <StyledTableCell
+                  align="left"
+                  style={{
+                    width: '13%',
+                  }}
+                >
+                  Кол-во, шт.
+                </StyledTableCell>
+                <StyledTableCell
+                  align="left"
+                  style={{
+                    width: '13%',
+                  }}
+                >
+                  Площадь, кв.м.
+                </StyledTableCell>
+                <StyledTableCell
+                  align="left"
+                  style={{
+                    width: '13%',
+                  }}
+                >
+                  Цена <br />
+                  без скидки
+                </StyledTableCell>
+                <StyledTableCell
+                  align="left"
+                  style={{
+                    width: '13%',
+                  }}
+                >
+                  Скидка
+                </StyledTableCell>
+                <StyledTableCell
+                  align="left"
+                  style={{
+                    width: '13%',
+                  }}
+                >
+                  Сумма
+                </StyledTableCell>
+              </StyledTableRow>
+            </TableHead>
+            <TableBody>
+              {products &&
+                products.map((product) => (
+                  <TableRow key={product.row}>
+                    <StyledTableCell
+                      style={{
+                        width: '25%',
+                      }}
+                    >
+                      {product.characteristic.prod_nom.name_full}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {product.characteristic.clr.presentation}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      align="left"
+                      style={{
+                        width: '13%',
+                      }}
+                    >
+                      {product.quantity}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      align="left"
+                      style={{
+                        width: '13%',
+                      }}
+                    >
+                      {(product.s * product.quantity).round(2)}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      align="left"
+                      style={{
+                        width: '13%',
+                      }}
+                    >
+                      {product.price * product.quantity}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      align="left"
+                      style={{
+                        width: '13%',
+                      }}
+                    >
+                      {product.price * product.discount}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      align="left"
+                      style={{
+                        width: '13%',
+                      }}
+                    >
+                      {product.price *
                         product.quantity *
-                        (1 - product.discount)
-                    )
-                    .reduce((acc, price) => (acc += price), 0)}
-              </td>
-            </tr>
-          </table>
-        </div>
-        <Box mb={2.5}>
-          <table>
-            <colgroup>
-              <col width="61%" />
-              <col width="13%" />
-              <col width="13%" />
-              <col width="13%" />
-            </colgroup>
-            <tr>
-              <th>ИТОГО</th>
-              <th>
-                {products &&
-                  products
-                    .map((product) => product.price * product.quantity)
-                    .reduce((acc, price) => (acc += price), 0)}
-              </th>
-              <th>0</th>
-              <th>
-                {products &&
-                  products
-                    .map(
-                      (product) =>
-                        product.price *
-                        product.quantity *
-                        (1 - product.discount)
-                    )
-                    .reduce((acc, price) => (acc += price), 0)}
-              </th>
-            </tr>
-          </table>
-          <TableContainer component={Paper}>
-            <Table>
-              <TableBody>
-                <TableRow>
-                  <TableCell>Dessert (100g serving)</TableCell>
-                  <TableCell align="right">Calories</TableCell>
-                  <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                  <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                  <TableCell align="right">Protein&nbsp;(g)</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
+                        (1 - product.discount)}
+                    </StyledTableCell>
+                  </TableRow>
+                ))}
+              <TableRow>
+                <StyledTableCell align="left" colSpan={2}>
+                  Всего
+                </StyledTableCell>
+                <StyledTableCell align="left">
+                  {products &&
+                    products
+                      .map((product) => product.quantity)
+                      .reduce((acc, quantity) => (acc += quantity), 0)}
+                </StyledTableCell>
+                <StyledTableCell align="left">
+                  {products &&
+                    products
+                      .map((product) => product.s * product.quantity)
+                      .reduce((acc, square) => (acc += square), 0)
+                      .round(2)}
+                </StyledTableCell>
+                <StyledTableCell align="left">
+                  {products &&
+                    products
+                      .map((product) => product.price * product.quantity)
+                      .reduce((acc, price) => (acc += price), 0)}
+                </StyledTableCell>
+                <StyledTableCell align="left">
+                  {products &&
+                    products
+                      .map(
+                        (product) =>
+                          product.price * product.quantity * product.discount
+                      )
+                      .reduce((acc, discount) => (acc += discount), 0)}
+                </StyledTableCell>
+                <StyledTableCell align="left">
+                  {products &&
+                    products
+                      .map(
+                        (product) =>
+                          product.price *
+                          product.quantity *
+                          (1 - product.discount)
+                      )
+                      .reduce((acc, price) => (acc += price), 0)}
+                </StyledTableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </Box>
+        <Box mt={2.5}>
+          <Table>
+            <TableHead>
+              <StyledTableRow>
+                <StyledTotalTableCell
+                  style={{
+                    width: '61%',
+                  }}
+                >
+                  ИТОГО
+                </StyledTotalTableCell>
+                <StyledTotalTableCell
+                  align="left"
+                  style={{
+                    width: '13%',
+                  }}
+                >
+                  {' '}
+                  {products &&
+                    products
+                      .map((product) => product.price * product.quantity)
+                      .reduce((acc, price) => (acc += price), 0)}
+                </StyledTotalTableCell>
+                <StyledTotalTableCell
+                  align="left"
+                  style={{
+                    width: '13%',
+                  }}
+                >
+                  0
+                </StyledTotalTableCell>
+                <StyledTotalTableCell
+                  align="left"
+                  style={{
+                    width: '13%',
+                  }}
+                >
+                  {products &&
+                    products
+                      .map(
+                        (product) =>
+                          product.price *
+                          product.quantity *
+                          (1 - product.discount)
+                      )
+                      .reduce((acc, price) => (acc += price), 0)}
+                </StyledTotalTableCell>
+              </StyledTableRow>
+            </TableHead>
+          </Table>
         </Box>
         <Box mt={11.25} mb={2.5}>
           <Typography>
