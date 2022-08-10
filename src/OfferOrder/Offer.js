@@ -21,46 +21,10 @@ import {
   OInfo10_4,
 } from '../img/index.js';
 import Products from './Products.js';
-const {
-  React,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  TableContainer,
-  Paper,
-  Typography,
-  Link,
-  Box,
-  withStyles,
-} = $p.ui;
+import OfferTable from './OfferTable.js';
+import OfferTableTotal from './OfferTableTotal.js';
 
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    backgroundColor: theme.palette.primary.light,
-  },
-}))(TableRow);
-
-const StyledTotalTableCell = withStyles((theme) => ({
-  root: {
-    padding: theme.spacing(0.5),
-    fontSize: theme.typography.body2.fontSize,
-    border: 'none',
-    lineHeight: theme.typography.lineHeight,
-    fontWeight: theme.typography.fontWeightBold,
-  },
-}))(TableCell);
-
-const StyledTableCell = withStyles((theme) => ({
-  root: {
-    padding: theme.spacing(0.5),
-    fontSize: theme.typography.body2.fontSize,
-    border: `1px solid ${theme.palette.primary.dark}`,
-    lineHeight: theme.typography.lineHeight,
-    fontWeight: theme.typography.fontWeightBold,
-  },
-}))(TableCell);
+const { React, Typography, Link, Box } = $p.ui;
 
 export default function Offer(props) {
   let {
@@ -96,25 +60,31 @@ export default function Offer(props) {
             светопрозрачных конструкций
           </Typography>
         </Box>
-        <Typography color="textSecondary">{title}</Typography>
-        <Box mt={5.75} mb={2.5} fontSize={15}>
-          <Typography variant="inherit">
+        <Box mt={4.25} mb={2.5} fontSize={15}>
+          <Typography color="textSecondary">{title}</Typography>
+        </Box>
+        <Box mt={4.25} mb={2.5} fontSize={15}>
+          <Typography variant="inherit" component="p">
             Предложение действительно в течении 10 календарных дней
           </Typography>
         </Box>
         <Box display="flex" flexDirection="row" fontSize={15}>
-          <Box sx={{ flex: '1 1 0%' }} mt={1.5} mb={1}>
+          <Box sx={{ flex: '1 1 0%' }}>
             <Box mt={1.5} mb={1}>
-              <Typography variant="inherit">
+              <Typography variant="inherit" component="p">
                 Ваш персональный менеджер:
               </Typography>
             </Box>
             <Box bgcolor="background.paper" p={1} display="flex">
               <Box sx={{ flex: '1 1 0%' }}>
-                <Typography variant="inherit">{obj.manager.name}</Typography>
-                <Typography variant="inherit">
-                  {managerContacts.phone_number}
+                <Typography variant="inherit" component="p">
+                  {obj.manager.name}
                 </Typography>
+                <Box mt={0.625}>
+                  <Typography variant="inherit" component="p">
+                    {managerContacts.phone_number}
+                  </Typography>
+                </Box>
               </Box>
               <Typography variant="inherit">
                 {managerContacts.email_address}
@@ -123,7 +93,9 @@ export default function Offer(props) {
             {officeContacts.address && (
               <>
                 <Box mt={2.5} mb={1}>
-                  <Typography variant="inherit">Офис продаж:</Typography>
+                  <Typography variant="inherit" component="p">
+                    Офис продаж:
+                  </Typography>
                 </Box>
                 <Box bgcolor="background.paper" p={1}>
                   <Typography variant="inherit">
@@ -137,7 +109,7 @@ export default function Offer(props) {
             <Box width="184px">
               <OCover17 />
             </Box>
-            <Box fontSize={27}>
+            <Box fontSize={27} textAlign="center" mb={2.5}>
               <Typography variant="inherit">ecookna.ru</Typography>
             </Box>
           </Box>
@@ -158,12 +130,12 @@ export default function Offer(props) {
           </Box>
           <Box ml={4}>
             <Box mt={-0.5} mb={2.5} fontSize={22}>
-              <Typography variant="inherit" color="textSecondary">
+              <Typography variant="inherit" color="textSecondary" component="p">
                 {title}
               </Typography>
             </Box>
             <Box display="flex">
-              <Box sx={{ flex: '0 1 auto' }}>
+              <Box sx={{ flex: '0 1 auto' }} textAlign="right">
                 <Typography>
                   Ваш персональный <br /> менеджер:
                 </Typography>
@@ -204,216 +176,9 @@ export default function Offer(props) {
             <Products key={product.row} product={product} classes={classes} />
           ))}
 
+        <Box mt={2.5}>{products && <OfferTable products={products} />}</Box>
         <Box mt={2.5}>
-          <Table>
-            <TableHead>
-              <StyledTableRow>
-                <StyledTableCell
-                  style={{
-                    width: '25%',
-                  }}
-                >
-                  Изделия
-                </StyledTableCell>
-                <StyledTableCell align="left">Цвет</StyledTableCell>
-                <StyledTableCell
-                  align="left"
-                  style={{
-                    width: '13%',
-                  }}
-                >
-                  Кол-во, шт.
-                </StyledTableCell>
-                <StyledTableCell
-                  align="left"
-                  style={{
-                    width: '13%',
-                  }}
-                >
-                  Площадь, кв.м.
-                </StyledTableCell>
-                <StyledTableCell
-                  align="left"
-                  style={{
-                    width: '13%',
-                  }}
-                >
-                  Цена <br />
-                  без скидки
-                </StyledTableCell>
-                <StyledTableCell
-                  align="left"
-                  style={{
-                    width: '13%',
-                  }}
-                >
-                  Скидка
-                </StyledTableCell>
-                <StyledTableCell
-                  align="left"
-                  style={{
-                    width: '13%',
-                  }}
-                >
-                  Сумма
-                </StyledTableCell>
-              </StyledTableRow>
-            </TableHead>
-            <TableBody>
-              {products &&
-                products.map((product) => (
-                  <TableRow key={product.row}>
-                    <StyledTableCell
-                      style={{
-                        width: '25%',
-                      }}
-                    >
-                      {product.characteristic.prod_nom.name_full}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {product.characteristic.clr.presentation}
-                    </StyledTableCell>
-                    <StyledTableCell
-                      align="left"
-                      style={{
-                        width: '13%',
-                      }}
-                    >
-                      {product.quantity}
-                    </StyledTableCell>
-                    <StyledTableCell
-                      align="left"
-                      style={{
-                        width: '13%',
-                      }}
-                    >
-                      {(product.s * product.quantity).round(2)}
-                    </StyledTableCell>
-                    <StyledTableCell
-                      align="left"
-                      style={{
-                        width: '13%',
-                      }}
-                    >
-                      {product.price * product.quantity}
-                    </StyledTableCell>
-                    <StyledTableCell
-                      align="left"
-                      style={{
-                        width: '13%',
-                      }}
-                    >
-                      {product.price * product.discount}
-                    </StyledTableCell>
-                    <StyledTableCell
-                      align="left"
-                      style={{
-                        width: '13%',
-                      }}
-                    >
-                      {product.price *
-                        product.quantity *
-                        (1 - product.discount)}
-                    </StyledTableCell>
-                  </TableRow>
-                ))}
-              <TableRow>
-                <StyledTableCell align="left" colSpan={2}>
-                  Всего
-                </StyledTableCell>
-                <StyledTableCell align="left">
-                  {products &&
-                    products
-                      .map((product) => product.quantity)
-                      .reduce((acc, quantity) => (acc += quantity), 0)}
-                </StyledTableCell>
-                <StyledTableCell align="left">
-                  {products &&
-                    products
-                      .map((product) => product.s * product.quantity)
-                      .reduce((acc, square) => (acc += square), 0)
-                      .round(2)}
-                </StyledTableCell>
-                <StyledTableCell align="left">
-                  {products &&
-                    products
-                      .map((product) => product.price * product.quantity)
-                      .reduce((acc, price) => (acc += price), 0)}
-                </StyledTableCell>
-                <StyledTableCell align="left">
-                  {products &&
-                    products
-                      .map(
-                        (product) =>
-                          product.price * product.quantity * product.discount
-                      )
-                      .reduce((acc, discount) => (acc += discount), 0)}
-                </StyledTableCell>
-                <StyledTableCell align="left">
-                  {products &&
-                    products
-                      .map(
-                        (product) =>
-                          product.price *
-                          product.quantity *
-                          (1 - product.discount)
-                      )
-                      .reduce((acc, price) => (acc += price), 0)}
-                </StyledTableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </Box>
-        <Box mt={2.5}>
-          <Table>
-            <TableHead>
-              <StyledTableRow>
-                <StyledTotalTableCell
-                  style={{
-                    width: '61%',
-                  }}
-                >
-                  ИТОГО
-                </StyledTotalTableCell>
-                <StyledTotalTableCell
-                  align="left"
-                  style={{
-                    width: '13%',
-                  }}
-                >
-                  {' '}
-                  {products &&
-                    products
-                      .map((product) => product.price * product.quantity)
-                      .reduce((acc, price) => (acc += price), 0)}
-                </StyledTotalTableCell>
-                <StyledTotalTableCell
-                  align="left"
-                  style={{
-                    width: '13%',
-                  }}
-                >
-                  0
-                </StyledTotalTableCell>
-                <StyledTotalTableCell
-                  align="left"
-                  style={{
-                    width: '13%',
-                  }}
-                >
-                  {products &&
-                    products
-                      .map(
-                        (product) =>
-                          product.price *
-                          product.quantity *
-                          (1 - product.discount)
-                      )
-                      .reduce((acc, price) => (acc += price), 0)}
-                </StyledTotalTableCell>
-              </StyledTableRow>
-            </TableHead>
-          </Table>
+          {products && <OfferTableTotal products={products} />}
         </Box>
         <Box mt={11.25} mb={2.5}>
           <Typography>
@@ -428,26 +193,28 @@ export default function Offer(props) {
         </Box>
         <Box display="flex">
           <Box fontSize={19} sx={{ flex: '1 1 0%' }}>
-            <Typography color="textSecondary" variant="inherit">
+            <Typography color="textSecondary" variant="inherit" component="p">
               Будем рады вашему отзыву о работе наших специалистов
             </Typography>
           </Box>
-          <Box ml={0.6} p={0.6} px={2} bgcolor="primary.main">
-            <Link
-              underline="none"
-              color="inherit"
-              target="_blank"
-              href="https://www.ecookna.ru/clients/napisat-otzyv/"
-            >
+          <Link
+            underline="none"
+            color="inherit"
+            target="_blank"
+            href="https://www.ecookna.ru/clients/napisat-otzyv/"
+          >
+            <Box ml={0.6} p={0.6} px={2} bgcolor="primary.main" fontSize={20}>
               Оставить отзыв
-            </Link>
-          </Box>
+            </Box>
+          </Link>
         </Box>
       </Box>
 
       <Box mx="auto" maxWidth="794px" boxSizing="border-box">
         <Box boxSizing="border-box" pt={2.5} pb={2} px={3.75}>
-          <OInfo1 />
+          <Box mt={2}>
+            <OInfo1 />
+          </Box>
           <Box mt={4.25} mb={2.5}>
             <Typography>
               Мы производим особенные окна для Вас. Учитываем не только
@@ -456,14 +223,16 @@ export default function Offer(props) {
             </Typography>
           </Box>
           <Box mt={3.75} mb={2.5} fontSize={19}>
-            <Typography variant="inherit" color="textSecondary">
+            <Typography variant="inherit" color="textSecondary" component="p">
               Что мы предлагаем? - Тысячи комбинаций окон, дверей и других
               продуктов, для самых взыскательных заказчиков.
             </Typography>
           </Box>
-          <OInfo4 />
+          <Box pt={1}>
+            <OInfo4 />
+          </Box>
           <Box mt={3.75} color="textSecondary" fontSize={19}>
-            <Typography variant="inherit" color="textSecondary">
+            <Typography variant="inherit" color="textSecondary" component="p">
               Комплектующие от мировых лидеров:
             </Typography>
           </Box>
@@ -495,7 +264,11 @@ export default function Offer(props) {
                 color="inherit"
                 href="https://www.youtube.com/watch?v=X6lQcjH1Jc4"
               >
-                <Box display="flex" sx={{ flex: '1 1 0%' }}>
+                <Box
+                  display="flex"
+                  sx={{ flex: '1 1 0%', minHeight: '100%' }}
+                  alignItems="center"
+                >
                   <Box sx={{ flex: '0 0 60px' }}>
                     <OInfo10_1 />
                   </Box>
@@ -515,7 +288,12 @@ export default function Offer(props) {
                 color="inherit"
                 href="https://www.ecookna.ru/clients/3d/"
               >
-                <Box display="flex" sx={{ flex: '1 1 0%' }} ml={1.75}>
+                <Box
+                  display="flex"
+                  sx={{ flex: '1 1 0%', minHeight: '100%' }}
+                  ml={1.75}
+                  alignItems="center"
+                >
                   <Box sx={{ flex: '0 0 60px' }}>
                     <OInfo10_2 />
                   </Box>
@@ -535,7 +313,12 @@ export default function Offer(props) {
                 color="inherit"
                 href="https://www.youtube.com/watch?v=pHthiLw2RpA"
               >
-                <Box display="flex" sx={{ flex: '1 1 0%' }} ml={1.75}>
+                <Box
+                  display="flex"
+                  sx={{ flex: '1 1 0%', minHeight: '100%' }}
+                  ml={1.75}
+                  alignItems="center"
+                >
                   <Box sx={{ flex: '0 0 60px' }}>
                     <OInfo10_3 />
                   </Box>
@@ -555,7 +338,12 @@ export default function Offer(props) {
                 color="inherit"
                 href="https://www.youtube.com/watch?v=zkKJTZ90QVo"
               >
-                <Box display="flex" sx={{ flex: '1 1 0%' }} ml={1.75}>
+                <Box
+                  display="flex"
+                  sx={{ flex: '1 1 0%', minHeight: '100%' }}
+                  ml={1.75}
+                  alignItems="center"
+                >
                   <Box sx={{ flex: '0 0 60px' }}>
                     <OInfo10_4 />
                   </Box>

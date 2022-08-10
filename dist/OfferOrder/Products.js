@@ -36,7 +36,8 @@ const ExtendedParams = ({
   dense: "false",
   key: `${paramName}-${paramValue}`
 }, React.createElement(Typography, {
-  component: "p"
+  component: "p",
+  variant: "body2"
 }, React.createElement(Typography, {
   variant: "subtitle2",
   component: "b"
@@ -145,7 +146,8 @@ export default function Products({
     disableGutters: true,
     dense: "false"
   }, React.createElement(Typography, {
-    component: "p"
+    component: "p",
+    variant: "body2"
   }, _ref, '    ', React.createElement(Typography, {
     variant: "body2",
     component: "span"
@@ -153,7 +155,8 @@ export default function Products({
     disableGutters: true,
     dense: "false"
   }, React.createElement(Typography, {
-    component: "p"
+    component: "p",
+    variant: "body2"
   }, _ref2, ' ', React.createElement(Typography, {
     variant: "body2",
     component: "span"
@@ -161,7 +164,8 @@ export default function Products({
     disableGutters: true,
     dense: "false"
   }, React.createElement(Typography, {
-    component: "p"
+    component: "p",
+    variant: "body2"
   }, _ref3, ' ', React.createElement(Typography, {
     variant: "body2",
     component: "span"
@@ -169,7 +173,8 @@ export default function Products({
     disableGutters: true,
     dense: "false"
   }, React.createElement(Typography, {
-    component: "p"
+    component: "p",
+    variant: "body2"
   }, _ref4, ' ', React.createElement(Typography, {
     variant: "body2",
     component: "span"

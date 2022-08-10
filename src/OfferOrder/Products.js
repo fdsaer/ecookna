@@ -34,7 +34,7 @@ const ExtendedParams = ({ paramsArr }) =>
                 dense="false"
                 key={`${paramName}-${paramValue}`}
               >
-                <Typography component="p">
+                <Typography component="p" variant="body2">
                   <Typography variant="subtitle2" component="b">
                     {paramName}:
                   </Typography>
@@ -114,7 +114,7 @@ export default function Products({ props, product, classes }) {
         <Box pl={5.25}>
           <List>
             <ListItem disableGutters dense="false">
-              <Typography component="p">
+              <Typography component="p" variant="body2">
                 <Typography variant="subtitle2" component="b">
                   Масса общ/зап, кг:
                 </Typography>
@@ -125,7 +125,7 @@ export default function Products({ props, product, classes }) {
               </Typography>
             </ListItem>
             <ListItem disableGutters dense="false">
-              <Typography component="p">
+              <Typography component="p" variant="body2">
                 <Typography variant="subtitle2" component="b">
                   Количество, шт:
                 </Typography>{' '}
@@ -135,7 +135,7 @@ export default function Products({ props, product, classes }) {
               </Typography>
             </ListItem>
             <ListItem disableGutters dense="false">
-              <Typography component="p">
+              <Typography component="p" variant="body2">
                 <Typography variant="subtitle2" component="b">
                   Проф.система:
                 </Typography>{' '}
@@ -145,7 +145,7 @@ export default function Products({ props, product, classes }) {
               </Typography>
             </ListItem>
             <ListItem disableGutters dense="false">
-              <Typography component="p">
+              <Typography component="p" variant="body2">
                 <Typography variant="subtitle2" component="b">
                   Цвет:
                 </Typography>{' '}

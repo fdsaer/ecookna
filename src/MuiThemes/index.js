@@ -1,6 +1,15 @@
 const { createTheme } = $p.ui;
 
 export const theme = createTheme({
+  overrides: {
+    MuiList: {
+      padding: {
+        paddingTop: '4px',
+        paddingBottom: '4px',
+      },
+    },
+  },
+
   typography: {
     fontFamily: ['Museo', 'Open Sans', 'Arial', 'sans-serif'].join(','),
     lineHeight: 1.15,
