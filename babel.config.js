@@ -1,4 +1,3 @@
-
 let defaultPresets;
 
 // We release a ES version of Material-UI.
@@ -11,7 +10,9 @@ if (process.env.BABEL_ENV === 'es') {
     [
       '@babel/preset-env',
       {
-        modules: ['modules', 'production-umd'].includes(process.env.BABEL_ENV) ? false : 'commonjs',
+        modules: ['modules', 'production-umd'].includes(process.env.BABEL_ENV)
+          ? false
+          : 'commonjs',
       },
     ],
   ];
@@ -21,8 +22,8 @@ module.exports = {
   presets: defaultPresets.concat(['@babel/preset-react']),
   generatorOpts: {
     jsescOption: {
-      minimal: true
-    }
+      minimal: true,
+    },
   },
   plugins: [
     ['@babel/plugin-proposal-class-properties', { loose: true }],
@@ -37,20 +38,26 @@ module.exports = {
         [
           'babel-plugin-import',
           {
-            'libraryName': '@material-ui/core',
-            'libraryDirectory': 'esm',
-            'camel2DashComponentName': false
+            libraryName: '@material-ui/core',
+            libraryDirectory: 'esm',
+            camel2DashComponentName: false,
           },
-          'core'
+          'core',
         ],
         [
           'babel-plugin-import',
           {
-            'libraryName': '@material-ui/icons',
-            'libraryDirectory': 'esm',
-            'camel2DashComponentName': false
+            libraryName: '@material-ui/icons',
+            libraryDirectory: 'esm',
+            camel2DashComponentName: false,
           },
-          'icons'
+          'icons',
+        ],
+        [
+          'inline-import-data-uri',
+          {
+            extensions: ['.png', '.jpg'],
+          },
         ],
       ],
       // It's most likely a babel bug.
@@ -61,23 +68,25 @@ module.exports = {
     production: {
       plugins: [
         'transform-react-constant-elements',
-        ['react-remove-properties', {properties: ['data-mui-test']}],
+        ['react-remove-properties', { properties: ['data-mui-test'] }],
         ['transform-react-remove-prop-types'],
-        ['babel-plugin-import',
+        [
+          'babel-plugin-import',
           {
-            'libraryName': '@material-ui/core',
-            'libraryDirectory': 'esm',
-            'camel2DashComponentName': false
+            libraryName: '@material-ui/core',
+            libraryDirectory: 'esm',
+            camel2DashComponentName: false,
           },
-          'core'
+          'core',
         ],
-        ['babel-plugin-import',
+        [
+          'babel-plugin-import',
           {
-            'libraryName': '@material-ui/icons',
-            'libraryDirectory': 'esm',
-            'camel2DashComponentName': false
+            libraryName: '@material-ui/icons',
+            libraryDirectory: 'esm',
+            camel2DashComponentName: false,
           },
-          'icons'
+          'icons',
         ],
       ],
       // It's most likely a babel bug.

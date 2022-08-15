@@ -9,34 +9,39 @@ import stylesOrg1 from './stylesOrg1.js';
 import stylesOrg2 from './stylesOrg2.js';
 export default function StyledFrame({
   children,
+  setClasses,
   ...props
 }) {
   let classes;
+  console.log(props.obj.organization.name);
 
   switch (props.obj.organization.name) {
     case 'ЕВРООКНА':
     case 'ГРУППА КОМПАНИЙ':
     case 'ФЕНСТЕР ООО':
     case 'ОКНА РОСТА ДОМ':
-      classes = makeStyles(stylesOrg1)();
+      classes = makeStyles(() => stylesOrg2(theme))();
       break;
 
     case 'Компания ФОТОТЕХ':
     case 'ООО"ФОТОТЕХ"':
-      classes = makeStyles(stylesOrg2)();
+      classes = makeStyles(() => stylesOrg2(theme))();
       break;
 
     default:
-      classes = makeStyles(stylesOrg2)();
+      classes = makeStyles(() => stylesBase(theme))();
   }
 
-  return React.createElement(React.StrictMode, null, React.createElement(ThemeProvider, {
+  setClasses(classes);
+  return React.createElement(ThemeProvider, {
     theme: theme
   }, React.createElement("div", {
     className: classes.root
   }, React.Children.map(children, child => {
     return child ? React.cloneElement(child, { ...props,
-      classes
+      classes,
+      style: { ...child.props.style
+      }
     }) : null;
-  }))));
+  })));
 }

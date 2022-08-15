@@ -10,11 +10,10 @@ const path = require('path');
 const fs = require('fs');
 const md5File = require('md5-file');
 const lpath = path.resolve(__dirname, './dist');
-const rpath = path.resolve(__dirname, './src');;
+const rpath = path.resolve(__dirname, './src');
 
 function fromDir(startPath, filter, callback) {
-
-  if(!fs.existsSync(startPath)) {
+  if (!fs.existsSync(startPath)) {
     console.log('no dir ', startPath);
     return;
   }
@@ -22,32 +21,30 @@ function fromDir(startPath, filter, callback) {
   const files = fs.readdirSync(startPath);
   for (let i = 0; i < files.length; i++) {
     const filename = path.join(startPath, files[i]);
-    if(/node_modules/.test(filename)){
+    if (/node_modules/.test(filename)) {
       continue;
     }
     const stat = fs.lstatSync(filename);
-    if(stat.isDirectory()) {
+    if (stat.isDirectory()) {
       fromDir(filename, filter, callback); //recurse
-    }
-    else if(filter.test(filename)) callback(filename);
-  };
-};
+    } else if (filter.test(filename)) callback(filename);
+  }
+}
 
 let copied;
 let i = 0;
-fromDir(rpath, /\.(css|md|woff2|svg|gif|png)$/, (rname) => {
+fromDir(rpath, /\.(css|md|woff2|svg|gif|png|jpg)$/, (rname) => {
   const name = rname.replace(rpath, '');
   const lame = path.join(lpath, name);
-  if(!fs.existsSync(lame) || (md5File.sync(rname) != md5File.sync(lame))){
+  if (!fs.existsSync(lame) || md5File.sync(rname) != md5File.sync(lame)) {
     i++;
     fs.createReadStream(rname).pipe(fs.createWriteStream(lame));
   }
 });
-if(i){
+if (i) {
   copied = true;
   console.log(`from ${rpath} written ${i} files`);
 }
-if(!copied){
+if (!copied) {
   console.log(`all files match`);
 }
-

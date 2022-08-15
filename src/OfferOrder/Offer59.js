@@ -10,7 +10,7 @@ import PrnProto from '../PrnProto.js';
 import Offer from './Offer.js';
 const { React } = $p.ui;
 
-const StyledFrame = React.lazy(() => import('../StyledFrame/Base.js'));
+const StyledFrame = React.lazy(() => import('../StyledFrame/index.js'));
 class Offer59 extends PrnProto {
   componentDidMount() {
     const { attr, obj, print } = this.props;

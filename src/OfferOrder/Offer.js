@@ -6,20 +6,17 @@
  * Created by Evgeniy Malyarov on 03.01.2022.
  */
 
-import {
-  OCover1,
-  OCover17,
-  ODetails,
-  ODetails3,
-  OInfo1,
-  OInfo4,
-  OInfo6,
-  OInfo7,
-  OInfo10_1,
-  OInfo10_2,
-  OInfo10_3,
-  OInfo10_4,
-} from '../img/index.js';
+import OCover1 from '../img/o-cover__logo.png';
+import OCover17 from '../img/o-cover__photo.png';
+import ODetails3 from '../img/o-details__3.jpg';
+import OInfo1 from '../img/o-info__1.jpg';
+import OInfo4 from '../img/o-info__4.png';
+import OInfo6 from '../img/o-info__6.jpg';
+import OInfo7 from '../img/o-info__7.png';
+import OInfo10_1 from '../img/o-info__10-1.png';
+import OInfo10_2 from '../img/o-info__10-2.png';
+import OInfo10_3 from '../img/o-info__10-3.png';
+import OInfo10_4 from '../img/o-info__10-4.png';
 import Products from './Products.js';
 import OfferTable from './OfferTable.js';
 import OfferTableTotal from './OfferTableTotal.js';
@@ -48,7 +45,7 @@ export default function Offer(props) {
         px={7.5}
         pb={3}
       >
-        <OCover1 />
+        <img src={OCover17} />
         <Box mt={5.75} mb={2.5}>
           <Typography variant="h1" component="h1" color="textPrimary">
             Коммерческое <br /> предложение
@@ -107,7 +104,7 @@ export default function Offer(props) {
           </Box>
           <Box ml={8} mt={4.75}>
             <Box width="184px">
-              <OCover17 />
+              <img src={OCover1} />
             </Box>
             <Box fontSize={27} textAlign="center" mb={2.5}>
               <Typography variant="inherit">ecookna.ru</Typography>
@@ -126,7 +123,7 @@ export default function Offer(props) {
       >
         <Box display="flex" pt={2.5}>
           <Box width={114}>
-            <ODetails3 />
+            <img src={ODetails3} />
           </Box>
           <Box ml={4}>
             <Box mt={-0.5} mb={2.5} fontSize={22}>
@@ -213,7 +210,7 @@ export default function Offer(props) {
       <Box mx="auto" maxWidth="794px" boxSizing="border-box">
         <Box boxSizing="border-box" pt={2.5} pb={2} px={3.75}>
           <Box mt={2}>
-            <OInfo1 />
+            <img src={OInfo1} />
           </Box>
           <Box mt={4.25} mb={2.5}>
             <Typography>
@@ -229,7 +226,7 @@ export default function Offer(props) {
             </Typography>
           </Box>
           <Box pt={1}>
-            <OInfo4 />
+            <img src={OInfo4} />
           </Box>
           <Box mt={3.75} color="textSecondary" fontSize={19}>
             <Typography variant="inherit" color="textSecondary" component="p">
@@ -238,11 +235,11 @@ export default function Offer(props) {
           </Box>
         </Box>
         <Box>
-          <OInfo6 />
+          <img src={OInfo6} />
         </Box>
         <Box boxSizing="border-box" pt={2.5} pb={2} px={3.75}>
           <Box mt={3.75}>
-            <OInfo7 />
+            <img src={OInfo7} />
           </Box>
           <Box display="flex" mt={3}>
             <Box
@@ -270,7 +267,7 @@ export default function Offer(props) {
                   alignItems="center"
                 >
                   <Box sx={{ flex: '0 0 60px' }}>
-                    <OInfo10_1 />
+                    <img src={OInfo10_1} />
                   </Box>
                   <Box fontSize={10} ml={1.25} mt={2.5} mb={2.5}>
                     <Typography
@@ -295,7 +292,7 @@ export default function Offer(props) {
                   alignItems="center"
                 >
                   <Box sx={{ flex: '0 0 60px' }}>
-                    <OInfo10_2 />
+                    <img src={OInfo10_2} />
                   </Box>
                   <Box fontSize={10} ml={1.25} mt={2.5} mb={2.5}>
                     <Typography
@@ -320,7 +317,7 @@ export default function Offer(props) {
                   alignItems="center"
                 >
                   <Box sx={{ flex: '0 0 60px' }}>
-                    <OInfo10_3 />
+                    <img src={OInfo10_3} />
                   </Box>
                   <Box fontSize={10} ml={1.25} mt={2.5} mb={2.5}>
                     <Typography
@@ -345,7 +342,7 @@ export default function Offer(props) {
                   alignItems="center"
                 >
                   <Box sx={{ flex: '0 0 60px' }}>
-                    <OInfo10_4 />
+                    <img src={OInfo10_4} />
                   </Box>
                   <Box fontSize={10} ml={1.25} mt={2.5} mb={2.5}>
                     <Typography
