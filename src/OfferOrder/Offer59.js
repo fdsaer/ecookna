@@ -8,6 +8,7 @@
 
 import PrnProto from '../PrnProto.js';
 import Offer from './Offer.js';
+import Header from '../Header/index.js';
 const { React } = $p.ui;
 
 const StyledFrame = React.lazy(() => import('../StyledFrame/index.js'));
@@ -119,6 +120,12 @@ class Offer59 extends PrnProto {
           loading={loading}
           // err={err}
         >
+          <Header
+            title={title}
+            officeContacts={officeContacts}
+            managerContacts={managerContacts}
+            obj={obj}
+          />
           <Offer
             title={title}
             officeContacts={officeContacts}

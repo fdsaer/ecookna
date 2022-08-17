@@ -1,5 +1,6 @@
 import PrnProto from '../PrnProto.js';
 import Offer from './Offer.js';
+import Header from '../Header/index.js';
 const {
   React
 } = $p.ui;
@@ -121,7 +122,12 @@ class Offer59 extends PrnProto {
       setClasses: this.setClasses,
       title: title,
       loading: loading
-    }, React.createElement(Offer, {
+    }, React.createElement(Header, {
+      title: title,
+      officeContacts: officeContacts,
+      managerContacts: managerContacts,
+      obj: obj
+    }), React.createElement(Offer, {
       title: title,
       officeContacts: officeContacts,
       managerContacts: managerContacts,

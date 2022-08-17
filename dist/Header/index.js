@@ -4,6 +4,7 @@ const {
 } = $p.ui;
 import HeaderBase from './HeaderBase.js';
 import HeaderOrg1 from './HeaderOrg1.js';
+import HeaderOffer from './HeaderOffer.js';
 export default function Header(props) {
   let Component;
 
@@ -12,6 +13,10 @@ export default function Header(props) {
     case 'ООО"ФОТОТЕХ"':
     case 'ОКНА РОСТА ДОМ':
       Component = HeaderOrg1;
+      break;
+
+    case 'ГРУППА КОМПАНИЙ':
+      Component = HeaderOffer;
       break;
 
     default:
