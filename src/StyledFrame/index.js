@@ -12,13 +12,12 @@ import stylesOrg2 from './stylesOrg2.js';
 export default function StyledFrame({ children, setClasses, ...props }) {
   let classes;
   let theme = theme1;
-  console.log(props.obj.organization.name);
-  switch (props.obj.organization.name) {
+  console.log(props.obj.manager.name);
+  switch (props.obj.manager.name) {
     case 'ЕВРООКНА':
     case 'ГРУППА КОМПАНИЙ':
     case 'ФЕНСТЕР ООО':
     case 'ОКНА РОСТА ДОМ':
-    case 'Петров ВВ':
       classes = makeStyles(() => stylesOrg2(theme))();
       break;
 
@@ -27,9 +26,14 @@ export default function StyledFrame({ children, setClasses, ...props }) {
       classes = makeStyles(() => stylesOrg2(theme))();
       break;
 
+    // case 'Петров ВВ':
+    //   theme = theme2;
+    //   classes = makeStyles(() => stylesOrg2(theme))();
+    //   break;
+
     default:
-      theme = theme2;
-      classes = makeStyles(() => stylesBase(theme))();
+      // classes = makeStyles(() => stylesBase(theme))();
+      classes = makeStyles(() => stylesOrg2(theme))();
   }
   setClasses(classes);
 

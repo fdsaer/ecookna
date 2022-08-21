@@ -3,15 +3,159 @@
  *
  * @module Offer59
  *
- * Created by Evgeniy Malyarov on 03.01.2022.
  */
 
 import PrnProto from '../PrnProto.js';
-import Offer from './Offer.js';
 import Header from '../Header/index.js';
-const { React } = $p.ui;
+import Payments from '../Components/Payments.js';
+import Wrapper from '../Components/Wrapper.js';
+import Description from '../Components/Description.js';
+import Advantages from '../Components/Advantages.js';
+import Additions from '../Components/Additions.js';
+import LinksBlock from '../Components/LinksBlock.js';
+import Manager from '../Components/Manager.js';
+import ProductParams from '../Components/ProductParams.js';
+import ProductsTable from '../Components/ProductsTable.js';
+
+import AgeAdvantageImage from '../img/ageIcon.svg';
+import FreeSizingAdvantageIcon from '../img/measuringIcon.svg';
+import GuaranteeAdvantageIcon from '../img/guaranteeIcon.svg';
+import ClientsAdvantageIcon from '../img/clientsIcon.svg';
+import CashPaymentIcon from '../img/cashPaymentIcon.svg';
+import CardPaymentIcon from '../img/cardPaymentIcon.svg';
+import OnlinePaymentIcon from '../img/onlinePaymentIcon.svg';
+import installmentIcon from '../img/installmentIcon.svg';
+import ExamplesIcon from '../img/examplesIcon.svg';
+import FactoryIcon from '../img/factoryIcon.svg';
+import ProductionIcon from '../img/productionIcon.svg';
+import WatchVideoIcon from '../img/watchVideoIcon.svg';
+import GarageGateImage from '../img/garageGate.jpg';
+import BalconyDecorationImage from '../img/balconyDecoration.jpg';
+import CurtainsImage from '../img/curtains.jpg';
+import HeatingRadiatorImage from '../img/heatingRadiatorDecoration.jpg';
+import EvolvingOpacityImage from '../img/evolvingOpacity.jpg';
+import OrangeryImage from '../img/orangery.jpg';
+import GlassDoorImage from '../img/glassDoor.jpg';
+import GlassHeaterImage from '../img/glassHeater.jpg';
+import PhoneChargerImage from '../img/phoneCharger.jpg';
+const { React, Box, Typography } = $p.ui;
 
 const StyledFrame = React.lazy(() => import('../StyledFrame/index.js'));
+
+const getProductParams = (product) => {
+  const glasses = product.characteristic.glasses;
+  const glassesWeight = glasses
+    .map((glass) => product.characteristic.elm_weight(glass.elm))
+    .reduce((acc, glassWeight) => (acc += glassWeight), 0)
+    .round();
+  const constructionsWeight = product.characteristic.constructions
+    .map((construction) =>
+      product.characteristic.elm_weight(-1 * construction.cnstr)
+    )
+    .reduce((acc, constructionWeight) => (acc += constructionWeight), 0)
+    .round();
+  return `${constructionsWeight}/${glassesWeight}`;
+};
+
+const getProductGlassesParams = (product) => {
+  const glasses = product.characteristic.glasses;
+  return glasses.map((glass, index) => {
+    return {
+      name: '',
+      value: `${glass.formula} (${glass.thickness} мм)`,
+      id: index,
+    };
+  });
+};
+
+const getExtendedParams = (product) => {
+  const constructionCount = product.characteristic.constructions._obj.length;
+  const extendedParams = {};
+  for (let i = 0; i <= constructionCount; i += 1) {
+    let name = '';
+    if (i === 0) {
+      name = 'Дополнительные параметры';
+    } else {
+      const currentConstruction = product.characteristic.constructions.get(
+        i - 1
+      );
+      name = currentConstruction?.furn?.name
+        ? `${
+            currentConstruction.furn.name
+          } Исполнение - ${currentConstruction.direction.name.toLowerCase()}`
+        : '';
+    }
+    extendedParams[name] = product.characteristic.params
+      .map((param) => {
+        if (param.cnstr !== i) return null;
+        return param;
+      })
+      .filter((param) => param !== null && !param.hide)
+      .map((param) => [param.param.name, param.value.name]);
+  }
+  return extendedParams;
+};
+
+const getProductCharacteristics = (product) => {
+  const extendedParams = getExtendedParams(product);
+  return [
+    {
+      subtitle: '',
+      paramsList: [
+        {
+          name: 'Масса общ/зап, кг',
+          value: getProductParams(product),
+          id: 1,
+        },
+        { name: 'Количество, шт', value: product.quantity, id: 2 },
+        {
+          name: 'Проф.система',
+          value: product.characteristic.prod_nom.name,
+          id: 3,
+        },
+        { name: 'Цвет', value: product.characteristic.clr.presentation, id: 4 },
+      ],
+      id: 1,
+    },
+    ...Object.entries(extendedParams)
+      .filter(([key]) => key === 'Дополнительные параметры')
+      .map(([key, list], index) => {
+        return {
+          subtitle: key,
+          paramsList: list.map(([name, value], index) => ({
+            name,
+            value,
+            id: index,
+          })),
+          id: `1${index}`,
+        };
+      }),
+    {
+      subtitle: 'Стеклопакеты',
+      paramsList: getProductGlassesParams(product),
+      id: 2,
+    },
+    ...Object.entries(extendedParams)
+      .filter(([key]) => key && key !== 'Дополнительные параметры')
+      .map(([key, list], index) => {
+        return {
+          subtitle: key,
+          paramsList: list.map(([name, value], index) => ({
+            name,
+            value,
+            id: index,
+          })),
+          id: `2${index}`,
+        };
+      }),
+    {
+      subtitle: 'Примечание',
+      paramsList: [{ name: '', value: product.note, id: 1 }],
+      id: 3,
+    },
+  ];
+};
+
 class Offer59 extends PrnProto {
   componentDidMount() {
     const { attr, obj, print } = this.props;
@@ -38,12 +182,72 @@ class Offer59 extends PrnProto {
       state: { loaded, products },
       classes,
     } = this;
-    const managerContacts = {
+    const assortmentLinks = [
+      { id: 1, image: WatchVideoIcon, link: 'https://youtu.be/sXf2ssofYUk' },
+    ];
+    const links = [
+      { id: 1, image: FactoryIcon, link: 'https://youtu.be/X6lQcjH1Jc4' },
+      { id: 2, image: ProductionIcon, link: 'https://youtu.be/pHthiLw2RpA' },
+      {
+        id: 3,
+        image: ExamplesIcon,
+        link: 'https://www.ecookna.ru/upload/email-links/portfolio/ecookna-portfolio.pdf',
+      },
+    ];
+    const advantages = [
+      { id: 1, image: AgeAdvantageImage },
+      { id: 2, image: FreeSizingAdvantageIcon },
+      { id: 3, image: GuaranteeAdvantageIcon },
+      { id: 4, image: ClientsAdvantageIcon },
+    ];
+    const payments = [
+      { id: 1, image: CashPaymentIcon },
+      { id: 2, image: CardPaymentIcon },
+      { id: 3, image: OnlinePaymentIcon },
+      { id: 4, image: installmentIcon },
+    ];
+    const additions = [
+      { id: 1, text: 'Гаражные ворота', image: GarageGateImage },
+      { id: 2, text: 'Отделка балконов', image: BalconyDecorationImage },
+      { id: 3, text: 'Жалюзи или рольшторы', image: CurtainsImage },
+      {
+        id: 4,
+        text: 'Декоративные экраны на батареи',
+        image: HeatingRadiatorImage,
+      },
+      {
+        id: 5,
+        text: 'Окна с изменяющейся прозрачностью',
+        image: EvolvingOpacityImage,
+      },
+      {
+        id: 6,
+        text: 'Зимний сад или остекленные веранды',
+        image: OrangeryImage,
+      },
+      {
+        id: 7,
+        text: 'Цельностеклянные межкомнатные двери',
+        image: GlassDoorImage,
+      },
+      {
+        id: 8,
+        text: 'Обогреватели и полотенцесушители из стекла',
+        image: GlassHeaterImage,
+      },
+      {
+        id: 9,
+        text: 'Зарядку для смартфона встроенного в подоконник',
+        image: PhoneChargerImage,
+      },
+    ];
+    const manager = {
+      name: obj.manager.name ?? '',
       phone_number: '',
       email_address: '',
       address: '',
     };
-    const officeContacts = { phone_number: '', email_address: '', address: '' };
+    const office = { phone_number: '', email_address: '', address: '' };
     const fullSquare =
       products &&
       products
@@ -62,21 +266,120 @@ class Offer59 extends PrnProto {
         .map((product) => getProductWeight(product) * product.quantity)
         .reduce((acc, productWeight) => (acc += productWeight), 0)
         .round();
+    const order = `Заполнения заказа №${obj.number_doc} от ${moment(
+      obj.date
+    ).format('DD MMMM YYYY')} г.`;
+    let loading = '';
+
+    const productList =
+      products &&
+      products.map((product) => {
+        return {
+          number: product.row,
+          position: product.row,
+          svg: product.characteristic.svg,
+          data: getProductCharacteristics(product),
+        };
+      });
+
+    const productsTotalPrice =
+      products &&
+      products
+        .map((product) => product.price * product.quantity)
+        .reduce((acc, price) => (acc += price), 0);
+    const productsTotalDiscount =
+      products &&
+      products
+        .map((product) => product.price * product.quantity * product.discount)
+        .reduce((acc, discount) => (acc += discount), 0);
+    const productsTotalSum =
+      products &&
+      products
+        .map(
+          (product) => product.price * product.quantity * (1 - product.discount)
+        )
+        .reduce((acc, price) => (acc += price), 0);
+
+    const productTableData = {
+      head: [
+        { text: 'Изделия', width: '25%', id: 0 },
+        { text: 'Цвет', width: 'auto', id: 1 },
+        { text: 'Кол-во, шт.', width: '13%', id: 2 },
+        { text: 'Площадь, кв.м.', width: '13%', id: 3 },
+        { text: 'Цена без скидки', width: '13%', id: 4 },
+        { text: 'Скидка', width: '13%', id: 5 },
+        { text: 'Сумма', width: '13%', id: 6 },
+      ],
+      rows:
+        products &&
+        products.map((product) => {
+          return [
+            { text: product.characteristic.prod_nom.name_full, id: 0 },
+            { text: product.characteristic.clr.presentation, id: 1 },
+            { text: product.quantity, id: 2 },
+            { text: (product.s * product.quantity).round(2), id: 3 },
+            { text: product.price * product.quantity, id: 4 },
+            { text: product.price * product.discount, id: 5 },
+            {
+              text: product.price * product.quantity * (1 - product.discount),
+              id: 6,
+            },
+          ];
+        }),
+      total: products && [
+        { text: 'Всего', id: 0 },
+        {
+          text: products
+            .map((product) => product.quantity)
+            .reduce((acc, quantity) => (acc += quantity), 0),
+          id: 1,
+        },
+        {
+          text: products
+            .map((product) => product.s * product.quantity)
+            .reduce((acc, square) => (acc += square), 0)
+            .round(2),
+          id: 2,
+        },
+        {
+          text: productsTotalPrice,
+          id: 3,
+        },
+        {
+          text: productsTotalDiscount,
+          id: 4,
+        },
+        {
+          text: productsTotalSum,
+          id: 5,
+        },
+      ],
+    };
+
+    const productTotalData = {
+      head: [
+        { text: 'Всего', width: '61%', id: 0 },
+        { text: productsTotalPrice, width: 'auto', id: 1 },
+        { text: productsTotalDiscount, width: '13%', id: 2 },
+        { text: productsTotalSum, width: '13%', id: 3 },
+      ],
+    };
+
     obj.manager.contact_information.forEach((row) => {
       switch (row.type.name) {
         case 'Адрес':
-          if (row.presentation && !managerContacts.address) {
-            managerContacts.address = row.presentation;
+          if (row.presentation && !manager.address) {
+            manager.address = row.presentation;
           }
           break;
         case 'Телефон':
-          if (row.presentation && !managerContacts.phone_number) {
-            managerContacts.phone_number = row.presentation;
+          if (row.presentation && !manager.phone_number) {
+            manager.phone_number = row.presentation;
           }
           break;
         case 'АдресЭлектроннойПочты':
-          if (row.presentation && !managerContacts.email_address) {
-            managerContacts.email_address = row.presentation;
+          if (row.presentation && !manager.email_address) {
+            manager.email_address = row.presentation;
           }
           break;
         default:
@@ -86,28 +389,23 @@ class Offer59 extends PrnProto {
     obj.organization.contact_information.forEach((row) => {
       switch (row.type.name) {
         case 'Адрес':
-          if (row.presentation && !officeContacts.address) {
-            officeContacts.address = row.presentation;
+          if (row.presentation && !office.address) {
+            office.address = row.presentation;
           }
           break;
         case 'Телефон':
-          if (row.presentation && !officeContacts.phone_number) {
-            officeContacts.phone_number = row.presentation;
+          if (row.presentation && !office.phone_number) {
+            office.phone_number = row.presentation;
           }
           break;
         case 'АдресЭлектроннойПочты':
-          if (row.presentation && !officeContacts.email_address) {
-            officeContacts.email_address = row.presentation;
+          if (row.presentation && !office.email_address) {
+            office.email_address = row.presentation;
           }
           break;
         default:
       }
     });
-
-    const title = `Заполнения заказа №${obj.number_doc} от ${moment(
-      obj.date
-    ).format('DD MMMM YYYY')} г.`;
-    let loading = '';
 
     return (
       <React.Suspense fallback="Загрузка...">
@@ -116,24 +414,103 @@ class Offer59 extends PrnProto {
           attr={attr}
           classes={classes}
           setClasses={this.setClasses}
-          title={title}
+          title={order}
           loading={loading}
           // err={err}
         >
           <Header
-            title={title}
-            officeContacts={officeContacts}
-            managerContacts={managerContacts}
-            obj={obj}
+            headerTitle="Индивидуальное решение"
+            description="по изготовлению и установке светопрозрачных конструкций"
+            order={order}
+            office={office}
+            manager={manager}
           />
-          <Offer
-            title={title}
-            officeContacts={officeContacts}
-            managerContacts={managerContacts}
-            fullSquare={fullSquare}
-            fullWeight={fullWeight}
-            products={products}
-          />
+          <Wrapper>
+            <Box mt={3}>
+              <Advantages withLogo advantagesList={advantages} />
+            </Box>
+            <Box mt={3} mb={2.5} fontSize={22}>
+              <Typography variant="inherit" color="textSecondary" component="p">
+                {order}
+              </Typography>
+            </Box>
+            {productList && productList.length > 0 && (
+              <ProductParams
+                title="В комплектацию Вашего заказа входит:"
+                fullSquare={fullSquare}
+                fullWeight={fullWeight}
+                productList={productList}
+              />
+            )}
+            <Box mt={5}>
+              <ProductsTable
+                head={productTableData.head}
+                rows={productTableData.rows}
+                total={productTableData.total}
+                boldBorderlessHead={false}
+              />
+            </Box>
+            <Box mt={3}>
+              <ProductsTable head={productTotalData.head} boldBorderlessHead />
+            </Box>
+            <Box mt={3} mb={2.5}>
+              <Typography>
+                *Предложение действительно в течение 10 календарных дней.
+              </Typography>
+            </Box>
+            <Box mb={5}>
+              <Typography>
+                Для вашего удобства, точный расчет стоимости, заключение
+                договора и оплата могут быть осуществлены на объекте в день
+                проведения замера.
+              </Typography>
+            </Box>
+            <Payments paymentList={payments} />
+            <Box mt={5}>
+              <Advantages withLogo advantagesList={advantages} />
+            </Box>
+            <Box mt={5}>
+              <Description title="Подберем лучшее решение:" />
+            </Box>
+            <Box mt={7}>
+              <LinksBlock links={assortmentLinks}>
+                <Box color="textSecondary" fontSize="22px" mr={2.5}>
+                  <Typography
+                    variant="inherit"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Ассортимент компании ЭКООКНА
+                  </Typography>
+                </Box>
+              </LinksBlock>
+            </Box>
+            <Box mt={5}>
+              <LinksBlock links={links}>
+                <Box sx={{ maxWidth: '100px' }} mr={2.5}>
+                  <Typography
+                    variant="inherit"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Переходите по ссылкам:
+                  </Typography>
+                </Box>
+              </LinksBlock>
+            </Box>
+            <Box mt={7}>
+              <Additions
+                additions={additions}
+                title="Добавьте к своему интерьеру:"
+              />
+            </Box>
+            <Box mt={7}>
+              <Manager
+                title="Остались вопросы? Я на связи! "
+                manager={manager}
+              />
+            </Box>
+          </Wrapper>
         </StyledFrame>
       </React.Suspense>
     );

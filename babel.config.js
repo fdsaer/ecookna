@@ -56,7 +56,7 @@ module.exports = {
         [
           'inline-import-data-uri',
           {
-            extensions: ['.png', '.jpg'],
+            extensions: ['.png', '.jpg', '.svg'],
           },
         ],
       ],

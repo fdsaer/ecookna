@@ -15,14 +15,13 @@ export default function StyledFrame({
 }) {
   let classes;
   let theme = theme1;
-  console.log(props.obj.organization.name);
+  console.log(props.obj.manager.name);
 
-  switch (props.obj.organization.name) {
+  switch (props.obj.manager.name) {
     case 'ЕВРООКНА':
     case 'ГРУППА КОМПАНИЙ':
     case 'ФЕНСТЕР ООО':
     case 'ОКНА РОСТА ДОМ':
-    case 'Петров ВВ':
       classes = makeStyles(() => stylesOrg2(theme))();
       break;
 
@@ -32,8 +31,7 @@ export default function StyledFrame({
       break;
 
     default:
-      theme = theme2;
-      classes = makeStyles(() => stylesBase(theme))();
+      classes = makeStyles(() => stylesOrg2(theme))();
   }
 
   setClasses(classes);
