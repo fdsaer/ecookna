@@ -8,6 +8,7 @@ import { theme as theme2 } from './theme2.js';
 import stylesBase from './stylesBase.js';
 import stylesOrg1 from './stylesOrg1.js';
 import stylesOrg2 from './stylesOrg2.js';
+import stylesCss from './stylesCss.js';
 export default function StyledFrame({
   children,
   setClasses,
@@ -28,6 +29,11 @@ export default function StyledFrame({
     case 'Компания ФОТОТЕХ':
     case 'ООО"ФОТОТЕХ"':
       classes = makeStyles(() => stylesOrg2(theme))();
+      break;
+
+    case 'Петров ВВ':
+      theme = theme2;
+      classes = makeStyles(() => stylesCss(theme))();
       break;
 
     default:
