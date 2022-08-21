@@ -9,16 +9,21 @@ const {
 const Svg = ({
   source
 }) => {
-  const __html = $p.utils.scale_svg(source, 246, 0);
+  try {
+    const __html = $p.utils.scale_svg(source, 246, 0);
 
-  return React.createElement("div", {
-    style: {
-      textAlign: 'center'
-    },
-    dangerouslySetInnerHTML: {
-      __html
-    }
-  });
+    return React.createElement("div", {
+      style: {
+        textAlign: 'center'
+      },
+      dangerouslySetInnerHTML: {
+        __html
+      }
+    });
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
 };
 
 export default function ProductParams({

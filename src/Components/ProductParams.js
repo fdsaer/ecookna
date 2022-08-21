@@ -1,13 +1,18 @@
 const { React, Typography, Box, List, ListItem } = $p.ui;
 
 const Svg = ({ source }) => {
-  const __html = $p.utils.scale_svg(source, 246, 0);
-  return (
-    <div
-      style={{ textAlign: 'center' }}
-      dangerouslySetInnerHTML={{ __html }}
-    ></div>
-  );
+  try {
+    const __html = $p.utils.scale_svg(source, 246, 0);
+    return (
+      <div
+        style={{ textAlign: 'center' }}
+        dangerouslySetInnerHTML={{ __html }}
+      ></div>
+    );
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
 };
 
 export default function ProductParams({
