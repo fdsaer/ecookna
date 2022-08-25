@@ -303,7 +303,7 @@ class Offer59 extends PrnProto {
 
     const getProductWeight = product => product.characteristic.constructions.map(construction => product.characteristic.elm_weight(-1 * construction.cnstr)).reduce((acc, constructionWeight) => acc += constructionWeight, 0);
 
-    const fullWeight = products && products.map(product => getProductWeight(product) * product.quantity).reduce((acc, productWeight) => acc += productWeight, 0).round();
+    const fullWeight = products && products.map(product => getProductWeight(product) * product.quantity).reduce((acc, productWeight) => acc += productWeight, 0).round(2);
     const order = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format('DD MMMM YYYY')} г.`;
     let loading = '';
     const productList = products && products.map(product => {
@@ -318,9 +318,10 @@ class Offer59 extends PrnProto {
     const productsTotalPrice = products && products.map(product => product.price * product.quantity).reduce((acc, price) => acc += price, 0);
     const productsTotalDiscount = products && products.map(product => product.price * product.quantity * product.discount).reduce((acc, discount) => acc += discount, 0);
     const productsTotalSum = products && products.map(product => product.price * product.quantity * (1 - product.discount)).reduce((acc, price) => acc += price, 0);
+    const productsTotalQuantity = products && products.map(product => product.quantity).reduce((acc, quantity) => acc += quantity, 0);
     const productTableData = {
       head: [{
-        text: 'Изделия',
+        text: 'Название',
         width: '25%',
         id: 0
       }, {
@@ -328,25 +329,29 @@ class Offer59 extends PrnProto {
         width: 'auto',
         id: 1
       }, {
-        text: 'Кол-во, шт.',
+        text: 'Количество (шт.)',
         width: '13%',
         id: 2
       }, {
-        text: 'Площадь, кв.м.',
-        width: '13%',
-        id: 3
-      }, {
-        text: 'Цена без скидки',
+        text: 'Общий вес (кг)',
         width: '13%',
         id: 4
       }, {
-        text: 'Скидка',
+        text: 'Общая площадь (м2)',
+        width: '13%',
+        id: 3
+      }, {
+        text: 'Цена без скидки (руб.)',
         width: '13%',
         id: 5
       }, {
-        text: 'Сумма',
+        text: 'Скидка (%)',
         width: '13%',
         id: 6
+      }, {
+        text: 'Цена со скидкой (руб.)',
+        width: '13%',
+        id: 7
       }],
       rows: products && products.map(product => {
         return [{
@@ -359,56 +364,43 @@ class Offer59 extends PrnProto {
           text: product.quantity,
           id: 2
         }, {
+          text: (getProductWeight(product) * product.quantity).round(2),
+          id: 4
+        }, {
           text: (product.s * product.quantity).round(2),
           id: 3
         }, {
           text: (product.price * product.quantity).round(0),
-          id: 4
-        }, {
-          text: (product.price * product.discount).round(0),
           id: 5
         }, {
-          text: (product.price * product.quantity * (1 - product.discount)).round(0),
+          text: (product.price * product.discount).round(0),
           id: 6
+        }, {
+          text: (product.price * product.quantity * (1 - product.discount)).round(0),
+          id: 7
         }];
       }),
       total: products && [{
         text: 'Всего',
         id: 0
       }, {
-        text: products.map(product => product.quantity).reduce((acc, quantity) => acc += quantity, 0),
+        text: productsTotalQuantity,
         id: 1
       }, {
-        text: products.map(product => product.s * product.quantity).reduce((acc, square) => acc += square, 0).round(2),
+        text: fullWeight,
         id: 2
       }, {
-        text: productsTotalPrice,
+        text: fullSquare,
         id: 3
       }, {
-        text: productsTotalDiscount,
+        text: productsTotalPrice,
         id: 4
       }, {
-        text: productsTotalSum,
-        id: 5
-      }]
-    };
-    const productTotalData = {
-      head: [{
-        text: 'Всего',
-        width: '61%',
-        id: 0
-      }, {
-        text: productsTotalPrice,
-        width: 'auto',
-        id: 1
-      }, {
         text: productsTotalDiscount,
-        width: '13%',
-        id: 2
+        id: 5
       }, {
         text: productsTotalSum,
-        width: '13%',
-        id: 3
+        id: 6
       }]
     };
     obj.manager.contact_information.forEach(row => {
@@ -503,11 +495,6 @@ class Offer59 extends PrnProto {
       rows: productTableData.rows,
       total: productTableData.total,
       boldBorderlessHead: false
-    })), React.createElement(Box, {
-      mt: 3
-    }, React.createElement(ProductsTable, {
-      head: productTotalData.head,
-      boldBorderlessHead: true
     })), _ref, _ref2, React.createElement(Payments, {
       paymentList: payments
     }), React.createElement(Box, {

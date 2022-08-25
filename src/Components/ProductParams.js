@@ -23,7 +23,7 @@ export default function ProductParams({
 }) {
   return (
     <Box>
-      {title && (
+      {/* {title && (
         <>
           <Box mt={1.5} mb={0.75}>
             <Typography>{title}</Typography>
@@ -50,7 +50,7 @@ export default function ProductParams({
             </Typography>
           </Box>
         </Box>
-      )}
+      )} */}
       {productList.map(({ data, number, position, quantity, svg }, index) => {
         return (
           <Box display="flex" flexDirection="row" mt={7.25}>

@@ -37,43 +37,7 @@ export default function ProductParams({
   fullSquare,
   fullWeight
 }) {
-  return React.createElement(Box, null, title && React.createElement(React.Fragment, null, React.createElement(Box, {
-    mt: 1.5,
-    mb: 0.75
-  }, React.createElement(Typography, null, title)), React.createElement(Box, {
-    p: 0.625,
-    sx: {
-      borderBottom: '1px solid #999'
-    },
-    mb: 2.5
-  })), fullSquare && fullWeight && React.createElement(Box, {
-    display: "flex",
-    flexDirection: "row",
-    sx: {
-      flex: '0 0 400px'
-    }
-  }, React.createElement(Box, {
-    sx: {
-      flex: '0 0 400px'
-    }
-  }, React.createElement(Typography, {
-    variant: "subtitle2",
-    component: "p"
-  }, "Площадь изделий, кв.м:", ' ', React.createElement(Typography, {
-    variant: "subtitle2",
-    component: "span"
-  }, fullSquare))), React.createElement(Box, {
-    sx: {
-      flex: '1 1 0%'
-    },
-    pl: 5.25
-  }, React.createElement(Typography, {
-    variant: "subtitle2",
-    component: "p"
-  }, "Масса изделий, кг:", ' ', React.createElement(Typography, {
-    variant: "subtitle2",
-    component: "span"
-  }, fullWeight)))), productList.map(({
+  return React.createElement(Box, null, productList.map(({
     data,
     number,
     position,

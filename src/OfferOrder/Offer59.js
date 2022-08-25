@@ -284,7 +284,7 @@ class Offer59 extends PrnProto {
       products
         .map((product) => getProductWeight(product) * product.quantity)
         .reduce((acc, productWeight) => (acc += productWeight), 0)
-        .round();
+        .round(2);
     const order = `Заполнения заказа №${obj.number_doc} от ${moment(
       obj.date
     ).format('DD MMMM YYYY')} г.`;
@@ -322,16 +322,22 @@ class Offer59 extends PrnProto {
           (product) => product.price * product.quantity * (1 - product.discount)
         )
         .reduce((acc, price) => (acc += price), 0);
+      const productsTotalQuantity =                                             // Считаем сумму количества изделий в заказе
+      products &&
+      products
+          .map((product) => product.quantity)
+          .reduce((acc, quantity) => (acc += quantity), 0);   
 
     const productTableData = {
       head: [
-        { text: 'Изделия', width: '25%', id: 0 },
+        { text: 'Название', width: '25%', id: 0 },
         { text: 'Цвет', width: 'auto', id: 1 },
-        { text: 'Кол-во, шт.', width: '13%', id: 2 },
-        { text: 'Площадь, кв.м.', width: '13%', id: 3 },
-        { text: 'Цена без скидки', width: '13%', id: 4 },
-        { text: 'Скидка', width: '13%', id: 5 },
-        { text: 'Сумма', width: '13%', id: 6 },
+        { text: 'Количество (шт.)', width: '13%', id: 2 },                   
+        { text: 'Общий вес (кг)', width: '13%', id: 4 },                       // Добавляем в таблицу поле с массой изделия           
+        { text: 'Общая площадь (м2)', width: '13%', id: 3 },                  
+        { text: 'Цена без скидки (руб.)', width: '13%', id: 5 },
+        { text: 'Скидка (%)', width: '13%', id: 6 },
+        { text: 'Цена со скидкой (руб.)', width: '13%', id: 7 },
       ],
       rows:
         products &&
@@ -340,53 +346,63 @@ class Offer59 extends PrnProto {
             { text: product.characteristic.prod_nom.name_full, id: 0 },
             { text: product.characteristic.clr.presentation, id: 1 },
             { text: product.quantity, id: 2 },
+            { text: (getProductWeight(product) * product.quantity).round(2), id: 4 },                                // Вычисляем массу каждого изделия
             { text: (product.s * product.quantity).round(2), id: 3 },
-            { text: (product.price * product.quantity).round(0), id: 4 },
-            { text: (product.price * product.discount).round(0), id: 5 },
+            { text: (product.price * product.quantity).round(0), id: 5 },
+            { text: (product.price * product.discount).round(0), id: 6 },
             {
               text: (product.price * product.quantity * (1 - product.discount)).round(0),
-              id: 6,
-            },
+              id: 7,
+            },            
           ];
         }),
       total: products && [
         { text: 'Всего', id: 0 },
         {
-          text: products
-            .map((product) => product.quantity)
-            .reduce((acc, quantity) => (acc += quantity), 0),
+          // text: products
+          //   .map((product) => product.quantity)
+          //   .reduce((acc, quantity) => (acc += quantity), 0),       
+          text: productsTotalQuantity,
           id: 1,
         },
         {
-          text: products
-            .map((product) => product.s * product.quantity)
-            .reduce((acc, square) => (acc += square), 0)
-            .round(2),
+          // text: products
+          //   .map((product) => product.s * product.quantity)
+          //   .reduce((acc, square) => (acc += square), 0)
+          //   .round(2),         
+          text: fullWeight,
           id: 2,
         },
-        {
-          text: productsTotalPrice,
+        {          
+          text: fullSquare, 
           id: 3,
         },
         {
-          text: productsTotalDiscount,
+          text: productsTotalPrice,
           id: 4,
         },
         {
-          text: productsTotalSum,
+          text: productsTotalDiscount,
           id: 5,
         },
+        {
+          text: productsTotalSum,
+          id: 6,
+        },      
       ],
     };
 
-    const productTotalData = {
-      head: [
-        { text: 'Всего', width: '61%', id: 0 },
-        { text: productsTotalPrice, width: 'auto', id: 1 },
-        { text: productsTotalDiscount, width: '13%', id: 2 },
-        { text: productsTotalSum, width: '13%', id: 3 },
-      ],
-    };
+    // const productTotalData = {
+    //   head: [
+    //     { text: 'Всего', width: '33%', id: 0 },
+    //     { text: productsTotalQuantity, width: '11%', id: 1 },        
+    //     { text: fullSquare, width: '12%', id: 2 },        
+    //     { text: fullWeight, width: '11%', id: 3 },   
+    //     { text: productsTotalPrice, width: '12%', id: 4 },
+    //     { text: productsTotalDiscount, width: '11%', id: 5 },
+    //     { text: productsTotalSum, width: '10%', id: 6 },
+    //   ],
+    // };
 
     obj.manager.contact_information.forEach((row) => {
       switch (row.type.name) {
@@ -473,9 +489,9 @@ class Offer59 extends PrnProto {
                 boldBorderlessHead={false}
               />
             </Box>
-            <Box mt={3}>
+            {/* <Box mt={3}>
               <ProductsTable head={productTotalData.head} boldBorderlessHead />
-            </Box>
+            </Box> */}
             <Box mt={3} mb={2.5}>
               <Typography>
                 *Предложение действительно в течение 10 календарных дней.
