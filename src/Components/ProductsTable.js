@@ -94,7 +94,7 @@ export default function ProductsTable({
               ))}
             </TableRow>
           ))}
-        <TableRow>
+        <StyledTableRow>
           {total &&
             total.map(({ text, id }, index) => (
               <StyledTableCell
@@ -104,8 +104,8 @@ export default function ProductsTable({
                 {text}
               </StyledTableCell>
             ))}
-        </TableRow>
-      </TableBody>
+        </StyledTableRow>
+      </TableBody> 
     </Table>
   );
 }

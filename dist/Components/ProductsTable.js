@@ -68,7 +68,7 @@ export default function ProductsTable({
       fontWeight: 'normal'
     },
     colSpan: index === 0 ? head.length - product.length + 1 : 0
-  }, text)))), React.createElement(TableRow, null, total && total.map(({
+  }, text)))), React.createElement(StyledTableRow, null, total && total.map(({
     text,
     id
   }, index) => React.createElement(StyledTableCell, {
