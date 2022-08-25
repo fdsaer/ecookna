@@ -26,6 +26,11 @@ const Svg = ({
   }
 };
 
+var _ref = React.createElement(Typography, {
+  variant: "subtitle2",
+  component: "p"
+}, " ");
+
 export default function ProductParams({
   title,
   productList,
@@ -72,8 +77,9 @@ export default function ProductParams({
     data,
     number,
     position,
+    quantity,
     svg
-  }) => {
+  }, index) => {
     return React.createElement(Box, {
       display: "flex",
       flexDirection: "row",
@@ -89,7 +95,7 @@ export default function ProductParams({
     }, React.createElement(Typography, {
       variant: "subtitle2",
       component: "p"
-    }, "Номер: ", number)), React.createElement(Box, {
+    }, "Номер: ", index + 1, " (поз. ", position, ") - ", quantity, " шт.")), React.createElement(Box, {
       pr: 1,
       pl: 3
     }, React.createElement(Svg, {
@@ -102,10 +108,7 @@ export default function ProductParams({
       bgcolor: "primary.light",
       p: 1,
       pl: 5.25
-    }, React.createElement(Typography, {
-      variant: "subtitle2",
-      component: "p"
-    }, "Позиция: ", position)), React.createElement(Box, {
+    }, _ref), React.createElement(Box, {
       pl: 5.25
     }, data && data.map(({
       subtitle,
@@ -114,7 +117,7 @@ export default function ProductParams({
     }) => {
       return React.createElement(React.Fragment, {
         key: id
-      }, subtitle && React.createElement(Box, {
+      }, console.log(subtitle, paramsList), subtitle && paramsList.length > 0 && React.createElement(Box, {
         bgcolor: "primary.light",
         p: 1
       }, React.createElement(Typography, {

@@ -58,15 +58,32 @@ const getProductParams = (product) => {
 };
 
 const getProductGlassesParams = (product) => {
-  const glasses = product.characteristic.glasses;
-  return glasses.map((glass, index) => {
+  const glasses = product.characteristic.glasses; 
+  const uniqueGlasses = [...new Set(glasses.map((glass) => `${glass.formula} (${glass.thickness} мм)`))]; // отбираем уникальные стеклопакеты
+
+  return uniqueGlasses.map((value, index) => {  
     return {
       name: '',
-      value: `${glass.formula} (${glass.thickness} мм)`,
+      value,
       id: index,
     };
   });
+
+  // return glasses.map((glass, index) => {  
+  //   return {
+  //     name: '',
+  //     value: `${glass.formula} (${glass.thickness} мм)`,
+  //     id: index,
+  //   };
+  // });
 };
+
+// функция на отсеивание параметров, не проходящих фильтр
+const filterParams = (param) => {
+  const filters = ["автоматически", "нет", "_", null, undefined]; 
+  if (param && filters.includes(param.toLowerCase())) return false;
+  return true;
+}
 
 const getExtendedParams = (product) => {
   const constructionCount = product.characteristic.constructions._obj.length;
@@ -91,8 +108,9 @@ const getExtendedParams = (product) => {
         return param;
       })
       .filter((param) => param !== null && !param.hide)
+      .filter((param) => filterParams(param.value.name)) // фильтр свойств
       .map((param) => [param.param.name, param.value.name]);
-  }
+  } 
   return extendedParams;
 };
 
@@ -106,14 +124,13 @@ const getProductCharacteristics = (product) => {
           name: 'Масса общ/зап, кг',
           value: getProductParams(product),
           id: 1,
-        },
-        { name: 'Количество, шт', value: product.quantity, id: 2 },
+        }, 
         {
           name: 'Проф.система',
           value: product.characteristic.prod_nom.name,
-          id: 3,
+          id: 2,
         },
-        { name: 'Цвет', value: product.characteristic.clr.presentation, id: 4 },
+        { name: 'Цвет', value: product.characteristic.clr.presentation, id: 3 },
       ],
       id: 1,
     },
@@ -131,7 +148,7 @@ const getProductCharacteristics = (product) => {
         };
       }),
     {
-      subtitle: 'Стеклопакеты',
+      subtitle: 'Заполнения',
       paramsList: getProductGlassesParams(product),
       id: 2,
     },
@@ -150,16 +167,17 @@ const getProductCharacteristics = (product) => {
       }),
     {
       subtitle: 'Примечание',
-      paramsList: [{ name: '', value: product.note, id: 1 }],
+      paramsList: product.note ? [{ name: '', value: product.note, id: 1 }] : [],
       id: 3,
     },
   ];
 };
 
 class Offer59 extends PrnProto {
+ 
   componentDidMount() {
     const { attr, obj, print } = this.props;
-    console.log(obj);
+    console.log(obj); 
     obj
       // метод .load_linked_refs здесь на самом деле не нужен, но почему то svg в production.characteristic не доступны
       // поэтому пока эта обертка здесь есть, а когда svg будут на своем месте ее можно будет убрать.
@@ -181,7 +199,8 @@ class Offer59 extends PrnProto {
       props: { obj, attr },
       state: { loaded, products },
       classes,
-    } = this;
+    } = this; 
+
     const assortmentLinks = [
       { id: 1, image: WatchVideoIcon, link: 'https://youtu.be/sXf2ssofYUk' },
     ];
@@ -273,10 +292,14 @@ class Offer59 extends PrnProto {
 
     const productList =
       products &&
-      products.map((product) => {
+      products.map((product) => { 
+        // тут сделать проверку на наличие svg, если нет - не выводить
+        // потом проверку на тип, чтобы не было отливов
+        // и number сделать индексом
         return {
           number: product.row,
           position: product.row,
+          quantity: product.quantity,
           svg: product.characteristic.svg,
           data: getProductCharacteristics(product),
         };
@@ -318,10 +341,10 @@ class Offer59 extends PrnProto {
             { text: product.characteristic.clr.presentation, id: 1 },
             { text: product.quantity, id: 2 },
             { text: (product.s * product.quantity).round(2), id: 3 },
-            { text: product.price * product.quantity, id: 4 },
-            { text: product.price * product.discount, id: 5 },
+            { text: (product.price * product.quantity).round(0), id: 4 },
+            { text: (product.price * product.discount).round(0), id: 5 },
             {
-              text: product.price * product.quantity * (1 - product.discount),
+              text: (product.price * product.quantity * (1 - product.discount)).round(0),
               id: 6,
             },
           ];
@@ -407,7 +430,7 @@ class Offer59 extends PrnProto {
       }
     });
 
-    return (
+    return ( 
       <React.Suspense fallback="Загрузка...">
         <StyledFrame
           obj={obj}
@@ -416,7 +439,7 @@ class Offer59 extends PrnProto {
           setClasses={this.setClasses}
           title={order}
           loading={loading}
-          // err={err}
+          // err={err} 
         >
           <Header
             headerTitle="Индивидуальное решение"

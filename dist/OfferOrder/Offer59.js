@@ -46,13 +46,20 @@ const getProductParams = product => {
 
 const getProductGlassesParams = product => {
   const glasses = product.characteristic.glasses;
-  return glasses.map((glass, index) => {
+  const uniqueGlasses = [...new Set(glasses.map(glass => `${glass.formula} (${glass.thickness} мм)`))];
+  return uniqueGlasses.map((value, index) => {
     return {
       name: '',
-      value: `${glass.formula} (${glass.thickness} мм)`,
+      value,
       id: index
     };
   });
+};
+
+const filterParams = param => {
+  const filters = ["автоматически", "нет", "_", null, undefined];
+  if (param && filters.includes(param.toLowerCase())) return false;
+  return true;
 };
 
 const getExtendedParams = product => {
@@ -72,7 +79,7 @@ const getExtendedParams = product => {
     extendedParams[name] = product.characteristic.params.map(param => {
       if (param.cnstr !== i) return null;
       return param;
-    }).filter(param => param !== null && !param.hide).map(param => [param.param.name, param.value.name]);
+    }).filter(param => param !== null && !param.hide).filter(param => filterParams(param.value.name)).map(param => [param.param.name, param.value.name]);
   }
 
   return extendedParams;
@@ -87,17 +94,13 @@ const getProductCharacteristics = product => {
       value: getProductParams(product),
       id: 1
     }, {
-      name: 'Количество, шт',
-      value: product.quantity,
-      id: 2
-    }, {
       name: 'Проф.система',
       value: product.characteristic.prod_nom.name,
-      id: 3
+      id: 2
     }, {
       name: 'Цвет',
       value: product.characteristic.clr.presentation,
-      id: 4
+      id: 3
     }],
     id: 1
   }, ...Object.entries(extendedParams).filter(([key]) => key === 'Дополнительные параметры').map(([key, list], index) => {
@@ -111,7 +114,7 @@ const getProductCharacteristics = product => {
       id: `1${index}`
     };
   }), {
-    subtitle: 'Стеклопакеты',
+    subtitle: 'Заполнения',
     paramsList: getProductGlassesParams(product),
     id: 2
   }, ...Object.entries(extendedParams).filter(([key]) => key && key !== 'Дополнительные параметры').map(([key, list], index) => {
@@ -126,11 +129,11 @@ const getProductCharacteristics = product => {
     };
   }), {
     subtitle: 'Примечание',
-    paramsList: [{
+    paramsList: product.note ? [{
       name: '',
       value: product.note,
       id: 1
-    }],
+    }] : [],
     id: 3
   }];
 };
@@ -307,6 +310,7 @@ class Offer59 extends PrnProto {
       return {
         number: product.row,
         position: product.row,
+        quantity: product.quantity,
         svg: product.characteristic.svg,
         data: getProductCharacteristics(product)
       };
@@ -358,13 +362,13 @@ class Offer59 extends PrnProto {
           text: (product.s * product.quantity).round(2),
           id: 3
         }, {
-          text: product.price * product.quantity,
+          text: (product.price * product.quantity).round(0),
           id: 4
         }, {
-          text: product.price * product.discount,
+          text: (product.price * product.discount).round(0),
           id: 5
         }, {
-          text: product.price * product.quantity * (1 - product.discount),
+          text: (product.price * product.quantity * (1 - product.discount)).round(0),
           id: 6
         }];
       }),
