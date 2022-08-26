@@ -307,14 +307,19 @@ class Offer59 extends PrnProto {
     const order = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format('DD MMMM YYYY')} г.`;
     let loading = '';
     const productList = products && products.map(product => {
-      return {
-        number: product.row,
-        position: product.row,
-        quantity: product.quantity,
-        svg: product.characteristic.svg,
-        data: getProductCharacteristics(product)
-      };
-    });
+      console.log(product);
+      console.log(product.characteristic.sys.name);
+
+      if (product.characteristic.svg) {
+        return {
+          number: product.row,
+          position: product.row,
+          quantity: product.quantity,
+          svg: product.characteristic.svg,
+          data: getProductCharacteristics(product)
+        };
+      }
+    }).filter(product => product);
     const productsTotalPrice = products && products.map(product => product.price * product.quantity).reduce((acc, price) => acc += price, 0);
     const productsTotalDiscount = products && products.map(product => product.price * product.quantity * product.discount).reduce((acc, discount) => acc += discount, 0);
     const productsTotalSum = products && products.map(product => product.price * product.quantity * (1 - product.discount)).reduce((acc, price) => acc += price, 0);

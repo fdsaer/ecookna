@@ -292,18 +292,22 @@ class Offer59 extends PrnProto {
 
     const productList =
       products &&
-      products.map((product) => { 
-        // тут сделать проверку на наличие svg, если нет - не выводить
-        // потом проверку на тип, чтобы не было отливов
-        // и number сделать индексом
-        return {
-          number: product.row,
-          position: product.row,
-          quantity: product.quantity,
-          svg: product.characteristic.svg,
-          data: getProductCharacteristics(product),
-        };
-      });
+      products.map((product) => {  
+        console.log(product);
+        console.log(product.characteristic.sys.name);
+
+        // Выводим только те изделия, которые имеют миниатюру
+        // todo: сделать проверку по типу изделий. Пропускать только: двери/окна
+        if (product.characteristic.svg) {
+          return {
+            number: product.row,
+            position: product.row,
+            quantity: product.quantity,
+            svg: product.characteristic.svg,
+            data: getProductCharacteristics(product),
+          };
+        }  
+      }).filter(product => product);
 
     const productsTotalPrice =
       products &&
