@@ -80,7 +80,6 @@ export default function ProductParams({
                   data.map(({ subtitle, paramsList, id }) => {
                     return (
                       <React.Fragment key={id}>
-                        { console.log(subtitle, paramsList) }
                         {subtitle && paramsList.length > 0 && (
                           <Box bgcolor="primary.light" p={1}>
                             <Typography variant="subtitle2">

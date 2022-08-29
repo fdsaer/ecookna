@@ -81,7 +81,7 @@ export default function ProductParams({
     }) => {
       return React.createElement(React.Fragment, {
         key: id
-      }, console.log(subtitle, paramsList), subtitle && paramsList.length > 0 && React.createElement(Box, {
+      }, subtitle && paramsList.length > 0 && React.createElement(Box, {
         bgcolor: "primary.light",
         p: 1
       }, React.createElement(Typography, {
