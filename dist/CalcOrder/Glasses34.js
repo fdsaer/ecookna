@@ -80,7 +80,6 @@ class Glasses34 extends PrnProto {
       },
       classes
     } = this;
-    console.log(classes);
     const totals = {
       imgs,
       q: new Map(),

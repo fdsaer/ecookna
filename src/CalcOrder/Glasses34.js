@@ -54,7 +54,7 @@ class Glasses34 extends PrnProto {
       state: { imgs, loaded, err },
       classes,
     } = this;
-    console.log(classes);
+    
     // в totals накопим итоги
     const totals = { imgs, q: new Map(), s: new Map(), m: new Map() };
     const title = `Заполнения заказа №${obj.number_doc} от ${moment(
@@ -66,13 +66,13 @@ class Glasses34 extends PrnProto {
         : "Формируем эскизы заполнений..."
       : "Читаем продукции заказа...";
 
-    const Cell = ({ right, ...props }) => (
+    const Cell = ({ right, ...props }) => ( 
       <TableCell
         className={`${classes.tableCell} ${right ? classes.alignRight : ""}`}
         {...props}
       />
-    );
-
+    ); 
+    
     return (
       <React.Suspense fallback="Загрузка...">
         <StyledFrame
