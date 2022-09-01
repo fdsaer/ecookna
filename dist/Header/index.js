@@ -16,11 +16,12 @@ export default function Header(props) {
       break;
 
     case 'ГРУППА КОМПАНИЙ':
+    case 'ОК Калева':
       Component = HeaderOffer;
       break;
 
     default:
-      Component = HeaderBase;
+      Component = HeaderOffer;
   }
 
   return React.createElement(Component, props);

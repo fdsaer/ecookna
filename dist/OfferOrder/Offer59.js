@@ -307,10 +307,12 @@ class Offer59 extends PrnProto {
     const order = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format('DD MMMM YYYY')} г.`;
     let loading = '';
     const productList = products && products.map(product => {
+      const sysName = product.characteristic.sys.name;
+      const filters = ["водоотлив"];
       console.log(product);
-      console.log(product.characteristic.sys.name);
+      console.log(sysName);
 
-      if (product.characteristic.svg) {
+      if (product.characteristic.svg && !filters.includes(sysName.toLowerCase())) {
         return {
           number: product.row,
           position: product.row,

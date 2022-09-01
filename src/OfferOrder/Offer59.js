@@ -293,12 +293,15 @@ class Offer59 extends PrnProto {
     const productList =
       products &&
       products.map((product) => {  
-        console.log(product);
-        console.log(product.characteristic.sys.name);
+        const sysName = product.characteristic.sys.name;
+        const filters = ["водоотлив"];
+
+        console.log(product); 
+        console.log(sysName);
 
         // Выводим только те изделия, которые имеют миниатюру
         // todo: сделать проверку по типу изделий. Пропускать только: двери/окна
-        if (product.characteristic.svg) {
+        if (product.characteristic.svg && !filters.includes(sysName.toLowerCase())) {
           return {
             number: product.row,
             position: product.row,
@@ -337,7 +340,7 @@ class Offer59 extends PrnProto {
         { text: 'Название', width: '25%', id: 0 },
         { text: 'Цвет', width: 'auto', id: 1 },
         { text: 'Количество (шт.)', width: '13%', id: 2 },                   
-        { text: 'Общий вес (кг)', width: '13%', id: 4 },                       // Добавляем в таблицу поле с массой изделия           
+        { text: 'Общий вес (кг)', width: '13%', id: 4 },   // Добавляем в таблицу поле с массой изделия           
         { text: 'Общая площадь (м2)', width: '13%', id: 3 },                  
         { text: 'Цена без скидки (руб.)', width: '13%', id: 5 },
         { text: 'Скидка (%)', width: '13%', id: 6 },
@@ -350,7 +353,7 @@ class Offer59 extends PrnProto {
             { text: product.characteristic.prod_nom.name_full, id: 0 },
             { text: product.characteristic.clr.presentation, id: 1 },
             { text: product.quantity, id: 2 },
-            { text: (getProductWeight(product) * product.quantity).round(2), id: 4 },                                // Вычисляем массу каждого изделия
+            { text: (getProductWeight(product) * product.quantity).round(2), id: 4 }, // Вычисляем массу каждого изделия
             { text: (product.s * product.quantity).round(2), id: 3 },
             { text: (product.price * product.quantity).round(0), id: 5 },
             { text: (product.price * product.discount).round(0), id: 6 },
