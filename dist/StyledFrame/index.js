@@ -41,6 +41,7 @@ export default function StyledFrame({
   }
 
   setClasses(classes);
+  console.log(classes);
   return React.createElement(ThemeProvider, {
     theme: theme
   }, React.createElement("div", {
