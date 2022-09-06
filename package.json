@@ -1,0 +1,67 @@
+{
+  "name": "ecookna-print",
+  "version": "2.1.255",
+  "description": "Ecookna printing plates",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unpete/ecookna.git"
+  },
+  "engines": {
+    "node": "^16.13",
+    "yarn": "^1.22"
+  },
+  "keywords": [
+    "metadata",
+    "order dealer",
+    "cad",
+    "crm",
+    "window builder",
+    "windows calculator"
+  ],
+  "author": "Evgeniy Malyarov <info@oknosoft.ru> (http://www.oknosoft.ru)",
+  "license": "SEE LICENSE IN LICENSE",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/oknosoft/windowbuilder/issues"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16",
+    "@babel/core": "^7.16",
+    "@babel/preset-env": "^7.16",
+    "@babel/preset-react": "^7.16",
+    "@babel/runtime": "^7.16",
+    "babel-plugin-import": "^1.13",
+    "babel-plugin-inline-import-data-uri": "^1.0.1",
+    "babel-plugin-react-remove-properties": "^0.3",
+    "babel-plugin-transform-react-constant-elements": "^6.23",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4",
+    "browser-sync": "^2.27.10",
+    "cross-env": "^7.0",
+    "md5-file": "^5.0",
+    "onchange": "^7.1.0"
+  },
+  "files": [
+    "dist/**",
+    "LICENSE",
+    "LICENSE.ru.md"
+  ],
+  "main": "dist",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ./babel.config.js ./src --out-dir ./dist && node ./copy-files",
+    "serve": "browser-sync start --proxy \"http://localhost:3016/\" --files \"dist/**/*\"",
+    "watch:all": "onchange \"src/**/*\" -- \"npm run build\""
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      "> 5%"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
