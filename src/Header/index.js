@@ -16,10 +16,11 @@ export default function Header(props) {
       Component = HeaderOrg1;
       break;
     case 'ГРУППА КОМПАНИЙ':
+    case 'ОК Калева':
       Component = HeaderOffer;
       break;
     default:
-      Component = HeaderBase;
+      Component = HeaderOffer;
   }
 
   return <Component {...props} />;
