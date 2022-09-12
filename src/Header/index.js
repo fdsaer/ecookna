@@ -20,8 +20,7 @@ export default function Header(props) {
       Component = HeaderOffer;
       break;
     default:
-      // Component = HeaderBase;
-      Component = HeaderOffer; // компонент по умолчанию
+      Component = HeaderOffer;
   }
 
   return <Component {...props} />;

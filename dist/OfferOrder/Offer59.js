@@ -138,22 +138,37 @@ const getProductCharacteristics = product => {
   }];
 };
 
-var _ref = React.createElement(Box, {
+var _ref = React.createElement(Typography, {
+  color: "textSecondary",
+  component: "p"
+}, "Изделия");
+
+var _ref2 = React.createElement(Typography, {
+  color: "textSecondary",
+  component: "p"
+}, "Дополнительная комплектация");
+
+var _ref3 = React.createElement(Typography, {
+  color: "textSecondary",
+  component: "p"
+}, "Услуги");
+
+var _ref4 = React.createElement(Box, {
   mt: 3,
   mb: 2.5
 }, React.createElement(Typography, null, "*Предложение действительно в течение 10 календарных дней."));
 
-var _ref2 = React.createElement(Box, {
+var _ref5 = React.createElement(Box, {
   mb: 5
 }, React.createElement(Typography, null, "Для вашего удобства, точный расчет стоимости, заключение договора и оплата могут быть осуществлены на объекте в день проведения замера."));
 
-var _ref3 = React.createElement(Box, {
+var _ref6 = React.createElement(Box, {
   mt: 5
 }, React.createElement(Description, {
   title: "Подберем лучшее решение:"
 }));
 
-var _ref4 = React.createElement(Box, {
+var _ref7 = React.createElement(Box, {
   color: "textSecondary",
   fontSize: "22px",
   mr: 2.5
@@ -163,7 +178,7 @@ var _ref4 = React.createElement(Box, {
   component: "p"
 }, "Ассортимент компании ЭКООКНА"));
 
-var _ref5 = React.createElement(Typography, {
+var _ref8 = React.createElement(Typography, {
   variant: "inherit",
   color: "textSecondary",
   component: "p"
@@ -299,33 +314,54 @@ class Offer59 extends PrnProto {
       email_address: '',
       address: ''
     };
-    const fullSquare = products && products.map(product => product.s * product.quantity).reduce((acc, productSquare) => acc += productSquare, 0).round(2);
+    const productListSvg = products && products.map(product => {
+      if (!product.nom.is_service && !product.nom.grouping) {
+        return product;
+      }
+
+      ;
+    }).filter(product => product);
+    const productListExtraItems = products && products.map(product => {
+      if (product.nom.grouping && !product.nom.is_service) {
+        return product;
+      }
+
+      ;
+    }).filter(product => product);
+    const productIsService = products && products.map(product => {
+      if (product.nom.is_service) {
+        return product;
+      }
+
+      ;
+    }).filter(product => product);
+
+    const fullSquare = products => products && products.map(product => product.s * product.quantity).reduce((acc, productSquare) => acc += productSquare, 0).round(2);
 
     const getProductWeight = product => product.characteristic.constructions.map(construction => product.characteristic.elm_weight(-1 * construction.cnstr)).reduce((acc, constructionWeight) => acc += constructionWeight, 0);
 
-    const fullWeight = products && products.map(product => getProductWeight(product) * product.quantity).reduce((acc, productWeight) => acc += productWeight, 0).round(2);
+    const fullWeight = products => products && products.map(product => getProductWeight(product) * product.quantity).reduce((acc, productWeight) => acc += productWeight, 0).round(2);
+
     const order = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format('DD MMMM YYYY')} г.`;
     let loading = '';
     const productList = products && products.map(product => {
-      const sysName = product.characteristic.sys.name;
-      const filters = ["водоотлив"];
-      console.log(product);
-      console.log(sysName);
+      return {
+        number: product.row,
+        position: product.row,
+        quantity: product.quantity,
+        svg: product.characteristic.svg,
+        data: getProductCharacteristics(product)
+      };
+    });
 
-      if (product.characteristic.svg && !filters.includes(sysName.toLowerCase())) {
-        return {
-          number: product.row,
-          position: product.row,
-          quantity: product.quantity,
-          svg: product.characteristic.svg,
-          data: getProductCharacteristics(product)
-        };
-      }
-    }).filter(product => product);
-    const productsTotalPrice = products && products.map(product => product.price * product.quantity).reduce((acc, price) => acc += price, 0);
-    const productsTotalDiscount = products && products.map(product => product.price * product.quantity * product.discount).reduce((acc, discount) => acc += discount, 0);
-    const productsTotalSum = products && products.map(product => product.price * product.quantity * (1 - product.discount)).reduce((acc, price) => acc += price, 0);
-    const productsTotalQuantity = products && products.map(product => product.quantity).reduce((acc, quantity) => acc += quantity, 0);
+    const productsTotalPrice = products => products && products.map(product => product.price * product.quantity).reduce((acc, price) => acc += price, 0).round(0);
+
+    const productsTotalDiscount = products => products && products.map(product => product.price * product.quantity * product.discount).reduce((acc, discount) => acc += discount, 0);
+
+    const productsTotalSum = products => products && products.map(product => product.price * product.quantity * (1 - product.discount)).reduce((acc, price) => acc += price, 0).round(0);
+
+    const productsTotalQuantity = products => products && products.map(product => product.quantity).reduce((acc, quantity) => acc += quantity, 0);
+
     const productTableData = {
       head: [{
         text: 'Название',
@@ -342,11 +378,11 @@ class Offer59 extends PrnProto {
       }, {
         text: 'Общий вес (кг)',
         width: '13%',
-        id: 4
+        id: 3
       }, {
         text: 'Общая площадь (м2)',
         width: '13%',
-        id: 3
+        id: 4
       }, {
         text: 'Цена без скидки (руб.)',
         width: '13%',
@@ -360,15 +396,53 @@ class Offer59 extends PrnProto {
         width: '13%',
         id: 7
       }],
-      rows: products && products.map(product => {
+      headExtraItem: [{
+        text: 'Название',
+        width: '25%',
+        id: 0
+      }, {
+        text: 'Количество (шт.)',
+        width: '13%',
+        id: 1
+      }, {
+        text: 'Цена без скидки (руб.)',
+        width: '13%',
+        id: 2
+      }, {
+        text: 'Скидка (%)',
+        width: '13%',
+        id: 3
+      }, {
+        text: 'Цена со скидкой (руб.)',
+        width: '13%',
+        id: 4
+      }],
+      headService: [{
+        text: 'Название',
+        width: '25%',
+        id: 0
+      }, {
+        text: 'Цена без скидки (руб.)',
+        width: '13%',
+        id: 1
+      }, {
+        text: 'Скидка (%)',
+        width: '13%',
+        id: 2
+      }, {
+        text: 'Цена со скидкой (руб.)',
+        width: '13%',
+        id: 3
+      }],
+      rows: productListSvg && productListSvg.map(product => {
         return [{
-          text: product.characteristic.prod_nom.name_full,
+          text: product.characteristic.prod_nom.name_full ? product.characteristic.prod_nom.name_full : product.nom.name_full,
           id: 0
         }, {
           text: product.characteristic.clr.presentation,
           id: 1
         }, {
-          text: product.quantity,
+          text: product.quantity.round(0),
           id: 2
         }, {
           text: (getProductWeight(product) * product.quantity).round(2),
@@ -387,27 +461,89 @@ class Offer59 extends PrnProto {
           id: 7
         }];
       }),
-      total: products && [{
+      rowsExtraItem: productListExtraItems && productListExtraItems.map(product => {
+        return [{
+          text: product.characteristic.prod_nom.name_full ? product.characteristic.prod_nom.name_full : product.nom.name_full,
+          id: 0
+        }, {
+          text: product.quantity.round(0),
+          id: 1
+        }, {
+          text: (product.price * product.quantity).round(0),
+          id: 2
+        }, {
+          text: (product.price * product.discount).round(0),
+          id: 3
+        }, {
+          text: (product.price * product.quantity * (1 - product.discount)).round(0),
+          id: 7
+        }];
+      }),
+      rowsService: productIsService && productIsService.map(product => {
+        return [{
+          text: product.characteristic.prod_nom.name_full ? product.characteristic.prod_nom.name_full : product.nom.name_full,
+          id: 0
+        }, {
+          text: (product.price * product.quantity).round(0),
+          id: 1
+        }, {
+          text: (product.price * product.discount).round(0),
+          id: 2
+        }, {
+          text: (product.price * product.quantity * (1 - product.discount)).round(0),
+          id: 3
+        }];
+      }),
+      total: productListSvg && [{
         text: 'Всего',
         id: 0
       }, {
-        text: productsTotalQuantity,
+        text: productsTotalQuantity(productListSvg),
         id: 1
       }, {
-        text: fullWeight,
+        text: fullWeight(productListSvg),
         id: 2
       }, {
-        text: fullSquare,
+        text: fullSquare(productListSvg),
         id: 3
       }, {
-        text: productsTotalPrice,
+        text: productsTotalPrice(productListSvg),
         id: 4
       }, {
-        text: productsTotalDiscount,
+        text: productsTotalDiscount(productListSvg),
         id: 5
       }, {
-        text: productsTotalSum,
+        text: productsTotalSum(productListSvg),
         id: 6
+      }],
+      totalExtraItem: productListExtraItems && [{
+        text: 'Всего',
+        id: 0
+      }, {
+        text: productsTotalQuantity(productListExtraItems),
+        id: 1
+      }, {
+        text: productsTotalPrice(productListExtraItems),
+        id: 4
+      }, {
+        text: productsTotalDiscount(productListExtraItems),
+        id: 5
+      }, {
+        text: productsTotalSum(productListExtraItems),
+        id: 6
+      }],
+      totalService: productIsService && [{
+        text: 'Всего',
+        id: 0
+      }, {
+        text: productsTotalPrice(productIsService),
+        id: 3
+      }, {
+        text: productsTotalDiscount(productIsService),
+        id: 4
+      }, {
+        text: productsTotalSum(productIsService),
+        id: 5
       }]
     };
     obj.manager.contact_information.forEach(row => {
@@ -497,23 +633,37 @@ class Offer59 extends PrnProto {
       productList: productList
     }), React.createElement(Box, {
       mt: 5
-    }, React.createElement(ProductsTable, {
+    }, _ref, React.createElement(ProductsTable, {
       head: productTableData.head,
       rows: productTableData.rows,
       total: productTableData.total,
       boldBorderlessHead: false
-    })), _ref, _ref2, React.createElement(Payments, {
+    })), React.createElement(Box, {
+      mt: 5
+    }, productListExtraItems && productListExtraItems.length > 0 && [_ref2, React.createElement(ProductsTable, {
+      head: productTableData.headExtraItem,
+      rows: productTableData.rowsExtraItem,
+      total: productTableData.totalExtraItem,
+      boldBorderlessHead: false
+    })]), React.createElement(Box, {
+      mt: 5
+    }, productIsService && productIsService.length > 0 && [_ref3, React.createElement(ProductsTable, {
+      head: productTableData.headService,
+      rows: productTableData.rowsService,
+      total: productTableData.totalService,
+      boldBorderlessHead: false
+    })]), _ref4, _ref5, React.createElement(Payments, {
       paymentList: payments
     }), React.createElement(Box, {
       mt: 5
     }, React.createElement(Advantages, {
       withLogo: true,
       advantagesList: advantages
-    })), _ref3, React.createElement(Box, {
+    })), _ref6, React.createElement(Box, {
       mt: 7
     }, React.createElement(LinksBlock, {
       links: assortmentLinks
-    }, _ref4)), React.createElement(Box, {
+    }, _ref7)), React.createElement(Box, {
       mt: 5
     }, React.createElement(LinksBlock, {
       links: links
@@ -522,7 +672,7 @@ class Offer59 extends PrnProto {
         maxWidth: '100px'
       },
       mr: 2.5
-    }, _ref5))), React.createElement(Box, {
+    }, _ref8))), React.createElement(Box, {
       mt: 7
     }, React.createElement(Additions, {
       additions: additions,
