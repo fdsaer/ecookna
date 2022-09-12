@@ -9,18 +9,6 @@
 const { React, TableCell } = $p.ui;
 import PrnProto from '../PrnProto.js';
 
-import OCover1 from '../img/o-cover__photo.png';
-import OCover17 from '../img/o-cover__logo.png';
-import ODetails3 from '../img/o-details__3.jpg';
-import OInfo1 from '../img/o-info__1.jpg';
-import OInfo4 from '../img/o-info__4.png';
-import OInfo6 from '../img/o-info__6.jpg';
-import OInfo7 from '../img/o-info__7.png';
-import OInfo10_1 from '../img/o-info__10-1.png';
-import OInfo10_2 from '../img/o-info__10-2.png';
-import OInfo10_3 from '../img/o-info__10-3.png';
-import OInfo10_4 from '../img/o-info__10-4.png';
-
 const StyledFrame = React.lazy(() => import('../StyledFrame/index.js'));
 
 const Svg = ({ source }) => {
@@ -158,13 +146,32 @@ class Offer59 extends PrnProto {
         this.setState({ err: err.message });
       });
     this.setState({ loaded: true });
+
+    const imagesImport = import('./OfferImages.js');
+    imagesImport.then((module) => {
+      this.setState({
+        images: {
+          OCover1: module.OCover1,
+          OCover17: module.OCover17,
+          ODetails3: module.ODetails3,
+          OInfo1: module.OInfo1,
+          OInfo4: module.OInfo4,
+          OInfo6: module.OInfo6,
+          OInfo7: module.OInfo7,
+          OInfo10_1: module.OInfo10_1,
+          OInfo10_2: module.OInfo10_2,
+          OInfo10_3: module.OInfo10_3,
+          OInfo10_4: module.OInfo10_4,
+        },
+      });
+    });
   }
 
   render() {
     const {
       props: { obj, attr },
       // state: { imgs, loaded, err },
-      state: { loaded, products },
+      state: { loaded, products, images },
       classes,
     } = this;
     const managerContacts = { phone: '', email: '' };
@@ -214,11 +221,11 @@ class Offer59 extends PrnProto {
           classes={classes}
           setClasses={this.setClasses}
           title={title}
-          loading={loading}
+          loading={!images}
           // err={err}
         >
           <div class="o-cover">
-            <img src={OCover1} />
+            <img src={images?.OCover1} />
             <h1 class="o-cover__2">
               Коммерческое <br /> предложение
             </h1>
@@ -247,7 +254,7 @@ class Offer59 extends PrnProto {
                 {/* Как получить данные офиса и контакты менеджера? */}
               </div>
               <div class="o-cover__16">
-                <img src={OCover17} />
+                <img src={images?.OCover17} />
                 <p class="o-cover__18">ecookna.ru</p>
               </div>
             </div>
@@ -256,7 +263,7 @@ class Offer59 extends PrnProto {
           <div class="o-details">
             <div class="o-details__1">
               <div class="o-details__2">
-                <img src={ODetails3} />
+                <img src={images?.ODetails3} />
               </div>
               <div class="o-details__4">
                 <p class="o-details__13">{title}</p>
@@ -430,7 +437,7 @@ class Offer59 extends PrnProto {
 
           <div class="o-info">
             <div class="o-info__top">
-              <img src={OInfo1} />
+              <img src={images?.OInfo1} />
               <p class="o-info__2">
                 Мы производим особенные окна для Вас. Учитываем не только
                 интерьерные и экстерьерные особенности помещения, но и
@@ -440,14 +447,14 @@ class Offer59 extends PrnProto {
                 Что мы предлагаем? - Тысячи комбинаций окон, дверей и других
                 продуктов, для самых взыскательных заказчиков.
               </p>
-              <img src={OInfo4} />
+              <img src={images?.OInfo4} />
               <p class="o-info__5">Комплектующие от мировых лидеров:</p>
             </div>
             <div class="o-info__6">
-              <img src={OInfo6} />
+              <img src={images?.OInfo6} />
             </div>
             <div class="o-info__bottom">
-              <img src={OInfo7} />
+              <img src={images?.OInfo7} />
               <div class="o-info__11">
                 <div class="o-info__9">
                   <span>Переходите</span> по сылкам:
@@ -456,7 +463,7 @@ class Offer59 extends PrnProto {
                   <div class="o-info__10">
                     <a href="https://www.youtube.com/watch?v=X6lQcjH1Jc4">
                       <div>
-                        <img src={OInfo10_1} />
+                        <img src={images?.OInfo10_1} />
                       </div>
                       <p>Собственное производство </p>
                     </a>
@@ -464,7 +471,7 @@ class Offer59 extends PrnProto {
                   <div class="o-info__10">
                     <a href="https://www.ecookna.ru/clients/3d/">
                       <div>
-                        <img src={OInfo10_2} />
+                        <img src={images?.OInfo10_2} />
                       </div>
                       <p>Панорама нашего шоу-рума </p>
                     </a>
@@ -472,7 +479,7 @@ class Offer59 extends PrnProto {
                   <div class="o-info__10">
                     <a href="https://www.youtube.com/watch?v=pHthiLw2RpA">
                       <div>
-                        <img src={OInfo10_3} />
+                        <img src={images?.OInfo10_3} />
                       </div>
                       <p>Производство окон ПВХ</p>
                     </a>
@@ -480,7 +487,7 @@ class Offer59 extends PrnProto {
                   <div class="o-info__10">
                     <a href="https://www.youtube.com/watch?v=zkKJTZ90QVo">
                       <div>
-                        <img src={OInfo10_4} />
+                        <img src={images?.OInfo10_4} />
                       </div>
                       <p>Постоянный участник телепроектов</p>
                     </a>

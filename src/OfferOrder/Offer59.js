@@ -4,40 +4,8 @@
  * @module Offer59
  *
  */
-
 import PrnProto from '../PrnProto.js';
-import Header from '../Header/index.js';
-import Payments from '../Components/Payments.js';
-import Wrapper from '../Components/Wrapper.js';
-import Description from '../Components/Description.js';
-import Advantages from '../Components/Advantages.js';
-import Additions from '../Components/Additions.js';
-import LinksBlock from '../Components/LinksBlock.js';
-import Manager from '../Components/Manager.js';
-import ProductParams from '../Components/ProductParams.js';
-import ProductsTable from '../Components/ProductsTable.js';
 
-import AgeAdvantageImage from '../img/ageIcon.svg';
-import FreeSizingAdvantageIcon from '../img/measuringIcon.svg';
-import GuaranteeAdvantageIcon from '../img/guaranteeIcon.svg';
-import ClientsAdvantageIcon from '../img/clientsIcon.svg';
-import CashPaymentIcon from '../img/cashPaymentIcon.svg';
-import CardPaymentIcon from '../img/cardPaymentIcon.svg';
-import OnlinePaymentIcon from '../img/onlinePaymentIcon.svg';
-import installmentIcon from '../img/installmentIcon.svg';
-import ExamplesIcon from '../img/examplesIcon.svg';
-import FactoryIcon from '../img/factoryIcon.svg';
-import ProductionIcon from '../img/productionIcon.svg';
-import WatchVideoIcon from '../img/watchVideoIcon.svg';
-import GarageGateImage from '../img/garageGate.jpg';
-import BalconyDecorationImage from '../img/balconyDecoration.jpg';
-import CurtainsImage from '../img/curtains.jpg';
-import HeatingRadiatorImage from '../img/heatingRadiatorDecoration.jpg';
-import EvolvingOpacityImage from '../img/evolvingOpacity.jpg';
-import OrangeryImage from '../img/orangery.jpg';
-import GlassDoorImage from '../img/glassDoor.jpg';
-import GlassHeaterImage from '../img/glassHeater.jpg';
-import PhoneChargerImage from '../img/phoneCharger.jpg';
 const { React, Box, Typography } = $p.ui;
 
 const StyledFrame = React.lazy(() => import('../StyledFrame/index.js'));
@@ -189,72 +157,135 @@ class Offer59 extends PrnProto {
         this.setState({ err: err.message });
       });
     this.setState({ loaded: true });
+
+    const componentsImport = import('./OfferComponents.js');
+    componentsImport.then((module) => {
+      this.setState({
+        components: {
+          Header: module.Header,
+          Payments: module.Payments,
+          Wrapper: module.Wrapper,
+          Description: module.Description,
+          Advantages: module.Advantages,
+          Additions: module.Additions,
+          LinksBlock: module.LinksBlock,
+          Manager: module.Manager,
+          ProductParams: module.ProductParams,
+          ProductsTable: module.ProductsTable,
+        },
+      });
+    });
+
+    const imagesImport = import('./OfferImages.js');
+    imagesImport.then((module) => {
+      this.setState({
+        images: {
+          AgeAdvantageImage: module.AgeAdvantageImage,
+          FreeSizingAdvantageIcon: module.FreeSizingAdvantageIcon,
+          GuaranteeAdvantageIcon: module.GuaranteeAdvantageIcon,
+          ClientsAdvantageIcon: module.ClientsAdvantageIcon,
+          CashPaymentIcon: module.CashPaymentIcon,
+          CardPaymentIcon: module.CardPaymentIcon,
+          OnlinePaymentIcon: module.OnlinePaymentIcon,
+          installmentIcon: module.installmentIcon,
+          ExamplesIcon: module.ExamplesIcon,
+          FactoryIcon: module.FactoryIcon,
+          ProductionIcon: module.ProductionIcon,
+          WatchVideoIcon: module.WatchVideoIcon,
+          GarageGateImage: module.GarageGateImage,
+          BalconyDecorationImage: module.BalconyDecorationImage,
+          CurtainsImage: module.CurtainsImage,
+          HeatingRadiatorImage: module.HeatingRadiatorImage,
+          EvolvingOpacityImage: module.EvolvingOpacityImage,
+          OrangeryImage: module.OrangeryImage,
+          GlassDoorImage: module.GlassDoorImage,
+          GlassHeaterImage: module.GlassHeaterImage,
+          PhoneChargerImage: module.PhoneChargerImage,
+        },
+      });
+    });
   }
 
   render() {
     const {
       props: { obj, attr },
-      state: { loaded, products },
+      state: { loaded, products, components, images },
       classes,
     } = this;
 
     const assortmentLinks = [
-      { id: 1, image: WatchVideoIcon, link: 'https://youtu.be/sXf2ssofYUk' },
+      {
+        id: 1,
+        image: images?.WatchVideoIcon,
+        link: 'https://youtu.be/sXf2ssofYUk',
+      },
     ];
     const links = [
-      { id: 1, image: FactoryIcon, link: 'https://youtu.be/X6lQcjH1Jc4' },
-      { id: 2, image: ProductionIcon, link: 'https://youtu.be/pHthiLw2RpA' },
+      {
+        id: 1,
+        image: images?.FactoryIcon,
+        link: 'https://youtu.be/X6lQcjH1Jc4',
+      },
+      {
+        id: 2,
+        image: images?.ProductionIcon,
+        link: 'https://youtu.be/pHthiLw2RpA',
+      },
       {
         id: 3,
-        image: ExamplesIcon,
+        image: images?.ExamplesIcon,
         link: 'https://www.ecookna.ru/upload/email-links/portfolio/ecookna-portfolio.pdf',
       },
     ];
     const advantages = [
-      { id: 1, image: AgeAdvantageImage },
-      { id: 2, image: FreeSizingAdvantageIcon },
-      { id: 3, image: GuaranteeAdvantageIcon },
-      { id: 4, image: ClientsAdvantageIcon },
+      { id: 1, image: images?.AgeAdvantageImage },
+      { id: 2, image: images?.FreeSizingAdvantageIcon },
+      { id: 3, image: images?.GuaranteeAdvantageIcon },
+      { id: 4, image: images?.ClientsAdvantageIcon },
     ];
     const payments = [
-      { id: 1, image: CashPaymentIcon },
-      { id: 2, image: CardPaymentIcon },
-      { id: 3, image: OnlinePaymentIcon },
-      { id: 4, image: installmentIcon },
+      { id: 1, image: images?.CashPaymentIcon },
+      { id: 2, image: images?.CardPaymentIcon },
+      { id: 3, image: images?.OnlinePaymentIcon },
+      { id: 4, image: images?.installmentIcon },
     ];
     const additions = [
-      { id: 1, text: 'Гаражные ворота', image: GarageGateImage },
-      { id: 2, text: 'Отделка балконов', image: BalconyDecorationImage },
-      { id: 3, text: 'Жалюзи или рольшторы', image: CurtainsImage },
+      { id: 1, text: 'Гаражные ворота', image: images?.GarageGateImage },
+      {
+        id: 2,
+        text: 'Отделка балконов',
+        image: images?.BalconyDecorationImage,
+      },
+      { id: 3, text: 'Жалюзи или рольшторы', image: images?.CurtainsImage },
       {
         id: 4,
         text: 'Декоративные экраны на батареи',
-        image: HeatingRadiatorImage,
+        image: images?.HeatingRadiatorImage,
       },
       {
         id: 5,
         text: 'Окна с изменяющейся прозрачностью',
-        image: EvolvingOpacityImage,
+        image: images?.EvolvingOpacityImage,
       },
       {
         id: 6,
         text: 'Зимний сад или остекленные веранды',
-        image: OrangeryImage,
+        image: images?.OrangeryImage,
       },
       {
         id: 7,
         text: 'Цельностеклянные межкомнатные двери',
-        image: GlassDoorImage,
+        image: images?.GlassDoorImage,
       },
       {
         id: 8,
         text: 'Обогреватели и полотенцесушители из стекла',
-        image: GlassHeaterImage,
+        image: images?.GlassHeaterImage,
       },
       {
         id: 9,
         text: 'Зарядку для смартфона встроенного в подоконник',
-        image: PhoneChargerImage,
+        image: images?.PhoneChargerImage,
       },
     ];
     const manager = {
@@ -585,130 +616,164 @@ class Offer59 extends PrnProto {
           classes={classes}
           setClasses={this.setClasses}
           title={order}
-          loading={loading}
+          loading={!components || !images}
           // err={err}
         >
-          <Header
-            headerTitle="Индивидуальное решение"
-            description="по изготовлению и установке светопрозрачных конструкций"
-            order={order}
-            office={office}
-            manager={manager}
-          />
-          <Wrapper>
-            <Box mt={3}>
-              <Advantages withLogo advantagesList={advantages} />
-            </Box>
-            <Box mt={3} mb={2.5} fontSize={22}>
-              <Typography variant="inherit" color="textSecondary" component="p">
-                {order}
-              </Typography>
-            </Box>
-            {productList && productList.length > 0 && (
-              <ProductParams
-                title="В комплектацию Вашего заказа входит:"
-                fullSquare={fullSquare}
-                fullWeight={fullWeight}
-                productList={productList}
-              />
-            )}
-            <Box mt={5}>
-              <Typography color="textSecondary" component="p">
-                Изделия
-              </Typography>
-              <ProductsTable
-                head={productTableData.head}
-                rows={productTableData.rows}
-                total={productTableData.total}
-                boldBorderlessHead={false}
-              />
-            </Box>
-            <Box mt={5}>
-              {productListExtraItems &&
-                productListExtraItems.length > 0 && [
-                  <Typography color="textSecondary" component="p">
-                    Дополнительная комплектация
-                  </Typography>,
-                  <ProductsTable
-                    head={productTableData.headExtraItem}
-                    rows={productTableData.rowsExtraItem}
-                    total={productTableData.totalExtraItem}
+          {components?.Header && (
+            <components.Header
+              headerTitle="Индивидуальное решение"
+              description="по изготовлению и установке светопрозрачных конструкций"
+              order={order}
+              office={office}
+              manager={manager}
+            />
+          )}
+          {components?.Wrapper && (
+            <components.Wrapper>
+              <Box mt={3}>
+                {components?.Advantages && (
+                  <components.Advantages withLogo advantagesList={advantages} />
+                )}
+              </Box>
+              <Box mt={3} mb={2.5} fontSize={22}>
+                <Typography
+                  variant="inherit"
+                  color="textSecondary"
+                  component="p"
+                >
+                  {order}
+                </Typography>
+              </Box>
+              {productList &&
+                productList.length > 0 &&
+                components?.ProductParams && (
+                  <components.ProductParams
+                    title="В комплектацию Вашего заказа входит:"
+                    fullSquare={fullSquare}
+                    fullWeight={fullWeight}
+                    productList={productList}
+                  />
+                )}
+              <Box mt={5}>
+                <Typography color="textSecondary" component="p">
+                  Изделия
+                </Typography>
+                {components?.ProductsTable && (
+                  <components.ProductsTable
+                    head={productTableData.head}
+                    rows={productTableData.rows}
+                    total={productTableData.total}
                     boldBorderlessHead={false}
-                  />,
-                ]}
-            </Box>
-            <Box mt={5}>
-              {productIsService &&
-                productIsService.length > 0 && [
-                  <Typography color="textSecondary" component="p">
-                    Услуги
-                  </Typography>,
-                  <ProductsTable
-                    head={productTableData.headService}
-                    rows={productTableData.rowsService}
-                    total={productTableData.totalService}
-                    boldBorderlessHead={false}
-                  />,
-                ]}
-            </Box>
-            <Box mt={3} mb={2.5}>
-              <Typography>
-                *Предложение действительно в течение 10 календарных дней.
-              </Typography>
-            </Box>
-            <Box mb={5}>
-              <Typography>
-                Для вашего удобства, точный расчет стоимости, заключение
-                договора и оплата могут быть осуществлены на объекте в день
-                проведения замера.
-              </Typography>
-            </Box>
-            <Payments paymentList={payments} />
-            <Box mt={5}>
-              <Advantages withLogo advantagesList={advantages} />
-            </Box>
-            <Box mt={5}>
-              <Description title="Подберем лучшее решение:" />
-            </Box>
-            <Box mt={7}>
-              <LinksBlock links={assortmentLinks}>
-                <Box color="textSecondary" fontSize="22px" mr={2.5}>
-                  <Typography
-                    variant="inherit"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    Ассортимент компании ЭКООКНА
-                  </Typography>
-                </Box>
-              </LinksBlock>
-            </Box>
-            <Box mt={5}>
-              <LinksBlock links={links}>
-                <Box sx={{ maxWidth: '100px' }} mr={2.5}>
-                  <Typography
-                    variant="inherit"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    Переходите по ссылкам:
-                  </Typography>
-                </Box>
-              </LinksBlock>
-            </Box>
-            <Box mt={7}>
-              <Additions
-                additions={additions}
-                title="Добавьте к своему интерьеру:"
-              />
-            </Box>
-            <Box mt={7}>
-              <Manager
-                title="Остались вопросы? Я на связи! "
-                manager={manager}
-              />
-            </Box>
-          </Wrapper>
+                  />
+                )}
+              </Box>
+              <Box mt={5}>
+                {productListExtraItems && productListExtraItems.length > 0 && (
+                  <>
+                    <Typography color="textSecondary" component="p">
+                      Дополнительная комплектация
+                    </Typography>
+                    {components?.ProductsTable && (
+                      <components.ProductsTable
+                        head={productTableData.headExtraItem}
+                        rows={productTableData.rowsExtraItem}
+                        total={productTableData.totalExtraItem}
+                        boldBorderlessHead={false}
+                      />
+                    )}
+                  </>
+                )}
+              </Box>
+              <Box mt={5}>
+                {productIsService && productIsService.length > 0 && (
+                  <>
+                    <Typography color="textSecondary" component="p">
+                      Услуги
+                    </Typography>
+                    {components?.ProductsTable && (
+                      <components.ProductsTable
+                        head={productTableData.headService}
+                        rows={productTableData.rowsService}
+                        total={productTableData.totalService}
+                        boldBorderlessHead={false}
+                      />
+                    )}
+                  </>
+                )}
+              </Box>
+              <Box mt={3} mb={2.5}>
+                <Typography>
+                  *Предложение действительно в течение 10 календарных дней.
+                </Typography>
+              </Box>
+              <Box mb={5}>
+                <Typography>
+                  Для вашего удобства, точный расчет стоимости, заключение
+                  договора и оплата могут быть осуществлены на объекте в день
+                  проведения замера.
+                </Typography>
+              </Box>
+              {components?.Payments && (
+                <components.Payments paymentList={payments} />
+              )}
+              <Box mt={5}>
+                {components?.Advantages && (
+                  <components.Advantages withLogo advantagesList={advantages} />
+                )}
+              </Box>
+              <Box mt={5}>
+                {components?.Description && (
+                  <components.Description title="Подберем лучшее решение:" />
+                )}
+              </Box>
+              <Box mt={7}>
+                {components?.LinksBlock && (
+                  <components.LinksBlock links={assortmentLinks}>
+                    <Box color="textSecondary" fontSize="22px" mr={2.5}>
+                      <Typography
+                        variant="inherit"
+                        color="textSecondary"
+                        component="p"
+                      >
+                        Ассортимент компании ЭКООКНА
+                      </Typography>
+                    </Box>
+                  </components.LinksBlock>
+                )}
+              </Box>
+              <Box mt={5}>
+                {components?.LinksBlock && (
+                  <components.LinksBlock links={links}>
+                    <Box sx={{ maxWidth: '100px' }} mr={2.5}>
+                      <Typography
+                        variant="inherit"
+                        color="textSecondary"
+                        component="p"
+                      >
+                        Переходите по ссылкам:
+                      </Typography>
+                    </Box>
+                  </components.LinksBlock>
+                )}
+              </Box>
+              <Box mt={7}>
+                {components?.Additions && (
+                  <components.Additions
+                    additions={additions}
+                    title="Добавьте к своему интерьеру:"
+                  />
+                )}
+              </Box>
+              <Box mt={7}>
+                {components?.Manager && (
+                  <components.Manager
+                    title="Остались вопросы? Я на связи! "
+                    manager={manager}
+                  />
+                )}
+              </Box>
+            </components.Wrapper>
+          )}
         </StyledFrame>
       </React.Suspense>
     );

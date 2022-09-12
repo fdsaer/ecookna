@@ -9,10 +9,14 @@ import stylesBase from './stylesBase.js';
 import stylesOrg1 from './stylesOrg1.js';
 import stylesOrg2 from './stylesOrg2.js';
 import stylesCss from './stylesCss.js';
+import Loading from './Loading.js';
 export default function StyledFrame({
   children,
   setClasses,
   classes,
+  title,
+  loading,
+  loadingText = 'Загрузка...',
   ...props
 }) {
   let tempClasses;
@@ -49,7 +53,11 @@ export default function StyledFrame({
     theme: theme
   }, React.createElement("div", {
     className: classes?.root
-  }, React.Children.map(children, child => {
+  }, loading ? React.createElement(Loading, {
+    classes: "",
+    title: title,
+    text: loadingText
+  }) : React.Children.map(children, child => {
     return child ? React.cloneElement(child, { ...props,
       classes,
       style: { ...child.props.style
