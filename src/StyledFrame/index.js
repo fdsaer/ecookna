@@ -10,37 +10,45 @@ import stylesOrg1 from './stylesOrg1.js';
 import stylesOrg2 from './stylesOrg2.js';
 import stylesCss from './stylesCss.js';
 
-export default function StyledFrame({ children, setClasses, ...props }) {
-  let classes;
+export default function StyledFrame({
+  children,
+  setClasses,
+  classes,
+  ...props
+}) {
+  let tempClasses;
   let theme = theme1;
-  console.log(props.obj.manager.name);
+  const [newClasses, setNewClasses] = React.useState('');
   switch (props.obj.manager.name) {
     case 'ЕВРООКНА':
     case 'ГРУППА КОМПАНИЙ':
     case 'ФЕНСТЕР ООО':
     case 'ОКНА РОСТА ДОМ':
-      classes = makeStyles(() => stylesOrg2(theme))();
+      tempClasses = makeStyles(() => stylesOrg2(theme))();
       break;
 
     case 'Компания ФОТОТЕХ':
     case 'ООО"ФОТОТЕХ"':
-      classes = makeStyles(() => stylesOrg2(theme))();
+      tempClasses = makeStyles(() => stylesOrg2(theme))();
       break;
 
     case 'Петров ВВ':
       theme = theme2;
-      classes = makeStyles(() => stylesCss(theme))();
+      tempClasses = makeStyles(() => stylesCss(theme))();
       break;
 
     default:
       // classes = makeStyles(() => stylesBase(theme))();
-      classes = makeStyles(() => stylesOrg2(theme))();
+      tempClasses = makeStyles(() => stylesOrg2(theme))();
   }
-  setClasses(classes);
+  setClasses(newClasses);
+  React.useEffect(() => {
+    setNewClasses(tempClasses);
+  }, [classes]);
 
   return (
     <ThemeProvider theme={theme}>
-      <div className={classes.root}>
+      <div className={classes?.root}>
         {React.Children.map(children, (child) => {
           return child
             ? React.cloneElement(child, {

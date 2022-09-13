@@ -12,40 +12,43 @@ import stylesCss from './stylesCss.js';
 export default function StyledFrame({
   children,
   setClasses,
+  classes,
   ...props
 }) {
-  let classes;
+  let tempClasses;
   let theme = theme1;
-  console.log(props.obj.manager.name);
+  const [newClasses, setNewClasses] = React.useState('');
 
   switch (props.obj.manager.name) {
     case 'ЕВРООКНА':
     case 'ГРУППА КОМПАНИЙ':
     case 'ФЕНСТЕР ООО':
     case 'ОКНА РОСТА ДОМ':
-      classes = makeStyles(() => stylesOrg2(theme))();
+      tempClasses = makeStyles(() => stylesOrg2(theme))();
       break;
 
     case 'Компания ФОТОТЕХ':
     case 'ООО"ФОТОТЕХ"':
-      classes = makeStyles(() => stylesOrg2(theme))();
+      tempClasses = makeStyles(() => stylesOrg2(theme))();
       break;
 
     case 'Петров ВВ':
       theme = theme2;
-      classes = makeStyles(() => stylesCss(theme))();
+      tempClasses = makeStyles(() => stylesCss(theme))();
       break;
 
     default:
-      classes = makeStyles(() => stylesOrg2(theme))();
+      tempClasses = makeStyles(() => stylesOrg2(theme))();
   }
 
-  setClasses(classes);
-  console.log(classes);
+  setClasses(newClasses);
+  React.useEffect(() => {
+    setNewClasses(tempClasses);
+  }, [classes]);
   return React.createElement(ThemeProvider, {
     theme: theme
   }, React.createElement("div", {
-    className: classes.root
+    className: classes?.root
   }, React.Children.map(children, child => {
     return child ? React.cloneElement(child, { ...props,
       classes,

@@ -36,7 +36,6 @@ const {
   Typography
 } = $p.ui;
 const StyledFrame = React.lazy(() => import('../StyledFrame/index.js'));
-console.log(StyledFrame);
 
 const getProductParams = product => {
   const glasses = product.characteristic.glasses;
