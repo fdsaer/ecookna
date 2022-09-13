@@ -4,11 +4,11 @@
  * @module Offer59
  *
  */
-import PrnProto from '../PrnProto.js';
+import PrnProto from '../../PrnProto.js';
 
 const { React, Box, Typography } = $p.ui;
 
-const StyledFrame = React.lazy(() => import('../StyledFrame/index.js'));
+const StyledFrame = React.lazy(() => import('../../StyledFrame/index.js'));
 
 const getProductParams = (product) => {
   const glasses = product.characteristic.glasses;

@@ -9,7 +9,7 @@
 
 import orderForms from './CalcOrder/index.js';
 import characteristicsForms from './CatCharacteristics/index.js';
-import offerForm from './OfferOrder/index.js';
+import offerForm from './CalcOrder/OfferOrder/index.js';
 import testForm from './TestForm/index.js';
 
 const all = [...offerForm, ...orderForms, ...testForm];
