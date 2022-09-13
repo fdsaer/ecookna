@@ -349,14 +349,19 @@ class Offer59 extends PrnProto {
     const order = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format('DD MMMM YYYY')} г.`;
     let loading = '';
     const productList = products && products.map(product => {
-      return {
-        number: product.row,
-        position: product.row,
-        quantity: product.quantity,
-        svg: product.characteristic.svg,
-        data: getProductCharacteristics(product)
-      };
-    });
+      const sysName = product.characteristic.sys.name;
+      const filters = ['водоотлив'];
+
+      if (product.characteristic.svg && !filters.includes(sysName.toLowerCase())) {
+        return {
+          number: product.row,
+          position: product.row,
+          quantity: product.quantity,
+          svg: product.characteristic.svg,
+          data: getProductCharacteristics(product)
+        };
+      }
+    }).filter(product => product);
 
     const productsTotalPrice = products => products && products.map(product => product.price * product.quantity).reduce((acc, price) => acc += price, 0).round(0);
 

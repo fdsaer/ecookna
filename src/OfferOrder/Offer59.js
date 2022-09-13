@@ -351,18 +351,28 @@ class Offer59 extends PrnProto {
 
     const productList =
       products &&
-      products.map((product) => {
-        // тут сделать проверку на наличие svg, если нет - не выводить
-        // потом проверку на тип, чтобы не было отливов
-        // и number сделать индексом
-        return {
-          number: product.row,
-          position: product.row,
-          quantity: product.quantity,
-          svg: product.characteristic.svg,
-          data: getProductCharacteristics(product),
-        };
-      });
+      products
+        .map((product) => {
+          const sysName = product.characteristic.sys.name;
+          const filters = ['водоотлив'];
+
+          // тут сделать проверку на наличие svg, если нет - не выводить
+          // потом проверку на тип, чтобы не было отливов
+          // и number сделать индексом
+          if (
+            product.characteristic.svg &&
+            !filters.includes(sysName.toLowerCase())
+          ) {
+            return {
+              number: product.row,
+              position: product.row,
+              quantity: product.quantity,
+              svg: product.characteristic.svg,
+              data: getProductCharacteristics(product),
+            };
+          }
+        })
+        .filter((product) => product);
 
     const productsTotalPrice = (products) =>
       products &&
