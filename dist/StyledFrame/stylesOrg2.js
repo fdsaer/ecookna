@@ -29,6 +29,35 @@ export default function styles(theme) {
         borderCollapse: 'collapse'
       }
     },
+    pageBreakAfter: {
+      '@media print': {
+        height: '297mm',
+        'page-break-after': 'always'
+      }
+    },
+    pageBreakBefore: {
+      '@media print': {
+        'page-break-before': 'always'
+      }
+    },
+    topColontitulPrint: {
+      '@media print': {
+        position: 'fixed',
+        top: 0,
+        display: 'table-header-group'
+      }
+    },
+    hideInPrint: {
+      '@media print': {
+        display: 'none'
+      }
+    },
+    displayInPrint: {
+      display: 'none',
+      '@media print': {
+        display: 'block'
+      }
+    },
     head: {
       fontSize: 'small'
     },

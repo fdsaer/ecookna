@@ -664,7 +664,8 @@ class Offer59 extends PrnProto {
     }))), _ref4, _ref5, components?.Payments && React.createElement(components.Payments, {
       paymentList: payments
     }), React.createElement(Box, {
-      mt: 5
+      mt: 5,
+      className: classes?.pageBreakBefore
     }, components?.Advantages && React.createElement(components.Advantages, {
       withLogo: true,
       advantagesList: advantages
@@ -686,7 +687,8 @@ class Offer59 extends PrnProto {
       },
       mr: 2.5
     }, _ref7))), React.createElement(Box, {
-      mt: 7
+      mt: 7,
+      className: classes?.pageBreakBefore
     }, components?.Additions && React.createElement(components.Additions, {
       additions: additions,
       title: "Добавьте к своему интерьеру:"

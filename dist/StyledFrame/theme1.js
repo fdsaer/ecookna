@@ -8,6 +8,28 @@ export const theme = createTheme({
         paddingTop: '4px',
         paddingBottom: '4px'
       }
+    },
+    MuiCssBaseline: {
+      '@global': {
+        body: {
+          '@media print': {
+            width: '210mm',
+            backgroundColor: 'yellow',
+            margin: 0,
+            '& *, & *::before, & *::after': {
+              printColorAdjust: 'exact'
+            }
+          },
+          fontFamily: ['Roboto', 'Helvetica', 'Arial', 'sans-serif'].join(','),
+          fontSize: '.95rem',
+          fontWeight: 400,
+          letterSpacing: '.01071em',
+          lineHeight: 1.43,
+          '& *, & *::before, & *::after': {
+            boxSizing: 'content-box'
+          }
+        }
+      }
     }
   },
   typography: {

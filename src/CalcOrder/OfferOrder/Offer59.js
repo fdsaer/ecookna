@@ -726,7 +726,7 @@ class Offer59 extends PrnProto {
               {components?.Payments && (
                 <components.Payments paymentList={payments} />
               )}
-              <Box mt={5}>
+              <Box mt={5} className={classes?.pageBreakBefore}>
                 {components?.Advantages && (
                   <components.Advantages withLogo advantagesList={advantages} />
                 )}
@@ -766,7 +766,7 @@ class Offer59 extends PrnProto {
                   </components.LinksBlock>
                 )}
               </Box>
-              <Box mt={7}>
+              <Box mt={7} className={classes?.pageBreakBefore}>
                 {components?.Additions && (
                   <components.Additions
                     additions={additions}

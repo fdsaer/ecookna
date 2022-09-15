@@ -1,7 +1,8 @@
 const {
   React,
   makeStyles,
-  ThemeProvider
+  ThemeProvider,
+  CssBaseline
 } = $p.ui;
 import { theme as theme1 } from './theme1.js';
 import { theme as theme2 } from './theme2.js';
@@ -10,6 +11,9 @@ import stylesOrg1 from './stylesOrg1.js';
 import stylesOrg2 from './stylesOrg2.js';
 import stylesCss from './stylesCss.js';
 import Loading from './Loading.js';
+
+var _ref = React.createElement(CssBaseline, null);
+
 export default function StyledFrame({
   children,
   setClasses,
@@ -51,7 +55,7 @@ export default function StyledFrame({
   }, [classes]);
   return React.createElement(ThemeProvider, {
     theme: theme
-  }, React.createElement("div", {
+  }, _ref, React.createElement("div", {
     className: classes?.root
   }, loading ? React.createElement(Loading, {
     classes: "",

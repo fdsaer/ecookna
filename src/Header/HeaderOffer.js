@@ -6,7 +6,7 @@ import Contacts from '../Components/Contacts.js';
 const { React, Typography, Link, Box } = $p.ui;
 
 export default function HeaderOffer(props) {
-  const { headerTitle, order, description, manager, office } = props;
+  const { headerTitle, order, description, manager, office, classes } = props;
   return (
     <Box
       bgcolor="primary.main"
@@ -15,6 +15,7 @@ export default function HeaderOffer(props) {
       boxSizing="border-box"
       px={7.5}
       pb={3}
+      className={classes.pageBreakAfter}
     >
       <img src={HeaderBackImage} style={{ width: '100%' }} />
       {headerTitle && (

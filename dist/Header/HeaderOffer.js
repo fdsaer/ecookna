@@ -14,7 +14,8 @@ export default function HeaderOffer(props) {
     order,
     description,
     manager,
-    office
+    office,
+    classes
   } = props;
   return React.createElement(Box, {
     bgcolor: "primary.main",
@@ -22,7 +23,8 @@ export default function HeaderOffer(props) {
     maxWidth: "794px",
     boxSizing: "border-box",
     px: 7.5,
-    pb: 3
+    pb: 3,
+    className: classes.pageBreakAfter
   }, React.createElement("img", {
     src: HeaderBackImage,
     style: {

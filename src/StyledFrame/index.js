@@ -2,7 +2,7 @@
  * Маршрутизатор стилей верхнего уровня
  */
 
-const { React, makeStyles, ThemeProvider } = $p.ui;
+const { React, makeStyles, ThemeProvider, CssBaseline } = $p.ui;
 import { theme as theme1 } from './theme1.js';
 import { theme as theme2 } from './theme2.js';
 import stylesBase from './stylesBase.js';
@@ -52,6 +52,7 @@ export default function StyledFrame({
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <div className={classes?.root}>
         {loading ? (
           <Loading classes="" title={title} text={loadingText} />
