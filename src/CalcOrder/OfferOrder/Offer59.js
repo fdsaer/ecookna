@@ -662,9 +662,13 @@ class Offer59 extends PrnProto {
                     fullSquare={fullSquare}
                     fullWeight={fullWeight}
                     productList={productList}
+                    classes={classes}
                   />
                 )}
-              <Box mt={5}>
+              <Box
+                mt={5}
+                className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`}
+              >
                 <Typography color="textSecondary" component="p">
                   Изделия
                 </Typography>
@@ -677,7 +681,10 @@ class Offer59 extends PrnProto {
                   />
                 )}
               </Box>
-              <Box mt={5}>
+              <Box
+                mt={5}
+                className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`}
+              >
                 {productListExtraItems && productListExtraItems.length > 0 && (
                   <>
                     <Typography color="textSecondary" component="p">
@@ -694,7 +701,10 @@ class Offer59 extends PrnProto {
                   </>
                 )}
               </Box>
-              <Box mt={5}>
+              <Box
+                mt={5}
+                className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`}
+              >
                 {productIsService && productIsService.length > 0 && (
                   <>
                     <Typography color="textSecondary" component="p">

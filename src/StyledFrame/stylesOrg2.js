@@ -26,12 +26,31 @@ export default function styles(theme) {
         maxWidth: '100%',
         height: 'auto',
         boxSizing: 'border-box',
+        '@media print': {
+          'break-inside': 'avoid',
+        },
       },
       '& img': {
         display: 'block',
+        '@media print': {
+          'break-inside': 'avoid',
+        },
       },
       '& table': {
         borderCollapse: 'collapse',
+        '@media print': {
+          'break-inside': 'avoid',
+        },
+      },
+    },
+    breakElementWithMargins: {
+      '@media print': {
+        'box-decoration-break': 'clone',
+      },
+    },
+    avoidBreakInside: {
+      '@media print': {
+        'break-inside': 'avoid-page',
       },
     },
     pageBreakAfter: {

@@ -35,9 +35,13 @@ export default function ProductParams({
   title,
   productList,
   fullSquare,
-  fullWeight
+  fullWeight,
+  classes
 }) {
-  return React.createElement(Box, null, productList.map(({
+  return React.createElement(Box, {
+    mt: 7.25,
+    className: classes?.breakElementWithMargins
+  }, productList.map(({
     data,
     number,
     position,
@@ -51,7 +55,8 @@ export default function ProductParams({
     }, React.createElement(Box, {
       sx: {
         flex: '0 0 400px'
-      }
+      },
+      className: `${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`
     }, React.createElement(Box, {
       bgcolor: "primary.light",
       p: 1,
@@ -79,7 +84,8 @@ export default function ProductParams({
       paramsList,
       id
     }) => {
-      return React.createElement(React.Fragment, {
+      return React.createElement(Box, {
+        className: `${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`,
         key: id
       }, subtitle && paramsList.length > 0 && React.createElement(Box, {
         bgcolor: "primary.light",

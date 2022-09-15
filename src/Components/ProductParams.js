@@ -20,9 +20,10 @@ export default function ProductParams({
   productList,
   fullSquare,
   fullWeight,
+  classes,
 }) {
   return (
-    <Box>
+    <Box mt={7.25} className={classes?.breakElementWithMargins}>
       {/* {title && (
         <>
           <Box mt={1.5} mb={0.75}>
@@ -54,32 +55,40 @@ export default function ProductParams({
       {productList.map(({ data, number, position, quantity, svg }, index) => {
         return (
           <Box display="flex" flexDirection="row" mt={7.25}>
-            <Box sx={{ flex: '0 0 400px' }}>
+            <Box
+              sx={{ flex: '0 0 400px' }}
+              className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`}
+            >
               <Box bgcolor="primary.light" p={1} mb={1.25}>
-              {/* <Typography variant="subtitle2" component="p">
+                {/* <Typography variant="subtitle2" component="p">
                   Номер: {number}
               </Typography> */}
 
-              <Typography variant="subtitle2" component="p">
-                  Номер: {index+1} (поз. {position}) - {quantity} шт.
-              </Typography>
+                <Typography variant="subtitle2" component="p">
+                  Номер: {index + 1} (поз. {position}) - {quantity} шт.
+                </Typography>
               </Box>
               <Box pr={1} pl={3}>
                 <Svg source={svg} />
               </Box>
             </Box>
             <Box sx={{ flex: '1 1 0%' }}>
-               <Box bgcolor="primary.light" p={1} pl={5.25}>
-                  {/* <Typography variant="subtitle2" component="p">
+              <Box bgcolor="primary.light" p={1} pl={5.25}>
+                {/* <Typography variant="subtitle2" component="p">
                   Позиция: {position}
                 </Typography>   */}
-                <Typography variant="subtitle2" component="p">&nbsp;</Typography>
-              </Box> 
+                <Typography variant="subtitle2" component="p">
+                  &nbsp;
+                </Typography>
+              </Box>
               <Box pl={5.25}>
                 {data &&
                   data.map(({ subtitle, paramsList, id }) => {
                     return (
-                      <React.Fragment key={id}>
+                      <Box
+                        className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`}
+                        key={id}
+                      >
                         {subtitle && paramsList.length > 0 && (
                           <Box bgcolor="primary.light" p={1}>
                             <Typography variant="subtitle2">
@@ -113,7 +122,7 @@ export default function ProductParams({
                               )
                           )}
                         </List>
-                      </React.Fragment>
+                      </Box>
                     );
                   })}
               </Box>

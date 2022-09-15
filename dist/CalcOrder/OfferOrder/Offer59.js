@@ -639,23 +639,27 @@ class Offer59 extends PrnProto {
       title: "В комплектацию Вашего заказа входит:",
       fullSquare: fullSquare,
       fullWeight: fullWeight,
-      productList: productList
+      productList: productList,
+      classes: classes
     }), React.createElement(Box, {
-      mt: 5
+      mt: 5,
+      className: `${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`
     }, _ref, components?.ProductsTable && React.createElement(components.ProductsTable, {
       head: productTableData.head,
       rows: productTableData.rows,
       total: productTableData.total,
       boldBorderlessHead: false
     })), React.createElement(Box, {
-      mt: 5
+      mt: 5,
+      className: `${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`
     }, productListExtraItems && productListExtraItems.length > 0 && React.createElement(React.Fragment, null, _ref2, components?.ProductsTable && React.createElement(components.ProductsTable, {
       head: productTableData.headExtraItem,
       rows: productTableData.rowsExtraItem,
       total: productTableData.totalExtraItem,
       boldBorderlessHead: false
     }))), React.createElement(Box, {
-      mt: 5
+      mt: 5,
+      className: `${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`
     }, productIsService && productIsService.length > 0 && React.createElement(React.Fragment, null, _ref3, components?.ProductsTable && React.createElement(components.ProductsTable, {
       head: productTableData.headService,
       rows: productTableData.rowsService,

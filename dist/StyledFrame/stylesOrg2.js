@@ -20,13 +20,32 @@ export default function styles(theme) {
       '& img, & video, & canvas': {
         maxWidth: '100%',
         height: 'auto',
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        '@media print': {
+          'break-inside': 'avoid'
+        }
       },
       '& img': {
-        display: 'block'
+        display: 'block',
+        '@media print': {
+          'break-inside': 'avoid'
+        }
       },
       '& table': {
-        borderCollapse: 'collapse'
+        borderCollapse: 'collapse',
+        '@media print': {
+          'break-inside': 'avoid'
+        }
+      }
+    },
+    breakElementWithMargins: {
+      '@media print': {
+        'box-decoration-break': 'clone'
+      }
+    },
+    avoidBreakInside: {
+      '@media print': {
+        'break-inside': 'avoid-page'
       }
     },
     pageBreakAfter: {

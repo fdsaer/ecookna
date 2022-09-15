@@ -5,7 +5,7 @@
 const { React } = $p.ui;
 
 const addPrintStyles = (selector) => {
-  // const css = `@page :left {margin: 0; margin-top: 50mm} @page :right {margin: 0; margin-top: 50mm}`;
+  // const css = `@page {margin: 0; margin-top: 10mm; margin-bottom: 10mm} @page :first {margin: 0}`;
   const css = `@page {margin: 0}`;
   const head = document.head || document.getElementsByTagName('head')[0];
   const style = document.createElement('style');
