@@ -1,5 +1,3 @@
-import OCover1 from '../img/o-cover__logo.png';
-import OCover17 from '../img/o-cover__photo.png';
 import HeaderBackImage from '../img/headerBack.jpg';
 import Contacts from '../Components/Contacts.js';
 

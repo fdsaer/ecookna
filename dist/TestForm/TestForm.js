@@ -1,5 +1,4 @@
 import PrnProto from '../PrnProto.js';
-import Header from '../Header/index.js';
 const {
   React
 } = $p.ui;
@@ -121,12 +120,7 @@ class TestForm extends PrnProto {
       setClasses: this.setClasses,
       title: title,
       loading: loading
-    }, React.createElement(Header, {
-      title: title,
-      officeContacts: officeContacts,
-      managerContacts: managerContacts,
-      obj: obj
-    })));
+    }));
   }
 
 }

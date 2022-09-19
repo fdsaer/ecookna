@@ -13,7 +13,6 @@ export const theme = createTheme({
         body: {
           '@media print': {
             width: '210mm',
-            backgroundColor: 'yellow',
             margin: 0,
             '& *, & *::before, & *::after': {
               printColorAdjust: 'exact',
