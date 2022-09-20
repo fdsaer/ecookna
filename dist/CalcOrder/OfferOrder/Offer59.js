@@ -26,8 +26,16 @@ const getProductGlassesParams = product => {
 };
 
 const filterParams = param => {
+  const value = param.value?.name || false;
   const filters = ['автоматически', 'нет', '_', null, undefined];
-  if (param && filters.includes(param.toLowerCase())) return false;
+  if (value && filters.includes(value.toLowerCase())) return false;
+  const hiddenValuesRefs = param.param.hide.map(tab => tab.value.ref);
+
+  if (Array.isArray(hiddenValuesRefs)) {
+    const isHide = hiddenValuesRefs.includes(param.value?.ref);
+    if (isHide) return false;
+  }
+
   return true;
 };
 
@@ -48,7 +56,7 @@ const getExtendedParams = product => {
     extendedParams[name] = product.characteristic.params.map(param => {
       if (param.cnstr !== i) return null;
       return param;
-    }).filter(param => param !== null && !param.hide).filter(param => filterParams(param.value.name)).map(param => [param.param.name, param.value.name]);
+    }).filter(param => param !== null && !param.hide).filter(param => filterParams(param)).map(param => [param.param.name, param.value.name]);
   }
 
   return extendedParams;
