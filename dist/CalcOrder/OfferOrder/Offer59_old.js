@@ -4,8 +4,8 @@ const {
   React,
   TableCell
 } = $p.ui;
-import PrnProto from '../PrnProto.js';
-const StyledFrame = React.lazy(() => import('../StyledFrame/index.js'));
+import PrnProto from '../../PrnProto.js';
+const StyledFrame = React.lazy(() => import('../../StyledFrame/index.js'));
 
 const Svg = ({
   source

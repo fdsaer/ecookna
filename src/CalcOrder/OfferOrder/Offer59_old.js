@@ -7,9 +7,9 @@
  */
 
 const { React, TableCell } = $p.ui;
-import PrnProto from '../PrnProto.js';
+import PrnProto from '../../PrnProto.js';
 
-const StyledFrame = React.lazy(() => import('../StyledFrame/index.js'));
+const StyledFrame = React.lazy(() => import('../../StyledFrame/index.js'));
 
 const Svg = ({ source }) => {
   const __html = $p.utils.scale_svg(source, 246, 0);

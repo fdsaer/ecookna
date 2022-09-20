@@ -4,11 +4,11 @@
  * @module Offer59
  *
  */
-import PrnProto from '../PrnProto.js';
+import PrnProto from '../../PrnProto.js';
 
 const { React, Box, Typography } = $p.ui;
-
-const StyledFrame = React.lazy(() => import('../StyledFrame/index.js')); 
+ 
+const StyledFrame = React.lazy(() => import('../../StyledFrame/index.js'));
 
 const getProductParams = (product) => {
   const glasses = product.characteristic.glasses;
@@ -43,9 +43,22 @@ const getProductGlassesParams = (product) => {
 };
 
 // функция на отсеивание параметров, не проходящих фильтр
-const filterParams = (param) => {
-  const filters = ['автоматически', 'нет', '_', null, undefined];
-  if (param && filters.includes(param.toLowerCase())) return false;
+const filterParams = (param) => { 
+  const value = param.value?.name || false;
+  const filters = ['автоматически', 'нет', '_', null, undefined]; // заменить на список в 1с
+
+  // фильтрация значений по совпадению из списка 1с (пока константа)
+  if (value && filters.includes(value.toLowerCase())) return false;
+  
+  // фильтрация по таб-части скрываемых значений у параметра
+  const hiddenValuesRefs = param.param.hide.map(tab => tab.value.ref);  
+
+  if (Array.isArray(hiddenValuesRefs)) {
+    const isHide = hiddenValuesRefs.includes(param.value?.ref); 
+    if (isHide) return false;
+  } 
+  
+
   return true;
 };
 
@@ -67,12 +80,12 @@ const getExtendedParams = (product) => {
         : '';
     }
     extendedParams[name] = product.characteristic.params
-      .map((param) => {
-        if (param.cnstr !== i) return null;
+      .map((param) => {  
+        if (param.cnstr !== i) return null;  
         return param;
       })
       .filter((param) => param !== null && !param.hide)
-      .filter((param) => filterParams(param.value.name)) // фильтр свойств
+      .filter((param) => filterParams(param)) // фильтр на изменение значений свойств 
       .map((param) => [param.param.name, param.value.name]);
   }
   return extendedParams;
@@ -351,18 +364,27 @@ class Offer59 extends PrnProto {
 
     const productList =
       products &&
-      products.map((product) => {
-        // тут сделать проверку на наличие svg, если нет - не выводить
-        // потом проверку на тип, чтобы не было отливов
-        // и number сделать индексом
-        return {
-          number: product.row,
-          position: product.row,
-          quantity: product.quantity,
-          svg: product.characteristic.svg,
-          data: getProductCharacteristics(product),
-        };
-      });
+      products
+        .map((product) => {
+          const sysName = product.characteristic.sys.name;
+          const filters = ['водоотлив']; 
+
+          // тут сделать проверку на наличие svg, если нет - не выводить
+          // потом проверку на тип, чтобы не было отливов 
+          if (
+            product.characteristic.svg &&
+            !filters.includes(sysName.toLowerCase())
+          ) {
+            return {
+              number: product.row,
+              position: product.row,
+              quantity: product.quantity,
+              svg: product.characteristic.svg,
+              data: getProductCharacteristics(product),
+            };
+          }
+        })
+        .filter((product) => product);
 
     const productsTotalPrice = (products) =>
       products &&
