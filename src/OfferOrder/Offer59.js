@@ -260,27 +260,43 @@ class Offer59 extends PrnProto {
     };
     const office = { phone_number: '', email_address: '', address: '' };
 
+    const productListSvg =
+      products &&
+      products
+        .map((product) => {
+          // if (!product.nom.is_service && !product.nom.grouping && !product.nom.is_accessory && product.nom.name !== "Аксессуары") {
+          //   return product;
+          // }
+          if (product.characteristic.cnn_elmnts._obj.length || product.characteristic.coordinates._obj.length) {
+            return product;
+          }
+        })
+        .filter((product) => product);
 
-    const productListSvg = products && products.map(product => {
-      if (!product.nom.is_service && !product.nom.grouping)  {
-        return product
-      };
-    })
-    .filter(product => product);
-    
-    const productListExtraItems = products && products.map(product => {
-      if (product.nom.grouping && !product.nom.is_service)  {
-        return product
-      };
-    })
-    .filter(product => product);
+    const productListExtraItems =
+      products &&
+      products
+        .map((product) => {
+          // if (!product.nom.is_service && product.nom.grouping || product.nom.is_accessory || product.nom.name === "Аксессуары") {
+          //   return product;
+          // }
+          if (!product.nom.is_service && !product.characteristic.cnn_elmnts._obj.length && !product.characteristic.coordinates._obj.length) {
+            return product;
+          }
+        })
+        .filter((product) => product);
 
-    const productIsService= products && products.map(product => {
-      if (product.nom.is_service)  {
-        return product
-      };
-    })
-    .filter(product => product); 
+    const productIsService =
+      products &&
+      products
+        .map((product) => {
+          if (product.nom.is_service) {
+            return product;
+          }
+        })
+        .filter((product) => product);
+      
+    console.log(productListSvg);    
        
     const fullSquare = (products) =>
       products &&
@@ -371,7 +387,12 @@ class Offer59 extends PrnProto {
         productListSvg &&
         productListSvg.map((product) => {
           return [
-            { text: product.characteristic.prod_nom.name_full ? product.characteristic.prod_nom.name_full : product.nom.name_full, id: 0 },
+            {
+              text: product.characteristic.prod_nom.name_full
+                ? product.characteristic.prod_nom.name_full
+                : product.characteristic.sys.name,
+              id: 0,
+            },
             { text: product.characteristic.clr.presentation, id: 1 },
             { text: product.quantity.round(0), id: 2 },
             { text: (getProductWeight(product) * product.quantity).round(2), id: 4 },                                // Вычисляем массу каждого изделия
@@ -388,7 +409,16 @@ class Offer59 extends PrnProto {
         productListExtraItems &&
         productListExtraItems.map((product) => {
           return [
-            { text: product.characteristic.prod_nom.name_full ? product.characteristic.prod_nom.name_full : product.nom.name_full, id: 0 },
+            // {
+            //   text: product.characteristic.prod_nom.name_full
+            //     ? product.characteristic.prod_nom.name_full
+            //     : product.nom.name_full,
+            //   id: 0,
+            // },
+            {
+              text: (product.characteristic.prod_nom.name_full && product.characteristic.prod_nom.name_full !== 'Аксессуары') ? product.characteristic.prod_nom.name_full : product.characteristic.name,
+              id: 0,
+            },
             { text: product.quantity.round(0), id: 1 },
             { text: (product.price * product.quantity).round(0), id: 2 },
             { text: (product.price * product.discount).round(0), id: 3 },
