@@ -7,7 +7,7 @@
 import PrnProto from '../../PrnProto.js';
 
 const { React, Box, Typography } = $p.ui;
- 
+
 const StyledFrame = React.lazy(() => import('../../StyledFrame/index.js'));
 
 const getProductParams = (product) => {
@@ -43,21 +43,20 @@ const getProductGlassesParams = (product) => {
 };
 
 // функция на отсеивание параметров, не проходящих фильтр
-const filterParams = (param) => { 
+const filterParams = (param) => {
   const value = param.value?.name || false;
   const filters = ['автоматически', 'нет', '_', null, undefined]; // заменить на список в 1с
 
   // фильтрация значений по совпадению из списка 1с (пока константа)
   if (value && filters.includes(value.toLowerCase())) return false;
-  
+
   // фильтрация по таб-части скрываемых значений у параметра
-  const hiddenValuesRefs = param.param.hide.map(tab => tab.value.ref);  
+  const hiddenValuesRefs = param.param?.hide?.map((tab) => tab.value?.ref);
 
   if (Array.isArray(hiddenValuesRefs)) {
-    const isHide = hiddenValuesRefs.includes(param.value?.ref); 
+    const isHide = hiddenValuesRefs.includes(param.value?.ref);
     if (isHide) return false;
-  } 
-  
+  }
 
   return true;
 };
@@ -80,12 +79,12 @@ const getExtendedParams = (product) => {
         : '';
     }
     extendedParams[name] = product.characteristic.params
-      .map((param) => {  
-        if (param.cnstr !== i) return null;  
+      .map((param) => {
+        if (param.cnstr !== i) return null;
         return param;
       })
       .filter((param) => param !== null && !param.hide)
-      .filter((param) => filterParams(param)) // фильтр на изменение значений свойств 
+      .filter((param) => filterParams(param)) // фильтр на изменение значений свойств
       .map((param) => [param.param.name, param.value.name]);
   }
   return extendedParams;
@@ -249,7 +248,7 @@ class Offer59 extends PrnProto {
         image: images?.ExamplesIcon,
         link: 'https://www.ecookna.ru/upload/email-links/portfolio/ecookna-portfolio.pdf',
       },
-    ]; 
+    ];
     const advantages = [
       { id: 1, image: images?.AgeAdvantageImage },
       { id: 2, image: images?.FreeSizingAdvantageIcon },
@@ -313,7 +312,13 @@ class Offer59 extends PrnProto {
       products &&
       products
         .map((product) => {
-          if (!product.nom.is_service && !product.nom.grouping) {
+          // if (!product.nom.is_service && !product.nom.grouping && !product.nom.is_accessory && product.nom.name !== "Аксессуары") {
+          //   return product;
+          // }
+          if (
+            product.characteristic.cnn_elmnts._obj.length ||
+            product.characteristic.coordinates._obj.length
+          ) {
             return product;
           }
         })
@@ -323,7 +328,14 @@ class Offer59 extends PrnProto {
       products &&
       products
         .map((product) => {
-          if (product.nom.grouping && !product.nom.is_service) {
+          // if (!product.nom.is_service && product.nom.grouping || product.nom.is_accessory || product.nom.name === "Аксессуары") {
+          //   return product;
+          // }
+          if (
+            !product.nom.is_service &&
+            !product.characteristic.cnn_elmnts._obj.length &&
+            !product.characteristic.coordinates._obj.length
+          ) {
             return product;
           }
         })
@@ -367,10 +379,10 @@ class Offer59 extends PrnProto {
       products
         .map((product) => {
           const sysName = product.characteristic.sys.name;
-          const filters = ['водоотлив']; 
+          const filters = ['водоотлив'];
 
           // тут сделать проверку на наличие svg, если нет - не выводить
-          // потом проверку на тип, чтобы не было отливов 
+          // потом проверку на тип, чтобы не было отливов
           if (
             product.characteristic.svg &&
             !filters.includes(sysName.toLowerCase())
@@ -447,7 +459,7 @@ class Offer59 extends PrnProto {
             {
               text: product.characteristic.prod_nom.name_full
                 ? product.characteristic.prod_nom.name_full
-                : product.nom.name_full,
+                : product.characteristic.sys.name,
               id: 0,
             },
             { text: product.characteristic.clr.presentation, id: 1 },
@@ -474,10 +486,18 @@ class Offer59 extends PrnProto {
         productListExtraItems &&
         productListExtraItems.map((product) => {
           return [
+            // {
+            //   text: product.characteristic.prod_nom.name_full
+            //     ? product.characteristic.prod_nom.name_full
+            //     : product.nom.name_full,
+            //   id: 0,
+            // },
             {
-              text: product.characteristic.prod_nom.name_full
-                ? product.characteristic.prod_nom.name_full
-                : product.nom.name_full,
+              text:
+                product.characteristic.prod_nom.name_full &&
+                product.characteristic.prod_nom.name_full !== 'Аксессуары'
+                  ? product.characteristic.prod_nom.name_full
+                  : product.characteristic.name,
               id: 0,
             },
             { text: product.quantity.round(0), id: 1 },

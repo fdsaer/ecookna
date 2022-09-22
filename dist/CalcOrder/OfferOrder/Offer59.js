@@ -29,7 +29,7 @@ const filterParams = param => {
   const value = param.value?.name || false;
   const filters = ['автоматически', 'нет', '_', null, undefined];
   if (value && filters.includes(value.toLowerCase())) return false;
-  const hiddenValuesRefs = param.param.hide.map(tab => tab.value.ref);
+  const hiddenValuesRefs = param.param?.hide?.map(tab => tab.value?.ref);
 
   if (Array.isArray(hiddenValuesRefs)) {
     const isHide = hiddenValuesRefs.includes(param.value?.ref);
@@ -333,12 +333,12 @@ class Offer59 extends PrnProto {
       address: ''
     };
     const productListSvg = products && products.map(product => {
-      if (!product.nom.is_service && !product.nom.grouping) {
+      if (product.characteristic.cnn_elmnts._obj.length || product.characteristic.coordinates._obj.length) {
         return product;
       }
     }).filter(product => product);
     const productListExtraItems = products && products.map(product => {
-      if (product.nom.grouping && !product.nom.is_service) {
+      if (!product.nom.is_service && !product.characteristic.cnn_elmnts._obj.length && !product.characteristic.coordinates._obj.length) {
         return product;
       }
     }).filter(product => product);
@@ -453,7 +453,7 @@ class Offer59 extends PrnProto {
       }],
       rows: productListSvg && productListSvg.map(product => {
         return [{
-          text: product.characteristic.prod_nom.name_full ? product.characteristic.prod_nom.name_full : product.nom.name_full,
+          text: product.characteristic.prod_nom.name_full ? product.characteristic.prod_nom.name_full : product.characteristic.sys.name,
           id: 0
         }, {
           text: product.characteristic.clr.presentation,
@@ -480,7 +480,7 @@ class Offer59 extends PrnProto {
       }),
       rowsExtraItem: productListExtraItems && productListExtraItems.map(product => {
         return [{
-          text: product.characteristic.prod_nom.name_full ? product.characteristic.prod_nom.name_full : product.nom.name_full,
+          text: product.characteristic.prod_nom.name_full && product.characteristic.prod_nom.name_full !== 'Аксессуары' ? product.characteristic.prod_nom.name_full : product.characteristic.name,
           id: 0
         }, {
           text: product.quantity.round(0),
