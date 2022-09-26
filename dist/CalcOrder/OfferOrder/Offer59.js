@@ -1,120 +1,12 @@
 import PrnProto from '../../PrnProto.js';
-import getProductsData, { fullSquare, fullWeight } from './OfferData.js';
+import { fullSquare, fullWeight, getProductsList, getManagerInfo, getAddressInfo } from './OfferData.js';
+import getProductsData from './OfferTable.js';
 const {
   React,
   Box,
   Typography
 } = $p.ui;
 const StyledFrame = React.lazy(() => import('../../StyledFrame/index.js'));
-
-const getProductParams = product => {
-  const glasses = product.characteristic.glasses;
-  const glassesWeight = glasses.map(glass => product.characteristic.elm_weight(glass.elm)).reduce((acc, glassWeight) => acc += glassWeight, 0).round();
-  const constructionsWeight = product.characteristic.constructions.map(construction => product.characteristic.elm_weight(-1 * construction.cnstr)).reduce((acc, constructionWeight) => acc += constructionWeight, 0).round();
-  return `${constructionsWeight}/${glassesWeight}`;
-};
-
-const getProductGlassesParams = product => {
-  const glasses = product.characteristic.glasses;
-  const uniqueGlasses = [...new Set(glasses.map(glass => `${glass.formula} (${glass.thickness} мм)`))];
-  return uniqueGlasses.map((value, index) => {
-    return {
-      name: '',
-      value,
-      id: index
-    };
-  });
-};
-
-const filterParams = param => {
-  const value = param.value?.name || false;
-  const filters = ['автоматически', 'нет', '_', null, undefined];
-  if (value && filters.includes(value.toLowerCase())) return false;
-  const hiddenValuesRefs = param.param?.hide?.map(tab => tab.value?.ref);
-
-  if (Array.isArray(hiddenValuesRefs)) {
-    const isHide = hiddenValuesRefs.includes(param.value?.ref);
-    if (isHide) return false;
-  }
-
-  return true;
-};
-
-const getExtendedParams = product => {
-  const constructionCount = product.characteristic.constructions._obj.length;
-  const extendedParams = {};
-
-  for (let i = 0; i <= constructionCount; i += 1) {
-    let name = '';
-
-    if (i === 0) {
-      name = 'Дополнительные параметры';
-    } else {
-      const currentConstruction = product.characteristic.constructions.get(i - 1);
-      name = currentConstruction?.furn?.name ? `${currentConstruction.furn.name} Исполнение - ${currentConstruction.direction.name.toLowerCase()}` : '';
-    }
-
-    extendedParams[name] = product.characteristic.params.map(param => {
-      if (param.cnstr !== i) return null;
-      return param;
-    }).filter(param => param !== null && !param.hide).filter(param => filterParams(param)).map(param => [param.param.name, param.value.name]);
-  }
-
-  return extendedParams;
-};
-
-const getProductCharacteristics = product => {
-  const extendedParams = getExtendedParams(product);
-  return [{
-    subtitle: '',
-    paramsList: [{
-      name: 'Масса общ/зап, кг',
-      value: getProductParams(product),
-      id: 1
-    }, {
-      name: 'Проф.система',
-      value: product.characteristic.prod_nom.name,
-      id: 2
-    }, {
-      name: 'Цвет',
-      value: product.characteristic.clr.presentation,
-      id: 3
-    }],
-    id: 1
-  }, ...Object.entries(extendedParams).filter(([key]) => key === 'Дополнительные параметры').map(([key, list], index) => {
-    return {
-      subtitle: key,
-      paramsList: list.map(([name, value], index) => ({
-        name,
-        value,
-        id: index
-      })),
-      id: `1${index}`
-    };
-  }), {
-    subtitle: 'Заполнения',
-    paramsList: getProductGlassesParams(product),
-    id: 2
-  }, ...Object.entries(extendedParams).filter(([key]) => key && key !== 'Дополнительные параметры').map(([key, list], index) => {
-    return {
-      subtitle: key,
-      paramsList: list.map(([name, value], index) => ({
-        name,
-        value,
-        id: index
-      })),
-      id: `2${index}`
-    };
-  }), {
-    subtitle: 'Примечание',
-    paramsList: product.note ? [{
-      name: '',
-      value: product.note,
-      id: 1
-    }] : [],
-    id: 3
-  }];
-};
 
 var _ref = React.createElement(Typography, {
   color: "textSecondary",
@@ -322,125 +214,12 @@ class Offer59 extends PrnProto {
       text: 'Зарядку для смартфона встроенного в подоконник',
       image: images?.PhoneChargerImage
     }];
-    const manager = {
-      name: obj.manager.name ?? '',
-      phone_number: '',
-      email_address: '',
-      address: ''
-    };
-    const office = {
-      phone_number: '',
-      email_address: '',
-      address: ''
-    };
+    const manager = getManagerInfo(obj);
+    const office = getAddressInfo(obj);
+    const productList = products && getProductsList(products);
+    const productTableData = products && getProductsData(products);
     const order = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format('DD MMMM YYYY')} г.`;
     let loading = '';
-    const productList = products && products.map(product => {
-      const sysName = product.characteristic.sys.name;
-      const filters = ['водоотлив'];
-
-      if (product.characteristic.svg && !filters.includes(sysName.toLowerCase())) {
-        return {
-          number: product.row,
-          position: product.row,
-          quantity: product.quantity,
-          svg: product.characteristic.svg,
-          data: getProductCharacteristics(product)
-        };
-      }
-    }).filter(product => product);
-    const productTableData = products && getProductsData(products);
-
-    const getManagerInfo = () => {
-      obj.manager.contact_information.forEach(row => {
-        switch (row.type.name) {
-          case 'Адрес':
-            if (row.presentation && !manager.address) {
-              manager.address = row.presentation;
-            }
-
-            break;
-
-          case 'Телефон':
-            if (row.presentation && !manager.phone_number) {
-              manager.phone_number = row.presentation;
-            }
-
-            break;
-
-          case 'АдресЭлектроннойПочты':
-            if (row.presentation && !manager.email_address) {
-              manager.email_address = row.presentation;
-            }
-
-            break;
-
-          default:
-        }
-      });
-    };
-
-    console.log('$$$$$$$$$$$$$$$$$$$');
-    console.log(obj.manager);
-    console.log(obj.manager.class_name);
-    obj.manager.contact_information.forEach(row => console.log(row));
-
-    $p.CatUsers.getAddress = function () {
-      console.log('hello');
-    };
-
-    obj.manager.contact_information.forEach(row => {
-      switch (row.type.name) {
-        case 'Адрес':
-          if (row.presentation && !manager.address) {
-            manager.address = row.presentation;
-          }
-
-          break;
-
-        case 'Телефон':
-          if (row.presentation && !manager.phone_number) {
-            manager.phone_number = row.presentation;
-          }
-
-          break;
-
-        case 'АдресЭлектроннойПочты':
-          if (row.presentation && !manager.email_address) {
-            manager.email_address = row.presentation;
-          }
-
-          break;
-
-        default:
-      }
-    });
-    obj.organization.contact_information.forEach(row => {
-      switch (row.type.name) {
-        case 'Адрес':
-          if (row.presentation && !office.address) {
-            office.address = row.presentation;
-          }
-
-          break;
-
-        case 'Телефон':
-          if (row.presentation && !office.phone_number) {
-            office.phone_number = row.presentation;
-          }
-
-          break;
-
-        case 'АдресЭлектроннойПочты':
-          if (row.presentation && !office.email_address) {
-            office.email_address = row.presentation;
-          }
-
-          break;
-
-        default:
-      }
-    });
     return React.createElement(React.Suspense, {
       fallback: "Загрузка..."
     }, React.createElement(StyledFrame, {
