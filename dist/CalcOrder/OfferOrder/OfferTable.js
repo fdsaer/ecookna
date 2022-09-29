@@ -25,73 +25,73 @@ export default function getProductsData(products) {
   }).filter(product => product);
   return {
     head: [{
-      text: 'Название',
+      text: $p.msg.printing_form.table_columns.label,
       width: '25%',
       id: 0
     }, {
-      text: 'Цвет',
+      text: $p.msg.printing_form.table_columns.color,
       width: 'auto',
       id: 1
     }, {
-      text: 'Количество (шт.)',
+      text: $p.msg.printing_form.table_columns.quantity,
       width: '13%',
       id: 2
     }, {
-      text: 'Общий вес (кг)',
+      text: $p.msg.printing_form.table_columns.weight,
       width: '13%',
       id: 3
     }, {
-      text: 'Общая площадь (м2)',
+      text: $p.msg.printing_form.table_columns.square,
       width: '13%',
       id: 4
     }, {
-      text: 'Цена без скидки (руб.)',
+      text: $p.msg.printing_form.table_columns.price,
       width: '13%',
       id: 5
     }, {
-      text: 'Скидка (%)',
+      text: $p.msg.printing_form.table_columns.discount,
       width: '13%',
       id: 6
     }, {
-      text: 'Цена со скидкой (руб.)',
+      text: $p.msg.printing_form.table_columns.final_price,
       width: '13%',
       id: 7
     }],
     headExtraItem: [{
-      text: 'Название',
+      text: $p.msg.printing_form.table_columns.label,
       width: '25%',
       id: 0
     }, {
-      text: 'Количество (шт.)',
+      text: $p.msg.printing_form.table_columns.quantity,
       width: '13%',
       id: 1
     }, {
-      text: 'Цена без скидки (руб.)',
+      text: $p.msg.printing_form.table_columns.price,
       width: '13%',
       id: 2
     }, {
-      text: 'Скидка (%)',
+      text: $p.msg.printing_form.table_columns.discount,
       width: '13%',
       id: 3
     }, {
-      text: 'Цена со скидкой (руб.)',
+      text: $p.msg.printing_form.table_columns.final_price,
       width: '13%',
       id: 4
     }],
     headService: [{
-      text: 'Название',
+      text: $p.msg.printing_form.table_columns.label,
       width: '25%',
       id: 0
     }, {
-      text: 'Цена без скидки (руб.)',
+      text: $p.msg.printing_form.table_columns.price,
       width: '13%',
       id: 1
     }, {
-      text: 'Скидка (%)',
+      text: $p.msg.printing_form.table_columns.discount,
       width: '13%',
       id: 2
     }, {
-      text: 'Цена со скидкой (руб.)',
+      text: $p.msg.printing_form.table_columns.final_price,
       width: '13%',
       id: 3
     }],
@@ -156,7 +156,7 @@ export default function getProductsData(products) {
       }];
     }) : null,
     total: productListSvg ? [{
-      text: 'Всего',
+      text: $p.msg.printing_form.table_columns.total,
       id: 0
     }, {
       text: productsTotalQuantity(productListSvg),
@@ -178,7 +178,7 @@ export default function getProductsData(products) {
       id: 6
     }] : null,
     totalExtraItem: productListExtraItems ? [{
-      text: 'Всего',
+      text: $p.msg.printing_form.table_columns.total,
       id: 0
     }, {
       text: productsTotalQuantity(productListExtraItems),
@@ -194,7 +194,7 @@ export default function getProductsData(products) {
       id: 6
     }] : null,
     totalService: productIsService ? [{
-      text: 'Всего',
+      text: $p.msg.printing_form.table_columns.total,
       id: 0
     }, {
       text: productsTotalPrice(productIsService),

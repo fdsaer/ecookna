@@ -71,29 +71,61 @@ export default function getProductsData(products) {
   return {
     head: [
       //Шапка таблицы изделий
-      { text: 'Название', width: '25%', id: 0 },
-      { text: 'Цвет', width: 'auto', id: 1 },
-      { text: 'Количество (шт.)', width: '13%', id: 2 },
-      { text: 'Общий вес (кг)', width: '13%', id: 3 },
-      { text: 'Общая площадь (м2)', width: '13%', id: 4 },
-      { text: 'Цена без скидки (руб.)', width: '13%', id: 5 },
-      { text: 'Скидка (%)', width: '13%', id: 6 },
-      { text: 'Цена со скидкой (руб.)', width: '13%', id: 7 },
+      { text: $p.msg.printing_form.table_columns.label, width: '25%', id: 0 },
+      { text: $p.msg.printing_form.table_columns.color, width: 'auto', id: 1 },
+      {
+        text: $p.msg.printing_form.table_columns.quantity,
+        width: '13%',
+        id: 2,
+      },
+      { text: $p.msg.printing_form.table_columns.weight, width: '13%', id: 3 },
+      { text: $p.msg.printing_form.table_columns.square, width: '13%', id: 4 },
+      { text: $p.msg.printing_form.table_columns.price, width: '13%', id: 5 },
+      {
+        text: $p.msg.printing_form.table_columns.discount,
+        width: '13%',
+        id: 6,
+      },
+      {
+        text: $p.msg.printing_form.table_columns.final_price,
+        width: '13%',
+        id: 7,
+      },
     ],
     headExtraItem: [
       //Шапка таблицы доп.комплектации
-      { text: 'Название', width: '25%', id: 0 },
-      { text: 'Количество (шт.)', width: '13%', id: 1 },
-      { text: 'Цена без скидки (руб.)', width: '13%', id: 2 },
-      { text: 'Скидка (%)', width: '13%', id: 3 },
-      { text: 'Цена со скидкой (руб.)', width: '13%', id: 4 },
+      { text: $p.msg.printing_form.table_columns.label, width: '25%', id: 0 },
+      {
+        text: $p.msg.printing_form.table_columns.quantity,
+        width: '13%',
+        id: 1,
+      },
+      { text: $p.msg.printing_form.table_columns.price, width: '13%', id: 2 },
+      {
+        text: $p.msg.printing_form.table_columns.discount,
+        width: '13%',
+        id: 3,
+      },
+      {
+        text: $p.msg.printing_form.table_columns.final_price,
+        width: '13%',
+        id: 4,
+      },
     ],
     headService: [
       //Шапка таблицы услуг
-      { text: 'Название', width: '25%', id: 0 },
-      { text: 'Цена без скидки (руб.)', width: '13%', id: 1 },
-      { text: 'Скидка (%)', width: '13%', id: 2 },
-      { text: 'Цена со скидкой (руб.)', width: '13%', id: 3 },
+      { text: $p.msg.printing_form.table_columns.label, width: '25%', id: 0 },
+      { text: $p.msg.printing_form.table_columns.price, width: '13%', id: 1 },
+      {
+        text: $p.msg.printing_form.table_columns.discount,
+        width: '13%',
+        id: 2,
+      },
+      {
+        text: $p.msg.printing_form.table_columns.final_price,
+        width: '13%',
+        id: 3,
+      },
     ],
     rows: productListSvg
       ? productListSvg.map((product) => {
@@ -183,7 +215,7 @@ export default function getProductsData(products) {
       ? [
           //Итого для таблицы изделий
           {
-            text: 'Всего',
+            text: $p.msg.printing_form.table_columns.total,
             id: 0,
           },
           {
@@ -215,7 +247,7 @@ export default function getProductsData(products) {
     totalExtraItem: productListExtraItems
       ? [
           //Итого для таблицы доп.комплектации
-          { text: 'Всего', id: 0 },
+          { text: $p.msg.printing_form.table_columns.total, id: 0 },
           {
             text: productsTotalQuantity(productListExtraItems),
             id: 1,
@@ -238,7 +270,7 @@ export default function getProductsData(products) {
       ? [
           //Итого для таблицы услуг
           {
-            text: 'Всего',
+            text: $p.msg.printing_form.table_columns.total,
             id: 0,
           },
           {

@@ -179,39 +179,39 @@ class Offer59 extends PrnProto {
     }];
     const additions = [{
       id: 1,
-      text: 'Гаражные ворота',
+      text: $p.msg.printing_form.additions_labels.garage_gate,
       image: images?.GarageGateImage
     }, {
       id: 2,
-      text: 'Отделка балконов',
+      text: $p.msg.printing_form.additions_labels.balcony_decoration,
       image: images?.BalconyDecorationImage
     }, {
       id: 3,
-      text: 'Жалюзи или рольшторы',
+      text: $p.msg.printing_form.additions_labels.curtains,
       image: images?.CurtainsImage
     }, {
       id: 4,
-      text: 'Декоративные экраны на батареи',
+      text: $p.msg.printing_form.additions_labels.heating_radiator,
       image: images?.HeatingRadiatorImage
     }, {
       id: 5,
-      text: 'Окна с изменяющейся прозрачностью',
+      text: $p.msg.printing_form.additions_labels.evolving_opacity,
       image: images?.EvolvingOpacityImage
     }, {
       id: 6,
-      text: 'Зимний сад или остекленные веранды',
+      text: $p.msg.printing_form.additions_labels.orangery,
       image: images?.OrangeryImage
     }, {
       id: 7,
-      text: 'Цельностеклянные межкомнатные двери',
+      text: $p.msg.printing_form.additions_labels.glass_door,
       image: images?.GlassDoorImage
     }, {
       id: 8,
-      text: 'Обогреватели и полотенцесушители из стекла',
+      text: $p.msg.printing_form.additions_labels.glass_heater,
       image: images?.GlassHeaterImage
     }, {
       id: 9,
-      text: 'Зарядку для смартфона встроенного в подоконник',
+      text: $p.msg.printing_form.additions_labels.phone_charger,
       image: images?.PhoneChargerImage
     }];
     const manager = getManagerInfo(obj);
