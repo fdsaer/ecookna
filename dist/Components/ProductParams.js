@@ -108,7 +108,10 @@ export default function ProductParams({
         component: "b"
       }, `${name}: `), name && ' ', React.createElement(Typography, {
         variant: "body2",
-        component: "span"
+        component: "span",
+        style: {
+          wordBreak: "break-word"
+        }
       }, value))))));
     }))));
   }));
