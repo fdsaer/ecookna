@@ -113,7 +113,8 @@ export default function ProductParams({
                                     {name && ' '}
                                     <Typography
                                       variant="body2"
-                                      component="span"
+                                      component="span" 
+                                      style={{ wordBreak: "break-word" }}
                                     >
                                       {value}
                                     </Typography>
