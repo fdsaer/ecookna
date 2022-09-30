@@ -179,7 +179,7 @@ class Offer59 extends PrnProto {
     const office = getAddressInfo(obj);
     const productList = products && getProductsList(products);
     const productTableData = products && getProductsData(products);
-    const order = `Заполнения заказа №${obj.number_doc} от ${moment(
+    const order = `№${obj.number_doc} от ${moment(
       obj.date
     ).format('DD MMMM YYYY')} г.`;
     let loading = '';
