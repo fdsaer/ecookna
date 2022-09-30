@@ -201,7 +201,7 @@ class Offer59 extends PrnProto {
     });
 
     console.log({ managerContacts });
-    const title = `Заполнения заказа №${obj.number_doc} от ${moment(
+    const title = `№${obj.number_doc} от ${moment(
       obj.date
     ).format('DD MMMM YYYY')} г.`;
     let loading = '';
