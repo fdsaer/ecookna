@@ -235,15 +235,19 @@ class Offer59 extends PrnProto {
       order: order,
       office: office,
       manager: manager
-    }), components?.Wrapper && React.createElement(components.Wrapper, null, React.createElement(Box, {
-      mt: 3
+    }), components?.Wrapper && React.createElement(components.Wrapper, {
+      classes: classes
+    }, React.createElement(Box, {
+      mt: 3,
+      className: classes?.hideInPrint
     }, components?.Advantages && React.createElement(components.Advantages, {
       withLogo: true,
       advantagesList: advantages
     })), React.createElement(Box, {
       mt: 3,
       mb: 2.5,
-      fontSize: 22
+      fontSize: 22,
+      className: classes?.hideInPrint
     }, React.createElement(Typography, {
       variant: "inherit",
       color: "textSecondary",
@@ -253,32 +257,51 @@ class Offer59 extends PrnProto {
       fullSquare: fullSquare,
       fullWeight: fullWeight,
       productList: productList,
-      classes: classes
-    }), React.createElement(Box, {
-      mt: 5,
-      className: `${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`
-    }, _ref, components?.ProductsTable && React.createElement(components.ProductsTable, {
+      classes: classes,
+      advantages: advantages
+    }), components?.ProductsTable && React.createElement(Box, {
+      className: `${classes?.avoidBreakInside} ${classes?.breakElementWithMargins} ${classes?.pageBreakBefore} ${classes?.tableMargins}`
+    }, React.createElement(Box, {
+      mt: 3,
+      mb: 3,
+      className: classes?.displayInPrint
+    }, components?.Advantages && React.createElement(components.Advantages, {
+      withLogo: true,
+      advantagesList: advantages
+    })), _ref, React.createElement(components.ProductsTable, {
       head: productTableData.head,
       rows: productTableData.rows,
       total: productTableData.total,
       boldBorderlessHead: false
-    })), React.createElement(Box, {
-      mt: 5,
-      className: `${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`
-    }, components?.ProductsTable && productTableData.rowsExtraItem.length > 0 && React.createElement(React.Fragment, null, _ref2, React.createElement(components.ProductsTable, {
+    })), components?.ProductsTable && productTableData.rowsExtraItem.length > 0 && React.createElement(Box, {
+      className: `${classes?.avoidBreakInside} ${classes?.breakElementWithMargins} ${classes?.pageBreakBefore} ${classes?.tableMargins}`
+    }, React.createElement(Box, {
+      mt: 3,
+      mb: 3,
+      className: classes?.displayInPrint
+    }, components?.Advantages && React.createElement(components.Advantages, {
+      withLogo: true,
+      advantagesList: advantages
+    })), _ref2, React.createElement(components.ProductsTable, {
       head: productTableData.headExtraItem,
       rows: productTableData.rowsExtraItem,
       total: productTableData.totalExtraItem,
       boldBorderlessHead: false
-    }))), React.createElement(Box, {
-      mt: 5,
-      className: `${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`
-    }, components?.ProductsTable && productTableData.rowsService.length > 0 && React.createElement(React.Fragment, null, _ref3, React.createElement(components.ProductsTable, {
+    })), components?.ProductsTable && productTableData.rowsService.length > 0 && React.createElement(Box, {
+      className: `${classes?.avoidBreakInside} ${classes?.breakElementWithMargins} ${classes?.pageBreakBefore} ${classes?.tableMargins}`
+    }, React.createElement(Box, {
+      mt: 3,
+      mb: 3,
+      className: classes?.displayInPrint
+    }, components?.Advantages && React.createElement(components.Advantages, {
+      withLogo: true,
+      advantagesList: advantages
+    })), _ref3, React.createElement(components.ProductsTable, {
       head: productTableData.headService,
       rows: productTableData.rowsService,
       total: productTableData.totalService,
       boldBorderlessHead: false
-    }))), _ref4, _ref5, components?.Payments && React.createElement(components.Payments, {
+    })), _ref4, _ref5, components?.Payments && React.createElement(components.Payments, {
       paymentList: payments
     }), React.createElement(Box, {
       mt: 5,

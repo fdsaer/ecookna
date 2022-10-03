@@ -1,3 +1,4 @@
+import Advantages from './Advantages.js';
 const {
   React,
   Typography,
@@ -26,7 +27,7 @@ const Svg = ({
   }
 };
 
-var _ref = React.createElement(Typography, {
+var _ref2 = React.createElement(Typography, {
   variant: "subtitle2",
   component: "p"
 }, " ");
@@ -36,10 +37,15 @@ export default function ProductParams({
   productList,
   fullSquare,
   fullWeight,
-  classes
+  classes,
+  advantages
 }) {
+  var _ref = React.createElement(Advantages, {
+    withLogo: true,
+    advantagesList: advantages
+  });
+
   return React.createElement(Box, {
-    mt: 7.25,
     className: classes?.breakElementWithMargins
   }, productList.map(({
     data,
@@ -48,10 +54,20 @@ export default function ProductParams({
     quantity,
     svg
   }, index) => {
+    const count = data.reduce((acc, {
+      paramsList
+    }) => {
+      return acc += paramsList.length;
+    }, 0);
     return React.createElement(Box, {
+      className: classes?.pageBreakAfter
+    }, React.createElement(Box, {
+      mt: 3,
+      className: classes?.displayInPrint
+    }, _ref), React.createElement(Box, {
       display: "flex",
       flexDirection: "row",
-      mt: 7.25
+      className: classes?.productMargins
     }, React.createElement(Box, {
       sx: {
         flex: '0 0 400px'
@@ -77,7 +93,7 @@ export default function ProductParams({
       bgcolor: "primary.light",
       p: 1,
       pl: 5.25
-    }, _ref), React.createElement(Box, {
+    }, _ref2), React.createElement(Box, {
       pl: 5.25
     }, data && data.map(({
       subtitle,
@@ -110,9 +126,9 @@ export default function ProductParams({
         variant: "body2",
         component: "span",
         style: {
-          wordBreak: "break-word"
+          wordBreak: 'break-word'
         }
       }, value))))));
-    }))));
+    })))));
   }));
 }

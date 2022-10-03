@@ -43,6 +43,11 @@ export default function styles(theme) {
         },
       },
     },
+    pageHeight: {
+      '@media print': {
+        height: '297mm',
+      },
+    },
     breakElementWithMargins: {
       '@media print': {
         'box-decoration-break': 'clone',
@@ -55,7 +60,6 @@ export default function styles(theme) {
     },
     pageBreakAfter: {
       '@media print': {
-        height: '297mm',
         'page-break-after': 'always',
       },
     },
@@ -80,6 +84,24 @@ export default function styles(theme) {
       display: 'none',
       '@media print': {
         display: 'block',
+      },
+    },
+    productMargins: {
+      marginTop: theme.spacing(7.25),
+      '@media print': {
+        marginTop: theme.spacing(3),
+      },
+    },
+    tableMargins: {
+      marginTop: theme.spacing(5),
+      '@media print': {
+        marginTop: 0,
+      },
+    },
+    wrapper: {
+      paddingTop: theme.spacing(2),
+      '@media print': {
+        paddingTop: 0,
       },
     },
     head: {
