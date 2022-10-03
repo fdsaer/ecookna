@@ -1,8 +1,6 @@
 const { React, Box } = $p.ui;
 
-export default function Wrapper(props) {
-  let { children } = props;
-
+export default function Wrapper({ children, classes }) {
   return (
     <>
       <Box
@@ -10,8 +8,8 @@ export default function Wrapper(props) {
         maxWidth="794px"
         boxSizing="border-box"
         px={3.75}
-        pt={2}
         pb={2}
+        className={classes?.wrapper}
       >
         {children}
       </Box>

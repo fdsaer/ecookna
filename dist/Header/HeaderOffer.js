@@ -22,7 +22,7 @@ export default function HeaderOffer(props) {
     boxSizing: "border-box",
     px: 7.5,
     pb: 3,
-    className: classes.pageBreakAfter
+    className: `${classes.pageBreakAfter} ${classes.pageHeight}`
   }, React.createElement("img", {
     src: HeaderBackImage,
     style: {

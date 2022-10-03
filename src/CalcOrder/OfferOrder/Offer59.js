@@ -179,9 +179,9 @@ class Offer59 extends PrnProto {
     const office = getAddressInfo(obj);
     const productList = products && getProductsList(products);
     const productTableData = products && getProductsData(products);
-    const order = `№${obj.number_doc} от ${moment(
-      obj.date
-    ).format('DD MMMM YYYY')} г.`;
+    const order = `№${obj.number_doc} от ${moment(obj.date).format(
+      'DD MMMM YYYY'
+    )} г.`;
     let loading = '';
 
     return (
@@ -205,13 +205,18 @@ class Offer59 extends PrnProto {
             />
           )}
           {components?.Wrapper && (
-            <components.Wrapper>
-              <Box mt={3}>
+            <components.Wrapper classes={classes}>
+              <Box mt={3} className={classes?.hideInPrint}>
                 {components?.Advantages && (
                   <components.Advantages withLogo advantagesList={advantages} />
                 )}
               </Box>
-              <Box mt={3} mb={2.5} fontSize={22}>
+              <Box
+                mt={3}
+                mb={2.5}
+                fontSize={22}
+                className={classes?.hideInPrint}
+              >
                 <Typography
                   variant="inherit"
                   color="textSecondary"
@@ -229,62 +234,81 @@ class Offer59 extends PrnProto {
                     fullWeight={fullWeight}
                     productList={productList}
                     classes={classes}
+                    advantages={advantages}
                   />
                 )}
-              <Box
-                mt={5}
-                className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`}
-              >
-                <Typography color="textSecondary" component="p">
-                  Изделия
-                </Typography>
-                {components?.ProductsTable && (
+              {components?.ProductsTable && (
+                <Box
+                  className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins} ${classes?.pageBreakBefore} ${classes?.tableMargins}`}
+                >
+                  <Box mt={3} mb={3} className={classes?.displayInPrint}>
+                    {components?.Advantages && (
+                      <components.Advantages
+                        withLogo
+                        advantagesList={advantages}
+                      />
+                    )}
+                  </Box>
+                  <Typography color="textSecondary" component="p">
+                    Изделия
+                  </Typography>
+
                   <components.ProductsTable
                     head={productTableData.head}
                     rows={productTableData.rows}
                     total={productTableData.total}
                     boldBorderlessHead={false}
                   />
+                </Box>
+              )}
+              {components?.ProductsTable &&
+                productTableData.rowsExtraItem.length > 0 && (
+                  <Box
+                    className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins} ${classes?.pageBreakBefore} ${classes?.tableMargins}`}
+                  >
+                    <Box mt={3} mb={3} className={classes?.displayInPrint}>
+                      {components?.Advantages && (
+                        <components.Advantages
+                          withLogo
+                          advantagesList={advantages}
+                        />
+                      )}
+                    </Box>
+                    <Typography color="textSecondary" component="p">
+                      Дополнительная комплектация
+                    </Typography>
+                    <components.ProductsTable
+                      head={productTableData.headExtraItem}
+                      rows={productTableData.rowsExtraItem}
+                      total={productTableData.totalExtraItem}
+                      boldBorderlessHead={false}
+                    />
+                  </Box>
                 )}
-              </Box>
-              <Box
-                mt={5}
-                className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`}
-              >
-                {components?.ProductsTable &&
-                  productTableData.rowsExtraItem.length > 0 && (
-                    <>
-                      <Typography color="textSecondary" component="p">
-                        Дополнительная комплектация
-                      </Typography>
-                      <components.ProductsTable
-                        head={productTableData.headExtraItem}
-                        rows={productTableData.rowsExtraItem}
-                        total={productTableData.totalExtraItem}
-                        boldBorderlessHead={false}
-                      />
-                    </>
-                  )}
-              </Box>
-              <Box
-                mt={5}
-                className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`}
-              >
-                {components?.ProductsTable &&
-                  productTableData.rowsService.length > 0 && (
-                    <>
-                      <Typography color="textSecondary" component="p">
-                        Услуги
-                      </Typography>
-                      <components.ProductsTable
-                        head={productTableData.headService}
-                        rows={productTableData.rowsService}
-                        total={productTableData.totalService}
-                        boldBorderlessHead={false}
-                      />
-                    </>
-                  )}
-              </Box>
+              {components?.ProductsTable &&
+                productTableData.rowsService.length > 0 && (
+                  <Box
+                    className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins} ${classes?.pageBreakBefore} ${classes?.tableMargins}`}
+                  >
+                    <Box mt={3} mb={3} className={classes?.displayInPrint}>
+                      {components?.Advantages && (
+                        <components.Advantages
+                          withLogo
+                          advantagesList={advantages}
+                        />
+                      )}
+                    </Box>
+                    <Typography color="textSecondary" component="p">
+                      Услуги
+                    </Typography>
+                    <components.ProductsTable
+                      head={productTableData.headService}
+                      rows={productTableData.rowsService}
+                      total={productTableData.totalService}
+                      boldBorderlessHead={false}
+                    />
+                  </Box>
+                )}
               <Box mt={3} mb={2.5}>
                 <Typography>
                   *Предложение действительно в течение 10 календарных дней.
