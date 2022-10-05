@@ -49,7 +49,7 @@ export default function ProductParams({
   fullWeight,
   classes,
   advantages,
-  rowsInParams = 20,
+  rowsInParams = 30,
   chunksInBlock = 2,
 }) {
   // Группирует список карточек объединяя карточки с небольшим количеством параметров
@@ -63,8 +63,7 @@ export default function ProductParams({
     if (
       Array.isArray(lastChunk) &&
       lastChunk.length < chunksInBlock &&
-      count < rowsInParams &&
-      getParamCount(lastChunkItem.data) < rowsInParams
+      count + getParamCount(lastChunkItem.data) < rowsInParams
     ) {
       newAcc[newAcc.length - 1].push(product);
     } else {

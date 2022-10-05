@@ -218,6 +218,12 @@ class Offer59 extends PrnProto {
     const office = getAddressInfo(obj);
     const productList = products && getProductsList(products);
     const productTableData = products && getProductsData(products);
+    const tableRowsPerPage = 25;
+    const tablesStatus = {
+      isProductTableSecond: false,
+      isExtraTableSecond: productTableData?.rows.length + productTableData?.rowsExtraItem.length < tableRowsPerPage,
+      isSeviceTableSecond: productTableData?.rows.length + productTableData?.rowsExtraItem.length + productTableData?.rowsService.length < tableRowsPerPage || productTableData?.rows.length + productTableData?.rowsExtraItem.length > tableRowsPerPage && productTableData?.rowsExtraItem.length + productTableData?.rowsService.length < tableRowsPerPage
+    };
     const order = `№${obj.number_doc} от ${moment(obj.date).format('DD MMMM YYYY')} г.`;
     let loading = '';
     return React.createElement(React.Suspense, {
@@ -259,10 +265,10 @@ class Offer59 extends PrnProto {
       productList: productList,
       classes: classes,
       advantages: advantages
-    }), components?.ProductsTable && React.createElement(Box, {
+    }), components?.ProductsTable && productTableData && React.createElement(Box, {
       className: `${classes?.avoidBreakInside} ${classes?.breakElementWithMargins} ${classes?.pageBreakBefore} ${classes?.tableMargins}`
-    }, React.createElement(Box, {
-      mt: 3,
+    }, !tablesStatus.isProductTableSecond && React.createElement(Box, {
+      pt: 3,
       mb: 3,
       className: classes?.displayInPrint
     }, components?.Advantages && React.createElement(components.Advantages, {
@@ -273,10 +279,10 @@ class Offer59 extends PrnProto {
       rows: productTableData.rows,
       total: productTableData.total,
       boldBorderlessHead: false
-    })), components?.ProductsTable && productTableData.rowsExtraItem.length > 0 && React.createElement(Box, {
-      className: `${classes?.avoidBreakInside} ${classes?.breakElementWithMargins} ${classes?.pageBreakBefore} ${classes?.tableMargins}`
-    }, React.createElement(Box, {
-      mt: 3,
+    })), components?.ProductsTable && productTableData && productTableData.rowsExtraItem.length > 0 && React.createElement(Box, {
+      className: `${classes?.avoidBreakInside} ${classes?.breakElementWithMargins} ${classes?.tableMargins}`
+    }, !tablesStatus.isExtraTableSecond && React.createElement(Box, {
+      pt: 3,
       mb: 3,
       className: classes?.displayInPrint
     }, components?.Advantages && React.createElement(components.Advantages, {
@@ -287,10 +293,10 @@ class Offer59 extends PrnProto {
       rows: productTableData.rowsExtraItem,
       total: productTableData.totalExtraItem,
       boldBorderlessHead: false
-    })), components?.ProductsTable && productTableData.rowsService.length > 0 && React.createElement(Box, {
-      className: `${classes?.avoidBreakInside} ${classes?.breakElementWithMargins} ${classes?.pageBreakBefore} ${classes?.tableMargins}`
-    }, React.createElement(Box, {
-      mt: 3,
+    })), components?.ProductsTable && productTableData && productTableData.rowsService.length > 0 && React.createElement(Box, {
+      className: `${classes?.avoidBreakInside} ${classes?.breakElementWithMargins} ${classes?.tableMargins}`
+    }, !tablesStatus.isSeviceTableSecond && React.createElement(Box, {
+      pt: 3,
       mb: 3,
       className: classes?.displayInPrint
     }, components?.Advantages && React.createElement(components.Advantages, {
