@@ -179,6 +179,24 @@ class Offer59 extends PrnProto {
     const office = getAddressInfo(obj);
     const productList = products && getProductsList(products);
     const productTableData = products && getProductsData(products);
+    const tableRowsPerPage = 25;
+    const tablesStatus = {
+      isProductTableSecond: false,
+      isExtraTableSecond:
+        productTableData?.rows.length + productTableData?.rowsExtraItem.length <
+        tableRowsPerPage,
+      isSeviceTableSecond:
+        productTableData?.rows.length +
+          productTableData?.rowsExtraItem.length +
+          productTableData?.rowsService.length <
+          tableRowsPerPage ||
+        (productTableData?.rows.length +
+          productTableData?.rowsExtraItem.length >
+          tableRowsPerPage &&
+          productTableData?.rowsExtraItem.length +
+            productTableData?.rowsService.length <
+            tableRowsPerPage),
+    };
     const order = `№${obj.number_doc} от ${moment(obj.date).format(
       'DD MMMM YYYY'
     )} г.`;
@@ -237,18 +255,20 @@ class Offer59 extends PrnProto {
                     advantages={advantages}
                   />
                 )}
-              {components?.ProductsTable && (
+              {components?.ProductsTable && productTableData && (
                 <Box
                   className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins} ${classes?.pageBreakBefore} ${classes?.tableMargins}`}
                 >
-                  <Box mt={3} mb={3} className={classes?.displayInPrint}>
-                    {components?.Advantages && (
-                      <components.Advantages
-                        withLogo
-                        advantagesList={advantages}
-                      />
-                    )}
-                  </Box>
+                  {!tablesStatus.isProductTableSecond && (
+                    <Box pt={3} mb={3} className={classes?.displayInPrint}>
+                      {components?.Advantages && (
+                        <components.Advantages
+                          withLogo
+                          advantagesList={advantages}
+                        />
+                      )}
+                    </Box>
+                  )}
                   <Typography color="textSecondary" component="p">
                     Изделия
                   </Typography>
@@ -262,18 +282,21 @@ class Offer59 extends PrnProto {
                 </Box>
               )}
               {components?.ProductsTable &&
+                productTableData &&
                 productTableData.rowsExtraItem.length > 0 && (
                   <Box
-                    className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins} ${classes?.pageBreakBefore} ${classes?.tableMargins}`}
+                    className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins} ${classes?.tableMargins}`}
                   >
-                    <Box mt={3} mb={3} className={classes?.displayInPrint}>
-                      {components?.Advantages && (
-                        <components.Advantages
-                          withLogo
-                          advantagesList={advantages}
-                        />
-                      )}
-                    </Box>
+                    {!tablesStatus.isExtraTableSecond && (
+                      <Box pt={3} mb={3} className={classes?.displayInPrint}>
+                        {components?.Advantages && (
+                          <components.Advantages
+                            withLogo
+                            advantagesList={advantages}
+                          />
+                        )}
+                      </Box>
+                    )}
                     <Typography color="textSecondary" component="p">
                       Дополнительная комплектация
                     </Typography>
@@ -286,18 +309,21 @@ class Offer59 extends PrnProto {
                   </Box>
                 )}
               {components?.ProductsTable &&
+                productTableData &&
                 productTableData.rowsService.length > 0 && (
                   <Box
-                    className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins} ${classes?.pageBreakBefore} ${classes?.tableMargins}`}
+                    className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins} ${classes?.tableMargins}`}
                   >
-                    <Box mt={3} mb={3} className={classes?.displayInPrint}>
-                      {components?.Advantages && (
-                        <components.Advantages
-                          withLogo
-                          advantagesList={advantages}
-                        />
-                      )}
-                    </Box>
+                    {!tablesStatus.isSeviceTableSecond && (
+                      <Box pt={3} mb={3} className={classes?.displayInPrint}>
+                        {components?.Advantages && (
+                          <components.Advantages
+                            withLogo
+                            advantagesList={advantages}
+                          />
+                        )}
+                      </Box>
+                    )}
                     <Typography color="textSecondary" component="p">
                       Услуги
                     </Typography>

@@ -95,7 +95,7 @@ export default function styles(theme) {
     tableMargins: {
       marginTop: theme.spacing(5),
       '@media print': {
-        marginTop: 0,
+        marginTop: theme.spacing(3),
       },
     },
     wrapper: {
