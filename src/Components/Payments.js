@@ -1,8 +1,13 @@
 const { React, Box, Typography } = $p.ui;
 
-export default function Advantages({ paymentList }) {
+export default function Payments({ paymentList, classes }) {
   return (
-    <Box display="flex" justifyContent="space-between" alignItems="center">
+    <Box
+      display="flex"
+      justifyContent="space-between"
+      alignItems="center"
+      className={`${classes?.localFooter}`}
+    >
       <Box fontSize={19} sx={{ flex: '0 0 225px' }}>
         <Typography color="textSecondary" variant="inherit" component="p">
           Оплата любым удобным для вас способом

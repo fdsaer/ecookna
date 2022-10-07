@@ -10,13 +10,15 @@ var _ref = React.createElement(Typography, {
   component: "p"
 }, "Оплата любым удобным для вас способом");
 
-export default function Advantages({
-  paymentList
+export default function Payments({
+  paymentList,
+  classes
 }) {
   return React.createElement(Box, {
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
+    className: `${classes?.localFooter}`
   }, React.createElement(Box, {
     fontSize: 19,
     sx: {

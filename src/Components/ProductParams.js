@@ -1,4 +1,5 @@
 import Advantages from './Advantages.js';
+import Payments from './Payments.js';
 const { React, Typography, Box, List, ListItem } = $p.ui;
 
 const Svg = ({ source }) => {
@@ -49,6 +50,7 @@ export default function ProductParams({
   fullWeight,
   classes,
   advantages,
+  payments,
   rowsInParams = 30,
   chunksInBlock = 2,
 }) {
@@ -104,7 +106,7 @@ export default function ProductParams({
       )} */}
       {productListChunks.map((chunk) => {
         return (
-          <Box className={classes?.pageBreakAfter}>
+          <Box className={`${classes?.pageBreakAfter} ${classes?.pageFrame}`}>
             <Box mt={3} className={classes?.displayInPrint}>
               <Advantages withLogo advantagesList={advantages} />
             </Box>
@@ -176,7 +178,9 @@ export default function ProductParams({
                 </Box>
               );
             })}
-            ;
+            <Box className={classes?.displayInPrint}>
+              <Payments paymentList={payments} classes={classes} />
+            </Box>
           </Box>
         );
       })}
