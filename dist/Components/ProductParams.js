@@ -1,4 +1,5 @@
 import Advantages from './Advantages.js';
+import Payments from './Payments.js';
 const {
   React,
   Typography,
@@ -71,9 +72,15 @@ export default function ProductParams({
   fullWeight,
   classes,
   advantages,
+  payments,
   rowsInParams = 30,
   chunksInBlock = 2
 }) {
+  var _ref3 = React.createElement(Payments, {
+    paymentList: payments,
+    classes: classes
+  });
+
   var _ref = React.createElement(Advantages, {
     withLogo: true,
     advantagesList: advantages
@@ -97,7 +104,7 @@ export default function ProductParams({
     className: classes?.breakElementWithMargins
   }, productListChunks.map(chunk => {
     return React.createElement(Box, {
-      className: classes?.pageBreakAfter
+      className: `${classes?.pageBreakAfter} ${classes?.pageFrame}`
     }, React.createElement(Box, {
       mt: 3,
       className: classes?.displayInPrint
@@ -162,6 +169,8 @@ export default function ProductParams({
           id: id
         }))));
       }))));
-    }), ";");
+    }), React.createElement(Box, {
+      className: classes?.displayInPrint
+    }, _ref3));
   }));
 }

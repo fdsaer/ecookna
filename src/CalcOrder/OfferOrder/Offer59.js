@@ -51,6 +51,7 @@ class Offer59 extends PrnProto {
           Manager: module.Manager,
           ProductParams: module.ProductParams,
           ProductsTable: module.ProductsTable,
+          ProductsTablePage: module.ProductsTablePage,
         },
       });
     });
@@ -178,25 +179,9 @@ class Offer59 extends PrnProto {
     const manager = getManagerInfo(obj);
     const office = getAddressInfo(obj);
     const productList = products && getProductsList(products);
-    const productTableData = products && getProductsData(products);
     const tableRowsPerPage = 25;
-    const tablesStatus = {
-      isProductTableSecond: false,
-      isExtraTableSecond:
-        productTableData?.rows.length + productTableData?.rowsExtraItem.length <
-        tableRowsPerPage,
-      isSeviceTableSecond:
-        productTableData?.rows.length +
-          productTableData?.rowsExtraItem.length +
-          productTableData?.rowsService.length <
-          tableRowsPerPage ||
-        (productTableData?.rows.length +
-          productTableData?.rowsExtraItem.length >
-          tableRowsPerPage &&
-          productTableData?.rowsExtraItem.length +
-            productTableData?.rowsService.length <
-            tableRowsPerPage),
-    };
+    const productTableData =
+      products && getProductsData(products, tableRowsPerPage);
     const order = `№${obj.number_doc} от ${moment(obj.date).format(
       'DD MMMM YYYY'
     )} г.`;
@@ -253,102 +238,24 @@ class Offer59 extends PrnProto {
                     productList={productList}
                     classes={classes}
                     advantages={advantages}
+                    payments={payments}
                   />
                 )}
-              {components?.ProductsTable && productTableData && (
-                <Box
-                  className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins} ${classes?.pageBreakBefore} ${classes?.tableMargins}`}
-                >
-                  {!tablesStatus.isProductTableSecond && (
-                    <Box pt={3} mb={3} className={classes?.displayInPrint}>
-                      {components?.Advantages && (
-                        <components.Advantages
-                          withLogo
-                          advantagesList={advantages}
-                        />
-                      )}
-                    </Box>
-                  )}
-                  <Typography color="textSecondary" component="p">
-                    Изделия
-                  </Typography>
-
-                  <components.ProductsTable
-                    head={productTableData.head}
-                    rows={productTableData.rows}
-                    total={productTableData.total}
-                    boldBorderlessHead={false}
+              {components?.ProductsTablePage && productTableData && (
+                <components.ProductsTablePage
+                  classes={classes}
+                  advantages={advantages}
+                  payments={payments}
+                  productTableData={productTableData}
+                />
+              )}
+              {components?.Payments && (
+                <Box className={classes?.hideInPrint}>
+                  <components.Payments
+                    paymentList={payments}
+                    classes={classes}
                   />
                 </Box>
-              )}
-              {components?.ProductsTable &&
-                productTableData &&
-                productTableData.rowsExtraItem.length > 0 && (
-                  <Box
-                    className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins} ${classes?.tableMargins}`}
-                  >
-                    {!tablesStatus.isExtraTableSecond && (
-                      <Box pt={3} mb={3} className={classes?.displayInPrint}>
-                        {components?.Advantages && (
-                          <components.Advantages
-                            withLogo
-                            advantagesList={advantages}
-                          />
-                        )}
-                      </Box>
-                    )}
-                    <Typography color="textSecondary" component="p">
-                      Дополнительная комплектация
-                    </Typography>
-                    <components.ProductsTable
-                      head={productTableData.headExtraItem}
-                      rows={productTableData.rowsExtraItem}
-                      total={productTableData.totalExtraItem}
-                      boldBorderlessHead={false}
-                    />
-                  </Box>
-                )}
-              {components?.ProductsTable &&
-                productTableData &&
-                productTableData.rowsService.length > 0 && (
-                  <Box
-                    className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins} ${classes?.tableMargins}`}
-                  >
-                    {!tablesStatus.isSeviceTableSecond && (
-                      <Box pt={3} mb={3} className={classes?.displayInPrint}>
-                        {components?.Advantages && (
-                          <components.Advantages
-                            withLogo
-                            advantagesList={advantages}
-                          />
-                        )}
-                      </Box>
-                    )}
-                    <Typography color="textSecondary" component="p">
-                      Услуги
-                    </Typography>
-                    <components.ProductsTable
-                      head={productTableData.headService}
-                      rows={productTableData.rowsService}
-                      total={productTableData.totalService}
-                      boldBorderlessHead={false}
-                    />
-                  </Box>
-                )}
-              <Box mt={3} mb={2.5}>
-                <Typography>
-                  *Предложение действительно в течение 10 календарных дней.
-                </Typography>
-              </Box>
-              <Box mb={5}>
-                <Typography>
-                  Для вашего удобства, точный расчет стоимости, заключение
-                  договора и оплата могут быть осуществлены на объекте в день
-                  проведения замера.
-                </Typography>
-              </Box>
-              {components?.Payments && (
-                <components.Payments paymentList={payments} />
               )}
               <Box mt={5} className={classes?.pageBreakBefore}>
                 {components?.Advantages && (

@@ -8,6 +8,7 @@ import LinksBlock from '../../Components/LinksBlock.js';
 import Manager from '../../Components/Manager.js';
 import ProductParams from '../../Components/ProductParams.js';
 import ProductsTable from '../../Components/ProductsTable.js';
+import ProductsTablePage from '../../Components/ProductsTablePage.js';
 
 export {
   Header,
@@ -20,4 +21,5 @@ export {
   Manager,
   ProductParams,
   ProductsTable,
+  ProductsTablePage,
 };

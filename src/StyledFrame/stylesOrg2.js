@@ -113,6 +113,18 @@ export default function styles(theme) {
       fontSize: '0.6rem',
       display: 'table-footer-group',
     },
+    localFooter: {
+      '@media print': {
+        position: 'absolute',
+        bottom: '0',
+      },
+    },
+    pageFrame: {
+      '@media print': {
+        height: '287mm',
+        position: 'relative',
+      },
+    },
     noBreak: {
       breakInside: 'avoid',
     },
