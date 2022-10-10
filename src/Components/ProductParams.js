@@ -24,7 +24,7 @@ const getParamCount = (data) => {
 };
 
 const ParamItem = ({ name, value, id }) => (
-  <ListItem disableGutters dense="false" key={id}>
+  <ListItem disableGutters dense={true} key={id}>
     <Typography component="p" variant="body2">
       {name && (
         <Typography variant="subtitle2" component="b">
@@ -106,7 +106,10 @@ export default function ProductParams({
       )} */}
       {productListChunks.map((chunk) => {
         return (
-          <Box className={`${classes?.pageBreakAfter} ${classes?.pageFrame}`}>
+          <Box
+            className={`${classes?.pageBreakAfter} ${classes?.pageFrame}`}
+            key={chunk[0]?.position}
+          >
             <Box mt={3} className={classes?.displayInPrint}>
               <Advantages withLogo advantagesList={advantages} />
             </Box>
@@ -116,6 +119,7 @@ export default function ProductParams({
                   display="flex"
                   flexDirection="row"
                   className={classes?.productMargins}
+                  key={position}
                 >
                   <Box
                     sx={{ flex: '0 0 400px' }}
@@ -166,6 +170,7 @@ export default function ProductParams({
                                         name={name}
                                         value={value}
                                         id={id}
+                                        key={id}
                                       />
                                     )
                                 )}

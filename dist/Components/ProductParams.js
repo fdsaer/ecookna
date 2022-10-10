@@ -44,7 +44,7 @@ const ParamItem = ({
   id
 }) => React.createElement(ListItem, {
   disableGutters: true,
-  dense: "false",
+  dense: true,
   key: id
 }, React.createElement(Typography, {
   component: "p",
@@ -104,7 +104,8 @@ export default function ProductParams({
     className: classes?.breakElementWithMargins
   }, productListChunks.map(chunk => {
     return React.createElement(Box, {
-      className: `${classes?.pageBreakAfter} ${classes?.pageFrame}`
+      className: `${classes?.pageBreakAfter} ${classes?.pageFrame}`,
+      key: chunk[0]?.position
     }, React.createElement(Box, {
       mt: 3,
       className: classes?.displayInPrint
@@ -118,7 +119,8 @@ export default function ProductParams({
       return React.createElement(Box, {
         display: "flex",
         flexDirection: "row",
-        className: classes?.productMargins
+        className: classes?.productMargins,
+        key: position
       }, React.createElement(Box, {
         sx: {
           flex: '0 0 400px'
@@ -166,7 +168,8 @@ export default function ProductParams({
         }) => value && React.createElement(ParamItem, {
           name: name,
           value: value,
-          id: id
+          id: id,
+          key: id
         }))));
       }))));
     }), React.createElement(Box, {

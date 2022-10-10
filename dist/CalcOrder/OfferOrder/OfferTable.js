@@ -71,8 +71,9 @@ export default function getProductsData(products, tableRowsPerPage) {
       width: '13%',
       id: 7
     }],
-    rows: productListSvg ? productListSvg.map(product => {
-      return [{
+    rows: productListSvg ? productListSvg.map((product, index) => ({
+      id: index,
+      data: [{
         text: product.characteristic.prod_nom.name_full ? product.characteristic.prod_nom.name_full : product.characteristic.sys.name,
         id: 0
       }, {
@@ -96,8 +97,8 @@ export default function getProductsData(products, tableRowsPerPage) {
       }, {
         text: (product.price * product.quantity * (1 - product.discount)).round(0),
         id: 7
-      }];
-    }) : null,
+      }]
+    })) : null,
     total: productListSvg ? [{
       text: $p.msg.printing_form.table_columns.total,
       id: 0
@@ -144,8 +145,9 @@ export default function getProductsData(products, tableRowsPerPage) {
       width: '13%',
       id: 4
     }],
-    rows: productListExtraItems ? productListExtraItems.map(product => {
-      return [{
+    rows: productListExtraItems ? productListExtraItems.map((product, index) => ({
+      id: index,
+      data: [{
         text: product.characteristic.prod_nom.name_full && product.characteristic.prod_nom.name_full !== 'Аксессуары' ? product.characteristic.prod_nom.name_full : product.characteristic.name,
         id: 0
       }, {
@@ -160,8 +162,8 @@ export default function getProductsData(products, tableRowsPerPage) {
       }, {
         text: (product.price * product.quantity * (1 - product.discount)).round(0),
         id: 7
-      }];
-    }) : null,
+      }]
+    })) : null,
     total: productListExtraItems ? [{
       text: $p.msg.printing_form.table_columns.total,
       id: 0
@@ -198,8 +200,9 @@ export default function getProductsData(products, tableRowsPerPage) {
       width: '13%',
       id: 3
     }],
-    rows: productIsService ? productIsService.map(product => {
-      return [{
+    rows: productIsService ? productIsService.map((product, index) => ({
+      id: index,
+      data: [{
         text: product.characteristic.prod_nom.name_full ? product.characteristic.prod_nom.name_full : product.nom.name_full,
         id: 0
       }, {
@@ -211,8 +214,8 @@ export default function getProductsData(products, tableRowsPerPage) {
       }, {
         text: (product.price * product.quantity * (1 - product.discount)).round(0),
         id: 3
-      }];
-    }) : null,
+      }]
+    })) : null,
     total: productIsService ? [{
       text: $p.msg.printing_form.table_columns.total,
       id: 0

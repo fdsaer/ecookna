@@ -115,8 +115,9 @@ export default function getProductsData(products, tableRowsPerPage) {
         },
       ],
       rows: productListSvg
-        ? productListSvg.map((product) => {
-            return [
+        ? productListSvg.map((product, index) => ({
+            id: index,
+            data: [
               {
                 text: product.characteristic.prod_nom.name_full
                   ? product.characteristic.prod_nom.name_full
@@ -140,8 +141,8 @@ export default function getProductsData(products, tableRowsPerPage) {
                 ).round(0),
                 id: 7,
               },
-            ];
-          })
+            ],
+          }))
         : null,
       total: productListSvg
         ? [
@@ -200,8 +201,9 @@ export default function getProductsData(products, tableRowsPerPage) {
         },
       ],
       rows: productListExtraItems
-        ? productListExtraItems.map((product) => {
-            return [
+        ? productListExtraItems.map((product, index) => ({
+            id: index,
+            data: [
               // {
               //   text: product.characteristic.prod_nom.name_full
               //     ? product.characteristic.prod_nom.name_full
@@ -227,8 +229,8 @@ export default function getProductsData(products, tableRowsPerPage) {
                 ).round(0),
                 id: 7,
               },
-            ];
-          })
+            ],
+          }))
         : null,
       total: productListExtraItems
         ? [
@@ -271,8 +273,9 @@ export default function getProductsData(products, tableRowsPerPage) {
         },
       ],
       rows: productIsService
-        ? productIsService.map((product) => {
-            return [
+        ? productIsService.map((product, index) => ({
+            id: index,
+            data: [
               {
                 text: product.characteristic.prod_nom.name_full
                   ? product.characteristic.prod_nom.name_full
@@ -289,8 +292,8 @@ export default function getProductsData(products, tableRowsPerPage) {
                 ).round(0),
                 id: 3,
               },
-            ];
-          })
+            ],
+          }))
         : null,
       total: productIsService
         ? [

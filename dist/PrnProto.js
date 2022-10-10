@@ -10,7 +10,6 @@ const addPrintStyles = selector => {
   style.setAttribute(selector, '');
   style.appendChild(document.createTextNode(css));
   head.appendChild(style);
-  document.title = 'Документ';
 };
 
 const removePrintStyles = selector => {
@@ -63,7 +62,6 @@ class PrnProto extends React.Component {
 
     this.componentWillMount = () => {
       add_table_titles($p.msg);
-      document.title = 'Документ';
     };
 
     this.componentWillUnmount = () => {
