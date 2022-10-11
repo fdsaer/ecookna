@@ -1,3 +1,5 @@
+
+
 import Product from './ProductGlasses.js';
 const {
   React,
@@ -11,7 +13,6 @@ const {
 const cond = ({
   characteristic
 }) => characteristic.constructions.count();
-
 export default function Products(props) {
   let {
     obj,
@@ -20,13 +21,10 @@ export default function Products(props) {
     Cell,
     classes
   } = props;
-
   if (!condition) {
     condition = cond;
   }
-
   const children = [];
-
   for (const row of obj.production) {
     if (condition(row)) {
       children.push(React.createElement(Product, {
@@ -38,7 +36,6 @@ export default function Products(props) {
       }));
     }
   }
-
   return React.createElement(Table, {
     size: "small",
     className: `${classes.table} ${classes.w100}`

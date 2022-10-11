@@ -7,7 +7,6 @@ export default function ImgRow({
   Cell
 }) {
   const __html = $p.utils.scale_svg(svg, 200, 0);
-
   return React.createElement(TableRow, {
     className: "no-break"
   }, React.createElement(Cell, {

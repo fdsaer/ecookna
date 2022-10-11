@@ -1,3 +1,5 @@
+
+
 const {
   React,
   Typography,
@@ -14,11 +16,9 @@ export default function Loading({
   React.useEffect(() => {
     progressRef.current = () => {
       let step = 10;
-
       if (progress > 50) {
         step -= progress / 10;
       }
-
       if (progress > 100) {
         setProgress(0);
         setBuffer(10);

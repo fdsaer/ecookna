@@ -1,5 +1,4 @@
 import { fullSquare, fullWeight, getProductWeight } from './OfferData.js';
-
 const getRowsNumber = table => {
   return data.reduce((acc, {
     paramsList
@@ -10,16 +9,11 @@ const getRowsNumber = table => {
     return acc += usefulParams.length;
   }, 0);
 };
-
 export default function getProductsData(products, tableRowsPerPage) {
   const productsTotalPrice = products => products && products.map(product => product.price * product.quantity).reduce((acc, price) => acc += price, 0).round(0);
-
   const productsTotalDiscount = products => products && products.map(product => product.price * product.quantity * product.discount).reduce((acc, discount) => acc += discount, 0);
-
   const productsTotalSum = products => products && products.map(product => product.price * product.quantity * (1 - product.discount)).reduce((acc, price) => acc += price, 0).round(0);
-
   const productsTotalQuantity = (products) => products && products.map(product => product.quantity).reduce((acc, quantity) => acc += quantity, 0);
-
   const productListSvg = products.map(product => {
     if (product.characteristic.cnn_elmnts._obj.length || product.characteristic.coordinates._obj.length) {
       return product;
@@ -35,7 +29,8 @@ export default function getProductsData(products, tableRowsPerPage) {
       return product;
     }
   }).filter(product => product);
-  const tables = [{
+  const tables = [
+  {
     id: '0',
     title: 'Изделия',
     head: [{
@@ -84,7 +79,8 @@ export default function getProductsData(products, tableRowsPerPage) {
       }, {
         text: (getProductWeight(product) * product.quantity).round(2),
         id: 4
-      }, {
+      },
+      {
         text: (product.s * product.quantity).round(2),
         id: 3
       }, {
@@ -145,7 +141,8 @@ export default function getProductsData(products, tableRowsPerPage) {
       id: 4
     }],
     rows: productListExtraItems ? productListExtraItems.map(product => {
-      return [{
+      return [
+      {
         text: product.characteristic.prod_nom.name_full && product.characteristic.prod_nom.name_full !== 'Аксессуары' ? product.characteristic.prod_nom.name_full : product.characteristic.name,
         id: 0
       }, {
@@ -234,13 +231,11 @@ export default function getProductsData(products, tableRowsPerPage) {
     const lastChunkRowsSumm = Array.isArray(lastChunk) ? lastChunk.reduce((acc, {
       rows
     }) => rows ? acc += rows.length : 0, 0) : 0;
-
     if (Array.isArray(lastChunk) && tableRowsNumber + lastChunkRowsSumm < tableRowsPerPage) {
       newAcc[newAcc.length - 1].push(table);
     } else {
       newAcc.push([table]);
     }
-
     return newAcc;
   }, []);
   return tablesChunks;
