@@ -1,4 +1,4 @@
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 const {
   React,
@@ -71,7 +71,8 @@ class Glasses34 extends PrnProto {
     const {
       props: {
         obj,
-        attr
+        attr,
+        externalWindow
       },
       state: {
         imgs,
@@ -87,6 +88,11 @@ class Glasses34 extends PrnProto {
       m: new Map()
     };
     const title = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format("DD.MM.YYYY")}`;
+
+    if (externalWindow) {
+      externalWindow.document.title = `${title} бла-бла-бла`;
+    }
+
     let loading = loaded ? imgs ? "" : "Формируем эскизы заполнений..." : "Читаем продукции заказа...";
 
     const Cell = ({
