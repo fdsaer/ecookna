@@ -7,13 +7,11 @@ const {
   List,
   ListItem
 } = $p.ui;
-
 const Svg = ({
   source
 }) => {
   try {
     const __html = $p.utils.scale_svg(source, 246, 0);
-
     return React.createElement("div", {
       style: {
         textAlign: 'center'
@@ -26,7 +24,6 @@ const Svg = ({
     return null;
   }
 };
-
 const getParamCount = data => {
   return data.reduce((acc, {
     paramsList
@@ -37,7 +34,6 @@ const getParamCount = data => {
     return acc += usefulParams.length;
   }, 0);
 };
-
 const ParamItem = ({
   name,
   value,
@@ -59,12 +55,10 @@ const ParamItem = ({
     wordBreak: 'break-word'
   }
 }, value)));
-
 var _ref2 = React.createElement(Typography, {
   variant: "subtitle2",
   component: "p"
 }, " ");
-
 export default function ProductParams({
   title,
   productList,
@@ -80,24 +74,20 @@ export default function ProductParams({
     paymentList: payments,
     classes: classes
   });
-
   var _ref = React.createElement(Advantages, {
     withLogo: true,
     advantagesList: advantages
   });
-
   const productListChunks = productList.reduce((acc, product) => {
     const count = getParamCount(product.data);
     const lastChunk = acc[acc.length - 1];
     const newAcc = acc.slice();
     const lastChunkItem = Array.isArray(lastChunk) && lastChunk[lastChunk.length - 1];
-
     if (Array.isArray(lastChunk) && lastChunk.length < chunksInBlock && count + getParamCount(lastChunkItem.data) < rowsInParams) {
       newAcc[newAcc.length - 1].push(product);
     } else {
       newAcc.push([product]);
     }
-
     return newAcc;
   }, []);
   return React.createElement(Box, {

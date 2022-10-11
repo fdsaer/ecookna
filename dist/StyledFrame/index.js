@@ -1,3 +1,5 @@
+
+
 const {
   React,
   makeStyles,
@@ -11,9 +13,7 @@ import stylesOrg1 from './stylesOrg1.js';
 import stylesOrg2 from './stylesOrg2.js';
 import stylesCss from './stylesCss.js';
 import Loading from './Loading.js';
-
 var _ref = React.createElement(CssBaseline, null);
-
 export default function StyledFrame({
   children,
   setClasses,
@@ -26,7 +26,6 @@ export default function StyledFrame({
   let tempClasses;
   let theme = theme1;
   const [newClasses, setNewClasses] = React.useState('');
-
   switch (props.obj.manager.name) {
     case 'ЕВРООКНА':
     case 'ГРУППА КОМПАНИЙ':
@@ -34,21 +33,17 @@ export default function StyledFrame({
     case 'ОКНА РОСТА ДОМ':
       tempClasses = makeStyles(() => stylesOrg2(theme))();
       break;
-
     case 'Компания ФОТОТЕХ':
     case 'ООО"ФОТОТЕХ"':
       tempClasses = makeStyles(() => stylesOrg2(theme))();
       break;
-
     case 'Петров ВВ':
       theme = theme2;
       tempClasses = makeStyles(() => stylesCss(theme))();
       break;
-
     default:
       tempClasses = makeStyles(() => stylesOrg2(theme))();
   }
-
   setClasses(newClasses);
   React.useEffect(() => {
     setNewClasses(tempClasses);
@@ -62,9 +57,11 @@ export default function StyledFrame({
     title: title,
     text: loadingText
   }) : React.Children.map(children, child => {
-    return child ? React.cloneElement(child, { ...props,
+    return child ? React.cloneElement(child, {
+      ...props,
       classes,
-      style: { ...child.props.style
+      style: {
+        ...child.props.style
       }
     }) : null;
   })));

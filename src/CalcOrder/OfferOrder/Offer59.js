@@ -88,7 +88,7 @@ class Offer59 extends PrnProto {
 
   render() {
     const {
-      props: { obj, attr },
+      props: { obj, attr, externalWindow },
       state: { loaded, products, components, images },
       classes,
     } = this;
@@ -186,6 +186,11 @@ class Offer59 extends PrnProto {
       'DD MMMM YYYY'
     )} г.`;
     let loading = '';
+
+    // при наличии ссылки на externalWindow, дублируем заголовок
+    if (externalWindow) {
+      externalWindow.document.title = order;
+    }
 
     return (
       <React.Suspense fallback="Загрузка...">

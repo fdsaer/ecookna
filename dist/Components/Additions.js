@@ -29,11 +29,9 @@ const StyledBox = withStyles(theme => ({
     }
   }
 }))(Box);
-
 var _ref = React.createElement(Dot, {
   fontSize: "small"
 });
-
 export default function Additions({
   additions,
   title

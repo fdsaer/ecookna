@@ -4,7 +4,6 @@ const {
   Box,
   Typography
 } = $p.ui;
-
 var _ref = React.createElement(Box, {
   mt: 1.5,
   mb: 1
@@ -12,7 +11,6 @@ var _ref = React.createElement(Box, {
   variant: "inherit",
   component: "p"
 }, "Ваш персональный менеджер:"));
-
 var _ref2 = React.createElement(Box, {
   mt: 2.5,
   mb: 1
@@ -20,12 +18,10 @@ var _ref2 = React.createElement(Box, {
   variant: "inherit",
   component: "p"
 }, "Офис продаж:"));
-
 var _ref3 = React.createElement(Box, {
   ml: 8,
   mt: 4.75
 }, React.createElement(Logo, null));
-
 export default function Contacts({
   withLogo = true,
   manager,

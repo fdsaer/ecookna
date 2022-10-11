@@ -1,3 +1,5 @@
+
+
 import orderForms from './CalcOrder/index.js';
 import characteristicsForms from './CatCharacteristics/index.js';
 import offerForm from './CalcOrder/OfferOrder/index.js';
@@ -11,6 +13,7 @@ const {
     pouch
   }
 } = $p;
+
 export function items() {
   const {
     current_user,
@@ -33,9 +36,7 @@ function create_formula(formulas, Component) {
     }]
   }, false, true);
   formula._data._formula = Component;
-
   formula._set_loaded(Component.ref);
-
   return formula;
 }
 

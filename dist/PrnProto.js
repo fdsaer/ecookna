@@ -1,7 +1,8 @@
+
+
 const {
   React
 } = $p.ui;
-
 const addPrintStyles = selector => {
   const css = `@page {margin: 0}`;
   const head = document.head || document.getElementsByTagName('head')[0];
@@ -10,9 +11,7 @@ const addPrintStyles = selector => {
   style.setAttribute(selector, '');
   style.appendChild(document.createTextNode(css));
   head.appendChild(style);
-  document.title = 'Документ';
 };
-
 const removePrintStyles = selector => {
   const head = document.head || document.getElementsByTagName('head')[0];
   const customPrintStyles = document.querySelectorAll(selector);
@@ -20,7 +19,6 @@ const removePrintStyles = selector => {
     head.removeChild(styleTag);
   });
 };
-
 function add_table_titles(msg) {
   msg.printing_form = {
     table_columns: {
@@ -47,34 +45,26 @@ function add_table_titles(msg) {
     }
   };
 }
-
 class PrnProto extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       loaded: false
     };
-
     this.setClasses = classes => {
       addPrintStyles('data-custom-print');
       this.classes = classes;
       props.copyStyles && props.copyStyles();
     };
-
     this.componentWillMount = () => {
       add_table_titles($p.msg);
-      document.title = 'Документ';
     };
-
     this.componentWillUnmount = () => {
       removePrintStyles('[data-custom-print]');
     };
   }
-
   render() {
     return 'PrnProto';
   }
-
 }
-
 export default PrnProto;

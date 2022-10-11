@@ -3,13 +3,11 @@ const {
   Box,
   Typography
 } = $p.ui;
-
 var _ref = React.createElement(Typography, {
   color: "textSecondary",
   variant: "inherit",
   component: "p"
 }, "Оплата любым удобным для вас способом");
-
 export default function Payments({
   paymentList,
   classes

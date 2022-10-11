@@ -1,3 +1,4 @@
+
 import PrnProto from '../../PrnProto.js';
 import { fullSquare, fullWeight, getProductsList, getManagerInfo, getAddressInfo } from './OfferData.js';
 import getProductsData from './OfferTable.js';
@@ -7,7 +8,6 @@ const {
   Typography
 } = $p.ui;
 const StyledFrame = React.lazy(() => import('../../StyledFrame/index.js'));
-
 var _ref = React.createElement(Box, {
   color: "textSecondary",
   fontSize: "22px",
@@ -17,13 +17,11 @@ var _ref = React.createElement(Box, {
   color: "textSecondary",
   component: "p"
 }, "Ассортимент компании ЭКООКНА"));
-
 var _ref2 = React.createElement(Typography, {
   variant: "inherit",
   color: "textSecondary",
   component: "p"
 }, "Переходите по ссылкам:");
-
 class Offer59 extends PrnProto {
   componentDidMount() {
     const {
@@ -32,7 +30,8 @@ class Offer59 extends PrnProto {
       print
     } = this.props;
     console.log(obj);
-    obj.load_linked_refs().then(async () => {
+    obj
+    .load_linked_refs().then(async () => {
       this.setState({
         loaded: true
       });
@@ -95,12 +94,12 @@ class Offer59 extends PrnProto {
       });
     });
   }
-
   render() {
     const {
       props: {
         obj,
-        attr
+        attr,
+        externalWindow
       },
       state: {
         loaded,
@@ -198,6 +197,10 @@ class Offer59 extends PrnProto {
     const productTableData = products && getProductsData(products, tableRowsPerPage);
     const order = `№${obj.number_doc} от ${moment(obj.date).format('DD MMMM YYYY')} г.`;
     let loading = '';
+
+    if (externalWindow) {
+      externalWindow.document.title = order;
+    }
     return React.createElement(React.Suspense, {
       fallback: "Загрузка..."
     }, React.createElement(StyledFrame, {
@@ -284,7 +287,6 @@ class Offer59 extends PrnProto {
       manager: manager
     })))));
   }
-
 }
 
 Offer59.ref = 'cefdf4d0-6c86-11ec-bee3-8b4e33301a48';

@@ -1,12 +1,12 @@
+
+
 const {
   React,
   Divider
 } = $p.ui;
-
 var _ref = React.createElement(Divider, {
   light: true
 });
-
 export default function Footer(props) {
   const {
     obj,
