@@ -96,20 +96,28 @@ export default function ProductParams({
                 </Box>
                 <Box pl={5.25}>
                   {data &&
-                    data.map(({ subtitle, paramsList, id }) => {
+                    data.map(({ subtitle, paramsList, productSystem, id }) => {
                       return (
                         <Box
                           className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`}
                           key={id}
                         >
-                          {subtitle && paramsList.length > 0 && (
+                          {subtitle && (paramsList.length > 0 || productSystem) && (   
                             <Box bgcolor="primary.light" p={1}>
                               <Typography variant="subtitle2">
-                                {subtitle}:
+                                {subtitle}:                                      
                               </Typography>
                             </Box>
                           )}
-                          <List>
+                          <List>                          
+                            {productSystem && (
+                              <Typography variant="subtitle2" component="b">
+                                Система:
+                                <Typography variant="body2" component="span" style={{ wordBreak: 'break-word' }}>
+                                  {` ${productSystem}`}
+                                </Typography>
+                              </Typography>
+                            )}
                             {paramsList.map(
                               ({ name, value, id }) =>
                                 value && (
@@ -117,7 +125,7 @@ export default function ProductParams({
                                     disableGutters
                                     dense="false"
                                     key={id}
-                                  >
+                                  >                                    
                                     <Typography component="p" variant="body2">
                                       {name && (
                                         <Typography
