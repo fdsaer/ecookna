@@ -8,31 +8,7 @@ const {
 } = $p.ui;
 const StyledFrame = React.lazy(() => import('../../StyledFrame/index.js'));
 
-var _ref = React.createElement(Typography, {
-  color: "textSecondary",
-  component: "p"
-}, "Изделия");
-
-var _ref2 = React.createElement(Typography, {
-  color: "textSecondary",
-  component: "p"
-}, "Дополнительная комплектация");
-
-var _ref3 = React.createElement(Typography, {
-  color: "textSecondary",
-  component: "p"
-}, "Услуги");
-
-var _ref4 = React.createElement(Box, {
-  mt: 3,
-  mb: 2.5
-}, React.createElement(Typography, null, "*Предложение действительно в течение 10 календарных дней."));
-
-var _ref5 = React.createElement(Box, {
-  mb: 5
-}, React.createElement(Typography, null, "Для вашего удобства, точный расчет стоимости, заключение договора и оплата могут быть осуществлены на объекте в день проведения замера."));
-
-var _ref6 = React.createElement(Box, {
+var _ref = React.createElement(Box, {
   color: "textSecondary",
   fontSize: "22px",
   mr: 2.5
@@ -42,7 +18,7 @@ var _ref6 = React.createElement(Box, {
   component: "p"
 }, "Ассортимент компании ЭКООКНА"));
 
-var _ref7 = React.createElement(Typography, {
+var _ref2 = React.createElement(Typography, {
   variant: "inherit",
   color: "textSecondary",
   component: "p"
@@ -85,7 +61,8 @@ class Offer59 extends PrnProto {
           LinksBlock: module.LinksBlock,
           Manager: module.Manager,
           ProductParams: module.ProductParams,
-          ProductsTable: module.ProductsTable
+          ProductsTable: module.ProductsTable,
+          ProductsTablePage: module.ProductsTablePage
         }
       });
     });
@@ -217,7 +194,8 @@ class Offer59 extends PrnProto {
     const manager = getManagerInfo(obj);
     const office = getAddressInfo(obj);
     const productList = products && getProductsList(products);
-    const productTableData = products && getProductsData(products);
+    const tableRowsPerPage = 25;
+    const productTableData = products && getProductsData(products, tableRowsPerPage);
     const order = `№${obj.number_doc} от ${moment(obj.date).format('DD MMMM YYYY')} г.`;
     let loading = '';
     return React.createElement(React.Suspense, {
@@ -258,52 +236,19 @@ class Offer59 extends PrnProto {
       fullWeight: fullWeight,
       productList: productList,
       classes: classes,
-      advantages: advantages
-    }), components?.ProductsTable && React.createElement(Box, {
-      className: `${classes?.avoidBreakInside} ${classes?.breakElementWithMargins} ${classes?.pageBreakBefore} ${classes?.tableMargins}`
-    }, React.createElement(Box, {
-      mt: 3,
-      mb: 3,
-      className: classes?.displayInPrint
-    }, components?.Advantages && React.createElement(components.Advantages, {
-      withLogo: true,
-      advantagesList: advantages
-    })), _ref, React.createElement(components.ProductsTable, {
-      head: productTableData.head,
-      rows: productTableData.rows,
-      total: productTableData.total,
-      boldBorderlessHead: false
-    })), components?.ProductsTable && productTableData.rowsExtraItem.length > 0 && React.createElement(Box, {
-      className: `${classes?.avoidBreakInside} ${classes?.breakElementWithMargins} ${classes?.pageBreakBefore} ${classes?.tableMargins}`
-    }, React.createElement(Box, {
-      mt: 3,
-      mb: 3,
-      className: classes?.displayInPrint
-    }, components?.Advantages && React.createElement(components.Advantages, {
-      withLogo: true,
-      advantagesList: advantages
-    })), _ref2, React.createElement(components.ProductsTable, {
-      head: productTableData.headExtraItem,
-      rows: productTableData.rowsExtraItem,
-      total: productTableData.totalExtraItem,
-      boldBorderlessHead: false
-    })), components?.ProductsTable && productTableData.rowsService.length > 0 && React.createElement(Box, {
-      className: `${classes?.avoidBreakInside} ${classes?.breakElementWithMargins} ${classes?.pageBreakBefore} ${classes?.tableMargins}`
-    }, React.createElement(Box, {
-      mt: 3,
-      mb: 3,
-      className: classes?.displayInPrint
-    }, components?.Advantages && React.createElement(components.Advantages, {
-      withLogo: true,
-      advantagesList: advantages
-    })), _ref3, React.createElement(components.ProductsTable, {
-      head: productTableData.headService,
-      rows: productTableData.rowsService,
-      total: productTableData.totalService,
-      boldBorderlessHead: false
-    })), _ref4, _ref5, components?.Payments && React.createElement(components.Payments, {
-      paymentList: payments
-    }), React.createElement(Box, {
+      advantages: advantages,
+      payments: payments
+    }), components?.ProductsTablePage && productTableData && React.createElement(components.ProductsTablePage, {
+      classes: classes,
+      advantages: advantages,
+      payments: payments,
+      productTableData: productTableData
+    }), components?.Payments && React.createElement(Box, {
+      className: classes?.hideInPrint
+    }, React.createElement(components.Payments, {
+      paymentList: payments,
+      classes: classes
+    })), React.createElement(Box, {
       mt: 5,
       className: classes?.pageBreakBefore
     }, components?.Advantages && React.createElement(components.Advantages, {
@@ -317,7 +262,7 @@ class Offer59 extends PrnProto {
       mt: 7
     }, components?.LinksBlock && React.createElement(components.LinksBlock, {
       links: assortmentLinks
-    }, _ref6)), React.createElement(Box, {
+    }, _ref)), React.createElement(Box, {
       mt: 5
     }, components?.LinksBlock && React.createElement(components.LinksBlock, {
       links: links
@@ -326,7 +271,7 @@ class Offer59 extends PrnProto {
         maxWidth: '100px'
       },
       mr: 2.5
-    }, _ref7))), React.createElement(Box, {
+    }, _ref2))), React.createElement(Box, {
       mt: 7,
       className: classes?.pageBreakBefore
     }, components?.Additions && React.createElement(components.Additions, {

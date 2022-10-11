@@ -37,8 +37,7 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4",
     "browser-sync": "^2.27.10",
     "cross-env": "^7.0",
-    "md5-file": "^5.0",
-    "onchange": "^7.1.0"
+    "md5-file": "^5.0"
   },
   "files": [
     "dist/**",
@@ -48,8 +47,7 @@
   "main": "dist",
   "scripts": {
     "build": "cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ./babel.config.js ./src --out-dir ./dist && node ./copy-files",
-    "serve": "browser-sync start --proxy \"http://localhost:3016/\" --files \"dist/**/*\"",
-    "watch:all": "onchange \"src/**/*\" -- \"npm run build\""
+    "serve": "browser-sync start --proxy \"http://localhost:3016/\" --files \"dist/**/*\""
   },
   "eslintConfig": {
     "extends": "react-app"

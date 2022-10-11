@@ -41,8 +41,6 @@ export default function ProductsTable({
   total,
   boldBorderlessHead
 }) {
-  console.log(head);
-  console.log(rows);
   return React.createElement(Table, null, head && head.length > 0 && React.createElement(TableHead, null, React.createElement(StyledTableRow, null, head.map(({
     text,
     width,

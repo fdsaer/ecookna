@@ -38,8 +38,6 @@ export default function ProductsTable({
   total,
   boldBorderlessHead,
 }) {
-  console.log(head);
-  console.log(rows);
   return (
     <Table>
       {head && head.length > 0 && (
@@ -105,7 +103,7 @@ export default function ProductsTable({
               </StyledTableCell>
             ))}
         </StyledTableRow>
-      </TableBody> 
+      </TableBody>
     </Table>
   );
 }

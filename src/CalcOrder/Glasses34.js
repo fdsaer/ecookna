@@ -50,29 +50,31 @@ class Glasses34 extends PrnProto {
 
   render() {
     const {
-      props: { obj, attr },
-      state: { imgs, loaded, err },
+      props: {obj, attr, externalWindow},
+      state: {imgs, loaded, err},
       classes,
     } = this;
-    
+
     // в totals накопим итоги
     const totals = { imgs, q: new Map(), s: new Map(), m: new Map() };
-    const title = `Заполнения заказа №${obj.number_doc} от ${moment(
-      obj.date
-    ).format("DD.MM.YYYY")}`;
+    const title = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format("DD.MM.YYYY")}`;
+    // при наличии ссылки на externalWindow, дублируем заголовок
+    if(externalWindow) {
+      externalWindow.document.title = `${title} бла-бла-бла`;
+    }
     let loading = loaded
       ? imgs
         ? ""
         : "Формируем эскизы заполнений..."
       : "Читаем продукции заказа...";
 
-    const Cell = ({ right, ...props }) => ( 
+    const Cell = ({ right, ...props }) => (
       <TableCell
         className={`${classes.tableCell} ${right ? classes.alignRight : ""}`}
         {...props}
       />
-    ); 
-    
+    );
+
     return (
       <React.Suspense fallback="Загрузка...">
         <StyledFrame

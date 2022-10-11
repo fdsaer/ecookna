@@ -95,7 +95,7 @@ export default function styles(theme) {
     tableMargins: {
       marginTop: theme.spacing(5),
       '@media print': {
-        marginTop: 0,
+        marginTop: theme.spacing(3),
       },
     },
     wrapper: {
@@ -112,6 +112,18 @@ export default function styles(theme) {
       bottom: 0,
       fontSize: '0.6rem',
       display: 'table-footer-group',
+    },
+    localFooter: {
+      '@media print': {
+        position: 'absolute',
+        bottom: '0',
+      },
+    },
+    pageFrame: {
+      '@media print': {
+        height: '287mm',
+        position: 'relative',
+      },
     },
     noBreak: {
       breakInside: 'avoid',
