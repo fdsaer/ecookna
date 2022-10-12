@@ -32,6 +32,7 @@ const filterParams = param => {
 };
 const getExtendedParams = product => {
   const constructionCount = product.characteristic.constructions._obj.length;
+  console.log(product);
   const extendedParams = {};
   for (let i = 0; i <= constructionCount; i += 1) {
     let name = '';
@@ -69,7 +70,7 @@ const getProductCharacteristics = product => {
   }, ...Object.entries(extendedParams).filter(([key]) => key === 'Дополнительные параметры').map(([key, list], index) => {
     return {
       subtitle: key,
-      paramsList: list.map(([name, value], index) => ({
+      paramsList: list?.map(([name, value], index) => ({
         name,
         value,
         id: index
@@ -82,7 +83,8 @@ const getProductCharacteristics = product => {
     id: 2
   }, ...Object.entries(extendedParams).filter(([key]) => key && key !== 'Дополнительные параметры').map(([key, list], index) => {
     return {
-      subtitle: key,
+      subtitle: `Створка ${index + 1}: фурнитура`,
+      productSystem: key,
       paramsList: list.map(([name, value], index) => ({
         name,
         value,

@@ -139,17 +139,27 @@ export default function ProductParams({
       }, data && data.map(({
         subtitle,
         paramsList,
+        productSystem,
         id
       }) => {
         return React.createElement(Box, {
           className: `${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`,
           key: id
-        }, subtitle && paramsList.length > 0 && React.createElement(Box, {
+        }, subtitle && (paramsList.length > 0 || productSystem) && React.createElement(Box, {
           bgcolor: "primary.light",
           p: 1
         }, React.createElement(Typography, {
           variant: "subtitle2"
-        }, subtitle, ":")), React.createElement(List, null, paramsList.map(({
+        }, subtitle, ":")), React.createElement(List, null, productSystem && React.createElement(Typography, {
+          variant: "subtitle2",
+          component: "b"
+        }, "Система:", React.createElement(Typography, {
+          variant: "body2",
+          component: "span",
+          style: {
+            wordBreak: 'break-word'
+          }
+        }, ` ${productSystem}`)), paramsList.map(({
           name,
           value,
           id
