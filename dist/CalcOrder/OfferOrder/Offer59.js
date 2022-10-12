@@ -106,7 +106,8 @@ class Offer59 extends PrnProto {
     const {
       props: {
         obj,
-        attr
+        attr,
+        externalWindow
       },
       state: {
         loaded,
@@ -206,6 +207,11 @@ class Offer59 extends PrnProto {
     const productTableData = products && getProductsData(products, tableRowsPerPage);
     const order = `№${obj.number_doc} от ${moment(obj.date).format('DD MMMM YYYY')} г.`;
     let loading = '';
+
+    if (externalWindow) {
+      externalWindow.document.title = order;
+    }
+
     return React.createElement(React.Suspense, {
       fallback: "Загрузка..."
     }, React.createElement(StyledFrame, {

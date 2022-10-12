@@ -149,35 +149,53 @@ export default function ProductParams({
                     </Box>
                     <Box pl={5.25}>
                       {data &&
-                        data.map(({ subtitle, paramsList, id }) => {
-                          return (
-                            <Box
-                              className={`${classes.avoidBreakInside} ${classes.breakElementWithMargins}`}
-                              key={id}
-                            >
-                              {subtitle && paramsList.length > 0 && (
-                                <Box bgcolor="primary.light" p={1}>
-                                  <Typography variant="subtitle2">
-                                    {subtitle}:
-                                  </Typography>
-                                </Box>
-                              )}
-                              <List>
-                                {paramsList.map(
-                                  ({ name, value, id }) =>
-                                    value && (
-                                      <ParamItem
-                                        name={name}
-                                        value={value}
-                                        id={id}
-                                        key={id}
-                                      />
-                                    )
-                                )}
-                              </List>
-                            </Box>
-                          );
-                        })}
+                        data.map(
+                          ({ subtitle, paramsList, productSystem, id }) => {
+                            return (
+                              <Box
+                                className={`${classes.avoidBreakInside} ${classes.breakElementWithMargins}`}
+                                key={id}
+                              >
+                                {subtitle &&
+                                  (paramsList.length > 0 || productSystem) && (
+                                    <Box bgcolor="primary.light" p={1}>
+                                      <Typography variant="subtitle2">
+                                        {subtitle}:
+                                      </Typography>
+                                    </Box>
+                                  )}
+                                <List>
+                                  {productSystem && (
+                                    <Typography
+                                      variant="subtitle2"
+                                      component="b"
+                                    >
+                                      Система:
+                                      <Typography
+                                        variant="body2"
+                                        component="span"
+                                        style={{ wordBreak: 'break-word' }}
+                                      >
+                                        {` ${productSystem}`}
+                                      </Typography>
+                                    </Typography>
+                                  )}
+                                  {paramsList.map(
+                                    ({ name, value, id }) =>
+                                      value && (
+                                        <ParamItem
+                                          name={name}
+                                          value={value}
+                                          id={id}
+                                          key={id}
+                                        />
+                                      )
+                                  )}
+                                </List>
+                              </Box>
+                            );
+                          }
+                        )}
                     </Box>
                   </Box>
                 </Box>

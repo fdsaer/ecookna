@@ -71,7 +71,8 @@ class Glasses34 extends PrnProto {
     const {
       props: {
         obj,
-        attr
+        attr,
+        externalWindow
       },
       state: {
         imgs,
@@ -87,6 +88,11 @@ class Glasses34 extends PrnProto {
       m: new Map()
     };
     const title = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format("DD.MM.YYYY")}`;
+
+    if (externalWindow) {
+      externalWindow.document.title = `${title} бла-бла-бла`;
+    }
+
     let loading = loaded ? imgs ? "" : "Формируем эскизы заполнений..." : "Читаем продукции заказа...";
 
     const Cell = ({
