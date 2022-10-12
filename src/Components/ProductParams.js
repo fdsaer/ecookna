@@ -75,7 +75,7 @@ export default function ProductParams({
   }, []);
 
   return (
-    <Box className={classes?.breakElementWithMargins}>
+    <Box className={classes.breakElementWithMargins}>
       {/* {title && (
         <>
           <Box mt={1.5} mb={0.75}>
@@ -107,10 +107,10 @@ export default function ProductParams({
       {productListChunks.map((chunk) => {
         return (
           <Box
-            className={`${classes?.pageBreakAfter} ${classes?.pageFrame}`}
+            className={`${classes.pageBreakAfter} ${classes.pageFrame}`}
             key={chunk[0]?.position}
           >
-            <Box mt={3} className={classes?.displayInPrint}>
+            <Box mt={3} className={classes.displayInPrint}>
               <Advantages withLogo advantagesList={advantages} />
             </Box>
             {chunk.map(({ data, number, position, quantity, svg }, index) => {
@@ -118,12 +118,12 @@ export default function ProductParams({
                 <Box
                   display="flex"
                   flexDirection="row"
-                  className={classes?.productMargins}
+                  className={classes.productMargins}
                   key={position}
                 >
                   <Box
                     sx={{ flex: '0 0 400px' }}
-                    className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`}
+                    className={`${classes.avoidBreakInside} ${classes.breakElementWithMargins}`}
                   >
                     <Box bgcolor="primary.light" p={1} mb={1.25}>
                       {/* <Typography variant="subtitle2" component="p">
@@ -152,7 +152,7 @@ export default function ProductParams({
                         data.map(({ subtitle, paramsList, id }) => {
                           return (
                             <Box
-                              className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`}
+                              className={`${classes.avoidBreakInside} ${classes.breakElementWithMargins}`}
                               key={id}
                             >
                               {subtitle && paramsList.length > 0 && (
@@ -183,7 +183,7 @@ export default function ProductParams({
                 </Box>
               );
             })}
-            <Box className={classes?.displayInPrint}>
+            <Box className={classes.displayInPrint}>
               <Payments paymentList={payments} classes={classes} />
             </Box>
           </Box>

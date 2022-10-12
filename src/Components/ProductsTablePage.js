@@ -11,20 +11,20 @@ export default function ProductsTablePage({
 }) {
   const chunkNumber = productTableData.length;
   return (
-    <Box className={classes?.breakElementWithMargins}>
+    <Box className={classes.breakElementWithMargins}>
       {productTableData.map((chunk, index) => (
         <Box
           key={chunk[0].id}
-          className={`${classes?.avoidBreakInside} ${classes?.pageBreakBefore} ${classes?.pageFrame}`}
+          className={`${classes.avoidBreakInside} ${classes.pageBreakBefore} ${classes.pageFrame}`}
         >
-          <Box mt={3} className={classes?.displayInPrint}>
+          <Box mt={3} className={classes.displayInPrint}>
             <Advantages withLogo advantagesList={advantages} />
           </Box>
           {chunk.map(
             ({ id, title, head, rows, total }) =>
               rows &&
               rows.length > 0 && (
-                <Box className={classes?.tableMargins} key={id}>
+                <Box className={classes.tableMargins} key={id}>
                   <Typography color="textSecondary" component="p">
                     {title}
                   </Typography>
@@ -53,7 +53,7 @@ export default function ProductsTablePage({
               </Box>
             </>
           )}
-          <Box className={classes?.displayInPrint}>
+          <Box className={classes.displayInPrint}>
             <Payments paymentList={payments} classes={classes} />
           </Box>
         </Box>

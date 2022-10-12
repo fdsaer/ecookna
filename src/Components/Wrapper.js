@@ -9,7 +9,7 @@ export default function Wrapper({ children, classes }) {
         boxSizing="border-box"
         px={3.75}
         pb={2}
-        className={classes?.wrapper}
+        className={classes.wrapper}
       >
         {children}
       </Box>

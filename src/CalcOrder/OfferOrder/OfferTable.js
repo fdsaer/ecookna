@@ -1,12 +1,5 @@
 import { fullSquare, fullWeight, getProductWeight } from './OfferData.js';
 
-const getRowsNumber = (table) => {
-  return data.reduce((acc, { paramsList }) => {
-    const usefulParams = paramsList.filter(({ value }) => value);
-    return (acc += usefulParams.length);
-  }, 0);
-};
-
 export default function getProductsData(products, tableRowsPerPage) {
   const productsTotalPrice = (products) =>
     products &&
@@ -79,7 +72,7 @@ export default function getProductsData(products, tableRowsPerPage) {
     //Таблица изделий
     {
       id: '0',
-      title: 'Изделия',
+      title: $p.msg.printing_form.table_titles.products,
       head: [
         { text: $p.msg.printing_form.table_columns.label, width: '25%', id: 0 },
         {
@@ -180,7 +173,7 @@ export default function getProductsData(products, tableRowsPerPage) {
     {
       //Таблица доп.комплектации
       id: '1',
-      title: 'Дополнительная комплектация',
+      title: $p.msg.printing_form.table_titles.extra_items,
       head: [
         { text: $p.msg.printing_form.table_columns.label, width: '25%', id: 0 },
         {
@@ -257,7 +250,7 @@ export default function getProductsData(products, tableRowsPerPage) {
     {
       //Таблица услуг
       id: '2',
-      title: 'Услуги',
+      title: $p.msg.printing_form.table_titles.services,
       head: [
         { text: $p.msg.printing_form.table_columns.label, width: '25%', id: 0 },
         { text: $p.msg.printing_form.table_columns.price, width: '13%', id: 1 },

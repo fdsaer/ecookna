@@ -34,13 +34,13 @@ export default function ProductsTablePage({
 
   const chunkNumber = productTableData.length;
   return React.createElement(Box, {
-    className: classes?.breakElementWithMargins
+    className: classes.breakElementWithMargins
   }, productTableData.map((chunk, index) => React.createElement(Box, {
     key: chunk[0].id,
-    className: `${classes?.avoidBreakInside} ${classes?.pageBreakBefore} ${classes?.pageFrame}`
+    className: `${classes.avoidBreakInside} ${classes.pageBreakBefore} ${classes.pageFrame}`
   }, React.createElement(Box, {
     mt: 3,
-    className: classes?.displayInPrint
+    className: classes.displayInPrint
   }, _ref), chunk.map(({
     id,
     title,
@@ -48,7 +48,7 @@ export default function ProductsTablePage({
     rows,
     total
   }) => rows && rows.length > 0 && React.createElement(Box, {
-    className: classes?.tableMargins,
+    className: classes.tableMargins,
     key: id
   }, React.createElement(Typography, {
     color: "textSecondary",
@@ -59,6 +59,6 @@ export default function ProductsTablePage({
     total: total,
     boldBorderlessHead: false
   }))), index === chunkNumber - 1 && React.createElement(React.Fragment, null, _ref2, _ref3), React.createElement(Box, {
-    className: classes?.displayInPrint
+    className: classes.displayInPrint
   }, _ref4))));
 }

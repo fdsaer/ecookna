@@ -101,14 +101,14 @@ export default function ProductParams({
     return newAcc;
   }, []);
   return React.createElement(Box, {
-    className: classes?.breakElementWithMargins
+    className: classes.breakElementWithMargins
   }, productListChunks.map(chunk => {
     return React.createElement(Box, {
-      className: `${classes?.pageBreakAfter} ${classes?.pageFrame}`,
+      className: `${classes.pageBreakAfter} ${classes.pageFrame}`,
       key: chunk[0]?.position
     }, React.createElement(Box, {
       mt: 3,
-      className: classes?.displayInPrint
+      className: classes.displayInPrint
     }, _ref), chunk.map(({
       data,
       number,
@@ -119,13 +119,13 @@ export default function ProductParams({
       return React.createElement(Box, {
         display: "flex",
         flexDirection: "row",
-        className: classes?.productMargins,
+        className: classes.productMargins,
         key: position
       }, React.createElement(Box, {
         sx: {
           flex: '0 0 400px'
         },
-        className: `${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`
+        className: `${classes.avoidBreakInside} ${classes.breakElementWithMargins}`
       }, React.createElement(Box, {
         bgcolor: "primary.light",
         p: 1,
@@ -154,7 +154,7 @@ export default function ProductParams({
         id
       }) => {
         return React.createElement(Box, {
-          className: `${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`,
+          className: `${classes.avoidBreakInside} ${classes.breakElementWithMargins}`,
           key: id
         }, subtitle && paramsList.length > 0 && React.createElement(Box, {
           bgcolor: "primary.light",
@@ -173,7 +173,7 @@ export default function ProductParams({
         }))));
       }))));
     }), React.createElement(Box, {
-      className: classes?.displayInPrint
+      className: classes.displayInPrint
     }, _ref3));
   }));
 }

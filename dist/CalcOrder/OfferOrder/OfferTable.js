@@ -1,16 +1,4 @@
 import { fullSquare, fullWeight, getProductWeight } from './OfferData.js';
-
-const getRowsNumber = table => {
-  return data.reduce((acc, {
-    paramsList
-  }) => {
-    const usefulParams = paramsList.filter(({
-      value
-    }) => value);
-    return acc += usefulParams.length;
-  }, 0);
-};
-
 export default function getProductsData(products, tableRowsPerPage) {
   const productsTotalPrice = products => products && products.map(product => product.price * product.quantity).reduce((acc, price) => acc += price, 0).round(0);
 
@@ -37,7 +25,7 @@ export default function getProductsData(products, tableRowsPerPage) {
   }).filter(product => product);
   const tables = [{
     id: '0',
-    title: 'Изделия',
+    title: $p.msg.printing_form.table_titles.products,
     head: [{
       text: $p.msg.printing_form.table_columns.label,
       width: '25%',
@@ -123,7 +111,7 @@ export default function getProductsData(products, tableRowsPerPage) {
     }] : null
   }, {
     id: '1',
-    title: 'Дополнительная комплектация',
+    title: $p.msg.printing_form.table_titles.extra_items,
     head: [{
       text: $p.msg.printing_form.table_columns.label,
       width: '25%',
@@ -182,7 +170,7 @@ export default function getProductsData(products, tableRowsPerPage) {
     }] : null
   }, {
     id: '2',
-    title: 'Услуги',
+    title: $p.msg.printing_form.table_titles.services,
     head: [{
       text: $p.msg.printing_form.table_columns.label,
       width: '25%',

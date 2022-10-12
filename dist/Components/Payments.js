@@ -18,7 +18,7 @@ export default function Payments({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    className: `${classes?.localFooter}`
+    className: `${classes.localFooter}`
   }, React.createElement(Box, {
     fontSize: 19,
     sx: {
