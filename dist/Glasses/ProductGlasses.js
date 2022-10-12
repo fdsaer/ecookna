@@ -1,5 +1,3 @@
-
-
 const {
   React,
   Typography,
@@ -17,7 +15,6 @@ export default function ProductGlasses({
   const {
     characteristic: ox
   } = row;
-
   const children = [React.createElement(TableRow, {
     key: `prod-${row.row}`
   }, React.createElement(Cell, {
@@ -25,7 +22,9 @@ export default function ProductGlasses({
   }, ox.name))];
 
   for (const prop of 'qsm') totals[prop].set(ox, 0);
+
   const img = totals.imgs.get(ox);
+
   for (const glr of ox.glasses) {
     children.push(React.createElement(GlassRow, {
       key: `gl-${row.row}-${glr.row}`,

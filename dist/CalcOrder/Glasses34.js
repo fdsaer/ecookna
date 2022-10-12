@@ -1,4 +1,4 @@
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 const {
   React,
@@ -13,6 +13,7 @@ const StyledFrame = React.lazy(() => import("../StyledFrame/Base.js"));
 const Header = React.lazy(() => import("../Header/HeaderGlasses.js"));
 const Footer = React.lazy(() => import("../Footer/index.js"));
 const Products = React.lazy(() => import("../Glasses/Products.js"));
+
 var _ref = React.createElement(Footer, null);
 
 class Glasses34 extends PrnProto {
@@ -27,6 +28,7 @@ class Glasses34 extends PrnProto {
         loaded: true
       });
       const imgs = new Map();
+
       for (const {
         characteristic
       } of obj.production) {
@@ -45,13 +47,16 @@ class Glasses34 extends PrnProto {
           }
         }
       }
+
       const attr = {
         res: new Map()
       };
+
       for (const [ox, elm] of imgs) {
         attr.elm = elm;
         await ox.draw(attr);
       }
+
       this.setState({
         imgs: attr.res
       });
@@ -61,6 +66,7 @@ class Glasses34 extends PrnProto {
       });
     });
   }
+
   render() {
     const {
       props: {
@@ -75,7 +81,6 @@ class Glasses34 extends PrnProto {
       },
       classes
     } = this;
-
     const totals = {
       imgs,
       q: new Map(),
@@ -83,16 +88,20 @@ class Glasses34 extends PrnProto {
       m: new Map()
     };
     const title = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format("DD.MM.YYYY")}`;
+
     if (externalWindow) {
       externalWindow.document.title = `${title} бла-бла-бла`;
     }
+
     let loading = loaded ? imgs ? "" : "Формируем эскизы заполнений..." : "Читаем продукции заказа...";
+
     const Cell = ({
       right,
       ...props
     }) => React.createElement(TableCell, _extends({
       className: `${classes.tableCell} ${right ? classes.alignRight : ""}`
     }, props));
+
     return React.createElement(React.Suspense, {
       fallback: "Загрузка..."
     }, React.createElement(StyledFrame, {
@@ -110,6 +119,7 @@ class Glasses34 extends PrnProto {
       Cell: Cell
     }), _ref));
   }
+
 }
 
 Glasses34.ref = "cefdf4d0-6c86-11ec-bee3-8b4e33301a47";

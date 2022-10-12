@@ -12,6 +12,6 @@ export default function Wrapper({
     boxSizing: "border-box",
     px: 3.75,
     pb: 2,
-    className: classes?.wrapper
+    className: classes.wrapper
   }, children));
 }

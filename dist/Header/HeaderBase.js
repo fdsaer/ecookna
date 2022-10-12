@@ -2,7 +2,9 @@ const {
   React,
   Typography
 } = $p.ui;
+
 var _ref = React.createElement("div", null, "Лого слева");
+
 export default function Header(props) {
   const {
     obj,

@@ -79,13 +79,13 @@ export default function ProductsTable({
       )}
       <TableBody>
         {rows &&
-          rows.map((product) => (
-            <TableRow>
-              {product.map(({ text, id }, index) => (
+          rows.map(({ data, id }) => (
+            <TableRow key={id}>
+              {data.map(({ text, id }, index) => (
                 <StyledTableCell
                   key={id}
                   style={{ fontWeight: 'normal' }}
-                  colSpan={index === 0 ? head.length - product.length + 1 : 0}
+                  colSpan={index === 0 ? head.length - data.length + 1 : 0}
                 >
                   {text}
                 </StyledTableCell>

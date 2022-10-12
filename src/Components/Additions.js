@@ -42,9 +42,8 @@ export default function Additions({ additions, title }) {
           <Box>
             {additions.map(({ image, id, text }) => {
               return (
-                <StyledBox>
+                <StyledBox key={id}>
                   <Box
-                    key={id}
                     sx={{
                       width: '112px',
                       height: '112px',

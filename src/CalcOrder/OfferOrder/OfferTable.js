@@ -1,12 +1,5 @@
 import { fullSquare, fullWeight, getProductWeight } from './OfferData.js';
 
-const getRowsNumber = (table) => {
-  return data.reduce((acc, { paramsList }) => {
-    const usefulParams = paramsList.filter(({ value }) => value);
-    return (acc += usefulParams.length);
-  }, 0);
-};
-
 export default function getProductsData(products, tableRowsPerPage) {
   const productsTotalPrice = (products) =>
     products &&
@@ -79,7 +72,7 @@ export default function getProductsData(products, tableRowsPerPage) {
     //Таблица изделий
     {
       id: '0',
-      title: 'Изделия',
+      title: $p.msg.printing_form.table_titles.products,
       head: [
         { text: $p.msg.printing_form.table_columns.label, width: '25%', id: 0 },
         {
@@ -115,8 +108,9 @@ export default function getProductsData(products, tableRowsPerPage) {
         },
       ],
       rows: productListSvg
-        ? productListSvg.map((product) => {
-            return [
+        ? productListSvg.map((product, index) => ({
+            id: index,
+            data: [
               {
                 text: product.characteristic.prod_nom.name_full
                   ? product.characteristic.prod_nom.name_full
@@ -140,8 +134,8 @@ export default function getProductsData(products, tableRowsPerPage) {
                 ).round(0),
                 id: 7,
               },
-            ];
-          })
+            ],
+          }))
         : null,
       total: productListSvg
         ? [
@@ -179,7 +173,7 @@ export default function getProductsData(products, tableRowsPerPage) {
     {
       //Таблица доп.комплектации
       id: '1',
-      title: 'Дополнительная комплектация',
+      title: $p.msg.printing_form.table_titles.extra_items,
       head: [
         { text: $p.msg.printing_form.table_columns.label, width: '25%', id: 0 },
         {
@@ -200,8 +194,9 @@ export default function getProductsData(products, tableRowsPerPage) {
         },
       ],
       rows: productListExtraItems
-        ? productListExtraItems.map((product) => {
-            return [
+        ? productListExtraItems.map((product, index) => ({
+            id: index,
+            data: [
               // {
               //   text: product.characteristic.prod_nom.name_full
               //     ? product.characteristic.prod_nom.name_full
@@ -227,8 +222,8 @@ export default function getProductsData(products, tableRowsPerPage) {
                 ).round(0),
                 id: 7,
               },
-            ];
-          })
+            ],
+          }))
         : null,
       total: productListExtraItems
         ? [
@@ -255,7 +250,7 @@ export default function getProductsData(products, tableRowsPerPage) {
     {
       //Таблица услуг
       id: '2',
-      title: 'Услуги',
+      title: $p.msg.printing_form.table_titles.services,
       head: [
         { text: $p.msg.printing_form.table_columns.label, width: '25%', id: 0 },
         { text: $p.msg.printing_form.table_columns.price, width: '13%', id: 1 },
@@ -271,8 +266,9 @@ export default function getProductsData(products, tableRowsPerPage) {
         },
       ],
       rows: productIsService
-        ? productIsService.map((product) => {
-            return [
+        ? productIsService.map((product, index) => ({
+            id: index,
+            data: [
               {
                 text: product.characteristic.prod_nom.name_full
                   ? product.characteristic.prod_nom.name_full
@@ -289,8 +285,8 @@ export default function getProductsData(products, tableRowsPerPage) {
                 ).round(0),
                 id: 3,
               },
-            ];
-          })
+            ],
+          }))
         : null,
       total: productIsService
         ? [

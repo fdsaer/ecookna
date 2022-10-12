@@ -3,9 +3,11 @@ const {
   React,
   Box
 } = $p.ui;
+
 var _ref = React.createElement(Logo, {
   width: "90px"
 });
+
 export default function Advantages({
   withLogo = true,
   advantagesList

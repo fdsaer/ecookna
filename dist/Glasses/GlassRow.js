@@ -1,5 +1,3 @@
-
-
 const {
   React,
   TableRow
@@ -17,7 +15,6 @@ export default function GlassRow({
     characteristic: ox,
     quantity
   } = row;
-
   const m = ox.elm_weight(glr.elm).round(1);
   totals.q.set(ox, totals.q.get(ox) + quantity);
   totals.s.set(ox, totals.s.get(ox) + quantity * glr.s);

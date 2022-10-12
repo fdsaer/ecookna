@@ -1,5 +1,3 @@
-
-
 const {
   React
 } = $p.ui;

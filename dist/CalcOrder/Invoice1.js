@@ -1,5 +1,3 @@
-
-
 const {
   React,
   Typography
@@ -8,7 +6,9 @@ const StyledFrame = React.lazy(() => import('../StyledFrame/Base.js'));
 const Header = React.lazy(() => import('../Header/index.js'));
 const Footer = React.lazy(() => import('../Footer/index.js'));
 import PrnProto from '../PrnProto.js';
+
 var _ref = React.createElement("div", null, "Загрузка...");
+
 class Invoice1 extends PrnProto {
   render() {
     const {
@@ -25,6 +25,7 @@ class Invoice1 extends PrnProto {
       classes: this.classes
     }, React.createElement(Header, this.props), React.createElement(Footer, this.props)));
   }
+
 }
 
 Invoice1.ref = '80ecfed0-8263-11ea-a364-7bbe5c31efe8';

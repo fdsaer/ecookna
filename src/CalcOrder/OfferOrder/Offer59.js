@@ -54,6 +54,7 @@ class Offer59 extends PrnProto {
           ProductsTablePage: module.ProductsTablePage,
         },
       });
+      this.setState({ componentsLoaded: true });
     });
 
     const imagesImport = import('./OfferImages.js');
@@ -83,13 +84,21 @@ class Offer59 extends PrnProto {
           PhoneChargerImage: module.PhoneChargerImage,
         },
       });
+      this.setState({ imagesLoaded: true });
     });
   }
 
   render() {
     const {
       props: { obj, attr, externalWindow },
-      state: { loaded, products, components, images },
+      state: {
+        loaded,
+        products,
+        components,
+        images,
+        componentsLoaded,
+        imagesLoaded,
+      },
       classes,
     } = this;
 
@@ -200,10 +209,12 @@ class Offer59 extends PrnProto {
           classes={classes}
           setClasses={this.setClasses}
           title={order}
-          loading={!components || !images}
+          loading={
+            !components || !componentsLoaded || !imagesLoaded || !classes
+          }
           // err={err}
         >
-          {components?.Header && (
+          {componentsLoaded && (
             <components.Header
               headerTitle="Индивидуальное решение"
               description="по изготовлению и установке светопрозрачных конструкций"

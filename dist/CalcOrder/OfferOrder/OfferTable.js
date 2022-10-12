@@ -1,19 +1,13 @@
 import { fullSquare, fullWeight, getProductWeight } from './OfferData.js';
-const getRowsNumber = table => {
-  return data.reduce((acc, {
-    paramsList
-  }) => {
-    const usefulParams = paramsList.filter(({
-      value
-    }) => value);
-    return acc += usefulParams.length;
-  }, 0);
-};
 export default function getProductsData(products, tableRowsPerPage) {
   const productsTotalPrice = products => products && products.map(product => product.price * product.quantity).reduce((acc, price) => acc += price, 0).round(0);
+
   const productsTotalDiscount = products => products && products.map(product => product.price * product.quantity * product.discount).reduce((acc, discount) => acc += discount, 0);
+
   const productsTotalSum = products => products && products.map(product => product.price * product.quantity * (1 - product.discount)).reduce((acc, price) => acc += price, 0).round(0);
+
   const productsTotalQuantity = (products) => products && products.map(product => product.quantity).reduce((acc, quantity) => acc += quantity, 0);
+
   const productListSvg = products.map(product => {
     if (product.characteristic.cnn_elmnts._obj.length || product.characteristic.coordinates._obj.length) {
       return product;
@@ -29,10 +23,9 @@ export default function getProductsData(products, tableRowsPerPage) {
       return product;
     }
   }).filter(product => product);
-  const tables = [
-  {
+  const tables = [{
     id: '0',
-    title: 'Изделия',
+    title: $p.msg.printing_form.table_titles.products,
     head: [{
       text: $p.msg.printing_form.table_columns.label,
       width: '25%',
@@ -66,8 +59,9 @@ export default function getProductsData(products, tableRowsPerPage) {
       width: '13%',
       id: 7
     }],
-    rows: productListSvg ? productListSvg.map(product => {
-      return [{
+    rows: productListSvg ? productListSvg.map((product, index) => ({
+      id: index,
+      data: [{
         text: product.characteristic.prod_nom.name_full ? product.characteristic.prod_nom.name_full : product.characteristic.sys.name,
         id: 0
       }, {
@@ -79,8 +73,7 @@ export default function getProductsData(products, tableRowsPerPage) {
       }, {
         text: (getProductWeight(product) * product.quantity).round(2),
         id: 4
-      },
-      {
+      }, {
         text: (product.s * product.quantity).round(2),
         id: 3
       }, {
@@ -92,8 +85,8 @@ export default function getProductsData(products, tableRowsPerPage) {
       }, {
         text: (product.price * product.quantity * (1 - product.discount)).round(0),
         id: 7
-      }];
-    }) : null,
+      }]
+    })) : null,
     total: productListSvg ? [{
       text: $p.msg.printing_form.table_columns.total,
       id: 0
@@ -118,7 +111,7 @@ export default function getProductsData(products, tableRowsPerPage) {
     }] : null
   }, {
     id: '1',
-    title: 'Дополнительная комплектация',
+    title: $p.msg.printing_form.table_titles.extra_items,
     head: [{
       text: $p.msg.printing_form.table_columns.label,
       width: '25%',
@@ -140,9 +133,9 @@ export default function getProductsData(products, tableRowsPerPage) {
       width: '13%',
       id: 4
     }],
-    rows: productListExtraItems ? productListExtraItems.map(product => {
-      return [
-      {
+    rows: productListExtraItems ? productListExtraItems.map((product, index) => ({
+      id: index,
+      data: [{
         text: product.characteristic.prod_nom.name_full && product.characteristic.prod_nom.name_full !== 'Аксессуары' ? product.characteristic.prod_nom.name_full : product.characteristic.name,
         id: 0
       }, {
@@ -157,8 +150,8 @@ export default function getProductsData(products, tableRowsPerPage) {
       }, {
         text: (product.price * product.quantity * (1 - product.discount)).round(0),
         id: 7
-      }];
-    }) : null,
+      }]
+    })) : null,
     total: productListExtraItems ? [{
       text: $p.msg.printing_form.table_columns.total,
       id: 0
@@ -177,7 +170,7 @@ export default function getProductsData(products, tableRowsPerPage) {
     }] : null
   }, {
     id: '2',
-    title: 'Услуги',
+    title: $p.msg.printing_form.table_titles.services,
     head: [{
       text: $p.msg.printing_form.table_columns.label,
       width: '25%',
@@ -195,8 +188,9 @@ export default function getProductsData(products, tableRowsPerPage) {
       width: '13%',
       id: 3
     }],
-    rows: productIsService ? productIsService.map(product => {
-      return [{
+    rows: productIsService ? productIsService.map((product, index) => ({
+      id: index,
+      data: [{
         text: product.characteristic.prod_nom.name_full ? product.characteristic.prod_nom.name_full : product.nom.name_full,
         id: 0
       }, {
@@ -208,8 +202,8 @@ export default function getProductsData(products, tableRowsPerPage) {
       }, {
         text: (product.price * product.quantity * (1 - product.discount)).round(0),
         id: 3
-      }];
-    }) : null,
+      }]
+    })) : null,
     total: productIsService ? [{
       text: $p.msg.printing_form.table_columns.total,
       id: 0
@@ -231,11 +225,13 @@ export default function getProductsData(products, tableRowsPerPage) {
     const lastChunkRowsSumm = Array.isArray(lastChunk) ? lastChunk.reduce((acc, {
       rows
     }) => rows ? acc += rows.length : 0, 0) : 0;
+
     if (Array.isArray(lastChunk) && tableRowsNumber + lastChunkRowsSumm < tableRowsPerPage) {
       newAcc[newAcc.length - 1].push(table);
     } else {
       newAcc.push([table]);
     }
+
     return newAcc;
   }, []);
   return tablesChunks;

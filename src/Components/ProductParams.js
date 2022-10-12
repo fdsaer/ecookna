@@ -24,7 +24,7 @@ const getParamCount = (data) => {
 };
 
 const ParamItem = ({ name, value, id }) => (
-  <ListItem disableGutters dense="false" key={id}>
+  <ListItem disableGutters dense={true} key={id}>
     <Typography component="p" variant="body2">
       {name && (
         <Typography variant="subtitle2" component="b">
@@ -75,7 +75,7 @@ export default function ProductParams({
   }, []);
 
   return (
-    <Box className={classes?.breakElementWithMargins}>
+    <Box className={classes.breakElementWithMargins}>
       {/* {title && (
         <>
           <Box mt={1.5} mb={0.75}>
@@ -106,8 +106,11 @@ export default function ProductParams({
       )} */}
       {productListChunks.map((chunk) => {
         return (
-          <Box className={`${classes?.pageBreakAfter} ${classes?.pageFrame}`}>
-            <Box mt={3} className={classes?.displayInPrint}>
+          <Box
+            className={`${classes.pageBreakAfter} ${classes.pageFrame}`}
+            key={chunk[0]?.position}
+          >
+            <Box mt={3} className={classes.displayInPrint}>
               <Advantages withLogo advantagesList={advantages} />
             </Box>
             {chunk.map(({ data, number, position, quantity, svg }, index) => {
@@ -115,11 +118,12 @@ export default function ProductParams({
                 <Box
                   display="flex"
                   flexDirection="row"
-                  className={classes?.productMargins}
+                  className={classes.productMargins}
+                  key={position}
                 >
                   <Box
                     sx={{ flex: '0 0 400px' }}
-                    className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`}
+                    className={`${classes.avoidBreakInside} ${classes.breakElementWithMargins}`}
                   >
                     <Box bgcolor="primary.light" p={1} mb={1.25}>
                       {/* <Typography variant="subtitle2" component="p">
@@ -139,54 +143,65 @@ export default function ProductParams({
                       {/* <Typography variant="subtitle2" component="p">
                   Позиция: {position}
                 </Typography>   */}
-                  <Typography variant="subtitle2" component="p">
-                    &nbsp;
-                  </Typography>
-                </Box>
-                <Box pl={5.25}>
-                  {data &&
-                    data.map(({ subtitle, paramsList, productSystem, id }) => {
-                      return (
-                        <Box
-                          className={`${classes?.avoidBreakInside} ${classes?.breakElementWithMargins}`}
-                          key={id}
-                        >
-                          {subtitle && (paramsList.length > 0 || productSystem) && (   
-                            <Box bgcolor="primary.light" p={1}>
-                              <Typography variant="subtitle2">
-                                {subtitle}:                                      
-                              </Typography>
-                            </Box>
-                          )}
-                          <List>                          
-                            {productSystem && (
-                              <Typography variant="subtitle2" component="b">
-                                Система:
-                                <Typography variant="body2" component="span" style={{ wordBreak: 'break-word' }}>
-                                  {` ${productSystem}`}
-                                </Typography>
-                              </Typography>
-                            )}
-                            {paramsList.map(
-                              ({ name, value, id }) =>
-                                value && (
-                                  <ParamItem
-                                    name={name}
-                                    value={value}
-                                    id={id}
-                                  />
-                                )
-                            )}                            
-                          </List>
-                        </Box>
-                      );
-                    })}                      
+                      <Typography variant="subtitle2" component="p">
+                        &nbsp;
+                      </Typography>
+                    </Box>
+                    <Box pl={5.25}>
+                      {data &&
+                        data.map(
+                          ({ subtitle, paramsList, productSystem, id }) => {
+                            return (
+                              <Box
+                                className={`${classes.avoidBreakInside} ${classes.breakElementWithMargins}`}
+                                key={id}
+                              >
+                                {subtitle &&
+                                  (paramsList.length > 0 || productSystem) && (
+                                    <Box bgcolor="primary.light" p={1}>
+                                      <Typography variant="subtitle2">
+                                        {subtitle}:
+                                      </Typography>
+                                    </Box>
+                                  )}
+                                <List>
+                                  {productSystem && (
+                                    <Typography
+                                      variant="subtitle2"
+                                      component="b"
+                                    >
+                                      Система:
+                                      <Typography
+                                        variant="body2"
+                                        component="span"
+                                        style={{ wordBreak: 'break-word' }}
+                                      >
+                                        {` ${productSystem}`}
+                                      </Typography>
+                                    </Typography>
+                                  )}
+                                  {paramsList.map(
+                                    ({ name, value, id }) =>
+                                      value && (
+                                        <ParamItem
+                                          name={name}
+                                          value={value}
+                                          id={id}
+                                          key={id}
+                                        />
+                                      )
+                                  )}
+                                </List>
+                              </Box>
+                            );
+                          }
+                        )}
+                    </Box>
                   </Box>
                 </Box>
-              </Box>
               );
             })}
-            <Box className={classes?.displayInPrint}>
+            <Box className={classes.displayInPrint}>
               <Payments paymentList={payments} classes={classes} />
             </Box>
           </Box>

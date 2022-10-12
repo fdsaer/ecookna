@@ -1,5 +1,3 @@
-
-
 const {
   React,
   makeStyles,
@@ -18,10 +16,12 @@ export default function StyledFrame({
 }) {
   if (!classes) {
     classes = makeStyles(() => stylesBase(theme))();
+
     if (!loading) {
       loading = 'Загрузка...';
     }
   }
+
   setClasses(classes);
   return React.createElement(ThemeProvider, {
     theme: theme
@@ -31,11 +31,9 @@ export default function StyledFrame({
     classes: classes,
     title: title,
     text: loading
-  }) : React.Children.map(children, child => child ? React.cloneElement(child, {
-    ...props,
+  }) : React.Children.map(children, child => child ? React.cloneElement(child, { ...props,
     classes,
-    style: {
-      ...child.props.style
+    style: { ...child.props.style
     }
   }) : null)));
 }

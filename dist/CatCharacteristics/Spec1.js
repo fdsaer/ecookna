@@ -1,9 +1,8 @@
-
-
 const {
   React,
   Typography
 } = $p.ui;
+
 class Spec1 extends React.Component {
   render() {
     const {
@@ -13,6 +12,7 @@ class Spec1 extends React.Component {
     } = this.props;
     return React.createElement(Typography, null, obj.toString());
   }
+
 }
 
 Spec1.ref = 'b7bb50e0-ed5d-11eb-bea7-3f8021c1bb8d';

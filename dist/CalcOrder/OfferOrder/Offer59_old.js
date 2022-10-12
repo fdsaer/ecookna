@@ -1,4 +1,4 @@
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 const {
   React,
@@ -6,10 +6,12 @@ const {
 } = $p.ui;
 import PrnProto from '../../PrnProto.js';
 const StyledFrame = React.lazy(() => import('../../StyledFrame/index.js'));
+
 const Svg = ({
   source
 }) => {
   const __html = $p.utils.scale_svg(source, 246, 0);
+
   return React.createElement("div", {
     style: {
       textAlign: 'center'
@@ -19,17 +21,27 @@ const Svg = ({
     }
   });
 };
+
 var _ref = React.createElement("b", null, "Масса общ/зап, кг:");
+
 var _ref2 = React.createElement("b", null, "Количество, шт:");
+
 var _ref3 = React.createElement("b", null, "Проф.система:");
+
 var _ref4 = React.createElement("li", {
   class: "red"
 }, React.createElement("b", null, "Цвет основы:"), " Белая");
+
 var _ref5 = React.createElement("b", null, "Цвет:");
+
 var _ref6 = React.createElement("p", null, "Дополнительные параметры:");
+
 var _ref7 = React.createElement("ul", null, React.createElement("li", null, React.createElement("b", null, "Цвет уплотнения:"), " Серый"));
+
 var _ref8 = React.createElement("p", null, "Стеклопакеты:");
+
 var _ref9 = React.createElement("p", null, "201 GU UNI JET Пов/Откидное:");
+
 var _ref10 = React.createElement("ul", null, React.createElement("li", {
   class: "red"
 }, React.createElement("b", null, "Ручка/Цвет:"), " Maco Rhapsody/Белый"), React.createElement("li", {
@@ -39,7 +51,9 @@ var _ref10 = React.createElement("ul", null, React.createElement("li", {
 }, React.createElement("b", null, "Тип Оконных петель:"), " Стандарт"), React.createElement("li", {
   class: "red"
 }, React.createElement("b", null, "Микропроветривание:"), " щелевое"));
+
 var _ref11 = React.createElement("p", null, "Примечание:");
+
 var _ref12 = React.createElement("div", {
   class: "o-details__21"
 }, React.createElement("table", null, React.createElement("colgroup", null, React.createElement("col", {
@@ -49,6 +63,7 @@ var _ref12 = React.createElement("div", {
 }), React.createElement("col", {
   width: "15%"
 })), React.createElement("tr", null, React.createElement("th", null, "Наименование"), React.createElement("th", null, "Цвет"), React.createElement("th", null, "Кол-во, шт.")), React.createElement("tr", null, React.createElement("td", null, "Подставочный профиль Veka"), React.createElement("td", null), React.createElement("td", null, "1"))));
+
 const Products = ({
   props,
   product
@@ -87,46 +102,61 @@ const Products = ({
     class: "green"
   }, product.note)))))), _ref12);
 };
+
 var _ref13 = React.createElement("h1", {
   class: "o-cover__2"
 }, "Коммерческое ", React.createElement("br", null), " предложение");
+
 var _ref14 = React.createElement("p", {
   class: "o-cover__3"
 }, "по изготовлению и установке ", React.createElement("br", null), "светопрозрачных конструкций");
+
 var _ref15 = React.createElement("p", {
   class: "o-cover__5"
 }, "Предложение действительно в течении 10 календарных дней");
+
 var _ref16 = React.createElement("p", {
   class: "o-cover__7"
 }, "Ваш персональный менеджер:");
+
 var _ref17 = React.createElement("div", {
   class: "o-cover__12"
 }, "Телефон менеджера");
+
 var _ref18 = React.createElement("div", {
   class: "o-cover__13"
 }, "Почта менеджера");
+
 var _ref19 = React.createElement("p", {
   class: "o-cover__14"
 }, "Офис продаж:");
+
 var _ref20 = React.createElement("div", {
   class: "o-cover__15"
 }, "Адрес офиса");
+
 var _ref21 = React.createElement("p", {
   class: "o-cover__18"
 }, "ecookna.ru");
+
 var _ref22 = React.createElement("div", {
   class: "o-details__11"
 }, "Ваш персональный ", React.createElement("br", null), " менеджер:");
+
 var _ref23 = React.createElement("br", null);
+
 var _ref24 = React.createElement("span", {
   class: "red"
 }, "+7 916 358-56-98, kolesnikov@ecookna.ru");
+
 var _ref25 = React.createElement("p", {
   class: "o-details__5"
 }, "В комплектацию Вашего заказа входит:");
+
 var _ref26 = React.createElement("div", {
   class: "o-details__6"
 });
+
 var _ref27 = React.createElement("colgroup", null, React.createElement("col", {
   width: "25%"
 }), React.createElement("col", null), React.createElement("col", {
@@ -140,10 +170,13 @@ var _ref27 = React.createElement("colgroup", null, React.createElement("col", {
 }), React.createElement("col", {
   width: "13%"
 }));
+
 var _ref28 = React.createElement("tr", null, React.createElement("td", null, "Изделия"), React.createElement("td", null, "Цвет"), React.createElement("td", null, "Кол-во, шт."), React.createElement("td", null, "Площадь, кв.м."), React.createElement("td", null, "Цена ", React.createElement("br", null), "без скидки"), React.createElement("td", null, "Скидка, %"), React.createElement("td", null, "Сумма"));
+
 var _ref29 = React.createElement("td", {
   colspan: "2"
 }, "Всего");
+
 var _ref30 = React.createElement("colgroup", null, React.createElement("col", {
   width: "61%"
 }), React.createElement("col", {
@@ -153,14 +186,19 @@ var _ref30 = React.createElement("colgroup", null, React.createElement("col", {
 }), React.createElement("col", {
   width: "13%"
 }));
+
 var _ref31 = React.createElement("th", null, "ИТОГО");
+
 var _ref32 = React.createElement("th", null, "0");
+
 var _ref33 = React.createElement("p", {
   class: "o-details__22"
 }, "*Предложение действительно в течение 10 календарных дней.");
+
 var _ref34 = React.createElement("p", {
   class: "o-details__23"
 }, "Для вашего удобства, точный расчет стоимости, заключение договора и оплата могут быть осуществлены на объекте в день проведения замера.");
+
 var _ref35 = React.createElement("div", {
   class: "o-details__24"
 }, React.createElement("div", {
@@ -172,22 +210,31 @@ var _ref35 = React.createElement("div", {
   target: "_blank",
   href: "https://www.ecookna.ru/clients/napisat-otzyv/"
 }, "Оставить отзыв")));
+
 var _ref36 = React.createElement("p", {
   class: "o-info__2"
 }, "Мы производим особенные окна для Вас. Учитываем не только интерьерные и экстерьерные особенности помещения, но и функциональную нагрузку каждой комнаты и строения.");
+
 var _ref37 = React.createElement("p", {
   class: "o-info__3"
 }, "Что мы предлагаем? - Тысячи комбинаций окон, дверей и других продуктов, для самых взыскательных заказчиков.");
+
 var _ref38 = React.createElement("p", {
   class: "o-info__5"
 }, "Комплектующие от мировых лидеров:");
+
 var _ref39 = React.createElement("div", {
   class: "o-info__9"
 }, React.createElement("span", null, "Переходите"), " по сылкам:");
+
 var _ref40 = React.createElement("p", null, "Собственное производство ");
+
 var _ref41 = React.createElement("p", null, "Панорама нашего шоу-рума ");
+
 var _ref42 = React.createElement("p", null, "Производство окон ПВХ");
+
 var _ref43 = React.createElement("p", null, "Постоянный участник телепроектов");
+
 class Offer59 extends PrnProto {
   componentDidMount() {
     const {
@@ -196,8 +243,7 @@ class Offer59 extends PrnProto {
       print
     } = this.props;
     console.log(obj);
-    obj
-    .load_linked_refs().then(async () => {
+    obj.load_linked_refs().then(async () => {
       this.setState({
         loaded: true
       });
@@ -232,6 +278,7 @@ class Offer59 extends PrnProto {
       });
     });
   }
+
   render() {
     const {
       props: {
@@ -250,7 +297,9 @@ class Offer59 extends PrnProto {
       email: ''
     };
     const fullSquare = products && products.map(product => product.s * product.quantity).reduce((acc, productSquare) => acc += productSquare, 0).round(2);
+
     const getProductWeight = product => product.characteristic.constructions.map(construction => product.characteristic.elm_weight(-1 * construction.cnstr)).reduce((acc, constructionWeight) => acc += constructionWeight, 0);
+
     const fullWeight = products && products.map(product => getProductWeight(product) * product.quantity).reduce((acc, productWeight) => acc += productWeight, 0).round();
     obj.leading_manager.contact_information.forEach(contact => {
       if (contact.type === 'Телефон') managerContacts.phone = contact.presentation;
@@ -261,12 +310,14 @@ class Offer59 extends PrnProto {
     });
     const title = `№${obj.number_doc} от ${moment(obj.date).format('DD MMMM YYYY')} г.`;
     let loading = '';
+
     const Cell = ({
       right,
       ...props
     }) => React.createElement(TableCell, _extends({
       className: `${classes.tableCell} ${right ? classes.alignRight : ''}`
     }, props));
+
     return React.createElement(React.Suspense, {
       fallback: "Загрузка..."
     }, React.createElement(StyledFrame, {
@@ -402,6 +453,7 @@ class Offer59 extends PrnProto {
       src: images?.OInfo10_4
     })), _ref43))))))));
   }
+
 }
 
 Offer59.ref = 'cefdf4d0-6c86-11ec-bee3-8b4e33301a50';

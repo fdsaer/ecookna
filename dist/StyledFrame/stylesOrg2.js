@@ -1,5 +1,3 @@
-
-
 export default function styles(theme) {
   console.log(theme);
   console.log(theme.spacing(5));

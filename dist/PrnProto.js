@@ -1,8 +1,7 @@
-
-
 const {
   React
 } = $p.ui;
+
 const addPrintStyles = selector => {
   const css = `@page {margin: 0}`;
   const head = document.head || document.getElementsByTagName('head')[0];
@@ -12,6 +11,7 @@ const addPrintStyles = selector => {
   style.appendChild(document.createTextNode(css));
   head.appendChild(style);
 };
+
 const removePrintStyles = selector => {
   const head = document.head || document.getElementsByTagName('head')[0];
   const customPrintStyles = document.querySelectorAll(selector);
@@ -19,6 +19,7 @@ const removePrintStyles = selector => {
     head.removeChild(styleTag);
   });
 };
+
 function add_table_titles(msg) {
   msg.printing_form = {
     table_columns: {
@@ -31,6 +32,11 @@ function add_table_titles(msg) {
       discount: 'Скидка (%)',
       final_price: 'Цена со скидкой (руб.)',
       total: 'Всего'
+    },
+    table_titles: {
+      products: 'Изделия',
+      extra_items: 'Дополнительная комплектация',
+      services: 'Услуги'
     },
     additions_labels: {
       garage_gate: 'Гаражные ворота',
@@ -45,26 +51,35 @@ function add_table_titles(msg) {
     }
   };
 }
+
 class PrnProto extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loaded: false
+      loaded: false,
+      componentsLoaded: false,
+      imagesLoaded: false
     };
+
     this.setClasses = classes => {
       addPrintStyles('data-custom-print');
       this.classes = classes;
       props.copyStyles && props.copyStyles();
     };
+
     this.componentWillMount = () => {
       add_table_titles($p.msg);
     };
+
     this.componentWillUnmount = () => {
       removePrintStyles('[data-custom-print]');
     };
   }
+
   render() {
     return 'PrnProto';
   }
+
 }
+
 export default PrnProto;

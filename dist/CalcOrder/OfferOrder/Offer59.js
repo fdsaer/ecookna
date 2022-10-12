@@ -1,4 +1,3 @@
-
 import PrnProto from '../../PrnProto.js';
 import { fullSquare, fullWeight, getProductsList, getManagerInfo, getAddressInfo } from './OfferData.js';
 import getProductsData from './OfferTable.js';
@@ -8,6 +7,7 @@ const {
   Typography
 } = $p.ui;
 const StyledFrame = React.lazy(() => import('../../StyledFrame/index.js'));
+
 var _ref = React.createElement(Box, {
   color: "textSecondary",
   fontSize: "22px",
@@ -17,11 +17,13 @@ var _ref = React.createElement(Box, {
   color: "textSecondary",
   component: "p"
 }, "Ассортимент компании ЭКООКНА"));
+
 var _ref2 = React.createElement(Typography, {
   variant: "inherit",
   color: "textSecondary",
   component: "p"
 }, "Переходите по ссылкам:");
+
 class Offer59 extends PrnProto {
   componentDidMount() {
     const {
@@ -30,8 +32,7 @@ class Offer59 extends PrnProto {
       print
     } = this.props;
     console.log(obj);
-    obj
-    .load_linked_refs().then(async () => {
+    obj.load_linked_refs().then(async () => {
       this.setState({
         loaded: true
       });
@@ -64,6 +65,9 @@ class Offer59 extends PrnProto {
           ProductsTablePage: module.ProductsTablePage
         }
       });
+      this.setState({
+        componentsLoaded: true
+      });
     });
     const imagesImport = import('./OfferImages.js');
     imagesImport.then(module => {
@@ -92,8 +96,12 @@ class Offer59 extends PrnProto {
           PhoneChargerImage: module.PhoneChargerImage
         }
       });
+      this.setState({
+        imagesLoaded: true
+      });
     });
   }
+
   render() {
     const {
       props: {
@@ -105,7 +113,9 @@ class Offer59 extends PrnProto {
         loaded,
         products,
         components,
-        images
+        images,
+        componentsLoaded,
+        imagesLoaded
       },
       classes
     } = this;
@@ -201,6 +211,7 @@ class Offer59 extends PrnProto {
     if (externalWindow) {
       externalWindow.document.title = order;
     }
+
     return React.createElement(React.Suspense, {
       fallback: "Загрузка..."
     }, React.createElement(StyledFrame, {
@@ -209,8 +220,8 @@ class Offer59 extends PrnProto {
       classes: classes,
       setClasses: this.setClasses,
       title: order,
-      loading: !components || !images
-    }, components?.Header && React.createElement(components.Header, {
+      loading: !components || !componentsLoaded || !imagesLoaded || !classes
+    }, componentsLoaded && React.createElement(components.Header, {
       headerTitle: "Индивидуальное решение",
       description: "по изготовлению и установке светопрозрачных конструкций",
       order: order,
@@ -287,6 +298,7 @@ class Offer59 extends PrnProto {
       manager: manager
     })))));
   }
+
 }
 
 Offer59.ref = 'cefdf4d0-6c86-11ec-bee3-8b4e33301a48';

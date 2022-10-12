@@ -6,7 +6,7 @@ export default function Payments({ paymentList, classes }) {
       display="flex"
       justifyContent="space-between"
       alignItems="center"
-      className={`${classes?.localFooter}`}
+      className={`${classes.localFooter}`}
     >
       <Box fontSize={19} sx={{ flex: '0 0 225px' }}>
         <Typography color="textSecondary" variant="inherit" component="p">

@@ -37,6 +37,11 @@ function add_table_titles(msg) {
       final_price: 'Цена со скидкой (руб.)',
       total: 'Всего',
     },
+    table_titles: {
+      products: 'Изделия',
+      extra_items: 'Дополнительная комплектация',
+      services: 'Услуги',
+    },
     additions_labels: {
       garage_gate: 'Гаражные ворота',
       balcony_decoration: 'Отделка балконов',
@@ -54,7 +59,11 @@ class PrnProto extends React.Component {
   constructor(props) {
     super(props);
     // props.skipCss && props.skipCss();
-    this.state = { loaded: false };
+    this.state = {
+      loaded: false,
+      componentsLoaded: false,
+      imagesLoaded: false,
+    };
     this.setClasses = (classes) => {
       addPrintStyles('data-custom-print');
       this.classes = classes;

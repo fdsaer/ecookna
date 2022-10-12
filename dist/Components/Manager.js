@@ -4,8 +4,11 @@ const {
   Box,
   Typography
 } = $p.ui;
+
 var _ref = React.createElement(Typography, null, "Ваш персональный ", React.createElement("br", null), " менеджер:");
+
 var _ref2 = React.createElement("br", null);
+
 export default function Manager({
   title,
   manager

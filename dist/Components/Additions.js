@@ -29,9 +29,11 @@ const StyledBox = withStyles(theme => ({
     }
   }
 }))(Box);
+
 var _ref = React.createElement(Dot, {
   fontSize: "small"
 });
+
 export default function Additions({
   additions,
   title
@@ -49,8 +51,9 @@ export default function Additions({
     id,
     text
   }) => {
-    return React.createElement(StyledBox, null, React.createElement(Box, {
-      key: id,
+    return React.createElement(StyledBox, {
+      key: id
+    }, React.createElement(Box, {
       sx: {
         width: '112px',
         height: '112px',
