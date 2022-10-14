@@ -221,7 +221,7 @@ class Offer59 extends PrnProto {
       setClasses: this.setClasses,
       title: order,
       loading: !components || !componentsLoaded || !imagesLoaded || !classes
-    }, componentsLoaded && React.createElement(components.Header, {
+    }, components?.Header && React.createElement(components.Header, {
       headerTitle: "Индивидуальное решение",
       description: "по изготовлению и установке светопрозрачных конструкций",
       order: order,
@@ -251,7 +251,8 @@ class Offer59 extends PrnProto {
       productList: productList,
       classes: classes,
       advantages: advantages,
-      payments: payments
+      payments: payments,
+      rowsPerPage: 25
     }), components?.ProductsTablePage && productTableData && React.createElement(components.ProductsTablePage, {
       classes: classes,
       advantages: advantages,
