@@ -65,7 +65,7 @@ const getExtendedParams = (product) => {
         ? `${
             currentConstruction.furn.name
           } Исполнение - ${currentConstruction.direction.name.toLowerCase()}`
-        : '';        
+        : '';
     }
     extendedParams[name] = product.characteristic.params
       .map((param) => {
@@ -80,7 +80,7 @@ const getExtendedParams = (product) => {
 };
 
 const getProductCharacteristics = (product) => {
-  const extendedParams = getExtendedParams(product);  
+  const extendedParams = getExtendedParams(product);
   return [
     {
       subtitle: '',
@@ -116,20 +116,21 @@ const getProductCharacteristics = (product) => {
       subtitle: 'Заполнения',
       paramsList: getProductGlassesParams(product),
       id: 2,
-    },    
+    },
     ...Object.entries(extendedParams)
-      .filter(([key]) => key && key !== 'Дополнительные параметры')   
+      .filter(([key]) => key && key !== 'Дополнительные параметры')
       .map(([key, list], index) => {
         return {
           subtitle: `Створка ${index + 1}: фурнитура`,
-          productSystem: key,            
-          paramsList:
-          list.map(([name, value], index) => ({                  
-            name,
-            value,            
-            id: index,
-          })),
-          id: `2${index}`, 
+          paramsList: [
+            { name: 'Система', value: key, id: key },
+            ...list.map(([name, value], index) => ({
+              name,
+              value,
+              id: index,
+            })),
+          ],
+          id: `2${index}`,
         };
       }),
     {

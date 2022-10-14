@@ -214,7 +214,7 @@ class Offer59 extends PrnProto {
           }
           // err={err}
         >
-          {componentsLoaded && (
+          {components?.Header && (
             <components.Header
               headerTitle="Индивидуальное решение"
               description="по изготовлению и установке светопрозрачных конструкций"
@@ -255,6 +255,7 @@ class Offer59 extends PrnProto {
                     classes={classes}
                     advantages={advantages}
                     payments={payments}
+                    rowsPerPage={25}
                   />
                 )}
               {components?.ProductsTablePage && productTableData && (

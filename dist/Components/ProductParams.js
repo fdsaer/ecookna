@@ -73,8 +73,7 @@ export default function ProductParams({
   classes,
   advantages,
   payments,
-  rowsInParams = 30,
-  chunksInBlock = 2
+  rowsPerPage = 24
 }) {
   var _ref3 = React.createElement(Payments, {
     paymentList: payments,
@@ -90,9 +89,9 @@ export default function ProductParams({
     const count = getParamCount(product.data);
     const lastChunk = acc[acc.length - 1];
     const newAcc = acc.slice();
-    const lastChunkItem = Array.isArray(lastChunk) && lastChunk[lastChunk.length - 1];
+    const lastChunkRowsSumm = Array.isArray(lastChunk) ? lastChunk.reduce((acc, lastChunkItem) => acc + getParamCount(lastChunkItem.data), 0) : 0;
 
-    if (Array.isArray(lastChunk) && lastChunk.length < chunksInBlock && count + getParamCount(lastChunkItem.data) < rowsInParams) {
+    if (Array.isArray(lastChunk) && count + lastChunkRowsSumm < rowsPerPage) {
       newAcc[newAcc.length - 1].push(product);
     } else {
       newAcc.push([product]);
@@ -151,27 +150,17 @@ export default function ProductParams({
       }, data && data.map(({
         subtitle,
         paramsList,
-        productSystem,
         id
       }) => {
         return React.createElement(Box, {
           className: `${classes.avoidBreakInside} ${classes.breakElementWithMargins}`,
           key: id
-        }, subtitle && (paramsList.length > 0 || productSystem) && React.createElement(Box, {
+        }, subtitle && paramsList.length > 0 && React.createElement(Box, {
           bgcolor: "primary.light",
           p: 1
         }, React.createElement(Typography, {
           variant: "subtitle2"
-        }, subtitle, ":")), React.createElement(List, null, productSystem && React.createElement(Typography, {
-          variant: "subtitle2",
-          component: "b"
-        }, "Система:", React.createElement(Typography, {
-          variant: "body2",
-          component: "span",
-          style: {
-            wordBreak: 'break-word'
-          }
-        }, ` ${productSystem}`)), paramsList.map(({
+        }, subtitle, ":")), React.createElement(List, null, paramsList.map(({
           name,
           value,
           id

@@ -51,8 +51,7 @@ export default function ProductParams({
   classes,
   advantages,
   payments,
-  rowsInParams = 30,
-  chunksInBlock = 2,
+  rowsPerPage = 24,
 }) {
   // Группирует список карточек объединяя карточки с небольшим количеством параметров
   // для того, чтобы при печати выводить по несколько карточек на одной странице
@@ -60,13 +59,13 @@ export default function ProductParams({
     const count = getParamCount(product.data);
     const lastChunk = acc[acc.length - 1];
     const newAcc = acc.slice();
-    const lastChunkItem =
-      Array.isArray(lastChunk) && lastChunk[lastChunk.length - 1];
-    if (
-      Array.isArray(lastChunk) &&
-      lastChunk.length < chunksInBlock &&
-      count + getParamCount(lastChunkItem.data) < rowsInParams
-    ) {
+    const lastChunkRowsSumm = Array.isArray(lastChunk)
+      ? lastChunk.reduce(
+          (acc, lastChunkItem) => acc + getParamCount(lastChunkItem.data),
+          0
+        )
+      : 0;
+    if (Array.isArray(lastChunk) && count + lastChunkRowsSumm < rowsPerPage) {
       newAcc[newAcc.length - 1].push(product);
     } else {
       newAcc.push([product]);
@@ -149,53 +148,35 @@ export default function ProductParams({
                     </Box>
                     <Box pl={5.25}>
                       {data &&
-                        data.map(
-                          ({ subtitle, paramsList, productSystem, id }) => {
-                            return (
-                              <Box
-                                className={`${classes.avoidBreakInside} ${classes.breakElementWithMargins}`}
-                                key={id}
-                              >
-                                {subtitle &&
-                                  (paramsList.length > 0 || productSystem) && (
-                                    <Box bgcolor="primary.light" p={1}>
-                                      <Typography variant="subtitle2">
-                                        {subtitle}:
-                                      </Typography>
-                                    </Box>
-                                  )}
-                                <List>
-                                  {productSystem && (
-                                    <Typography
-                                      variant="subtitle2"
-                                      component="b"
-                                    >
-                                      Система:
-                                      <Typography
-                                        variant="body2"
-                                        component="span"
-                                        style={{ wordBreak: 'break-word' }}
-                                      >
-                                        {` ${productSystem}`}
-                                      </Typography>
-                                    </Typography>
-                                  )}
-                                  {paramsList.map(
-                                    ({ name, value, id }) =>
-                                      value && (
-                                        <ParamItem
-                                          name={name}
-                                          value={value}
-                                          id={id}
-                                          key={id}
-                                        />
-                                      )
-                                  )}
-                                </List>
-                              </Box>
-                            );
-                          }
-                        )}
+                        data.map(({ subtitle, paramsList, id }) => {
+                          return (
+                            <Box
+                              className={`${classes.avoidBreakInside} ${classes.breakElementWithMargins}`}
+                              key={id}
+                            >
+                              {subtitle && paramsList.length > 0 && (
+                                <Box bgcolor="primary.light" p={1}>
+                                  <Typography variant="subtitle2">
+                                    {subtitle}:
+                                  </Typography>
+                                </Box>
+                              )}
+                              <List>
+                                {paramsList.map(
+                                  ({ name, value, id }) =>
+                                    value && (
+                                      <ParamItem
+                                        name={name}
+                                        value={value}
+                                        id={id}
+                                        key={id}
+                                      />
+                                    )
+                                )}
+                              </List>
+                            </Box>
+                          );
+                        })}
                     </Box>
                   </Box>
                 </Box>
