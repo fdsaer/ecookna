@@ -90,12 +90,15 @@ const getProductCharacteristics = product => {
   }, ...Object.entries(extendedParams).filter(([key]) => key && key !== 'Дополнительные параметры').map(([key, list], index) => {
     return {
       subtitle: `Створка ${index + 1}: фурнитура`,
-      productSystem: key,
-      paramsList: list.map(([name, value], index) => ({
+      paramsList: [{
+        name: 'Система',
+        value: key,
+        id: key
+      }, ...list.map(([name, value], index) => ({
         name,
         value,
         id: index
-      })),
+      }))],
       id: `2${index}`
     };
   }), {

@@ -88,6 +88,7 @@ export default function ProductParams({
 
   const productListChunks = productList.reduce((acc, product) => {
     const count = getParamCount(product.data);
+    console.log(count);
     const lastChunk = acc[acc.length - 1];
     const newAcc = acc.slice();
     const lastChunkItem = Array.isArray(lastChunk) && lastChunk[lastChunk.length - 1];
@@ -162,16 +163,7 @@ export default function ProductParams({
           p: 1
         }, React.createElement(Typography, {
           variant: "subtitle2"
-        }, subtitle, ":")), React.createElement(List, null, productSystem && React.createElement(Typography, {
-          variant: "subtitle2",
-          component: "b"
-        }, "Система:", React.createElement(Typography, {
-          variant: "body2",
-          component: "span",
-          style: {
-            wordBreak: 'break-word'
-          }
-        }, ` ${productSystem}`)), paramsList.map(({
+        }, subtitle, ":")), React.createElement(List, null, paramsList.map(({
           name,
           value,
           id

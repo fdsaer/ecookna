@@ -58,6 +58,7 @@ export default function ProductParams({
   // для того, чтобы при печати выводить по несколько карточек на одной странице
   const productListChunks = productList.reduce((acc, product) => {
     const count = getParamCount(product.data);
+    console.log(count);
     const lastChunk = acc[acc.length - 1];
     const newAcc = acc.slice();
     const lastChunkItem =
@@ -165,21 +166,6 @@ export default function ProductParams({
                                     </Box>
                                   )}
                                 <List>
-                                  {productSystem && (
-                                    <Typography
-                                      variant="subtitle2"
-                                      component="b"
-                                    >
-                                      Система:
-                                      <Typography
-                                        variant="body2"
-                                        component="span"
-                                        style={{ wordBreak: 'break-word' }}
-                                      >
-                                        {` ${productSystem}`}
-                                      </Typography>
-                                    </Typography>
-                                  )}
                                   {paramsList.map(
                                     ({ name, value, id }) =>
                                       value && (
