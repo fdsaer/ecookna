@@ -4,12 +4,15 @@ export const getProductParams = (product) => {
     .map((glass) => product.characteristic.elm_weight(glass.elm))
     .reduce((acc, glassWeight) => (acc += glassWeight), 0)
     .round();
-  const constructionsWeight = product.characteristic.constructions
-    .map((construction) =>
-      product.characteristic.elm_weight(-1 * construction.cnstr)
-    )
-    .reduce((acc, constructionWeight) => (acc += constructionWeight), 0)
-    .round();
+
+  // const constructionsWeight = product.characteristic.constructions
+  //   .map((construction) =>
+  //     product.characteristic.elm_weight(-1 * construction.cnstr)
+  //   )
+  //   .reduce((acc, constructionWeight) => (acc += constructionWeight), 0)
+  //   .round();
+  const constructionsWeight = product.characteristic.elm_weight().round();
+
   return `${constructionsWeight}/${glassesWeight}`;
 };
 
@@ -50,7 +53,8 @@ const filterParams = (param) => {
 };
 
 const getExtendedParams = (product) => {
-  const constructionCount = product.characteristic.constructions._obj.length;
+  const constructionCount = product.characteristic.constructions.count();
+
   console.log(product);
   const extendedParams = {};
   for (let i = 0; i <= constructionCount; i += 1) {
