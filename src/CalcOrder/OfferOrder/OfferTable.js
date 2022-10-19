@@ -77,7 +77,7 @@ export default function getProductsData(products, tableRowsPerPage) {
         { text: $p.msg.printing_form.table_columns.label, width: '25%', id: 0 },
         {
           text: $p.msg.printing_form.table_columns.color,
-          width: 'auto',
+          width: '13%',
           id: 1,
         },
         {

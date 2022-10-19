@@ -9,10 +9,11 @@ const {
 } = $p.ui;
 
 const Svg = ({
-  source
+  source,
+  maxHeight
 }) => {
   try {
-    const __html = $p.utils.scale_svg(source, 246, 0);
+    const __html = $p.utils.scale_svg(source, maxHeight, 0);
 
     return React.createElement("div", {
       style: {
@@ -29,12 +30,13 @@ const Svg = ({
 
 const getParamCount = data => {
   return data.reduce((acc, {
-    paramsList
+    paramsList,
+    subtitle
   }) => {
     const usefulParams = paramsList.filter(({
       value
     }) => value);
-    return acc += usefulParams.length;
+    return acc += usefulParams.length + (usefulParams.length > 0 && !!subtitle ? 1 : 0);
   }, 0);
 };
 
@@ -73,7 +75,9 @@ export default function ProductParams({
   classes,
   advantages,
   payments,
-  rowsPerPage = 24
+  rowsPerPage = 24,
+  svgMaxHeight = 246,
+  rowHeight = 23
 }) {
   var _ref3 = React.createElement(Payments, {
     paymentList: payments,
@@ -115,6 +119,7 @@ export default function ProductParams({
       quantity,
       svg
     }, index) => {
+      const count = getParamCount(data);
       return React.createElement(Box, {
         display: "flex",
         flexDirection: "row",
@@ -136,7 +141,8 @@ export default function ProductParams({
         pr: 1,
         pl: 3
       }, React.createElement(Svg, {
-        source: svg
+        source: svg,
+        maxHeight: count > (svgMaxHeight / rowHeight).round() ? svgMaxHeight : rowHeight * count
       }))), React.createElement(Box, {
         sx: {
           flex: '1 1 0%'

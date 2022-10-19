@@ -1,5 +1,13 @@
-const { React, Table, TableBody, TableCell, TableHead, TableRow, withStyles } =
-  $p.ui;
+const {
+  React,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  withStyles,
+  Box,
+} = $p.ui;
 
 const StyledTableRow = withStyles((theme) => ({
   root: {
@@ -39,7 +47,11 @@ export default function ProductsTable({
   boldBorderlessHead,
 }) {
   return (
-    <Table>
+    <Table
+      style={{
+        tableLayout: 'fixed',
+      }}
+    >
       {head && head.length > 0 && (
         <TableHead>
           <StyledTableRow>
@@ -48,13 +60,9 @@ export default function ProductsTable({
                 <StyledTableHeadBold
                   key={id}
                   align="left"
-                  style={
-                    width
-                      ? {
-                          width: width,
-                        }
-                      : {}
-                  }
+                  style={{
+                    width: width ? width : 'auto',
+                  }}
                 >
                   {text}
                 </StyledTableHeadBold>
@@ -62,13 +70,9 @@ export default function ProductsTable({
                 <StyledTableCell
                   key={id}
                   align="left"
-                  style={
-                    width
-                      ? {
-                          width: width,
-                        }
-                      : {}
-                  }
+                  style={{
+                    width: width ? width : 'auto',
+                  }}
                 >
                   {text}
                 </StyledTableCell>
@@ -81,13 +85,25 @@ export default function ProductsTable({
         {rows &&
           rows.map(({ data, id }) => (
             <TableRow key={id}>
-              {data.map(({ text, id }, index) => (
+              {data.map(({ text, width, id }, index) => (
                 <StyledTableCell
                   key={id}
-                  style={{ fontWeight: 'normal' }}
+                  style={{
+                    width: width ? width : 'auto',
+                    fontWeight: 'normal',
+                  }}
                   colSpan={index === 0 ? head.length - data.length + 1 : 0}
                 >
-                  {text}
+                  <Box
+                    style={{
+                      maxHeight: '14px',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {text}
+                  </Box>
                 </StyledTableCell>
               ))}
             </TableRow>

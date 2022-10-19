@@ -188,7 +188,10 @@ class Offer59 extends PrnProto {
     const manager = getManagerInfo(obj);
     const office = getAddressInfo(obj);
     const productList = products && getProductsList(products);
-    const tableRowsPerPage = 25;
+    const tableRowsPerPage = 25; // Ограничение количества строк на одну страницу при группировке таблиц для постраничной печати
+    const paramsRowsPerPage = 24; // Ограничение количества строк на одну страницу при группировке параметров изделия для постраничной печати
+    const paramsSvgMaxHeight = 246; // Высота SVG подобрана таким образом, чтобы рисунок занимал максимальное место
+    const paramsRowHeight = 23; // Эмпирически вычисленная высота строки в параметрах изделия
     const productTableData =
       products && getProductsData(products, tableRowsPerPage);
     const order = `№${obj.number_doc} от ${moment(obj.date).format(
@@ -255,7 +258,9 @@ class Offer59 extends PrnProto {
                     classes={classes}
                     advantages={advantages}
                     payments={payments}
-                    rowsPerPage={25}
+                    rowsPerPage={paramsRowsPerPage}
+                    svgMaxHeight={paramsSvgMaxHeight}
+                    rowHeight={paramsRowHeight}
                   />
                 )}
               {components?.ProductsTablePage && productTableData && (
