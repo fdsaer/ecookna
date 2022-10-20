@@ -2,9 +2,9 @@ import Advantages from './Advantages.js';
 import Payments from './Payments.js';
 const { React, Typography, Box, List, ListItem } = $p.ui;
 
-const Svg = ({ source }) => {
+const Svg = ({ source, maxHeight }) => {
   try {
-    const __html = $p.utils.scale_svg(source, 246, 0);
+    const __html = $p.utils.scale_svg(source, maxHeight, 0); // Фактически здесь задается максимальная высота. См. метод scale_svg
     return (
       <div
         style={{ textAlign: 'center' }}
@@ -17,9 +17,10 @@ const Svg = ({ source }) => {
 };
 
 const getParamCount = (data) => {
-  return data.reduce((acc, { paramsList }) => {
+  return data.reduce((acc, { paramsList, subtitle }) => {
     const usefulParams = paramsList.filter(({ value }) => value);
-    return (acc += usefulParams.length);
+    return (acc +=
+      usefulParams.length + (usefulParams.length > 0 && !!subtitle ? 1 : 0));
   }, 0);
 };
 
@@ -52,6 +53,8 @@ export default function ProductParams({
   advantages,
   payments,
   rowsPerPage = 24,
+  svgMaxHeight = 246,
+  rowHeight = 23,
 }) {
   // Группирует список карточек объединяя карточки с небольшим количеством параметров
   // для того, чтобы при печати выводить по несколько карточек на одной странице
@@ -113,6 +116,7 @@ export default function ProductParams({
               <Advantages withLogo advantagesList={advantages} />
             </Box>
             {chunk.map(({ data, number, position, quantity, svg }, index) => {
+              const count = getParamCount(data);
               return (
                 <Box
                   display="flex"
@@ -134,7 +138,14 @@ export default function ProductParams({
                       </Typography>
                     </Box>
                     <Box pr={1} pl={3}>
-                      <Svg source={svg} />
+                      <Svg
+                        source={svg}
+                        maxHeight={
+                          count > (svgMaxHeight / rowHeight).round() // в зависимости от количества строк в параметре меняем высоту изображения
+                            ? svgMaxHeight
+                            : rowHeight * count
+                        }
+                      />
                     </Box>
                   </Box>
                   <Box sx={{ flex: '1 1 0%' }}>

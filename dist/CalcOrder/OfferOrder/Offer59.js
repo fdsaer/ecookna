@@ -131,6 +131,9 @@ class Offer59 extends PrnProto {
     const additions = getAdditions(images);
     const productList = products && getProductsList(products);
     const tableRowsPerPage = 25;
+    const paramsRowsPerPage = 24;
+    const paramsSvgMaxHeight = 246;
+    const paramsRowHeight = 23;
     const productTableData = products && getProductsData(products, tableRowsPerPage);
     const order = `№${obj.number_doc} от ${moment(obj.date).format('DD MMMM YYYY')} г.`;
     let loading = '';
@@ -179,7 +182,9 @@ class Offer59 extends PrnProto {
       classes: classes,
       advantages: advantages,
       payments: payments,
-      rowsPerPage: 25
+      rowsPerPage: paramsRowsPerPage,
+      svgMaxHeight: paramsSvgMaxHeight,
+      rowHeight: paramsRowHeight
     }), components?.ProductsTablePage && productTableData && React.createElement(components.ProductsTablePage, {
       classes: classes,
       advantages: advantages,

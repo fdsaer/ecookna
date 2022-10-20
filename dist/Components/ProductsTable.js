@@ -5,7 +5,8 @@ const {
   TableCell,
   TableHead,
   TableRow,
-  withStyles
+  withStyles,
+  Box
 } = $p.ui;
 const StyledTableRow = withStyles(theme => ({
   root: {
@@ -41,22 +42,26 @@ export default function ProductsTable({
   total,
   boldBorderlessHead
 }) {
-  return React.createElement(Table, null, head && head.length > 0 && React.createElement(TableHead, null, React.createElement(StyledTableRow, null, head.map(({
+  return React.createElement(Table, {
+    style: {
+      tableLayout: 'fixed'
+    }
+  }, head && head.length > 0 && React.createElement(TableHead, null, React.createElement(StyledTableRow, null, head.map(({
     text,
     width,
     id
   }) => boldBorderlessHead ? React.createElement(StyledTableHeadBold, {
     key: id,
     align: "left",
-    style: width ? {
-      width: width
-    } : {}
+    style: {
+      width: width ? width : 'auto'
+    }
   }, text) : React.createElement(StyledTableCell, {
     key: id,
     align: "left",
-    style: width ? {
-      width: width
-    } : {}
+    style: {
+      width: width ? width : 'auto'
+    }
   }, text)))), React.createElement(TableBody, null, rows && rows.map(({
     data,
     id
@@ -64,14 +69,23 @@ export default function ProductsTable({
     key: id
   }, data.map(({
     text,
+    width,
     id
   }, index) => React.createElement(StyledTableCell, {
     key: id,
     style: {
+      width: width ? width : 'auto',
       fontWeight: 'normal'
     },
     colSpan: index === 0 ? head.length - data.length + 1 : 0
-  }, text)))), React.createElement(StyledTableRow, null, total && total.map(({
+  }, React.createElement(Box, {
+    style: {
+      maxHeight: '14px',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap'
+    }
+  }, text))))), React.createElement(StyledTableRow, null, total && total.map(({
     text,
     id
   }, index) => React.createElement(StyledTableCell, {
