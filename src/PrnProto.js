@@ -29,7 +29,7 @@ function add_table_titles(msg) {
     table_columns: {
       label: 'Название',
       color: 'Цвет',
-      quantity: 'Количество (шт.)',
+      quantity: 'Кол-во (шт.)',
       weight: 'Общий вес (кг)',
       square: 'Общая площадь (м2)',
       price: 'Цена без скидки (руб.)',

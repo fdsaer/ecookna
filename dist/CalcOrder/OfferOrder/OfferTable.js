@@ -28,35 +28,35 @@ export default function getProductsData(products, tableRowsPerPage) {
     title: $p.msg.printing_form.table_titles.products,
     head: [{
       text: $p.msg.printing_form.table_columns.label,
-      width: '25%',
+      width: 'auto',
       id: 0
     }, {
       text: $p.msg.printing_form.table_columns.color,
-      width: '13%',
+      width: 'auto',
       id: 1
     }, {
       text: $p.msg.printing_form.table_columns.quantity,
-      width: '13%',
+      width: '5%',
       id: 2
     }, {
       text: $p.msg.printing_form.table_columns.weight,
-      width: '13%',
+      width: '10%',
       id: 3
     }, {
       text: $p.msg.printing_form.table_columns.square,
-      width: '13%',
+      width: '10%',
       id: 4
     }, {
       text: $p.msg.printing_form.table_columns.price,
-      width: '13%',
+      width: '10%',
       id: 5
     }, {
       text: $p.msg.printing_form.table_columns.discount,
-      width: '13%',
+      width: '7%',
       id: 6
     }, {
       text: $p.msg.printing_form.table_columns.final_price,
-      width: '13%',
+      width: '10%',
       id: 7
     }],
     rows: productListSvg ? productListSvg.map((product, index) => ({
@@ -114,23 +114,23 @@ export default function getProductsData(products, tableRowsPerPage) {
     title: $p.msg.printing_form.table_titles.extra_items,
     head: [{
       text: $p.msg.printing_form.table_columns.label,
-      width: '25%',
+      width: 'auto',
       id: 0
     }, {
       text: $p.msg.printing_form.table_columns.quantity,
-      width: '13%',
+      width: '10%',
       id: 1
     }, {
       text: $p.msg.printing_form.table_columns.price,
-      width: '13%',
+      width: '10%',
       id: 2
     }, {
       text: $p.msg.printing_form.table_columns.discount,
-      width: '13%',
+      width: '7%',
       id: 3
     }, {
       text: $p.msg.printing_form.table_columns.final_price,
-      width: '13%',
+      width: '10%',
       id: 4
     }],
     rows: productListExtraItems ? productListExtraItems.map((product, index) => ({
@@ -173,20 +173,24 @@ export default function getProductsData(products, tableRowsPerPage) {
     title: $p.msg.printing_form.table_titles.services,
     head: [{
       text: $p.msg.printing_form.table_columns.label,
-      width: '25%',
+      width: 'auto',
       id: 0
     }, {
-      text: $p.msg.printing_form.table_columns.price,
-      width: '13%',
+      text: $p.msg.printing_form.table_columns.quantity,
+      width: '10%',
       id: 1
     }, {
-      text: $p.msg.printing_form.table_columns.discount,
-      width: '13%',
+      text: $p.msg.printing_form.table_columns.price,
+      width: '10%',
       id: 2
     }, {
-      text: $p.msg.printing_form.table_columns.final_price,
-      width: '13%',
+      text: $p.msg.printing_form.table_columns.discount,
+      width: '7%',
       id: 3
+    }, {
+      text: $p.msg.printing_form.table_columns.final_price,
+      width: '10%',
+      id: 4
     }],
     rows: productIsService ? productIsService.map((product, index) => ({
       id: index,
@@ -194,28 +198,34 @@ export default function getProductsData(products, tableRowsPerPage) {
         text: product.characteristic.prod_nom.name_full ? product.characteristic.prod_nom.name_full : product.nom.name_full,
         id: 0
       }, {
-        text: (product.price * product.quantity).round(0),
+        text: product.quantity.round(0),
         id: 1
       }, {
-        text: (product.price * product.discount).round(0),
+        text: (product.price * product.quantity).round(0),
         id: 2
       }, {
-        text: (product.price * product.quantity * (1 - product.discount)).round(0),
+        text: (product.price * product.discount).round(0),
         id: 3
+      }, {
+        text: (product.price * product.quantity * (1 - product.discount)).round(0),
+        id: 4
       }]
     })) : null,
     total: productIsService ? [{
       text: $p.msg.printing_form.table_columns.total,
       id: 0
     }, {
+      text: productsTotalQuantity(productIsService),
+      id: 1
+    }, {
       text: productsTotalPrice(productIsService),
-      id: 3
+      id: 2
     }, {
       text: productsTotalDiscount(productIsService),
-      id: 4
+      id: 3
     }, {
       text: productsTotalSum(productIsService),
-      id: 5
+      id: 4
     }] : null
   }];
   const tablesChunks = tables.reduce((acc, table) => {
