@@ -1,7 +1,12 @@
 export const getProductParams = product => {
   const glasses = product.characteristic.glasses;
+<<<<<<< HEAD
   const glassesWeight = glasses.map(glass => product.characteristic.elm_weight(glass.elm)).reduce((acc, glassWeight) => acc += glassWeight, 0).round();
+=======
+>>>>>>> origin/test-merged-printing-forms
   const constructionsWeight = product.characteristic.elm_weight().round();
+  const glassesWeight = product.characteristic.elm_weight(glasses.map(glass => glass.elm)).round();
+  
   return `${constructionsWeight}/${glassesWeight}`;
 };
 

@@ -131,7 +131,7 @@ class Offer59 extends PrnProto {
     const additions = getAdditions(images);
     const productList = products && getProductsList(products);
     const tableRowsPerPage = 25;
-    const paramsRowsPerPage = 24;
+    const paramsRowsPerPage = 29;
     const paramsSvgMaxHeight = 246;
     const paramsRowHeight = 23;
     const productTableData = products && getProductsData(products, tableRowsPerPage);
@@ -236,5 +236,5 @@ class Offer59 extends PrnProto {
 
 Offer59.ref = 'cefdf4d0-6c86-11ec-bee3-8b4e33301a48';
 Offer59.destination = 'doc.calc_order';
-Offer59.title = '5.9 КП Калева (jsx)';
+Offer59.title = 'КП Экоокна 2022 – тест';
 export default Offer59;
