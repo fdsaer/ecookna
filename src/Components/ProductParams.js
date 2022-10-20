@@ -141,7 +141,7 @@ export default function ProductParams({
                       <Svg
                         source={svg}
                         maxHeight={
-                          count > (svgMaxHeight / rowHeight).round() // в зависимости от количества строк в параметре меняем высоту изображения
+                          count > (svgMaxHeight / rowHeight).round() // в зависимости от количества строк в параметре меняем высоту изображения, с тем, чтобы оно было не выше чем блок с параметрами.
                             ? svgMaxHeight
                             : rowHeight * count
                         }
