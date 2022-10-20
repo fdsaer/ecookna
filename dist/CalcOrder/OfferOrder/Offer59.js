@@ -131,7 +131,7 @@ class Offer59 extends PrnProto {
     const additions = getAdditions(images);
     const productList = products && getProductsList(products);
     const tableRowsPerPage = 25;
-    const paramsRowsPerPage = 24;
+    const paramsRowsPerPage = 29;
     const paramsSvgMaxHeight = 246;
     const paramsRowHeight = 23;
     const productTableData = products && getProductsData(products, tableRowsPerPage);
