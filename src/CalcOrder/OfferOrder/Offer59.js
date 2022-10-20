@@ -5,15 +5,17 @@
  *
  */
 import PrnProto from '../../PrnProto.js';
-import {
-  fullSquare,
-  fullWeight,
-  getProductsList,  
-} from './OfferData.js';
+import { fullSquare, fullWeight, getProductsList } from './OfferData.js';
 import { getManagerInfo } from '../../Components/Manager.js';
 import { getAddressInfo } from '../../Components/Contacts.js';
 import getProductsData from './OfferTable.js';
-import { getAssortmentLinks, getLinks, getAdvantages, getPayments, getAdditions } from './Templates.js';
+import {
+  getAssortmentLinks,
+  getLinks,
+  getAdvantages,
+  getPayments,
+  getAdditions,
+} from './Templates.js';
 
 const { React, Box, Typography } = $p.ui;
 
@@ -102,12 +104,12 @@ class Offer59 extends PrnProto {
       },
       classes,
     } = this;
-    
+
     const manager = getManagerInfo(obj);
     const office = getAddressInfo(obj);
     const assortmentLinks = getAssortmentLinks(images);
     const links = getLinks(images);
-    const advantages = getAdvantages(images);    
+    const advantages = getAdvantages(images);
     const payments = getPayments(images);
     const additions = getAdditions(images);
     const productList = products && getProductsList(products);
@@ -269,6 +271,6 @@ class Offer59 extends PrnProto {
 // идентификатор - должен быть уникальным для каждой виртуальной формулы
 Offer59.ref = 'cefdf4d0-6c86-11ec-bee3-8b4e33301a48';
 Offer59.destination = 'doc.calc_order';
-Offer59.title = '5.9 КП Калева (jsx)';
+Offer59.title = 'КП Экоокна 2022 – тест';
 
 export default Offer59;

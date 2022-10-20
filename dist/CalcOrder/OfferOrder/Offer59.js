@@ -236,5 +236,5 @@ class Offer59 extends PrnProto {
 
 Offer59.ref = 'cefdf4d0-6c86-11ec-bee3-8b4e33301a48';
 Offer59.destination = 'doc.calc_order';
-Offer59.title = '5.9 КП Калева (jsx)';
+Offer59.title = 'КП Экоокна 2022 – тест';
 export default Offer59;
