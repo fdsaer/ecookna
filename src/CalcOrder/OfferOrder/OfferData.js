@@ -1,17 +1,9 @@
 export const getProductParams = (product) => {
   const glasses = product.characteristic.glasses;
-  const glassesWeight = glasses
-    .map((glass) => product.characteristic.elm_weight(glass.elm))
-    .reduce((acc, glassWeight) => (acc += glassWeight), 0)
-    .round();
-
-  // const constructionsWeight = product.characteristic.constructions
-  //   .map((construction) =>
-  //     product.characteristic.elm_weight(-1 * construction.cnstr)
-  //   )
-  //   .reduce((acc, constructionWeight) => (acc += constructionWeight), 0)
-  //   .round();
   const constructionsWeight = product.characteristic.elm_weight().round();
+  const glassesWeight = product.characteristic
+    .elm_weight(glasses.map((glass) => glass.elm))
+    .round();
 
   return `${constructionsWeight}/${glassesWeight}`;
 };
