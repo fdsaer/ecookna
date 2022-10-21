@@ -23,7 +23,7 @@ const StyledTableCell = withStyles(theme => ({
   },
   head: {
     fontWeight: theme.typography.fontWeightRegular,
-    verticalAlign: 'top'
+    verticalAlign: 'middle'
   }
 }))(TableCell);
 const StyledTableHeadBold = withStyles(theme => ({
@@ -58,7 +58,7 @@ export default function ProductsTable({
     }
   }, text) : React.createElement(StyledTableCell, {
     key: id,
-    align: "left",
+    align: "center",
     style: {
       width: width ? width : 'auto'
     }

@@ -2,11 +2,9 @@ import { fullSquare, fullWeight, getProductWeight } from './OfferData.js';
 export default function getProductsData(products, tableRowsPerPage) {
   const productsTotalPrice = products => products && products.map(product => product.price * product.quantity).reduce((acc, price) => acc += price, 0).round(0);
 
-  const productsTotalDiscount = products => products && products.map(product => product.price * product.quantity * product.discount).reduce((acc, discount) => acc += discount, 0);
+  const productsTotalSum = products => products && products.map(product => product.price * product.quantity * (1 - product.discount_percent / 100)).reduce((acc, price) => acc += price, 0).round(0);
 
-  const productsTotalSum = products => products && products.map(product => product.price * product.quantity * (1 - product.discount)).reduce((acc, price) => acc += price, 0).round(0);
-
-  const productsTotalQuantity = (products) => products && products.map(product => product.quantity).reduce((acc, quantity) => acc += quantity, 0);
+  const productsTotalQuantity = (products) => products && products.map(product => product.quantity).reduce((acc, quantity) => acc += quantity, 0).round(0);
 
   const productListSvg = products.map(product => {
     if (product.characteristic.cnn_elmnts._obj.length || product.characteristic.coordinates._obj.length) {
@@ -72,18 +70,18 @@ export default function getProductsData(products, tableRowsPerPage) {
         id: 2
       }, {
         text: (getProductWeight(product) * product.quantity).round(2),
-        id: 4
+        id: 3
       }, {
         text: (product.s * product.quantity).round(2),
-        id: 3
+        id: 4
       }, {
         text: (product.price * product.quantity).round(0),
         id: 5
       }, {
-        text: (product.price * product.discount).round(0),
+        text: product.discount_percent.round(0),
         id: 6
       }, {
-        text: (product.price * product.quantity * (1 - product.discount)).round(0),
+        text: (product.price * product.quantity * (1 - product.discount_percent / 100)).round(0),
         id: 7
       }]
     })) : null,
@@ -103,7 +101,7 @@ export default function getProductsData(products, tableRowsPerPage) {
       text: productsTotalPrice(productListSvg),
       id: 4
     }, {
-      text: productsTotalDiscount(productListSvg),
+      text: productsTotalPrice(productListSvg) ? (100 - productsTotalSum(productListSvg) / productsTotalPrice(productListSvg) * 100).round(0) : 0,
       id: 5
     }, {
       text: productsTotalSum(productListSvg),
@@ -145,11 +143,11 @@ export default function getProductsData(products, tableRowsPerPage) {
         text: (product.price * product.quantity).round(0),
         id: 2
       }, {
-        text: (product.price * product.discount).round(0),
+        text: product.discount_percent.round(0),
         id: 3
       }, {
-        text: (product.price * product.quantity * (1 - product.discount)).round(0),
-        id: 7
+        text: (product.price * product.quantity * (1 - product.discount_percent / 100)).round(0),
+        id: 4
       }]
     })) : null,
     total: productListExtraItems ? [{
@@ -160,13 +158,13 @@ export default function getProductsData(products, tableRowsPerPage) {
       id: 1
     }, {
       text: productsTotalPrice(productListExtraItems),
-      id: 4
+      id: 2
     }, {
-      text: productsTotalDiscount(productListExtraItems),
-      id: 5
+      text: productsTotalPrice(productListExtraItems) ? (100 - productsTotalSum(productListExtraItems) / productsTotalPrice(productListExtraItems) * 100).round(0) : 0,
+      id: 3
     }, {
       text: productsTotalSum(productListExtraItems),
-      id: 6
+      id: 4
     }] : null
   }, {
     id: '2',
@@ -204,10 +202,10 @@ export default function getProductsData(products, tableRowsPerPage) {
         text: (product.price * product.quantity).round(0),
         id: 2
       }, {
-        text: (product.price * product.discount).round(0),
+        text: product.discount_percent.round(0),
         id: 3
       }, {
-        text: (product.price * product.quantity * (1 - product.discount)).round(0),
+        text: (product.price * product.quantity * (1 - product.discount_percent / 100)).round(0),
         id: 4
       }]
     })) : null,
@@ -221,7 +219,7 @@ export default function getProductsData(products, tableRowsPerPage) {
       text: productsTotalPrice(productIsService),
       id: 2
     }, {
-      text: productsTotalDiscount(productIsService),
+      text: productsTotalPrice(productIsService) ? (100 - productsTotalSum(productIsService) / productsTotalPrice(productIsService) * 100).round(0) : 0,
       id: 3
     }, {
       text: productsTotalSum(productIsService),
