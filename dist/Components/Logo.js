@@ -5,13 +5,14 @@ const {
 } = $p.ui;
 export default function Logo({
   width = '184px',
-  mr = '0'
+  mr = '0',
+  src = LogoImage
 }) {
   return React.createElement(Box, {
     width: width,
     mr: mr
   }, React.createElement("img", {
-    src: LogoImage,
+    src: src,
     style: {
       display: 'block',
       width: '100%',

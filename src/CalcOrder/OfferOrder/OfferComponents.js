@@ -1,4 +1,5 @@
 import Header from '../../Header/index.js';
+import Title from '../../Title/index.js';
 import Payments from '../../Components/Payments.js';
 import Wrapper from '../../Components/Wrapper.js';
 import Description from '../../Components/Description.js';
@@ -12,6 +13,7 @@ import ProductsTablePage from '../../Components/ProductsTablePage.js';
 
 export {
   Header,
+  Title,
   Payments,
   Wrapper,
   Description,

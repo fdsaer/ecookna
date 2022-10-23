@@ -6,9 +6,11 @@ const {
 } = $p.ui;
 import { theme as theme1 } from './theme1.js';
 import { theme as theme2 } from './theme2.js';
+import { theme as theme61 } from './theme61.js';
 import stylesBase from './stylesBase.js';
 import stylesOrg1 from './stylesOrg1.js';
 import stylesOrg2 from './stylesOrg2.js';
+import stylesOrg61 from './stylesOrg61.js';
 import stylesCss from './stylesCss.js';
 import Loading from './Loading.js';
 
@@ -46,7 +48,8 @@ export default function StyledFrame({
       break;
 
     default:
-      tempClasses = makeStyles(() => stylesOrg2(theme))();
+      theme = theme61;
+      tempClasses = makeStyles(() => stylesOrg61(theme))();
   }
 
   setClasses(newClasses);
