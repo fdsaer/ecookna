@@ -4,41 +4,6 @@ const {
   Box,
   Typography
 } = $p.ui;
-export const getManagerInfo = obj => {
-  const managerData = {
-    name: obj.manager.name ?? '',
-    phone_number: '',
-    email_address: '',
-    address: ''
-  };
-  obj.manager.contact_information.forEach(row => {
-    switch (row.type.name) {
-      case 'Адрес':
-        if (row.presentation && !managerData.address) {
-          managerData.address = row.presentation;
-        }
-
-        break;
-
-      case 'Телефон':
-        if (row.presentation && !managerData.phone_number) {
-          managerData.phone_number = row.presentation;
-        }
-
-        break;
-
-      case 'АдресЭлектроннойПочты':
-        if (row.presentation && !managerData.email_address) {
-          managerData.email_address = row.presentation;
-        }
-
-        break;
-
-      default:
-    }
-  });
-  return managerData;
-};
 
 var _ref = React.createElement(Typography, null, "Ваш персональный ", React.createElement("br", null), " менеджер:");
 

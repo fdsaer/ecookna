@@ -64,13 +64,17 @@ class PrnProto extends React.Component {
     // props.skipCss && props.skipCss();
     this.state = {
       loaded: false,
-      componentsLoaded: false,
-      imagesLoaded: false,
     };
     this.setClasses = (classes) => {
       addPrintStyles('data-custom-print');
       this.classes = classes;
       props.copyStyles && props.copyStyles();
+    };
+    this.setAsyncModules = (components) => {
+      this.components = components;
+    };
+    this.setAsyncImages = (images) => {
+      this.images = images;
     };
     this.componentWillMount = () => {
       add_table_titles($p.msg);

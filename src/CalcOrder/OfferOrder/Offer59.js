@@ -5,9 +5,13 @@
  *
  */
 import PrnProto from '../../PrnProto.js';
-import { fullSquare, fullWeight, getProductsList } from './OfferData.js';
-import { getManagerInfo } from '../../Components/Manager.js';
-import { getAddressInfo } from '../../Components/Contacts.js';
+import {
+  fullSquare,
+  fullWeight,
+  getProductsList,
+  getManagerInfo,
+  getAddressInfo,
+} from './OfferData.js';
 import getProductsData from './OfferTable.js';
 import {
   getAssortmentLinks,
@@ -40,73 +44,59 @@ class Offer59 extends PrnProto {
       });
     this.setState({ loaded: true });
 
-    const componentsImport = import('./OfferComponents.js');
-    componentsImport.then((module) => {
-      this.setState({
-        components: {
-          Header: module.Header,
-          Payments: module.Payments,
-          Wrapper: module.Wrapper,
-          Description: module.Description,
-          Advantages: module.Advantages,
-          Additions: module.Additions,
-          LinksBlock: module.LinksBlock,
-          Manager: module.Manager,
-          ProductParams: module.ProductParams,
-          ProductsTable: module.ProductsTable,
-          ProductsTablePage: module.ProductsTablePage,
-        },
+    import('./OfferComponents.js').then((module) => {
+      this.setAsyncModules({
+        Header: module.Header,
+        Payments: module.Payments,
+        Wrapper: module.Wrapper,
+        Description: module.Description,
+        Advantages: module.Advantages,
+        Additions: module.Additions,
+        LinksBlock: module.LinksBlock,
+        Manager: module.Manager,
+        ProductParams: module.ProductParams,
+        ProductsTable: module.ProductsTable,
+        ProductsTablePage: module.ProductsTablePage,
       });
-      this.setState({ componentsLoaded: true });
     });
 
-    const imagesImport = import('./OfferImages.js');
-    imagesImport.then((module) => {
-      this.setState({
-        images: {
-          AgeAdvantageImage: module.AgeAdvantageImage,
-          FreeSizingAdvantageIcon: module.FreeSizingAdvantageIcon,
-          GuaranteeAdvantageIcon: module.GuaranteeAdvantageIcon,
-          ClientsAdvantageIcon: module.ClientsAdvantageIcon,
-          CashPaymentIcon: module.CashPaymentIcon,
-          CardPaymentIcon: module.CardPaymentIcon,
-          OnlinePaymentIcon: module.OnlinePaymentIcon,
-          installmentIcon: module.installmentIcon,
-          ExamplesIcon: module.ExamplesIcon,
-          FactoryIcon: module.FactoryIcon,
-          ProductionIcon: module.ProductionIcon,
-          WatchVideoIcon: module.WatchVideoIcon,
-          GarageGateImage: module.GarageGateImage,
-          BalconyDecorationImage: module.BalconyDecorationImage,
-          CurtainsImage: module.CurtainsImage,
-          HeatingRadiatorImage: module.HeatingRadiatorImage,
-          EvolvingOpacityImage: module.EvolvingOpacityImage,
-          OrangeryImage: module.OrangeryImage,
-          GlassDoorImage: module.GlassDoorImage,
-          GlassHeaterImage: module.GlassHeaterImage,
-          PhoneChargerImage: module.PhoneChargerImage,
-        },
+    import('./OfferImages.js').then((module) => {
+      this.setAsyncImages({
+        AgeAdvantageImage: module.AgeAdvantageImage,
+        FreeSizingAdvantageIcon: module.FreeSizingAdvantageIcon,
+        GuaranteeAdvantageIcon: module.GuaranteeAdvantageIcon,
+        ClientsAdvantageIcon: module.ClientsAdvantageIcon,
+        CashPaymentIcon: module.CashPaymentIcon,
+        CardPaymentIcon: module.CardPaymentIcon,
+        OnlinePaymentIcon: module.OnlinePaymentIcon,
+        installmentIcon: module.installmentIcon,
+        ExamplesIcon: module.ExamplesIcon,
+        FactoryIcon: module.FactoryIcon,
+        ProductionIcon: module.ProductionIcon,
+        WatchVideoIcon: module.WatchVideoIcon,
+        GarageGateImage: module.GarageGateImage,
+        BalconyDecorationImage: module.BalconyDecorationImage,
+        CurtainsImage: module.CurtainsImage,
+        HeatingRadiatorImage: module.HeatingRadiatorImage,
+        EvolvingOpacityImage: module.EvolvingOpacityImage,
+        OrangeryImage: module.OrangeryImage,
+        GlassDoorImage: module.GlassDoorImage,
+        GlassHeaterImage: module.GlassHeaterImage,
+        PhoneChargerImage: module.PhoneChargerImage,
       });
-      this.setState({ imagesLoaded: true });
     });
   }
 
   render() {
     const {
       props: { obj, attr, externalWindow },
-      state: {
-        loaded,
-        products,
-        components,
-        images,
-        componentsLoaded,
-        imagesLoaded,
-      },
+      state: { loaded, products },
       classes,
+      components,
+      images,
     } = this;
 
     const manager = getManagerInfo(obj);
-    const office = getAddressInfo(obj);
     const assortmentLinks = getAssortmentLinks(images);
     const links = getLinks(images);
     const advantages = getAdvantages(images);
@@ -137,32 +127,28 @@ class Offer59 extends PrnProto {
           classes={classes}
           setClasses={this.setClasses}
           title={order}
-          loading={
-            !components || !componentsLoaded || !imagesLoaded || !classes
-          }
+          loading={!components || !images || !loaded || !classes}
           // err={err}
         >
-          {components?.Header && (
+          {components && (
             <components.Header
               headerTitle="Индивидуальное решение"
               description="по изготовлению и установке светопрозрачных конструкций"
               order={order}
-              office={office}
+              office={getAddressInfo(obj)}
               manager={manager}
             />
           )}
-          {components?.Wrapper && (
+          {components && classes && (
             <components.Wrapper classes={classes}>
-              <Box mt={3} className={classes?.hideInPrint}>
-                {components?.Advantages && (
-                  <components.Advantages withLogo advantagesList={advantages} />
-                )}
+              <Box mt={3} className={classes.hideInPrint}>
+                <components.Advantages withLogo advantagesList={advantages} />
               </Box>
               <Box
                 mt={3}
                 mb={2.5}
                 fontSize={22}
-                className={classes?.hideInPrint}
+                className={classes.hideInPrint}
               >
                 <Typography
                   variant="inherit"
@@ -172,23 +158,21 @@ class Offer59 extends PrnProto {
                   {order}
                 </Typography>
               </Box>
-              {productList &&
-                productList.length > 0 &&
-                components?.ProductParams && (
-                  <components.ProductParams
-                    title="В комплектацию Вашего заказа входит:"
-                    fullSquare={fullSquare}
-                    fullWeight={fullWeight}
-                    productList={productList}
-                    classes={classes}
-                    advantages={advantages}
-                    payments={payments}
-                    rowsPerPage={paramsRowsPerPage}
-                    svgMaxHeight={paramsSvgMaxHeight}
-                    rowHeight={paramsRowHeight}
-                  />
-                )}
-              {components?.ProductsTablePage && productTableData && (
+              {productList && productList.length > 0 && (
+                <components.ProductParams
+                  title="В комплектацию Вашего заказа входит:"
+                  fullSquare={fullSquare}
+                  fullWeight={fullWeight}
+                  productList={productList}
+                  classes={classes}
+                  advantages={advantages}
+                  payments={payments}
+                  rowsPerPage={paramsRowsPerPage}
+                  svgMaxHeight={paramsSvgMaxHeight}
+                  rowHeight={paramsRowHeight}
+                />
+              )}
+              {productTableData && (
                 <components.ProductsTablePage
                   classes={classes}
                   advantages={advantages}
@@ -196,69 +180,52 @@ class Offer59 extends PrnProto {
                   productTableData={productTableData}
                 />
               )}
-              {components?.Payments && (
-                <Box className={classes?.hideInPrint}>
-                  <components.Payments
-                    paymentList={payments}
-                    classes={classes}
-                  />
-                </Box>
-              )}
-              <Box mt={5} className={classes?.pageBreakBefore}>
-                {components?.Advantages && (
-                  <components.Advantages withLogo advantagesList={advantages} />
-                )}
+              <Box className={classes.hideInPrint}>
+                <components.Payments paymentList={payments} classes={classes} />
+              </Box>
+              <Box mt={5} className={classes.pageBreakBefore}>
+                <components.Advantages withLogo advantagesList={advantages} />
               </Box>
               <Box mt={5}>
-                {components?.Description && (
-                  <components.Description title="Подберем лучшее решение:" />
-                )}
+                <components.Description title="Подберем лучшее решение:" />
               </Box>
               <Box mt={7}>
-                {components?.LinksBlock && (
-                  <components.LinksBlock links={assortmentLinks}>
-                    <Box color="textSecondary" fontSize="22px" mr={2.5}>
-                      <Typography
-                        variant="inherit"
-                        color="textSecondary"
-                        component="p"
-                      >
-                        Ассортимент компании ЭКООКНА
-                      </Typography>
-                    </Box>
-                  </components.LinksBlock>
-                )}
+                <components.LinksBlock links={assortmentLinks}>
+                  <Box color="textSecondary" fontSize="22px" mr={2.5}>
+                    <Typography
+                      variant="inherit"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      Ассортимент компании ЭКООКНА
+                    </Typography>
+                  </Box>
+                </components.LinksBlock>
               </Box>
               <Box mt={5}>
-                {components?.LinksBlock && (
-                  <components.LinksBlock links={links}>
-                    <Box sx={{ maxWidth: '100px' }} mr={2.5}>
-                      <Typography
-                        variant="inherit"
-                        color="textSecondary"
-                        component="p"
-                      >
-                        Переходите по ссылкам:
-                      </Typography>
-                    </Box>
-                  </components.LinksBlock>
-                )}
+                <components.LinksBlock links={links}>
+                  <Box sx={{ maxWidth: '100px' }} mr={2.5}>
+                    <Typography
+                      variant="inherit"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      Переходите по ссылкам:
+                    </Typography>
+                  </Box>
+                </components.LinksBlock>
               </Box>
-              <Box mt={7} className={classes?.pageBreakBefore}>
-                {components?.Additions && (
-                  <components.Additions
-                    additions={additions}
-                    title="Добавьте к своему интерьеру:"
-                  />
-                )}
+              <Box mt={7} className={classes.pageBreakBefore}>
+                <components.Additions
+                  additions={additions}
+                  title="Добавьте к своему интерьеру:"
+                />
               </Box>
               <Box mt={7}>
-                {components?.Manager && (
-                  <components.Manager
-                    title="Остались вопросы? Я на связи! "
-                    manager={manager}
-                  />
-                )}
+                <components.Manager
+                  title="Остались вопросы? Я на связи! "
+                  manager={manager}
+                />
               </Box>
             </components.Wrapper>
           )}

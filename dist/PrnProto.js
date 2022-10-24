@@ -59,15 +59,21 @@ class PrnProto extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loaded: false,
-      componentsLoaded: false,
-      imagesLoaded: false
+      loaded: false
     };
 
     this.setClasses = classes => {
       addPrintStyles('data-custom-print');
       this.classes = classes;
       props.copyStyles && props.copyStyles();
+    };
+
+    this.setAsyncModules = components => {
+      this.components = components;
+    };
+
+    this.setAsyncImages = images => {
+      this.images = images;
     };
 
     this.componentWillMount = () => {
