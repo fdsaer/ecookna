@@ -31,12 +31,15 @@ function add_table_titles(msg) {
       price: 'Цена без скидки (руб.)',
       discount: 'Скидка (%)',
       final_price: 'Цена со скидкой (руб.)',
-      total: 'Всего'
+      totalProducts: 'Всего по изделиям:',
+      totalExtraItems: 'Всего по доп. комплектации:',
+      totalService: 'Всего по услугам:'
     },
     table_titles: {
       products: 'Изделия',
       extra_items: 'Дополнительная комплектация',
-      services: 'Услуги'
+      services: 'Услуги',
+      total: 'Итого по заказу:'
     },
     additions_labels: {
       garage_gate: 'Гаражные ворота',

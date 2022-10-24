@@ -47,7 +47,7 @@ export default function ProductsTablePage({
     head,
     rows,
     total
-  }) => rows && rows.length > 0 && React.createElement(Box, {
+  }) => (rows && rows.length > 0 || id === '3' && head && head.length > 0) && React.createElement(Box, {
     className: classes.tableMargins,
     key: id
   }, React.createElement(Typography, {
@@ -57,7 +57,7 @@ export default function ProductsTablePage({
     head: head,
     rows: rows,
     total: total,
-    boldBorderlessHead: false
+    boldBorderlessHead: id === '3'
   }))), index === chunkNumber - 1 && React.createElement(React.Fragment, null, _ref2, _ref3), React.createElement(Box, {
     className: classes.displayInPrint
   }, _ref4))));
