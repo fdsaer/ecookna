@@ -31,7 +31,7 @@ const StyledTableHeadBold = withStyles(theme => ({
     padding: theme.spacing(0.5),
     fontSize: theme.typography.body2.fontSize,
     lineHeight: theme.typography.lineHeight,
-    border: 'none',
+    border: `1px solid ${theme.palette.primary.dark}`,
     fontWeight: theme.typography.fontWeightBold,
     verticalAlign: 'top'
   }
