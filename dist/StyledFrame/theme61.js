@@ -94,6 +94,9 @@ export const theme = createTheme({
     text: {
       primary: '#1A322C',
       secondary: '#FFFFFF'
+    },
+    error: {
+      main: '#E30613'
     }
   },
   shape: {

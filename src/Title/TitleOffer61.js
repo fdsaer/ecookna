@@ -1,5 +1,4 @@
 import HeaderBackImage from '../img/offer61/titleBack.jpg';
-import Contacts from '../Components/Contacts.js';
 import Header from '../Header/HeaderOffer61.js';
 
 const { React, Typography, Link, Box } = $p.ui;
@@ -15,7 +14,7 @@ export default function TitleOffer61(props) {
       className={`${classes.pageBreakAfter} ${classes.pageHeight}`}
       sx={{ position: 'relative' }}
     >
-      <Header />
+      <Header classes={classes} />
 
       <img src={HeaderBackImage} style={{ maxWidth: '100%' }} />
 

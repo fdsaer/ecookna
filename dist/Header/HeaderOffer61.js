@@ -13,8 +13,7 @@ var _ref = React.createElement(Logo, {
 });
 
 export default function HeaderOffer61(props) {
-  const {
-    obj,
+  let {
     classes
   } = props;
   return React.createElement(Box, {
@@ -31,6 +30,7 @@ export default function HeaderOffer61(props) {
     pb: 3.75,
     sx: {
       position: 'relative'
-    }
+    },
+    className: `${classes.logo}`
   }, _ref));
 }

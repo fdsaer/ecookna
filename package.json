@@ -49,7 +49,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ./babel.config.js ./src --out-dir ./dist && node ./copy-files",
     "serve": "browser-sync start --proxy \"http://localhost:3016/\" --files \"dist/**/*\"",
-    "watch:all": "onchange \"src/**/*\" -- \"npm run build\""
+    "watch:all": "onchange \"src/**/*\" -- cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ./babel.config.js ./src --out-dir ./dist && node ./copy-files"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -142,6 +142,21 @@ export default function styles(theme) {
     },
     w100: {
       width: '100%'
+    },
+    logo: {
+      '&:after': {
+        content: '""',
+        width: 0,
+        height: 0,
+        bottom: '-25px',
+        left: 0,
+        right: 0,
+        position: 'absolute',
+        margin: '0 auto',
+        borderLeft: '10px solid transparent',
+        borderRight: '68px solid transparent',
+        borderTop: '25px solid #E30613'
+      }
     }
   };
 }

@@ -95,6 +95,9 @@ export const theme = createTheme({
       primary: '#1A322C',
       secondary: '#FFFFFF',
     },
+    error: {
+      main: '#E30613',
+    },
   },
   shape: {
     borderRadius: 6,
