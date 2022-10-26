@@ -62,7 +62,7 @@ export default function getProductsData(products, tableRowsPerPage) {
     rows: productListSvg ? productListSvg.map((product, index) => ({
       id: index,
       data: [{
-        text: product.characteristic.prod_nom.name_full ? product.characteristic.prod_nom.name_full : product.characteristic.sys.name,
+        text: product.nom.name ? product.nom.name : product.characteristic.sys.name,
         id: 0
       }, {
         text: product.characteristic.clr.presentation,
@@ -136,7 +136,7 @@ export default function getProductsData(products, tableRowsPerPage) {
     rows: productListExtraItems ? productListExtraItems.map((product, index) => ({
       id: index,
       data: [{
-        text: product.characteristic.prod_nom.name_full && product.characteristic.prod_nom.name_full !== 'Аксессуары' ? product.characteristic.prod_nom.name_full : product.characteristic.name,
+        text: product.nom.name && product.characteristic.prod_nom.name_full !== 'Аксессуары' ? product.nom.name : product.characteristic.name,
         id: 0
       }, {
         text: product.quantity.round(0),
@@ -195,7 +195,7 @@ export default function getProductsData(products, tableRowsPerPage) {
     rows: productIsService ? productIsService.map((product, index) => ({
       id: index,
       data: [{
-        text: product.characteristic.prod_nom.name_full ? product.characteristic.prod_nom.name_full : product.nom.name_full,
+        text: product.nom.name ? product.nom.name : product.nom.name_full,
         id: 0
       }, {
         text: product.quantity.round(0),

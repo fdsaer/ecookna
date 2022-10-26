@@ -186,8 +186,8 @@ export const getProductWeight = (product) =>
     .reduce((acc, constructionWeight) => (acc += constructionWeight), 0);
 
 export const getAddressInfo = (obj) => {
-  const office = { phone_number: '', email_address: '', address: '' };
-  obj.organization.contact_information.forEach((row) => {
+  const office = { name: '', phone_number: '', email_address: '', address: '' };
+  obj?.department?.contact_information?.forEach((row) => {
     switch (row.type.name) {
       case 'Адрес':
         if (row.presentation && !office.address) {
@@ -207,6 +207,7 @@ export const getAddressInfo = (obj) => {
       default:
     }
   });
+  office.name = obj?.department?.name;
   return office;
 };
 
@@ -217,7 +218,7 @@ export const getManagerInfo = (obj) => {
     email_address: '',
     address: '',
   };
-  obj.manager.contact_information.forEach((row) => {
+  obj?.manager?.contact_information?.forEach((row) => {
     switch (row.type.name) {
       case 'Адрес':
         if (row.presentation && !managerData.address) {

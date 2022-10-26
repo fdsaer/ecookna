@@ -35,7 +35,11 @@ export default function Contacts({ withLogo = true, manager, office }) {
               </Typography>
             </Box>
             <Box bgcolor="background.paper" p={1}>
-              <Typography variant="inherit">{office.address}</Typography>
+              <Typography variant="inherit">
+                {[office.name, office.address]
+                  .filter((value) => value)
+                  .join(', ')}
+              </Typography>
             </Box>
           </>
         )}

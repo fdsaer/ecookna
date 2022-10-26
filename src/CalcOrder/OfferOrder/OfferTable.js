@@ -111,8 +111,8 @@ export default function getProductsData(products, tableRowsPerPage) {
             id: index,
             data: [
               {
-                text: product.characteristic.prod_nom.name_full
-                  ? product.characteristic.prod_nom.name_full
+                text: product.nom.name
+                  ? product.nom.name
                   : product.characteristic.sys.name,
                 id: 0,
               },
@@ -209,9 +209,9 @@ export default function getProductsData(products, tableRowsPerPage) {
             data: [
               {
                 text:
-                  product.characteristic.prod_nom.name_full &&
+                  product.nom.name &&
                   product.characteristic.prod_nom.name_full !== 'Аксессуары'
-                    ? product.characteristic.prod_nom.name_full
+                    ? product.nom.name
                     : product.characteristic.name,
                 id: 0,
               },
@@ -290,8 +290,8 @@ export default function getProductsData(products, tableRowsPerPage) {
             id: index,
             data: [
               {
-                text: product.characteristic.prod_nom.name_full
-                  ? product.characteristic.prod_nom.name_full
+                text: product.nom.name
+                  ? product.nom.name
                   : product.nom.name_full,
                 id: 0,
               },
