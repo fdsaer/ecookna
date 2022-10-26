@@ -59,7 +59,9 @@ class PrnProto extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loaded: false
+      loaded: false,
+      componentsLoaded: false,
+      imagesLoaded: false
     };
 
     this.setClasses = classes => {
