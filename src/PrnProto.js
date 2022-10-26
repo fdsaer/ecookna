@@ -64,6 +64,8 @@ class PrnProto extends React.Component {
     // props.skipCss && props.skipCss();
     this.state = {
       loaded: false,
+      componentsLoaded: false,
+      imagesLoaded: false,
     };
     this.setClasses = (classes) => {
       addPrintStyles('data-custom-print');

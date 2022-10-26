@@ -63,6 +63,9 @@ class Offer59 extends PrnProto {
         ProductsTable: module.ProductsTable,
         ProductsTablePage: module.ProductsTablePage
       });
+      this.setState({
+        componentsLoaded: true
+      });
     });
     import('./OfferImages.js').then(module => {
       this.setAsyncImages({
@@ -87,6 +90,9 @@ class Offer59 extends PrnProto {
         GlassDoorImage: module.GlassDoorImage,
         GlassHeaterImage: module.GlassHeaterImage,
         PhoneChargerImage: module.PhoneChargerImage
+      });
+      this.setState({
+        imagesLoaded: true
       });
     });
   }

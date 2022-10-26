@@ -62,5 +62,5 @@ export default function Contacts({
     p: 1
   }, React.createElement(Typography, {
     variant: "inherit"
-  }, office.address)))), withLogo && _ref3);
+  }, [office.name, office.address].filter(value => value).join(', '))))), withLogo && _ref3);
 }
