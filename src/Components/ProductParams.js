@@ -58,6 +58,7 @@ export default function ProductParams({
 }) {
   // Группирует список карточек объединяя карточки с небольшим количеством параметров
   // для того, чтобы при печати выводить по несколько карточек на одной странице
+  let index = 0;
   const productListChunks = productList.reduce((acc, product) => {
     const count = getParamCount(product.data);
     const lastChunk = acc[acc.length - 1];
@@ -115,8 +116,9 @@ export default function ProductParams({
             <Box mt={3} className={classes.displayInPrint}>
               <Advantages withLogo advantagesList={advantages} />
             </Box>
-            {chunk.map(({ data, number, position, quantity, svg }, index) => {
+            {chunk.map(({ data, number, position, quantity, svg }) => {
               const count = getParamCount(data);
+              index++
               return (
                 <Box
                   display="flex"
@@ -134,7 +136,7 @@ export default function ProductParams({
               </Typography> */}
 
                       <Typography variant="subtitle2" component="p">
-                        Номер: {index + 1} (поз. {position}) - {quantity} шт.
+                        Номер: {index} (поз. {position}) - {quantity} шт.
                       </Typography>
                     </Box>
                     <Box pr={1} pl={3}>

@@ -89,6 +89,7 @@ export default function ProductParams({
     advantagesList: advantages
   });
 
+  let index = 0;
   const productListChunks = productList.reduce((acc, product) => {
     const count = getParamCount(product.data);
     const lastChunk = acc[acc.length - 1];
@@ -118,8 +119,9 @@ export default function ProductParams({
       position,
       quantity,
       svg
-    }, index) => {
+    }) => {
       const count = getParamCount(data);
+      index++;
       return React.createElement(Box, {
         display: "flex",
         flexDirection: "row",
@@ -137,7 +139,7 @@ export default function ProductParams({
       }, React.createElement(Typography, {
         variant: "subtitle2",
         component: "p"
-      }, "Номер: ", index + 1, " (поз. ", position, ") - ", quantity, " шт.")), React.createElement(Box, {
+      }, "Номер: ", index, " (поз. ", position, ") - ", quantity, " шт.")), React.createElement(Box, {
         pr: 1,
         pl: 3
       }, React.createElement(Svg, {
