@@ -1,4 +1,4 @@
-import Advantages from './Advantages.js';
+import Header from '../../Header/index.js';
 import Payments from './Payments.js';
 const { React, Typography, Box, List, ListItem } = $p.ui;
 
@@ -55,6 +55,10 @@ export default function ProductParams({
   rowsPerPage = 24,
   svgMaxHeight = 246,
   rowHeight = 23,
+  obj,
+  order,
+  office,
+  manager,
 }) {
   // Группирует список карточек объединяя карточки с небольшим количеством параметров
   // для того, чтобы при печати выводить по несколько карточек на одной странице
@@ -114,11 +118,18 @@ export default function ProductParams({
             key={chunk[0]?.position}
           >
             <Box mt={3} className={classes.displayInPrint}>
-              <Advantages withLogo advantagesList={advantages} />
+              <Header
+                withLogo
+                obj={obj}
+                advantagesList={advantages}
+                order={order}
+                office={office}
+                manager={manager}
+              />
             </Box>
             {chunk.map(({ data, number, position, quantity, svg }) => {
               const count = getParamCount(data);
-              index++
+              index++;
               return (
                 <Box
                   display="flex"

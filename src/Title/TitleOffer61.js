@@ -15,7 +15,7 @@ export default function TitleOffer61(props) {
       className={`${classes.pageBreakAfter} ${classes.pageHeight}`}
       sx={{ position: 'relative' }}
     >
-      {/* header title */}
+      {/* header */}
       <Box
         pl={1.8}
         pr={1.8}

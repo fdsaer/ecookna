@@ -51,7 +51,6 @@ class Offer59 extends PrnProto {
         Payments: module.Payments,
         Wrapper: module.Wrapper,
         Description: module.Description,
-        Advantages: module.Advantages,
         Additions: module.Additions,
         LinksBlock: module.LinksBlock,
         Manager: module.Manager,
@@ -140,12 +139,17 @@ class Offer59 extends PrnProto {
               order={order}
               office={getAddressInfo(obj)}
               manager={manager}
+              obj={obj}
             />
           )}
           {components && classes && (
             <components.Wrapper classes={classes}>
               <Box mt={3} className={classes.hideInPrint}>
-                <components.Advantages withLogo advantagesList={advantages} />
+                <components.Header
+                  withLogo
+                  obj={obj}
+                  advantagesList={advantages}
+                />
               </Box>
               <Box
                 mt={3}
@@ -173,6 +177,7 @@ class Offer59 extends PrnProto {
                   rowsPerPage={paramsRowsPerPage}
                   svgMaxHeight={paramsSvgMaxHeight}
                   rowHeight={paramsRowHeight}
+                  obj={obj}
                 />
               )}
               {productTableData && (
@@ -181,13 +186,18 @@ class Offer59 extends PrnProto {
                   advantages={advantages}
                   payments={payments}
                   productTableData={productTableData}
+                  obj={obj}
                 />
               )}
               <Box className={classes.hideInPrint}>
                 <components.Payments paymentList={payments} classes={classes} />
               </Box>
               <Box mt={5} className={classes.pageBreakBefore}>
-                <components.Advantages withLogo advantagesList={advantages} />
+                <components.Header
+                  withLogo
+                  obj={obj}
+                  advantagesList={advantages}
+                />
               </Box>
               <Box mt={5}>
                 <components.Description title="Подберем лучшее решение:" />

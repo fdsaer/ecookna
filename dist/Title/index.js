@@ -14,7 +14,6 @@ export default function Title(props) {
       Component = TitleOffer59;
       break;
 
-    case 'ГРУППА КОМПАНИЙ':
     case 'ОК Калева':
       Component = TitleOffer61;
       break;

@@ -1,4 +1,4 @@
-import Advantages from './Advantages.js';
+import Header from '../../Header/index.js';
 import Payments from './Payments.js';
 const {
   React,
@@ -77,16 +77,24 @@ export default function ProductParams({
   payments,
   rowsPerPage = 24,
   svgMaxHeight = 246,
-  rowHeight = 23
+  rowHeight = 23,
+  obj,
+  order,
+  office,
+  manager
 }) {
   var _ref3 = React.createElement(Payments, {
     paymentList: payments,
     classes: classes
   });
 
-  var _ref = React.createElement(Advantages, {
+  var _ref = React.createElement(Header, {
     withLogo: true,
-    advantagesList: advantages
+    obj: obj,
+    advantagesList: advantages,
+    order: order,
+    office: office,
+    manager: manager
   });
 
   let index = 0;

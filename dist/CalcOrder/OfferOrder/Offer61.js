@@ -58,7 +58,6 @@ class Offer61 extends PrnProto {
           Payments: module.Payments,
           Wrapper: module.Wrapper,
           Description: module.Description,
-          Advantages: module.Advantages,
           Additions: module.Additions,
           LinksBlock: module.LinksBlock,
           Manager: module.Manager,
@@ -155,25 +154,20 @@ class Offer61 extends PrnProto {
       description: "по изготовлению и установке светопрозрачных конструкций",
       order: order,
       office: office,
-      manager: manager
+      manager: manager,
+      obj: obj
     }), components?.Wrapper && React.createElement(components.Wrapper, {
       classes: classes
     }, React.createElement(Box, {
       mt: 3,
       className: classes?.hideInPrint
-    }, components?.Advantages && React.createElement(components.Advantages, {
+    }, components?.Header && React.createElement(components.Header, {
       withLogo: true,
-      advantagesList: advantages
-    })), React.createElement(Box, {
-      mt: 3,
-      mb: 2.5,
-      fontSize: 22,
-      className: classes?.hideInPrint
-    }, React.createElement(Typography, {
-      variant: "inherit",
-      color: "textSecondary",
-      component: "p"
-    }, order)), productList && productList.length > 0 && components?.ProductParams && React.createElement(components.ProductParams, {
+      obj: obj,
+      order: order,
+      office: office,
+      manager: manager
+    })), productList && productList.length > 0 && components?.ProductParams && React.createElement(components.ProductParams, {
       title: "В комплектацию Вашего заказа входит:",
       fullSquare: fullSquare,
       fullWeight: fullWeight,
@@ -183,12 +177,20 @@ class Offer61 extends PrnProto {
       payments: payments,
       rowsPerPage: paramsRowsPerPage,
       svgMaxHeight: paramsSvgMaxHeight,
-      rowHeight: paramsRowHeight
+      rowHeight: paramsRowHeight,
+      obj: obj,
+      order: order,
+      office: office,
+      manager: manager
     }), components?.ProductsTablePage && productTableData && React.createElement(components.ProductsTablePage, {
       classes: classes,
       advantages: advantages,
       payments: payments,
-      productTableData: productTableData
+      productTableData: productTableData,
+      obj: obj,
+      order: order,
+      office: office,
+      manager: manager
     }), components?.Payments && React.createElement(Box, {
       className: classes?.hideInPrint
     }, React.createElement(components.Payments, {
@@ -197,9 +199,12 @@ class Offer61 extends PrnProto {
     })), React.createElement(Box, {
       mt: 5,
       className: classes?.pageBreakBefore
-    }, components?.Advantages && React.createElement(components.Advantages, {
+    }, components?.Header && React.createElement(components.Header, {
       withLogo: true,
-      advantagesList: advantages
+      obj: obj,
+      order: order,
+      office: office,
+      manager: manager
     })), React.createElement(Box, {
       mt: 5
     }, components?.Description && React.createElement(components.Description, {

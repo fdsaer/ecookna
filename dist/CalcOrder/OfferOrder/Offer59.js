@@ -56,7 +56,6 @@ class Offer59 extends PrnProto {
         Payments: module.Payments,
         Wrapper: module.Wrapper,
         Description: module.Description,
-        Advantages: module.Advantages,
         Additions: module.Additions,
         LinksBlock: module.LinksBlock,
         Manager: module.Manager,
@@ -146,14 +145,16 @@ class Offer59 extends PrnProto {
       description: "по изготовлению и установке светопрозрачных конструкций",
       order: order,
       office: getAddressInfo(obj),
-      manager: manager
+      manager: manager,
+      obj: obj
     }), components && classes && React.createElement(components.Wrapper, {
       classes: classes
     }, React.createElement(Box, {
       mt: 3,
       className: classes.hideInPrint
-    }, React.createElement(components.Advantages, {
+    }, React.createElement(components.Header, {
       withLogo: true,
+      obj: obj,
       advantagesList: advantages
     })), React.createElement(Box, {
       mt: 3,
@@ -174,12 +175,14 @@ class Offer59 extends PrnProto {
       payments: payments,
       rowsPerPage: paramsRowsPerPage,
       svgMaxHeight: paramsSvgMaxHeight,
-      rowHeight: paramsRowHeight
+      rowHeight: paramsRowHeight,
+      obj: obj
     }), productTableData && React.createElement(components.ProductsTablePage, {
       classes: classes,
       advantages: advantages,
       payments: payments,
-      productTableData: productTableData
+      productTableData: productTableData,
+      obj: obj
     }), React.createElement(Box, {
       className: classes.hideInPrint
     }, React.createElement(components.Payments, {
@@ -188,8 +191,9 @@ class Offer59 extends PrnProto {
     })), React.createElement(Box, {
       mt: 5,
       className: classes.pageBreakBefore
-    }, React.createElement(components.Advantages, {
+    }, React.createElement(components.Header, {
       withLogo: true,
+      obj: obj,
       advantagesList: advantages
     })), React.createElement(Box, {
       mt: 5

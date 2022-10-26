@@ -1,4 +1,4 @@
-import Advantages from './Advantages.js';
+import Header from '../../Header/index.js';
 import Payments from './Payments.js';
 import ProductsTable from './ProductsTable.js';
 const {
@@ -20,16 +20,24 @@ export default function ProductsTablePage({
   classes,
   advantages,
   payments,
-  productTableData
+  productTableData,
+  obj,
+  order,
+  office,
+  manager
 }) {
   var _ref4 = React.createElement(Payments, {
     paymentList: payments,
     classes: classes
   });
 
-  var _ref = React.createElement(Advantages, {
+  var _ref = React.createElement(Header, {
     withLogo: true,
-    advantagesList: advantages
+    obj: obj,
+    advantagesList: advantages,
+    order: order,
+    office: office,
+    manager: manager
   });
 
   const chunkNumber = productTableData.length;

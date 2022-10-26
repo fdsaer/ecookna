@@ -54,7 +54,6 @@ class Offer61 extends PrnProto {
           Payments: module.Payments,
           Wrapper: module.Wrapper,
           Description: module.Description,
-          Advantages: module.Advantages,
           Additions: module.Additions,
           LinksBlock: module.LinksBlock,
           Manager: module.Manager,
@@ -155,28 +154,21 @@ class Offer61 extends PrnProto {
               order={order}
               office={office}
               manager={manager}
+              obj={obj}
             />
           )}
           {components?.Wrapper && (
             <components.Wrapper classes={classes}>
               <Box mt={3} className={classes?.hideInPrint}>
-                {components?.Advantages && (
-                  <components.Advantages withLogo advantagesList={advantages} />
+                {components?.Header && (
+                  <components.Header
+                    withLogo
+                    obj={obj}
+                    order={order}
+                    office={office}
+                    manager={manager}
+                  />
                 )}
-              </Box>
-              <Box
-                mt={3}
-                mb={2.5}
-                fontSize={22}
-                className={classes?.hideInPrint}
-              >
-                <Typography
-                  variant="inherit"
-                  color="textSecondary"
-                  component="p"
-                >
-                  {order}
-                </Typography>
               </Box>
               {productList &&
                 productList.length > 0 &&
@@ -192,6 +184,10 @@ class Offer61 extends PrnProto {
                     rowsPerPage={paramsRowsPerPage}
                     svgMaxHeight={paramsSvgMaxHeight}
                     rowHeight={paramsRowHeight}
+                    obj={obj}
+                    order={order}
+                    office={office}
+                    manager={manager}
                   />
                 )}
               {components?.ProductsTablePage && productTableData && (
@@ -200,6 +196,10 @@ class Offer61 extends PrnProto {
                   advantages={advantages}
                   payments={payments}
                   productTableData={productTableData}
+                  obj={obj}
+                  order={order}
+                  office={office}
+                  manager={manager}
                 />
               )}
               {components?.Payments && (
@@ -211,8 +211,14 @@ class Offer61 extends PrnProto {
                 </Box>
               )}
               <Box mt={5} className={classes?.pageBreakBefore}>
-                {components?.Advantages && (
-                  <components.Advantages withLogo advantagesList={advantages} />
+                {components?.Header && (
+                  <components.Header
+                    withLogo
+                    obj={obj}
+                    order={order}
+                    office={office}
+                    manager={manager}
+                  />
                 )}
               </Box>
               <Box mt={5}>

@@ -8,13 +8,13 @@ import TitleOffer61 from './TitleOffer61.js';
 
 export default function Title(props) {
   let Component;
+
   switch (props.obj.organization.name) {
     case 'Компания ФОТОТЕХ':
     case 'ООО"ФОТОТЕХ"':
     case 'ОКНА РОСТА ДОМ':
       Component = TitleOffer59;
       break;
-    case 'ГРУППА КОМПАНИЙ':
     case 'ОК Калева':
       Component = TitleOffer61;
       break;
