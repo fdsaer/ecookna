@@ -22,8 +22,8 @@ export default function ProductsTablePage({
           </Box>
           {chunk.map(
             ({ id, title, head, rows, total }) =>
-              rows &&
-              rows.length > 0 && (
+              ((rows && rows.length > 0) ||
+                (id === '3' && head && head.length > 0)) && (
                 <Box className={classes.tableMargins} key={id}>
                   <Typography color="textSecondary" component="p">
                     {title}
@@ -32,7 +32,7 @@ export default function ProductsTablePage({
                     head={head}
                     rows={rows}
                     total={total}
-                    boldBorderlessHead={false}
+                    boldBorderlessHead={id === '3'}
                   />
                 </Box>
               )

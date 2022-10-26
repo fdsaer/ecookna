@@ -1,7 +1,5 @@
 import PrnProto from '../../PrnProto.js';
-import { fullSquare, fullWeight, getProductsList } from './OfferData.js';
-import { getManagerInfo } from '../../Components/Manager.js';
-import { getAddressInfo } from '../../Components/Contacts.js';
+import { fullSquare, fullWeight, getProductsList, getManagerInfo, getAddressInfo } from './OfferData.js';
 import getProductsData from './OfferTable.js';
 import { getAssortmentLinks, getLinks, getAdvantages, getPayments, getAdditions } from './Templates.js';
 const {
@@ -51,56 +49,45 @@ class Offer59 extends PrnProto {
     this.setState({
       loaded: true
     });
-    const componentsImport = import('./OfferComponents.js');
-    componentsImport.then(module => {
-      this.setState({
-        components: {
-          Header: module.Header,
-          Payments: module.Payments,
-          Wrapper: module.Wrapper,
-          Description: module.Description,
-          Advantages: module.Advantages,
-          Additions: module.Additions,
-          LinksBlock: module.LinksBlock,
-          Manager: module.Manager,
-          ProductParams: module.ProductParams,
-          ProductsTable: module.ProductsTable,
-          ProductsTablePage: module.ProductsTablePage
-        }
-      });
-      this.setState({
-        componentsLoaded: true
+    import('./OfferComponents.js').then(module => {
+      this.setAsyncModules({
+        Header: module.Header,
+        Title: module.Title,
+        Payments: module.Payments,
+        Wrapper: module.Wrapper,
+        Description: module.Description,
+        Advantages: module.Advantages,
+        Additions: module.Additions,
+        LinksBlock: module.LinksBlock,
+        Manager: module.Manager,
+        ProductParams: module.ProductParams,
+        ProductsTable: module.ProductsTable,
+        ProductsTablePage: module.ProductsTablePage
       });
     });
-    const imagesImport = import('./OfferImages.js');
-    imagesImport.then(module => {
-      this.setState({
-        images: {
-          AgeAdvantageImage: module.AgeAdvantageImage,
-          FreeSizingAdvantageIcon: module.FreeSizingAdvantageIcon,
-          GuaranteeAdvantageIcon: module.GuaranteeAdvantageIcon,
-          ClientsAdvantageIcon: module.ClientsAdvantageIcon,
-          CashPaymentIcon: module.CashPaymentIcon,
-          CardPaymentIcon: module.CardPaymentIcon,
-          OnlinePaymentIcon: module.OnlinePaymentIcon,
-          installmentIcon: module.installmentIcon,
-          ExamplesIcon: module.ExamplesIcon,
-          FactoryIcon: module.FactoryIcon,
-          ProductionIcon: module.ProductionIcon,
-          WatchVideoIcon: module.WatchVideoIcon,
-          GarageGateImage: module.GarageGateImage,
-          BalconyDecorationImage: module.BalconyDecorationImage,
-          CurtainsImage: module.CurtainsImage,
-          HeatingRadiatorImage: module.HeatingRadiatorImage,
-          EvolvingOpacityImage: module.EvolvingOpacityImage,
-          OrangeryImage: module.OrangeryImage,
-          GlassDoorImage: module.GlassDoorImage,
-          GlassHeaterImage: module.GlassHeaterImage,
-          PhoneChargerImage: module.PhoneChargerImage
-        }
-      });
-      this.setState({
-        imagesLoaded: true
+    import('./OfferImages.js').then(module => {
+      this.setAsyncImages({
+        AgeAdvantageImage: module.AgeAdvantageImage,
+        FreeSizingAdvantageIcon: module.FreeSizingAdvantageIcon,
+        GuaranteeAdvantageIcon: module.GuaranteeAdvantageIcon,
+        ClientsAdvantageIcon: module.ClientsAdvantageIcon,
+        CashPaymentIcon: module.CashPaymentIcon,
+        CardPaymentIcon: module.CardPaymentIcon,
+        OnlinePaymentIcon: module.OnlinePaymentIcon,
+        installmentIcon: module.installmentIcon,
+        ExamplesIcon: module.ExamplesIcon,
+        FactoryIcon: module.FactoryIcon,
+        ProductionIcon: module.ProductionIcon,
+        WatchVideoIcon: module.WatchVideoIcon,
+        GarageGateImage: module.GarageGateImage,
+        BalconyDecorationImage: module.BalconyDecorationImage,
+        CurtainsImage: module.CurtainsImage,
+        HeatingRadiatorImage: module.HeatingRadiatorImage,
+        EvolvingOpacityImage: module.EvolvingOpacityImage,
+        OrangeryImage: module.OrangeryImage,
+        GlassDoorImage: module.GlassDoorImage,
+        GlassHeaterImage: module.GlassHeaterImage,
+        PhoneChargerImage: module.PhoneChargerImage
       });
     });
   }
@@ -114,16 +101,13 @@ class Offer59 extends PrnProto {
       },
       state: {
         loaded,
-        products,
-        components,
-        images,
-        componentsLoaded,
-        imagesLoaded
+        products
       },
-      classes
+      classes,
+      components,
+      images
     } = this;
     const manager = getManagerInfo(obj);
-    const office = getAddressInfo(obj);
     const assortmentLinks = getAssortmentLinks(images);
     const links = getLinks(images);
     const advantages = getAdvantages(images);
@@ -150,31 +134,31 @@ class Offer59 extends PrnProto {
       classes: classes,
       setClasses: this.setClasses,
       title: order,
-      loading: !components || !componentsLoaded || !imagesLoaded || !classes
-    }, components?.Header && React.createElement(components.Header, {
+      loading: !components || !images || !loaded || !classes
+    }, components && React.createElement(components.Title, {
       headerTitle: "Индивидуальное решение",
       description: "по изготовлению и установке светопрозрачных конструкций",
       order: order,
-      office: office,
+      office: getAddressInfo(obj),
       manager: manager
-    }), components?.Wrapper && React.createElement(components.Wrapper, {
+    }), components && classes && React.createElement(components.Wrapper, {
       classes: classes
     }, React.createElement(Box, {
       mt: 3,
-      className: classes?.hideInPrint
-    }, components?.Advantages && React.createElement(components.Advantages, {
+      className: classes.hideInPrint
+    }, React.createElement(components.Advantages, {
       withLogo: true,
       advantagesList: advantages
     })), React.createElement(Box, {
       mt: 3,
       mb: 2.5,
       fontSize: 22,
-      className: classes?.hideInPrint
+      className: classes.hideInPrint
     }, React.createElement(Typography, {
       variant: "inherit",
       color: "textSecondary",
       component: "p"
-    }, order)), productList && productList.length > 0 && components?.ProductParams && React.createElement(components.ProductParams, {
+    }, order)), productList && productList.length > 0 && React.createElement(components.ProductParams, {
       title: "В комплектацию Вашего заказа входит:",
       fullSquare: fullSquare,
       fullWeight: fullWeight,
@@ -185,33 +169,33 @@ class Offer59 extends PrnProto {
       rowsPerPage: paramsRowsPerPage,
       svgMaxHeight: paramsSvgMaxHeight,
       rowHeight: paramsRowHeight
-    }), components?.ProductsTablePage && productTableData && React.createElement(components.ProductsTablePage, {
+    }), productTableData && React.createElement(components.ProductsTablePage, {
       classes: classes,
       advantages: advantages,
       payments: payments,
       productTableData: productTableData
-    }), components?.Payments && React.createElement(Box, {
-      className: classes?.hideInPrint
+    }), React.createElement(Box, {
+      className: classes.hideInPrint
     }, React.createElement(components.Payments, {
       paymentList: payments,
       classes: classes
     })), React.createElement(Box, {
       mt: 5,
-      className: classes?.pageBreakBefore
-    }, components?.Advantages && React.createElement(components.Advantages, {
+      className: classes.pageBreakBefore
+    }, React.createElement(components.Advantages, {
       withLogo: true,
       advantagesList: advantages
     })), React.createElement(Box, {
       mt: 5
-    }, components?.Description && React.createElement(components.Description, {
+    }, React.createElement(components.Description, {
       title: "Подберем лучшее решение:"
     })), React.createElement(Box, {
       mt: 7
-    }, components?.LinksBlock && React.createElement(components.LinksBlock, {
+    }, React.createElement(components.LinksBlock, {
       links: assortmentLinks
     }, _ref)), React.createElement(Box, {
       mt: 5
-    }, components?.LinksBlock && React.createElement(components.LinksBlock, {
+    }, React.createElement(components.LinksBlock, {
       links: links
     }, React.createElement(Box, {
       sx: {
@@ -220,13 +204,13 @@ class Offer59 extends PrnProto {
       mr: 2.5
     }, _ref2))), React.createElement(Box, {
       mt: 7,
-      className: classes?.pageBreakBefore
-    }, components?.Additions && React.createElement(components.Additions, {
+      className: classes.pageBreakBefore
+    }, React.createElement(components.Additions, {
       additions: additions,
       title: "Добавьте к своему интерьеру:"
     })), React.createElement(Box, {
       mt: 7
-    }, components?.Manager && React.createElement(components.Manager, {
+    }, React.createElement(components.Manager, {
       title: "Остались вопросы? Я на связи! ",
       manager: manager
     })))));

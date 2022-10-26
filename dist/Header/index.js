@@ -4,7 +4,7 @@ const {
 } = $p.ui;
 import HeaderBase from './HeaderBase.js';
 import HeaderOrg1 from './HeaderOrg1.js';
-import HeaderOffer from './HeaderOffer.js';
+import HeaderOffer59 from './HeaderOffer59.js';
 export default function Header(props) {
   let Component;
 
@@ -17,11 +17,11 @@ export default function Header(props) {
 
     case 'ГРУППА КОМПАНИЙ':
     case 'ОК Калева':
-      Component = HeaderOffer;
+      Component = HeaderOffer59;
       break;
 
     default:
-      Component = HeaderOffer;
+      Component = HeaderOrg1;
   }
 
   return React.createElement(Component, props);

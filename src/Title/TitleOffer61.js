@@ -1,5 +1,6 @@
 import HeaderBackImage from '../img/offer61/titleBack.jpg';
-import Header from '../Header/HeaderOffer61.js';
+import LogoImage from '../img/offer61/logo.svg';
+import Logo from '../Components/Logo.js';
 
 const { React, Typography, Link, Box } = $p.ui;
 
@@ -14,7 +15,28 @@ export default function TitleOffer61(props) {
       className={`${classes.pageBreakAfter} ${classes.pageHeight}`}
       sx={{ position: 'relative' }}
     >
-      <Header classes={classes} />
+      {/* header title */}
+      <Box
+        pl={1.8}
+        pr={1.8}
+        display="flex"
+        justifyContent="center"
+        sx={{
+          position: 'relative',
+          backgroundColor: '#E30613',
+        }}
+      >
+        <Box
+          pt={3.75}
+          pb={3.75}
+          sx={{
+            position: 'relative',
+          }}
+          className={`${classes.logo}`}
+        >
+          <Logo pt={3.75} pb={3.75} width={275} src={LogoImage} />
+        </Box>
+      </Box>
 
       <img src={HeaderBackImage} style={{ maxWidth: '100%' }} />
 

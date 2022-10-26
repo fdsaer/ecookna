@@ -1,7 +1,5 @@
 import PrnProto from '../../PrnProto.js';
-import { fullSquare, fullWeight, getProductsList } from './OfferData.js';
-import { getManagerInfo } from '../../Components/Manager.js';
-import { getAddressInfo } from '../../Components/Contacts.js';
+import { fullSquare, fullWeight, getProductsList, getManagerInfo, getAddressInfo } from './OfferData.js';
 import getProductsData from './OfferTable.js';
 import { getAssortmentLinks, getLinks, getAdvantages, getPayments, getAdditions } from './Templates.js';
 const {

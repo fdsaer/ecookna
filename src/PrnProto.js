@@ -35,12 +35,15 @@ function add_table_titles(msg) {
       price: 'Цена без скидки (руб.)',
       discount: 'Скидка (%)',
       final_price: 'Цена со скидкой (руб.)',
-      total: 'Всего',
+      totalProducts: 'Всего по изделиям:',
+      totalExtraItems: 'Всего по доп. комплектации:',
+      totalService: 'Всего по услугам:',
     },
     table_titles: {
       products: 'Изделия',
       extra_items: 'Дополнительная комплектация',
       services: 'Услуги',
+      total: 'Итого по заказу:',
     },
     additions_labels: {
       garage_gate: 'Гаражные ворота',
@@ -61,13 +64,17 @@ class PrnProto extends React.Component {
     // props.skipCss && props.skipCss();
     this.state = {
       loaded: false,
-      componentsLoaded: false,
-      imagesLoaded: false,
     };
     this.setClasses = (classes) => {
       addPrintStyles('data-custom-print');
       this.classes = classes;
       props.copyStyles && props.copyStyles();
+    };
+    this.setAsyncModules = (components) => {
+      this.components = components;
+    };
+    this.setAsyncImages = (images) => {
+      this.images = images;
     };
     this.componentWillMount = () => {
       add_table_titles($p.msg);

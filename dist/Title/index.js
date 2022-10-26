@@ -2,6 +2,7 @@ const {
   React,
   makeStyles
 } = $p.ui;
+import TitleOffer59 from './TitleOffer59.js';
 import TitleOffer61 from './TitleOffer61.js';
 export default function Title(props) {
   let Component;
@@ -10,7 +11,7 @@ export default function Title(props) {
     case 'Компания ФОТОТЕХ':
     case 'ООО"ФОТОТЕХ"':
     case 'ОКНА РОСТА ДОМ':
-      Component = HeaderOrg1;
+      Component = TitleOffer59;
       break;
 
     case 'ГРУППА КОМПАНИЙ':
@@ -19,7 +20,7 @@ export default function Title(props) {
       break;
 
     default:
-      Component = TitleOffer61;
+      Component = TitleOffer59;
   }
 
   return React.createElement(Component, props);

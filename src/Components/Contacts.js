@@ -1,31 +1,6 @@
 import Logo from './Logo.js';
 const { React, Box, Typography } = $p.ui;
 
-export const getAddressInfo = (obj) => {
-  const office = { phone_number: '', email_address: '', address: '' };
-  obj.organization.contact_information.forEach((row) => {
-    switch (row.type.name) {
-      case 'Адрес':
-        if (row.presentation && !office.address) {
-          office.address = row.presentation;
-        }
-        break;
-      case 'Телефон':
-        if (row.presentation && !office.phone_number) {
-          office.phone_number = row.presentation;
-        }
-        break;
-      case 'АдресЭлектроннойПочты':
-        if (row.presentation && !office.email_address) {
-          office.email_address = row.presentation;
-        }
-        break;
-      default:
-    }
-  });
-  return office;
-};
-
 export default function Contacts({ withLogo = true, manager, office }) {
   return (
     <Box display="flex" flexDirection="row" fontSize={15}>
