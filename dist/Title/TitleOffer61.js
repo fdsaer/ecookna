@@ -104,7 +104,7 @@ export default function TitleOffer61(props) {
     fontSize: 16,
     mt: 2.5
   }, React.createElement(Typography, {
-    component: "body1",
+    component: "p",
     color: "textSecondary"
   }, description))), React.createElement(Box, {
     sx: {

@@ -6,14 +6,14 @@ const {
   Typography
 } = $p.ui;
 
-var _ref = React.createElement(Box, null, React.createElement(Logo, {
+var _ref = React.createElement(Logo, {
   width: 210,
   src: LogoImage
-}));
+});
 
 var _ref2 = React.createElement(Box, {
   fontWeight: 600
-}, "Коммерческое предложение:");
+}, "Коммерческое предложение: ");
 
 var _ref3 = React.createElement(Box, {
   fontWeight: 600
@@ -27,22 +27,34 @@ export default function HeaderOffer61(props) {
   const {
     order,
     manager,
-    office
+    office,
+    classes
   } = props;
-  return React.createElement(Box, {
+  return React.createElement(Box, null, React.createElement(Box, {
     mt: 2.5,
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between"
-  }, _ref, React.createElement(Box, {
-    sx: {
-      flex: '0 0 50%'
-    }
-  }, order && React.createElement(Typography, {
-    component: "p",
-    color: "textPrimary",
+    justifyContent: "space-between",
     fontSize: 10
-  }, _ref2, order), manager && React.createElement(Box, {
+  }, React.createElement(Box, {
+    sx: {
+      flex: '0 0 50%',
+      maxWidth: '50%'
+    }
+  }, _ref), React.createElement(Box, {
+    sx: {
+      flex: '0 0 50%',
+      maxWidth: '50%'
+    },
+    fontSize: 10,
+    pl: 2.5
+  }, order && React.createElement(Box, {
+    display: "flex"
+  }, _ref2, React.createElement(Typography, {
+    variant: "inherit",
+    component: "span",
+    color: "textPrimary"
+  }, order)), manager && React.createElement(Box, {
     mt: 1.25,
     mb: 1.25,
     display: "flex",
@@ -50,22 +62,23 @@ export default function HeaderOffer61(props) {
     sx: {
       flex: '0 0 50%'
     }
-  }, React.createElement(Typography, {
+  }, React.createElement(Box, {
+    display: "flex"
+  }, _ref3, React.createElement(Box, null, manager.name || 'Кучер В.В.')), React.createElement(Typography, {
+    variant: "inherit",
     component: "p",
-    color: "textPrimary",
-    fontSize: 10
-  }, _ref3, manager.name), React.createElement(Typography, {
-    component: "p",
-    color: "textPrimary",
-    fontSize: 10
-  }, "телефон: ", manager.phone_number || '+7 777 777-77-77'), React.createElement(Typography, {
-    color: "textPrimary",
-    fontSize: 10
-  }, "email: ", manager.email_address || 'test@ecookna.ru')), office && React.createElement(Box, {
-    mb: 2.5
-  }, React.createElement(Typography, {
-    component: "p",
-    color: "textPrimary",
-    fontSize: 10
-  }, _ref4, office.address || 'г. Пушкино, ул. Напрудная, 33'))));
+    color: "textPrimary"
+  }, "Телефон: ", manager.phone_number || '+7 777 777-77-77'), React.createElement(Typography, {
+    variant: "inherit",
+    color: "textPrimary"
+  }, "Email: ", manager.email_address || 'test@ecookna.ru')), office && React.createElement(Box, {
+    mb: 2.5,
+    display: "flex"
+  }, _ref4, React.createElement(Typography, {
+    variant: "inherit",
+    component: "span",
+    color: "textPrimary"
+  }, office.address || 'г. Пушкино, ул. Напрудная, 33')))), classes && React.createElement(Box, {
+    className: classes.headerLine
+  }, "Спасибо, что выбрали «Окна Роста»!"));
 }

@@ -44,25 +44,21 @@ const ParamItem = ({ name, value, id }) => (
   </ListItem>
 );
 
-export default function ProductParams({
-  title,
-  productList,
-  fullSquare,
-  fullWeight,
-  classes,
-  advantages,
-  payments,
-  rowsPerPage = 24,
-  svgMaxHeight = 246,
-  rowHeight = 23,
-  obj,
-  order,
-  office,
-  manager,
-}) {
+export default function ProductParams(props) {
+  const {
+    title,
+    productList,
+    fullSquare,
+    fullWeight,
+    classes,
+    advantages,
+    payments,
+    rowsPerPage = 24,
+    svgMaxHeight = 246,
+    rowHeight = 23,
+  } = props;
   // Группирует список карточек объединяя карточки с небольшим количеством параметров
   // для того, чтобы при печати выводить по несколько карточек на одной странице
-  let index = 0;
   const productListChunks = productList.reduce((acc, product) => {
     const count = getParamCount(product.data);
     const lastChunk = acc[acc.length - 1];
@@ -80,6 +76,7 @@ export default function ProductParams({
     }
     return newAcc;
   }, []);
+  let index = 0;
 
   return (
     <Box className={classes.breakElementWithMargins}>
@@ -118,14 +115,7 @@ export default function ProductParams({
             key={chunk[0]?.position}
           >
             <Box mt={3} className={classes.displayInPrint}>
-              <Header
-                withLogo
-                obj={obj}
-                advantagesList={advantages}
-                order={order}
-                office={office}
-                manager={manager}
-              />
+              <Header withLogo {...props} />
             </Box>
             {chunk.map(({ data, number, position, quantity, svg }) => {
               const count = getParamCount(data);

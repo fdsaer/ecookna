@@ -157,6 +157,44 @@ export default function styles(theme) {
         borderRight: '68px solid transparent',
         borderTop: '25px solid #E30613'
       }
+    },
+    headerLine: {
+      borderTop: '1px solid #E30613',
+      textTransform: 'uppercase',
+      fontSize: '15px',
+      paddingTop: '6px',
+      fontWeight: 600,
+      marginTop: '20px',
+      position: 'relative',
+      zIndex: 22,
+      color: '#E30613',
+      '&:before': {
+        zIndex: 25,
+        content: '""',
+        width: 0,
+        height: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        position: 'absolute',
+        margin: '0 auto',
+        borderLeft: '10px solid transparent',
+        borderRight: '55px solid transparent',
+        borderTop: '25px solid #fff'
+      },
+      '&:after': {
+        content: '""',
+        width: 0,
+        height: 0,
+        bottom: '-1px',
+        left: 0,
+        right: 0,
+        position: 'absolute',
+        margin: '0 auto',
+        borderLeft: '10px solid transparent',
+        borderRight: '55px solid transparent',
+        borderTop: '25px solid #E30613'
+      }
     }
   };
 }

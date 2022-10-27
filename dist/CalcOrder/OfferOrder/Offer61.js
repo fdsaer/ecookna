@@ -166,7 +166,8 @@ class Offer61 extends PrnProto {
       obj: obj,
       order: order,
       office: office,
-      manager: manager
+      manager: manager,
+      classes: classes
     })), productList && productList.length > 0 && components?.ProductParams && React.createElement(components.ProductParams, {
       title: "В комплектацию Вашего заказа входит:",
       fullSquare: fullSquare,
@@ -204,7 +205,8 @@ class Offer61 extends PrnProto {
       obj: obj,
       order: order,
       office: office,
-      manager: manager
+      manager: manager,
+      classes: classes
     })), React.createElement(Box, {
       mt: 5
     }, components?.Description && React.createElement(components.Description, {

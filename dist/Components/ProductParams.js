@@ -1,3 +1,5 @@
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 import Header from '../../Header/index.js';
 import Payments from './Payments.js';
 const {
@@ -62,42 +64,24 @@ const ParamItem = ({
   }
 }, value)));
 
-var _ref2 = React.createElement(Typography, {
+var _ref = React.createElement(Typography, {
   variant: "subtitle2",
   component: "p"
 }, " ");
 
-export default function ProductParams({
-  title,
-  productList,
-  fullSquare,
-  fullWeight,
-  classes,
-  advantages,
-  payments,
-  rowsPerPage = 24,
-  svgMaxHeight = 246,
-  rowHeight = 23,
-  obj,
-  order,
-  office,
-  manager
-}) {
-  var _ref3 = React.createElement(Payments, {
-    paymentList: payments,
-    classes: classes
-  });
-
-  var _ref = React.createElement(Header, {
-    withLogo: true,
-    obj: obj,
-    advantagesList: advantages,
-    order: order,
-    office: office,
-    manager: manager
-  });
-
-  let index = 0;
+export default function ProductParams(props) {
+  const {
+    title,
+    productList,
+    fullSquare,
+    fullWeight,
+    classes,
+    advantages,
+    payments,
+    rowsPerPage = 24,
+    svgMaxHeight = 246,
+    rowHeight = 23
+  } = props;
   const productListChunks = productList.reduce((acc, product) => {
     const count = getParamCount(product.data);
     const lastChunk = acc[acc.length - 1];
@@ -112,6 +96,13 @@ export default function ProductParams({
 
     return newAcc;
   }, []);
+  let index = 0;
+
+  var _ref2 = React.createElement(Payments, {
+    paymentList: payments,
+    classes: classes
+  });
+
   return React.createElement(Box, {
     className: classes.breakElementWithMargins
   }, productListChunks.map(chunk => {
@@ -121,7 +112,9 @@ export default function ProductParams({
     }, React.createElement(Box, {
       mt: 3,
       className: classes.displayInPrint
-    }, _ref), chunk.map(({
+    }, React.createElement(Header, _extends({
+      withLogo: true
+    }, props))), chunk.map(({
       data,
       number,
       position,
@@ -161,7 +154,7 @@ export default function ProductParams({
         bgcolor: "primary.light",
         p: 1,
         pl: 5.25
-      }, _ref2), React.createElement(Box, {
+      }, _ref), React.createElement(Box, {
         pl: 5.25
       }, data && data.map(({
         subtitle,
@@ -189,6 +182,6 @@ export default function ProductParams({
       }))));
     }), React.createElement(Box, {
       className: classes.displayInPrint
-    }, _ref3));
+    }, _ref2));
   }));
 }

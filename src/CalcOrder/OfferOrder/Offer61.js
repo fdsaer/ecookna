@@ -167,6 +167,7 @@ class Offer61 extends PrnProto {
                     order={order}
                     office={office}
                     manager={manager}
+                    classes={classes}
                   />
                 )}
               </Box>
@@ -218,6 +219,7 @@ class Offer61 extends PrnProto {
                     order={order}
                     office={office}
                     manager={manager}
+                    classes={classes}
                   />
                 )}
               </Box>
