@@ -149,38 +149,11 @@ export const fullWeight = products => products && products.map(product => getPro
 export const getProductWeight = product => product.characteristic.constructions.map(construction => product.characteristic.elm_weight(-1 * construction.cnstr)).reduce((acc, constructionWeight) => acc += constructionWeight, 0);
 export const getAddressInfo = obj => {
   const office = {
-    name: '',
-    phone_number: '',
-    email_address: '',
-    address: ''
+    address: obj?.department?.extra_fields?.map(({
+      value
+    }) => value).join(', '),
+    name: obj?.department?.name
   };
-  obj?.department?.contact_information?.forEach(row => {
-    switch (row.type.name) {
-      case 'Адрес':
-        if (row.presentation && !office.address) {
-          office.address = row.presentation;
-        }
-
-        break;
-
-      case 'Телефон':
-        if (row.presentation && !office.phone_number) {
-          office.phone_number = row.presentation;
-        }
-
-        break;
-
-      case 'АдресЭлектроннойПочты':
-        if (row.presentation && !office.email_address) {
-          office.email_address = row.presentation;
-        }
-
-        break;
-
-      default:
-    }
-  });
-  office.name = obj?.department?.name;
   return office;
 };
 export const getManagerInfo = obj => {

@@ -198,28 +198,12 @@ export const getProductWeight = (product) =>
     .reduce((acc, constructionWeight) => (acc += constructionWeight), 0);
 
 export const getAddressInfo = (obj) => {
-  const office = { name: '', phone_number: '', email_address: '', address: '' };
-  obj?.department?.contact_information?.forEach((row) => {
-    switch (row.type.name) {
-      case 'Адрес':
-        if (row.presentation && !office.address) {
-          office.address = row.presentation;
-        }
-        break;
-      case 'Телефон':
-        if (row.presentation && !office.phone_number) {
-          office.phone_number = row.presentation;
-        }
-        break;
-      case 'АдресЭлектроннойПочты':
-        if (row.presentation && !office.email_address) {
-          office.email_address = row.presentation;
-        }
-        break;
-      default:
-    }
-  });
-  office.name = obj?.department?.name;
+  const office = {
+    address: obj?.department?.extra_fields
+      ?.map(({ value }) => value)
+      .join(', '),
+    name: obj?.department?.name,
+  };
   return office;
 };
 
