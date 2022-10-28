@@ -151,7 +151,7 @@ const getProductCharacteristics = (product) => {
 
 export const getProductsList = (products) => {
   return products
-    .map((product) => {
+    .map((product, index) => {
       const sysName = product.characteristic.sys.name;
       const filters = ['водоотлив'];
 
@@ -169,6 +169,7 @@ export const getProductsList = (products) => {
           svg: product.characteristic.svg,
           data,
           size: data.reduce((acc, { size }) => (acc += size), 0),
+          index: index + 1,
         };
       }
     })

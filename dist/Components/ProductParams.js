@@ -68,8 +68,7 @@ export default function ProductParams({
   return React.createElement(Box, {
     display: "flex",
     flexDirection: "row",
-    className: classes.productMargins,
-    key: position
+    className: classes.productMargins
   }, React.createElement(Box, {
     sx: {
       flex: '0 0 400px'

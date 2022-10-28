@@ -180,15 +180,17 @@ class Offer59 extends PrnProto {
     }, chunksMaker(productList, paramsRowsPerPage).map((chunk, index) => React.createElement(PrintingPageTemplate, {
       classes: classes,
       advantages: advantages,
-      payments: payments
+      payments: payments,
+      key: chunk[0]?.index
     }, React.createElement(React.Fragment, null, chunk.map(({
       data,
       number,
       position,
       quantity,
       svg,
-      size
-    }, index) => React.createElement(components.ProductParams, {
+      size,
+      index
+    }) => React.createElement(components.ProductParams, {
       data: data,
       number: number,
       position: position,
@@ -198,13 +200,15 @@ class Offer59 extends PrnProto {
       index: index,
       classes: classes,
       svgMaxHeight: paramsSvgMaxHeight,
-      rowHeight: paramsRowHeight
+      rowHeight: paramsRowHeight,
+      key: index
     }))))))), productTableData && React.createElement(Box, {
       className: classes.breakElementWithMargins
     }, chunksMaker(productTableData, tableRowsPerPage).map((chunk, index, chunksArr) => React.createElement(PrintingPageTemplate, {
       classes: classes,
       advantages: advantages,
-      payments: payments
+      payments: payments,
+      key: chunk[0]?.id
     }, React.createElement(React.Fragment, null, chunk.map(item => React.createElement(Box, {
       className: classes.tableMargins,
       key: item.id

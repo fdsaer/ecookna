@@ -124,7 +124,7 @@ const getProductCharacteristics = product => {
 };
 
 export const getProductsList = products => {
-  return products.map(product => {
+  return products.map((product, index) => {
     const sysName = product.characteristic.sys.name;
     const filters = ['водоотлив'];
 
@@ -138,7 +138,8 @@ export const getProductsList = products => {
         data,
         size: data.reduce((acc, {
           size
-        }) => acc += size, 0)
+        }) => acc += size, 0),
+        index: index + 1
       };
     }
   }).filter(product => product);

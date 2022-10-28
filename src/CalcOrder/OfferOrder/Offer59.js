@@ -199,13 +199,19 @@ class Offer59 extends PrnProto {
                           classes={classes}
                           advantages={advantages}
                           payments={payments}
+                          key={chunk[0]?.index}
                         >
                           <>
                             {chunk.map(
-                              (
-                                { data, number, position, quantity, svg, size },
-                                index
-                              ) => (
+                              ({
+                                data,
+                                number,
+                                position,
+                                quantity,
+                                svg,
+                                size,
+                                index,
+                              }) => (
                                 <components.ProductParams
                                   data={data}
                                   number={number}
@@ -217,6 +223,7 @@ class Offer59 extends PrnProto {
                                   classes={classes}
                                   svgMaxHeight={paramsSvgMaxHeight}
                                   rowHeight={paramsRowHeight}
+                                  key={index}
                                 />
                               )
                             )}
@@ -235,6 +242,7 @@ class Offer59 extends PrnProto {
                         classes={classes}
                         advantages={advantages}
                         payments={payments}
+                        key={chunk[0]?.id}
                       >
                         <>
                           {chunk.map((item) => (

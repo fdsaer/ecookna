@@ -47,12 +47,7 @@ export default function ProductParams({
   classes,
 }) {
   return (
-    <Box
-      display="flex"
-      flexDirection="row"
-      className={classes.productMargins}
-      key={position}
-    >
+    <Box display="flex" flexDirection="row" className={classes.productMargins}>
       <Box
         sx={{ flex: '0 0 400px' }}
         className={`${classes.avoidBreakInside} ${classes.breakElementWithMargins}`}
