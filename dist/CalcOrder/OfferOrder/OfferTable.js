@@ -1,5 +1,5 @@
 import { fullSquare, fullWeight, getProductWeight } from './OfferData.js';
-export default function getProductsData(products, tableRowsPerPage) {
+export default function getProductsData(products) {
   const productsTotalPrice = products => products && products.map(product => product.price * product.quantity).reduce((acc, price) => acc += price, 0);
 
   const productsTotalSum = products => products && products.map(product => product.amount).reduce((acc, price) => acc += price, 0);
@@ -108,7 +108,8 @@ export default function getProductsData(products, tableRowsPerPage) {
     }, {
       text: productsTotalSum(productListSvg).round(0),
       id: 6
-    }] : null
+    }] : null,
+    size: productListSvg ? productListSvg.length : 0
   }, {
     id: '1',
     title: $p.msg.printing_form.table_titles.extra_items,
@@ -167,7 +168,8 @@ export default function getProductsData(products, tableRowsPerPage) {
     }, {
       text: productsTotalSum(productListExtraItems).round(0),
       id: 4
-    }] : null
+    }] : null,
+    size: productListExtraItems ? productListExtraItems.length : 0
   }, {
     id: '2',
     title: $p.msg.printing_form.table_titles.services,
@@ -226,7 +228,8 @@ export default function getProductsData(products, tableRowsPerPage) {
     }, {
       text: productsTotalSum(productIsService).round(0),
       id: 4
-    }] : null
+    }] : null,
+    size: productIsService ? productIsService.length : 0
   }, {
     id: '3',
     title: '',
@@ -248,23 +251,8 @@ export default function getProductsData(products, tableRowsPerPage) {
       id: 4
     }] : null,
     rows: null,
-    total: null
+    total: null,
+    size: 1
   }];
-  const tablesChunks = tables.reduce((acc, table) => {
-    const tableRowsNumber = Array.isArray(table.rows) ? table.rows.length : 0;
-    const lastChunk = acc[acc.length - 1];
-    const newAcc = acc.slice();
-    const lastChunkRowsSumm = Array.isArray(lastChunk) ? lastChunk.reduce((acc, {
-      rows
-    }) => rows ? acc += rows.length : 0, 0) : 0;
-
-    if (Array.isArray(lastChunk) && tableRowsNumber + lastChunkRowsSumm < tableRowsPerPage) {
-      newAcc[newAcc.length - 1].push(table);
-    } else {
-      newAcc.push([table]);
-    }
-
-    return newAcc;
-  }, []);
-  return tablesChunks;
+  return tables;
 }

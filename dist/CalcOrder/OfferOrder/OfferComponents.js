@@ -9,4 +9,5 @@ import Manager from '../../Components/Manager.js';
 import ProductParams from '../../Components/ProductParams.js';
 import ProductsTable from '../../Components/ProductsTable.js';
 import ProductsTablePage from '../../Components/ProductsTablePage.js';
-export { Header, Payments, Wrapper, Description, Advantages, Additions, LinksBlock, Manager, ProductParams, ProductsTable, ProductsTablePage };
+import PrintingPageTemplate from '../../Components/PrintingPageTemplate.js';
+export { Header, Payments, Wrapper, Description, Advantages, Additions, LinksBlock, Manager, ProductParams, ProductsTable, ProductsTablePage, PrintingPageTemplate };

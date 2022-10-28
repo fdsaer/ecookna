@@ -9,6 +9,7 @@ import Manager from '../../Components/Manager.js';
 import ProductParams from '../../Components/ProductParams.js';
 import ProductsTable from '../../Components/ProductsTable.js';
 import ProductsTablePage from '../../Components/ProductsTablePage.js';
+import PrintingPageTemplate from '../../Components/PrintingPageTemplate.js';
 
 export {
   Header,
@@ -22,4 +23,5 @@ export {
   ProductParams,
   ProductsTable,
   ProductsTablePage,
+  PrintingPageTemplate,
 };
