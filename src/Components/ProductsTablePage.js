@@ -1,14 +1,10 @@
-import Advantages from './Advantages.js';
+import Header from '../../Header/index.js';
 import Payments from './Payments.js';
 import ProductsTable from './ProductsTable.js';
 const { React, Typography, Box } = $p.ui;
 
-export default function ProductsTablePage({
-  classes,
-  advantages,
-  payments,
-  productTableData,
-}) {
+export default function ProductsTablePage(props) {
+  const { classes, payments, productTableData } = props;
   const chunkNumber = productTableData.length;
   return (
     <Box className={classes.breakElementWithMargins}>
@@ -18,7 +14,7 @@ export default function ProductsTablePage({
           className={`${classes.avoidBreakInside} ${classes.pageBreakBefore} ${classes.pageFrame}`}
         >
           <Box mt={3} className={classes.displayInPrint}>
-            <Advantages withLogo advantagesList={advantages} />
+            <Header withLogo {...props} />
           </Box>
           {chunk.map(
             ({ id, title, head, rows, total }) =>

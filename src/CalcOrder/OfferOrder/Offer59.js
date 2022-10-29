@@ -49,10 +49,10 @@ class Offer59 extends PrnProto {
     import('./OfferComponents.js').then((module) => {
       this.setAsyncModules({
         Header: module.Header,
+        Title: module.Title,
         Payments: module.Payments,
         Wrapper: module.Wrapper,
         Description: module.Description,
-        Advantages: module.Advantages,
         Additions: module.Additions,
         LinksBlock: module.LinksBlock,
         Manager: module.Manager,
@@ -135,18 +135,23 @@ class Offer59 extends PrnProto {
           // err={err}
         >
           {components && (
-            <components.Header
+            <components.Title
               headerTitle="Индивидуальное решение"
               description="по изготовлению и установке светопрозрачных конструкций"
               order={order}
               office={getAddressInfo(obj)}
               manager={manager}
+              obj={obj}
             />
           )}
           {components && classes && (
             <components.Wrapper classes={classes}>
               <Box mt={3} className={classes.hideInPrint}>
-                <components.Advantages withLogo advantagesList={advantages} />
+                <components.Header
+                  withLogo
+                  obj={obj}
+                  advantagesList={advantages}
+                />
               </Box>
               <Box
                 mt={3}
@@ -286,7 +291,11 @@ class Offer59 extends PrnProto {
                 <components.Payments paymentList={payments} classes={classes} />
               </Box>
               <Box mt={5} className={classes.pageBreakBefore}>
-                <components.Advantages withLogo advantagesList={advantages} />
+                <components.Header
+                  withLogo
+                  obj={obj}
+                  advantagesList={advantages}
+                />
               </Box>
               <Box mt={5}>
                 <components.Description title="Подберем лучшее решение:" />

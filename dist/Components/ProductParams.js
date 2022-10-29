@@ -1,3 +1,7 @@
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+import Header from '../../Header/index.js';
+import Payments from './Payments.js';
 const {
   React,
   Typography,
@@ -24,6 +28,18 @@ const Svg = ({
   } catch (err) {
     return null;
   }
+};
+
+const getParamCount = data => {
+  return data.reduce((acc, {
+    paramsList,
+    subtitle
+  }) => {
+    const usefulParams = paramsList.filter(({
+      value
+    }) => value);
+    return acc += usefulParams.length + (usefulParams.length > 0 && !!subtitle ? 1 : 0);
+  }, 0);
 };
 
 const ParamItem = ({
@@ -53,72 +69,119 @@ var _ref = React.createElement(Typography, {
   component: "p"
 }, " ");
 
-export default function ProductParams({
-  data,
-  number,
-  position,
-  quantity,
-  svg,
-  index,
-  size,
-  svgMaxHeight = 246,
-  rowHeight = 23,
-  classes
-}) {
-  return React.createElement(Box, {
-    display: "flex",
-    flexDirection: "row",
-    className: classes.productMargins
-  }, React.createElement(Box, {
-    sx: {
-      flex: '0 0 400px'
-    },
-    className: `${classes.avoidBreakInside} ${classes.breakElementWithMargins}`
-  }, React.createElement(Box, {
-    bgcolor: "primary.light",
-    p: 1,
-    mb: 1.25
-  }, React.createElement(Typography, {
-    variant: "subtitle2",
-    component: "p"
-  }, "Номер: ", index, " (поз. ", position, ") - ", quantity, " шт.")), React.createElement(Box, {
-    pr: 1,
-    pl: 3
-  }, React.createElement(Svg, {
-    source: svg,
-    maxHeight: size > (svgMaxHeight / rowHeight).round() ? svgMaxHeight : rowHeight * size
-  }))), React.createElement(Box, {
-    sx: {
-      flex: '1 1 0%'
+export default function ProductParams(props) {
+  const {
+    title,
+    productList,
+    fullSquare,
+    fullWeight,
+    classes,
+    advantages,
+    payments,
+    rowsPerPage = 24,
+    svgMaxHeight = 246,
+    rowHeight = 23
+  } = props;
+  const productListChunks = productList.reduce((acc, product) => {
+    const count = getParamCount(product.data);
+    const lastChunk = acc[acc.length - 1];
+    const newAcc = acc.slice();
+    const lastChunkRowsSumm = Array.isArray(lastChunk) ? lastChunk.reduce((acc, lastChunkItem) => acc + getParamCount(lastChunkItem.data), 0) : 0;
+
+    if (Array.isArray(lastChunk) && count + lastChunkRowsSumm < rowsPerPage) {
+      newAcc[newAcc.length - 1].push(product);
+    } else {
+      newAcc.push([product]);
     }
-  }, React.createElement(Box, {
-    bgcolor: "primary.light",
-    p: 1,
-    pl: 5.25
-  }, _ref), React.createElement(Box, {
-    pl: 5.25
-  }, data && data.map(({
-    subtitle,
-    paramsList,
-    id
-  }) => {
+
+    return newAcc;
+  }, []);
+  let index = 0;
+
+  var _ref2 = React.createElement(Payments, {
+    paymentList: payments,
+    classes: classes
+  });
+
+  return React.createElement(Box, {
+    className: classes.breakElementWithMargins
+  }, productListChunks.map(chunk => {
     return React.createElement(Box, {
-      className: `${classes.avoidBreakInside} ${classes.breakElementWithMargins}`,
-      key: id
-    }, subtitle && paramsList.length > 0 && React.createElement(Box, {
-      bgcolor: "primary.light",
-      p: 1
-    }, React.createElement(Typography, {
-      variant: "subtitle2"
-    }, subtitle, ":")), React.createElement(List, null, paramsList.map(({
-      name,
-      value,
-      id
-    }) => value && React.createElement(ParamItem, {
-      name: name,
-      value: value,
-      id: id,
-      key: id
-    }))));
-  }))));
+      className: `${classes.pageBreakAfter} ${classes.pageFrame}`,
+      key: chunk[0]?.position
+    }, React.createElement(Box, {
+      mt: 3,
+      className: classes.displayInPrint
+    }, React.createElement(Header, _extends({
+      withLogo: true
+    }, props))), chunk.map(({
+      data,
+      number,
+      position,
+      quantity,
+      svg
+    }) => {
+      const count = getParamCount(data);
+      index++;
+      return React.createElement(Box, {
+        display: "flex",
+        flexDirection: "row",
+        className: classes.productMargins,
+        key: position
+      }, React.createElement(Box, {
+        sx: {
+          flex: '0 0 400px'
+        },
+        className: `${classes.avoidBreakInside} ${classes.breakElementWithMargins}`
+      }, React.createElement(Box, {
+        bgcolor: "primary.light",
+        p: 1,
+        mb: 1.25
+      }, React.createElement(Typography, {
+        variant: "subtitle2",
+        component: "p"
+      }, "Номер: ", index, " (поз. ", position, ") - ", quantity, " шт.")), React.createElement(Box, {
+        pr: 1,
+        pl: 3
+      }, React.createElement(Svg, {
+        source: svg,
+        maxHeight: count > (svgMaxHeight / rowHeight).round() ? svgMaxHeight : rowHeight * count
+      }))), React.createElement(Box, {
+        sx: {
+          flex: '1 1 0%'
+        }
+      }, React.createElement(Box, {
+        bgcolor: "primary.light",
+        p: 1,
+        pl: 5.25
+      }, _ref), React.createElement(Box, {
+        pl: 5.25
+      }, data && data.map(({
+        subtitle,
+        paramsList,
+        id
+      }) => {
+        return React.createElement(Box, {
+          className: `${classes.avoidBreakInside} ${classes.breakElementWithMargins}`,
+          key: id
+        }, subtitle && paramsList.length > 0 && React.createElement(Box, {
+          bgcolor: "primary.light",
+          p: 1
+        }, React.createElement(Typography, {
+          variant: "subtitle2"
+        }, subtitle, ":")), React.createElement(List, null, paramsList.map(({
+          name,
+          value,
+          id
+        }) => value && React.createElement(ParamItem, {
+          name: name,
+          value: value,
+          id: id,
+          key: id
+        }))));
+      }))));
+    }), React.createElement(Box, {
+      className: classes.displayInPrint
+    }, _ref2));
+  }));
 }

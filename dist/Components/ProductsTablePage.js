@@ -1,4 +1,6 @@
-import Advantages from './Advantages.js';
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+import Header from '../../Header/index.js';
 import Payments from './Payments.js';
 import ProductsTable from './ProductsTable.js';
 const {
@@ -7,32 +9,28 @@ const {
   Box
 } = $p.ui;
 
-var _ref2 = React.createElement(Box, {
+var _ref = React.createElement(Box, {
   mt: 3,
   mb: 2.5
 }, React.createElement(Typography, null, "*Предложение действительно в течение 10 календарных дней."));
 
-var _ref3 = React.createElement(Box, {
+var _ref2 = React.createElement(Box, {
   mb: 5
 }, React.createElement(Typography, null, "Для вашего удобства, точный расчет стоимости, заключение договора и оплата могут быть осуществлены на объекте в день проведения замера."));
 
-export default function ProductsTablePage({
-  classes,
-  advantages,
-  payments,
-  productTableData
-}) {
-  var _ref4 = React.createElement(Payments, {
+export default function ProductsTablePage(props) {
+  const {
+    classes,
+    payments,
+    productTableData
+  } = props;
+  const chunkNumber = productTableData.length;
+
+  var _ref3 = React.createElement(Payments, {
     paymentList: payments,
     classes: classes
   });
 
-  var _ref = React.createElement(Advantages, {
-    withLogo: true,
-    advantagesList: advantages
-  });
-
-  const chunkNumber = productTableData.length;
   return React.createElement(Box, {
     className: classes.breakElementWithMargins
   }, productTableData.map((chunk, index) => React.createElement(Box, {
@@ -41,7 +39,9 @@ export default function ProductsTablePage({
   }, React.createElement(Box, {
     mt: 3,
     className: classes.displayInPrint
-  }, _ref), chunk.map(({
+  }, React.createElement(Header, _extends({
+    withLogo: true
+  }, props))), chunk.map(({
     id,
     title,
     head,
@@ -58,7 +58,7 @@ export default function ProductsTablePage({
     rows: rows,
     total: total,
     boldBorderlessHead: id === '3'
-  }))), index === chunkNumber - 1 && React.createElement(React.Fragment, null, _ref2, _ref3), React.createElement(Box, {
+  }))), index === chunkNumber - 1 && React.createElement(React.Fragment, null, _ref, _ref2), React.createElement(Box, {
     className: classes.displayInPrint
-  }, _ref4))));
+  }, _ref3))));
 }

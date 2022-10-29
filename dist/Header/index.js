@@ -4,7 +4,8 @@ const {
 } = $p.ui;
 import HeaderBase from './HeaderBase.js';
 import HeaderOrg1 from './HeaderOrg1.js';
-import HeaderOffer from './HeaderOffer.js';
+import HeaderOffer59 from './HeaderOffer59.js';
+import HeaderOffer61 from './HeaderOffer61.js';
 export default function Header(props) {
   let Component;
 
@@ -12,16 +13,15 @@ export default function Header(props) {
     case 'Компания ФОТОТЕХ':
     case 'ООО"ФОТОТЕХ"':
     case 'ОКНА РОСТА ДОМ':
-      Component = HeaderOrg1;
+      Component = HeaderOffer59;
       break;
 
-    case 'ГРУППА КОМПАНИЙ':
     case 'ОК Калева':
-      Component = HeaderOffer;
+      Component = HeaderOffer61;
       break;
 
     default:
-      Component = HeaderOffer;
+      Component = HeaderOffer59;
   }
 
   return React.createElement(Component, props);

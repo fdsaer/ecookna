@@ -3,7 +3,7 @@ import Contacts from '../Components/Contacts.js';
 
 const { React, Typography, Link, Box } = $p.ui;
 
-export default function HeaderOffer(props) {
+export default function TitleOffer59(props) {
   const { headerTitle, order, description, manager, office, classes } = props;
   return (
     <Box
