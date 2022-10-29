@@ -1,9 +1,18 @@
 import LogoImage from '../img/offer61/logoRed.svg';
 import Logo from '../Components/Logo.js';
+import {
+  getManagerInfo,
+  getAddressInfo,
+} from '../CalcOrder/OfferOrder/OfferData.js';
 const { React, Box, Typography } = $p.ui;
 
 export default function HeaderOffer61(props) {
-  const { order, manager, office, classes } = props;
+  const { obj, classes } = props;
+  const order = `№${obj.number_doc} от ${moment(obj.date).format(
+    'DD MMMM YYYY'
+  )} г.`;
+  const manager = getManagerInfo(obj);
+  const office = getAddressInfo(obj);
   return (
     <Box>
       <Box

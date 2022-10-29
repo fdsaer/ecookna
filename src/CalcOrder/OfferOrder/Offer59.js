@@ -151,6 +151,7 @@ class Offer59 extends PrnProto {
                   withLogo
                   obj={obj}
                   advantagesList={advantages}
+                  images={images}
                 />
               </Box>
               <Box
@@ -205,6 +206,8 @@ class Offer59 extends PrnProto {
                           advantages={advantages}
                           payments={payments}
                           key={chunk[0]?.index}
+                          images={images}
+                          obj={obj}
                         >
                           <>
                             {chunk.map(
@@ -248,6 +251,8 @@ class Offer59 extends PrnProto {
                         advantages={advantages}
                         payments={payments}
                         key={chunk[0]?.id}
+                        images={images}
+                        obj={obj}
                       >
                         <>
                           {chunk.map((item) => (
@@ -295,6 +300,7 @@ class Offer59 extends PrnProto {
                   withLogo
                   obj={obj}
                   advantagesList={advantages}
+                  images={images}
                 />
               </Box>
               <Box mt={5}>

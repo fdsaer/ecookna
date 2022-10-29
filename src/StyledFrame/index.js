@@ -25,8 +25,8 @@ export default function StyledFrame({
   let tempClasses;
   let theme = theme1;
   const [newClasses, setNewClasses] = React.useState('');
-  // props.obj.manager.name
-  switch (props.obj.organization.name) {
+  switch (props.obj.manager.name) {
+    // switch (props.obj.organization.name) {
     case 'ЕВРООКНА':
     case 'ГРУППА КОМПАНИЙ':
     case 'ФЕНСТЕР ООО':
@@ -49,8 +49,17 @@ export default function StyledFrame({
       tempClasses = makeStyles(() => stylesCss(theme))();
       break;
 
+    case 'Касаткина Антонина':
+      theme = theme1;
+      tempClasses = makeStyles(() => stylesOrg59(theme))();
+      break;
+
+    case 'Гудилина ИА':
+      theme = theme61;
+      tempClasses = makeStyles(() => stylesOrg61(theme))();
+      break;
+
     default:
-      classes = makeStyles(() => stylesBase(theme))();
       tempClasses = makeStyles(() => stylesOrg59(theme))();
   }
   setClasses(newClasses);

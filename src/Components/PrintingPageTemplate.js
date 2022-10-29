@@ -1,3 +1,4 @@
+import Header from '../../Header/index.js';
 import Advantages from './Advantages.js';
 import Payments from './Payments.js';
 import ProductsTable from './ProductsTable.js';
@@ -8,6 +9,8 @@ export default function PrintingPageTemplate({
   advantages,
   payments,
   children,
+  images,
+  obj,
 }) {
   // const chunkNumber = productTableData.length;
   return (
@@ -15,7 +18,7 @@ export default function PrintingPageTemplate({
       className={`${classes.avoidBreakInside} ${classes.pageBreakBefore} ${classes.pageFrame}`}
     >
       <Box mt={3} className={classes.displayInPrint}>
-        <Advantages withLogo advantagesList={advantages} />
+        <Header withLogo images={images} obj={obj} />
       </Box>
       {children}
       <Box className={classes.displayInPrint}>
