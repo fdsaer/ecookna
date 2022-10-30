@@ -12,16 +12,19 @@ var _ref = React.createElement(Logo, {
 });
 
 var _ref2 = React.createElement(Box, {
-  fontWeight: 600
-}, "Коммерческое предложение: ");
+  fontWeight: 600,
+  display: "inline"
+}, "Коммерческое предложение:", ' ');
 
 var _ref3 = React.createElement(Box, {
-  fontWeight: 600
-}, "Ваш персональный менеджер:");
+  fontWeight: 600,
+  display: "inline"
+}, "Ваш персональный менеджер:", ' ');
 
 var _ref4 = React.createElement(Box, {
-  fontWeight: 600
-}, "Офис продаж:");
+  fontWeight: 600,
+  display: "inline"
+}, "Офис продаж:", ' ');
 
 export default function HeaderOffer61(props) {
   const {
@@ -46,11 +49,10 @@ export default function HeaderOffer61(props) {
       flex: '0 0 50%',
       maxWidth: '50%'
     },
-    fontSize: 10,
+    fontSize: 10
+  }, React.createElement(Box, {
     pl: 2.5
-  }, order && React.createElement(Box, {
-    display: "flex"
-  }, _ref2, React.createElement(Typography, {
+  }, order && React.createElement(Box, null, _ref2, React.createElement(Typography, {
     variant: "inherit",
     component: "span",
     color: "textPrimary"
@@ -62,9 +64,11 @@ export default function HeaderOffer61(props) {
     sx: {
       flex: '0 0 50%'
     }
-  }, React.createElement(Box, {
-    display: "flex"
-  }, _ref3, React.createElement(Box, null, manager.name || 'Кучер В.В.')), React.createElement(Typography, {
+  }, React.createElement(Box, null, _ref3, React.createElement(Typography, {
+    variant: "inherit",
+    component: "span",
+    color: "textPrimary"
+  }, manager.name || 'Кучер В.В.')), React.createElement(Typography, {
     variant: "inherit",
     component: "p",
     color: "textPrimary"
@@ -72,13 +76,16 @@ export default function HeaderOffer61(props) {
     variant: "inherit",
     color: "textPrimary"
   }, "Email: ", manager.email_address || 'test@ecookna.ru')), office && React.createElement(Box, {
-    mb: 2.5,
-    display: "flex"
+    mb: 2.5
   }, _ref4, React.createElement(Typography, {
     variant: "inherit",
     component: "span",
     color: "textPrimary"
-  }, office.address || 'г. Пушкино, ул. Напрудная, 33')))), classes && React.createElement(Box, {
+  }, office.address || 'г. Пушкино, ул. Напрудная, 33'))))), classes && React.createElement(Box, {
+    mt: 2.5
+  }, React.createElement(Typography, {
+    component: "p",
+    variant: "inherit",
     className: classes.headerLine
-  }, "Спасибо, что выбрали «Окна Роста»!"));
+  }, "Спасибо, что выбрали «Окна Роста»!")));
 }

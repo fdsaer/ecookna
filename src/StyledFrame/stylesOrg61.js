@@ -166,8 +166,8 @@ export default function styles(theme) {
     headerLine: {
       borderTop: '1px solid #E30613',
       textTransform: 'uppercase',
-      fontSize: '15px',
-      paddingTop: '6px',
+      fontSize: '14px',
+      paddingTop: '7px',
       fontWeight: 600,
       marginTop: '20px',
       position: 'relative',
