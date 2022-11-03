@@ -1,8 +1,11 @@
 import Logo from '../Components/Logo.js';
+import { getAdvantages } from '../CalcOrder/OfferOrder/Templates.js';
 
 const { React, Box } = $p.ui;
 
-export default function HeaderOffer59({ withLogo = true, advantagesList }) {
+export default function HeaderOffer59({ withLogo = true, images }) {
+  const advantagesList = images ? getAdvantages(images) : null;
+
   return (
     <Box
       display="flex"

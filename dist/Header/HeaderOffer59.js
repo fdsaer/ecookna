@@ -1,4 +1,5 @@
 import Logo from '../Components/Logo.js';
+import { getAdvantages } from '../CalcOrder/OfferOrder/Templates.js';
 const {
   React,
   Box
@@ -10,8 +11,9 @@ var _ref = React.createElement(Logo, {
 
 export default function HeaderOffer59({
   withLogo = true,
-  advantagesList
+  images
 }) {
+  const advantagesList = images ? getAdvantages(images) : null;
   return React.createElement(Box, {
     display: "flex",
     justifyContent: "space-between",

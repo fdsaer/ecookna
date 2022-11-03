@@ -16,13 +16,13 @@ const getProductGlassesParams = (product) => {
     ),
   ]; // отбираем уникальные стеклопакеты
 
-  return uniqueGlasses.map((value, index) => {
-    return {
+  return uniqueGlasses
+    .map((value, index) => ({
       name: '',
       value,
       id: index,
-    };
-  });
+    }))
+    .filter(({ value }) => value);
 };
 
 // функция на отсеивание параметров, не проходящих фильтр
@@ -76,43 +76,50 @@ const getExtendedParams = (product) => {
 };
 
 const getProductCharacteristics = (product) => {
+  const inners = getProductGlassesParams(product);
   const extendedParams = getExtendedParams(product);
+  const mainParams = [
+    {
+      name: 'Масса общ/зап, кг',
+      value: getProductParams(product),
+      id: 1,
+    },
+    {
+      name: 'Проф.система',
+      // value: product.characteristic.prod_nom.name,
+      value: product.nom.name,
+      id: 2,
+    },
+    { name: 'Цвет', value: product.characteristic.clr.presentation, id: 3 },
+  ].filter(({ value }) => value);
   return [
     {
       subtitle: '',
-      paramsList: [
-        {
-          name: 'Масса общ/зап, кг',
-          value: getProductParams(product),
-          id: 1,
-        },
-        {
-          name: 'Проф.система',
-          // value: product.characteristic.prod_nom.name,
-          value: product.nom.name,
-          id: 2,
-        },
-        { name: 'Цвет', value: product.characteristic.clr.presentation, id: 3 },
-      ],
+      paramsList: mainParams,
       id: 1,
+      size: mainParams.length,
     },
     ...Object.entries(extendedParams)
       .filter(([key]) => key === 'Дополнительные параметры')
       .map(([key, list], index) => {
         return {
           subtitle: key,
-          paramsList: list?.map(([name, value], index) => ({
-            name,
-            value,
-            id: index,
-          })),
+          paramsList: list
+            ?.map(([name, value], index) => ({
+              name,
+              value,
+              id: index,
+            }))
+            .filter(({ value }) => value),
           id: `1${index}`,
+          size: list?.filter(([_name, value]) => value).length + 1,
         };
       }),
     {
       subtitle: 'Заполнения',
-      paramsList: getProductGlassesParams(product),
+      paramsList: inners,
       id: 2,
+      size: inners.length + 1,
     },
     ...Object.entries(extendedParams)
       .filter(([key]) => key && key !== 'Дополнительные параметры')
@@ -128,6 +135,7 @@ const getProductCharacteristics = (product) => {
             })),
           ],
           id: `2${index}`,
+          size: list.filter(([_name, value]) => value).length + 2,
         };
       }),
     {
@@ -136,13 +144,14 @@ const getProductCharacteristics = (product) => {
         ? [{ name: '', value: product.note, id: 1 }]
         : [],
       id: 3,
+      size: product.note ? 2 : 0,
     },
   ];
 };
 
 export const getProductsList = (products) => {
   return products
-    .map((product) => {
+    .map((product, index) => {
       const sysName = product.characteristic.sys.name;
       const filters = ['водоотлив'];
 
@@ -152,12 +161,15 @@ export const getProductsList = (products) => {
         product.characteristic.svg &&
         !filters.includes(sysName.toLowerCase())
       ) {
+        const data = getProductCharacteristics(product);
         return {
           number: product.row,
           position: product.row,
           quantity: product.quantity,
           svg: product.characteristic.svg,
-          data: getProductCharacteristics(product),
+          data,
+          size: data.reduce((acc, { size }) => (acc += size), 0),
+          index: index + 1,
         };
       }
     })
@@ -186,28 +198,12 @@ export const getProductWeight = (product) =>
     .reduce((acc, constructionWeight) => (acc += constructionWeight), 0);
 
 export const getAddressInfo = (obj) => {
-  const office = { name: '', phone_number: '', email_address: '', address: '' };
-  obj?.department?.contact_information?.forEach((row) => {
-    switch (row.type.name) {
-      case 'Адрес':
-        if (row.presentation && !office.address) {
-          office.address = row.presentation;
-        }
-        break;
-      case 'Телефон':
-        if (row.presentation && !office.phone_number) {
-          office.phone_number = row.presentation;
-        }
-        break;
-      case 'АдресЭлектроннойПочты':
-        if (row.presentation && !office.email_address) {
-          office.email_address = row.presentation;
-        }
-        break;
-      default:
-    }
-  });
-  office.name = obj?.department?.name;
+  const office = {
+    address: obj?.department?.extra_fields
+      ?.map(({ value }) => value)
+      .join(', '),
+    name: obj?.department?.name,
+  };
   return office;
 };
 

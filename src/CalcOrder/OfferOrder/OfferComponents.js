@@ -1,4 +1,5 @@
 import Header from '../../Header/index.js';
+import Footer from '../../Footer/index.js';
 import Title from '../../Title/index.js';
 import Payments from '../../Components/Payments.js';
 import Wrapper from '../../Components/Wrapper.js';
@@ -10,9 +11,12 @@ import Manager from '../../Components/Manager.js';
 import ProductParams from '../../Components/ProductParams.js';
 import ProductsTable from '../../Components/ProductsTable.js';
 import ProductsTablePage from '../../Components/ProductsTablePage.js';
+import PrintingPageTemplate from '../../Components/PrintingPageTemplate.js';
+import GridImages from '../../Components/GridImages.js';
 
 export {
   Header,
+  Footer,
   Title,
   Payments,
   Wrapper,
@@ -24,4 +28,6 @@ export {
   ProductParams,
   ProductsTable,
   ProductsTablePage,
+  PrintingPageTemplate,
+  GridImages,
 };

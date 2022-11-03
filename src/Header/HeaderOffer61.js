@@ -1,9 +1,20 @@
 import LogoImage from '../img/offer61/logoRed.svg';
 import Logo from '../Components/Logo.js';
+import {
+  getManagerInfo,
+  getAddressInfo,
+} from '../CalcOrder/OfferOrder/OfferData.js';
 const { React, Box, Typography } = $p.ui;
 
 export default function HeaderOffer61(props) {
-  const { order, manager, office, classes } = props;
+  const { obj, classes, withCaption = false } = props;
+  const order = `№${obj.number_doc} от ${moment(obj.date).format(
+    'DD MMMM YYYY'
+  )} г.`;
+  const manager = getManagerInfo(obj);
+  const office = getAddressInfo(obj);
+  const colorCaption = withCaption ? 'error' : 'textSecondary';
+
   return (
     <Box>
       <Box
@@ -82,13 +93,10 @@ export default function HeaderOffer61(props) {
         </Box>
       </Box>
 
+      {/* TODO: Сделать скрытие текста везде, кроме первого колонтитула. Но если нет текста - ломается линия */}
       {classes && (
-        <Box mt={2.5}>
-          <Typography
-            component="p"
-            variant="inherit"
-            className={classes.headerLine}
-          >
+        <Box mt={2.5} className={classes.headerLine}>
+          <Typography component="p" color={colorCaption} variant="inherit">
             Спасибо, что выбрали «Окна Роста»!
           </Typography>
         </Box>

@@ -1,7 +1,9 @@
 import PrnProto from '../../PrnProto.js';
+import { PrintingPageTemplate } from './OfferComponents.js';
 import { fullSquare, fullWeight, getProductsList, getManagerInfo, getAddressInfo } from './OfferData.js';
 import getProductsData from './OfferTable.js';
 import { getAssortmentLinks, getLinks, getAdvantages, getPayments, getAdditions } from './Templates.js';
+import { chunksMaker } from '../../utilities/index.js';
 const {
   React,
   Box,
@@ -10,6 +12,15 @@ const {
 const StyledFrame = React.lazy(() => import('../../StyledFrame/index.js'));
 
 var _ref = React.createElement(Box, {
+  mt: 3,
+  mb: 2.5
+}, React.createElement(Typography, null, "*Предложение действительно в течение 10 календарных дней."));
+
+var _ref2 = React.createElement(Box, {
+  mb: 5
+}, React.createElement(Typography, null, "Для вашего удобства, точный расчет стоимости, заключение договора и оплата могут быть осуществлены на объекте в день проведения замера."));
+
+var _ref3 = React.createElement(Box, {
   color: "textSecondary",
   fontSize: "22px",
   mr: 2.5
@@ -19,7 +30,7 @@ var _ref = React.createElement(Box, {
   component: "p"
 }, "Ассортимент компании ЭКООКНА"));
 
-var _ref2 = React.createElement(Typography, {
+var _ref4 = React.createElement(Typography, {
   variant: "inherit",
   color: "textSecondary",
   component: "p"
@@ -52,6 +63,7 @@ class Offer59 extends PrnProto {
     import('./OfferComponents.js').then(module => {
       this.setAsyncModules({
         Header: module.Header,
+        Footer: module.Footer,
         Title: module.Title,
         Payments: module.Payments,
         Wrapper: module.Wrapper,
@@ -61,7 +73,8 @@ class Offer59 extends PrnProto {
         Manager: module.Manager,
         ProductParams: module.ProductParams,
         ProductsTable: module.ProductsTable,
-        ProductsTablePage: module.ProductsTablePage
+        ProductsTablePage: module.ProductsTablePage,
+        PrintingPageTemplate: module.PrintingPageTemplate
       });
       this.setState({
         componentsLoaded: true
@@ -123,7 +136,7 @@ class Offer59 extends PrnProto {
     const paramsRowsPerPage = 29;
     const paramsSvgMaxHeight = 246;
     const paramsRowHeight = 23;
-    const productTableData = products && getProductsData(products, tableRowsPerPage);
+    const productTableData = products && getProductsData(products);
     const order = `№${obj.number_doc} от ${moment(obj.date).format('DD MMMM YYYY')} г.`;
     let loading = '';
 
@@ -155,7 +168,8 @@ class Offer59 extends PrnProto {
     }, React.createElement(components.Header, {
       withLogo: true,
       obj: obj,
-      advantagesList: advantages
+      advantagesList: advantages,
+      images: images
     })), React.createElement(Box, {
       mt: 3,
       mb: 2.5,
@@ -165,27 +179,59 @@ class Offer59 extends PrnProto {
       variant: "inherit",
       color: "textSecondary",
       component: "p"
-    }, order)), productList && productList.length > 0 && React.createElement(components.ProductParams, {
-      title: "В комплектацию Вашего заказа входит:",
-      fullSquare: fullSquare,
-      fullWeight: fullWeight,
-      productList: productList,
+    }, order)), productList && React.createElement(React.Fragment, null, React.createElement(Box, {
+      className: classes.breakElementWithMargins
+    }, chunksMaker(productList, paramsRowsPerPage).map((chunk, index) => React.createElement(PrintingPageTemplate, {
       classes: classes,
       advantages: advantages,
       payments: payments,
-      rowsPerPage: paramsRowsPerPage,
+      key: chunk[0]?.index,
+      images: images,
+      obj: obj
+    }, React.createElement(React.Fragment, null, chunk.map(({
+      data,
+      number,
+      position,
+      quantity,
+      svg,
+      size,
+      index
+    }) => React.createElement(components.ProductParams, {
+      data: data,
+      number: number,
+      position: position,
+      quantity: quantity,
+      svg: svg,
+      size: size,
+      index: index,
+      classes: classes,
       svgMaxHeight: paramsSvgMaxHeight,
       rowHeight: paramsRowHeight,
-      obj: obj
-    }), productTableData && React.createElement(components.ProductsTablePage, {
+      key: index
+    }))))))), productTableData && React.createElement(Box, {
+      className: classes.breakElementWithMargins
+    }, chunksMaker(productTableData, tableRowsPerPage).map((chunk, index, chunksArr) => React.createElement(PrintingPageTemplate, {
       classes: classes,
       advantages: advantages,
       payments: payments,
-      productTableData: productTableData,
+      key: chunk[0]?.id,
+      images: images,
       obj: obj
-    }), React.createElement(Box, {
+    }, React.createElement(React.Fragment, null, chunk.map(item => React.createElement(Box, {
+      className: classes.tableMargins,
+      key: item.id
+    }, React.createElement(Typography, {
+      color: "textSecondary",
+      component: "p"
+    }, item.title), React.createElement(components.ProductsTable, {
+      head: item.head,
+      rows: item.rows,
+      total: item.total,
+      boldBorderlessHead: item.id === '3'
+    }))), index === chunksArr.length - 1 && React.createElement(React.Fragment, null, _ref, _ref2))))), React.createElement(Box, {
       className: classes.hideInPrint
-    }, React.createElement(components.Payments, {
+    }, React.createElement(components.Footer, {
+      obj: obj,
       paymentList: payments,
       classes: classes
     })), React.createElement(Box, {
@@ -194,7 +240,8 @@ class Offer59 extends PrnProto {
     }, React.createElement(components.Header, {
       withLogo: true,
       obj: obj,
-      advantagesList: advantages
+      advantagesList: advantages,
+      images: images
     })), React.createElement(Box, {
       mt: 5
     }, React.createElement(components.Description, {
@@ -203,7 +250,7 @@ class Offer59 extends PrnProto {
       mt: 7
     }, React.createElement(components.LinksBlock, {
       links: assortmentLinks
-    }, _ref)), React.createElement(Box, {
+    }, _ref3)), React.createElement(Box, {
       mt: 5
     }, React.createElement(components.LinksBlock, {
       links: links
@@ -212,7 +259,7 @@ class Offer59 extends PrnProto {
         maxWidth: '100px'
       },
       mr: 2.5
-    }, _ref2))), React.createElement(Box, {
+    }, _ref4))), React.createElement(Box, {
       mt: 7,
       className: classes.pageBreakBefore
     }, React.createElement(components.Additions, {

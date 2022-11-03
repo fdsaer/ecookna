@@ -33,32 +33,35 @@ export default function ProductsTablePage(props) {
 
   return React.createElement(Box, {
     className: classes.breakElementWithMargins
-  }, productTableData.map((chunk, index) => React.createElement(Box, {
-    key: chunk[0].id,
-    className: `${classes.avoidBreakInside} ${classes.pageBreakBefore} ${classes.pageFrame}`
-  }, React.createElement(Box, {
-    mt: 3,
-    className: classes.displayInPrint
-  }, React.createElement(Header, _extends({
-    withLogo: true
-  }, props))), chunk.map(({
-    id,
-    title,
-    head,
-    rows,
-    total
-  }) => (rows && rows.length > 0 || id === '3' && head && head.length > 0) && React.createElement(Box, {
-    className: classes.tableMargins,
-    key: id
-  }, React.createElement(Typography, {
-    color: "textSecondary",
-    component: "p"
-  }, title), React.createElement(ProductsTable, {
-    head: head,
-    rows: rows,
-    total: total,
-    boldBorderlessHead: id === '3'
-  }))), index === chunkNumber - 1 && React.createElement(React.Fragment, null, _ref, _ref2), React.createElement(Box, {
-    className: classes.displayInPrint
-  }, _ref3))));
+  }, productTableData.map((chunk, index) => {
+    console.log(chunk);
+    return React.createElement(Box, {
+      key: chunk[0].id,
+      className: `${classes.avoidBreakInside} ${classes.pageBreakBefore} ${classes.pageFrame}`
+    }, React.createElement(Box, {
+      mt: 3,
+      className: classes.displayInPrint
+    }, React.createElement(Header, _extends({
+      withLogo: true
+    }, props))), chunk.map(({
+      id,
+      title,
+      head,
+      rows,
+      total
+    }) => (rows && rows.length > 0 || id === '3' && head && head.length > 0) && React.createElement(Box, {
+      className: classes.tableMargins,
+      key: id
+    }, React.createElement(Typography, {
+      color: "textSecondary",
+      component: "p"
+    }, title), React.createElement(ProductsTable, {
+      head: head,
+      rows: rows,
+      total: total,
+      boldBorderlessHead: id === '3'
+    }))), index === chunkNumber - 1 && React.createElement(React.Fragment, null, _ref, _ref2), React.createElement(Box, {
+      className: classes.displayInPrint
+    }, _ref3));
+  }));
 }

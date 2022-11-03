@@ -1,15 +1,34 @@
 /**
- * Маршрутизатор подвалов
+ * Маршрутизатор заголовков (верхних колонтитулов)
  */
 
-const {React, Divider} = $p.ui;
+const { React, makeStyles } = $p.ui;
+import FooterOffer59 from './FooterOffer59.js';
+import FooterOffer61 from './FooterOffer61.js';
 
 export default function Footer(props) {
-  const {obj, classes} = props;
-  return <footer className={`${classes.footer} ${classes.w100}`}>
-    <Divider light />
-    <div className={classes.flex}>
-      <span>{`Распечатано ${moment().format('DD MMMM YYYY, hh:mm')}`}</span>
-    </div>
-  </footer>;
+  let Component;
+  // switch (props.obj.organization.name) {
+  switch (props.obj.manager.name) {
+    case 'Компания ФОТОТЕХ':
+    case 'ООО"ФОТОТЕХ"':
+    case 'ОКНА РОСТА ДОМ':
+      Component = FooterOffer59;
+      break;
+    // case 'ГРУППА КОМПАНИЙ':
+    case 'ОК Калева':
+      Component = FooterOffer61;
+      break;
+    case 'Касаткина Антонина':
+      Component = FooterOffer59;
+      break;
+
+    case 'Гудилина ИА':
+      Component = FooterOffer61;
+      break;
+    default:
+      Component = FooterOffer59;
+  }
+
+  return <Component {...props} />;
 }

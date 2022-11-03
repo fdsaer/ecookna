@@ -1,6 +1,6 @@
 import { fullSquare, fullWeight, getProductWeight } from './OfferData.js';
 
-export default function getProductsData(products, tableRowsPerPage) {
+export default function getProductsData(products) {
   const productsTotalPrice = (products) =>
     products &&
     products
@@ -175,6 +175,7 @@ export default function getProductsData(products, tableRowsPerPage) {
             },
           ]
         : null,
+      size: productListSvg ? productListSvg.length : 0,
     },
     {
       //Таблица доп.комплектации
@@ -257,6 +258,7 @@ export default function getProductsData(products, tableRowsPerPage) {
             },
           ]
         : null,
+      size: productListExtraItems ? productListExtraItems.length : 0,
     },
     {
       //Таблица услуг
@@ -340,6 +342,7 @@ export default function getProductsData(products, tableRowsPerPage) {
             },
           ]
         : null,
+      size: productIsService ? productIsService.length : 0,
     },
     {
       //Таблица итого
@@ -374,29 +377,9 @@ export default function getProductsData(products, tableRowsPerPage) {
           : null,
       rows: null,
       total: null,
+      size: 1,
     },
   ];
 
-  const tablesChunks = tables.reduce((acc, table) => {
-    const tableRowsNumber = Array.isArray(table.rows) ? table.rows.length : 0;
-    const lastChunk = acc[acc.length - 1];
-    const newAcc = acc.slice();
-    const lastChunkRowsSumm = Array.isArray(lastChunk)
-      ? lastChunk.reduce(
-          (acc, { rows }) => (rows ? (acc += rows.length) : 0),
-          0
-        )
-      : 0;
-    if (
-      Array.isArray(lastChunk) &&
-      tableRowsNumber + lastChunkRowsSumm < tableRowsPerPage
-    ) {
-      newAcc[newAcc.length - 1].push(table);
-    } else {
-      newAcc.push([table]);
-    }
-    return newAcc;
-  }, []);
-
-  return tablesChunks;
+  return tables;
 }

@@ -32,6 +32,19 @@ import GlassDoorImage from '../../img/glassDoor.jpg';
 import GlassHeaterImage from '../../img/glassHeater.jpg';
 import PhoneChargerImage from '../../img/phoneCharger.jpg';
 
+// offer61
+import CashPaymentIcon61 from '../../img/offer61/cashPayment.svg';
+import NonCashPaymentIcon61 from '../../img/offer61/nonCashPayment.svg';
+import CardPaymentIcon61 from '../../img/offer61/cardPayment.svg';
+import InstallmentIcon61 from '../../img/offer61/installment.svg';
+import FixedPriceIcon61 from '../../img/offer61/fixedPrice.svg';
+import RollerBlindsIcon61 from '../../img/offer61/rollerblinds.jpg';
+import HiddenHardwareIcon61 from '../../img/offer61/hiddenhardware.jpg';
+import DecorIcon61 from '../../img/offer61/decor.jpg';
+import MosquitoNetsIcon61 from '../../img/offer61/mosquitonets.jpg';
+import WindowSillsIcon61 from '../../img/offer61/windowsills.jpg';
+import ChildLockIcon61 from '../../img/offer61/childlock.jpg';
+
 export {
   OCover1,
   OCover17,
@@ -65,4 +78,15 @@ export {
   GlassDoorImage,
   GlassHeaterImage,
   PhoneChargerImage,
+  CashPaymentIcon61,
+  NonCashPaymentIcon61,
+  CardPaymentIcon61,
+  InstallmentIcon61,
+  FixedPriceIcon61,
+  RollerBlindsIcon61,
+  HiddenHardwareIcon61,
+  DecorIcon61,
+  MosquitoNetsIcon61,
+  WindowSillsIcon61,
+  ChildLockIcon61,
 };

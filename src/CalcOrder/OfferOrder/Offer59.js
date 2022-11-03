@@ -5,6 +5,7 @@
  *
  */
 import PrnProto from '../../PrnProto.js';
+import { PrintingPageTemplate } from './OfferComponents.js';
 import {
   fullSquare,
   fullWeight,
@@ -20,6 +21,7 @@ import {
   getPayments,
   getAdditions,
 } from './Templates.js';
+import { chunksMaker } from '../../utilities/index.js';
 
 const { React, Box, Typography } = $p.ui;
 
@@ -47,6 +49,7 @@ class Offer59 extends PrnProto {
     import('./OfferComponents.js').then((module) => {
       this.setAsyncModules({
         Header: module.Header,
+        Footer: module.Footer,
         Title: module.Title,
         Payments: module.Payments,
         Wrapper: module.Wrapper,
@@ -57,6 +60,7 @@ class Offer59 extends PrnProto {
         ProductParams: module.ProductParams,
         ProductsTable: module.ProductsTable,
         ProductsTablePage: module.ProductsTablePage,
+        PrintingPageTemplate: module.PrintingPageTemplate,
       });
       this.setState({ componentsLoaded: true });
     });
@@ -109,8 +113,7 @@ class Offer59 extends PrnProto {
     const paramsRowsPerPage = 29; // Ограничение количества строк на одну страницу при группировке параметров изделия для постраничной печати
     const paramsSvgMaxHeight = 246; // Высота SVG подобрана таким образом, чтобы рисунок занимал максимальное место
     const paramsRowHeight = 23; // Эмпирически вычисленная высота строки в параметрах изделия
-    const productTableData =
-      products && getProductsData(products, tableRowsPerPage);
+    const productTableData = products && getProductsData(products);
     const order = `№${obj.number_doc} от ${moment(obj.date).format(
       'DD MMMM YYYY'
     )} г.`;
@@ -149,6 +152,7 @@ class Offer59 extends PrnProto {
                   withLogo
                   obj={obj}
                   advantagesList={advantages}
+                  images={images}
                 />
               </Box>
               <Box
@@ -165,38 +169,143 @@ class Offer59 extends PrnProto {
                   {order}
                 </Typography>
               </Box>
-              {productList && productList.length > 0 && (
-                <components.ProductParams
-                  title="В комплектацию Вашего заказа входит:"
-                  fullSquare={fullSquare}
-                  fullWeight={fullWeight}
-                  productList={productList}
-                  classes={classes}
-                  advantages={advantages}
-                  payments={payments}
-                  rowsPerPage={paramsRowsPerPage}
-                  svgMaxHeight={paramsSvgMaxHeight}
-                  rowHeight={paramsRowHeight}
-                  obj={obj}
-                />
+              {productList && (
+                <>
+                  {/* {title && (
+                    <>
+                      <Box mt={1.5} mb={0.75}>
+                        <Typography>{title}</Typography>
+                      </Box>
+                      <Box p={0.625} sx={{ borderBottom: '1px solid #999' }} mb={2.5}></Box>
+                    </>
+                  )}
+                  {fullSquare && fullWeight && (
+                    <Box display="flex" flexDirection="row" sx={{ flex: '0 0 400px' }}>
+                      <Box sx={{ flex: '0 0 400px' }}>
+                        <Typography variant="subtitle2" component="p">
+                          Площадь изделий, кв.м:{' '}
+                          <Typography variant="subtitle2" component="span">
+                            {fullSquare}
+                          </Typography>
+                        </Typography>
+                      </Box>
+                      <Box sx={{ flex: '1 1 0%' }} pl={5.25}>
+                        <Typography variant="subtitle2" component="p">
+                          Масса изделий, кг:{' '}
+                          <Typography variant="subtitle2" component="span">
+                            {fullWeight}
+                          </Typography>
+                        </Typography>
+                      </Box>
+                    </Box>
+                  )} */}
+                  <Box className={classes.breakElementWithMargins}>
+                    {chunksMaker(productList, paramsRowsPerPage).map(
+                      (chunk, index) => (
+                        <PrintingPageTemplate
+                          classes={classes}
+                          advantages={advantages}
+                          payments={payments}
+                          key={chunk[0]?.index}
+                          images={images}
+                          obj={obj}
+                        >
+                          <>
+                            {chunk.map(
+                              ({
+                                data,
+                                number,
+                                position,
+                                quantity,
+                                svg,
+                                size,
+                                index,
+                              }) => (
+                                <components.ProductParams
+                                  data={data}
+                                  number={number}
+                                  position={position}
+                                  quantity={quantity}
+                                  svg={svg}
+                                  size={size}
+                                  index={index}
+                                  classes={classes}
+                                  svgMaxHeight={paramsSvgMaxHeight}
+                                  rowHeight={paramsRowHeight}
+                                  key={index}
+                                />
+                              )
+                            )}
+                          </>
+                        </PrintingPageTemplate>
+                      )
+                    )}
+                  </Box>
+                </>
               )}
               {productTableData && (
-                <components.ProductsTablePage
-                  classes={classes}
-                  advantages={advantages}
-                  payments={payments}
-                  productTableData={productTableData}
-                  obj={obj}
-                />
+                <Box className={classes.breakElementWithMargins}>
+                  {chunksMaker(productTableData, tableRowsPerPage).map(
+                    (chunk, index, chunksArr) => (
+                      <PrintingPageTemplate
+                        classes={classes}
+                        advantages={advantages}
+                        payments={payments}
+                        key={chunk[0]?.id}
+                        images={images}
+                        obj={obj}
+                      >
+                        <>
+                          {chunk.map((item) => (
+                            <Box className={classes.tableMargins} key={item.id}>
+                              <Typography color="textSecondary" component="p">
+                                {item.title}
+                              </Typography>
+                              <components.ProductsTable
+                                head={item.head}
+                                rows={item.rows}
+                                total={item.total}
+                                boldBorderlessHead={item.id === '3'}
+                              />
+                            </Box>
+                          ))}
+                          {index === chunksArr.length - 1 && (
+                            <>
+                              <Box mt={3} mb={2.5}>
+                                <Typography>
+                                  *Предложение действительно в течение 10
+                                  календарных дней.
+                                </Typography>
+                              </Box>
+                              <Box mb={5}>
+                                <Typography>
+                                  Для вашего удобства, точный расчет стоимости,
+                                  заключение договора и оплата могут быть
+                                  осуществлены на объекте в день проведения
+                                  замера.
+                                </Typography>
+                              </Box>
+                            </>
+                          )}
+                        </>
+                      </PrintingPageTemplate>
+                    )
+                  )}
+                </Box>
               )}
               <Box className={classes.hideInPrint}>
-                <components.Payments paymentList={payments} classes={classes} />
+                <components.Footer
+                  obj={obj}
+                  paymentList={payments}
+                  classes={classes}
+                />
               </Box>
               <Box mt={5} className={classes.pageBreakBefore}>
                 <components.Header
                   withLogo
                   obj={obj}
                   advantagesList={advantages}
+                  images={images}
                 />
               </Box>
               <Box mt={5}>

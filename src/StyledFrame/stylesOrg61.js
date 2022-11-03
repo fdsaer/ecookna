@@ -172,7 +172,6 @@ export default function styles(theme) {
       marginTop: '20px',
       position: 'relative',
       zIndex: 22,
-      color: '#E30613',
 
       '&:before': {
         zIndex: 25,

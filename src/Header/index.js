@@ -10,7 +10,8 @@ import HeaderOffer61 from './HeaderOffer61.js';
 
 export default function Header(props) {
   let Component;
-  switch (props.obj.organization.name) {
+  // switch (props.obj.organization.name) {
+  switch (props.obj.manager.name) {
     case 'Компания ФОТОТЕХ':
     case 'ООО"ФОТОТЕХ"':
     case 'ОКНА РОСТА ДОМ':
@@ -18,6 +19,13 @@ export default function Header(props) {
       break;
     // case 'ГРУППА КОМПАНИЙ':
     case 'ОК Калева':
+      Component = HeaderOffer61;
+      break;
+    case 'Касаткина Антонина':
+      Component = HeaderOffer59;
+      break;
+
+    case 'Гудилина ИА':
       Component = HeaderOffer61;
       break;
     default:
