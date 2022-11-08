@@ -18,8 +18,9 @@ import {
   getAssortmentLinks,
   getLinks,
   getPayments61,
-  getRecommendations61,
-  getAdditions,
+  getAdditions61,
+  getStatistics61,
+  getAdvantages61,
 } from './Templates.js';
 import { chunksMaker } from '../../utilities/index.js';
 
@@ -48,9 +49,10 @@ class Offer61 extends PrnProto {
 
     import('./OfferComponents.js').then((module) => {
       this.setAsyncModules({
-        Header: module.Header,
-        Footer: module.Footer,
-        Title: module.Title,
+        Header: module.Header61,
+        Footer: module.Footer61,
+        Title: module.Title61,
+        PromoPage: module.PromoPage61,
         Wrapper: module.Wrapper,
         GridImages: module.GridImages,
         Description: module.Description,
@@ -67,14 +69,6 @@ class Offer61 extends PrnProto {
 
     import('./OfferImages.js').then((module) => {
       this.setAsyncImages({
-        // AgeAdvantageImage: module.AgeAdvantageImage,
-        // FreeSizingAdvantageIcon: module.FreeSizingAdvantageIcon,
-        // GuaranteeAdvantageIcon: module.GuaranteeAdvantageIcon,
-        // ClientsAdvantageIcon: module.ClientsAdvantageIcon,
-        // CashPaymentIcon: module.CashPaymentIcon,
-        // CardPaymentIcon: module.CardPaymentIcon,
-        // OnlinePaymentIcon: module.OnlinePaymentIcon,
-        // installmentIcon: module.installmentIcon,
         ExamplesIcon: module.ExamplesIcon,
         FactoryIcon: module.FactoryIcon,
         ProductionIcon: module.ProductionIcon,
@@ -100,6 +94,12 @@ class Offer61 extends PrnProto {
         MosquitoNetsIcon61: module.MosquitoNetsIcon61,
         WindowSillsIcon61: module.WindowSillsIcon61,
         ChildLockIcon61: module.ChildLockIcon61,
+        OwnProductionIcon61: module.OwnProductionIcon61,
+        ManagerIcon61: module.ManagerIcon61,
+        QualityIcon61: module.QualityIcon61,
+        AccessoriesIcon61: module.AccessoriesIcon61,
+        PackageOfServicesIcon61: module.PackageOfServicesIcon61,
+        MountingBrigadesIcon61: module.MountingBrigadesIcon61,
       });
       this.setState({ imagesLoaded: true });
     });
@@ -117,9 +117,10 @@ class Offer61 extends PrnProto {
     const manager = getManagerInfo(obj);
     const assortmentLinks = getAssortmentLinks(images);
     const links = getLinks(images);
-    const recommendation = getRecommendations61(images);
     const payments = getPayments61(images);
-    const additions = getAdditions(images);
+    const additions = getAdditions61(images);
+    const statistics = getStatistics61(images);
+    const advantages = getAdvantages61(images);
     const productList = products && getProductsList(products);
     const tableRowsPerPage = 25; // Ограничение количества строк на одну страницу при группировке таблиц для постраничной печати
     const paramsRowsPerPage = 29; // Ограничение количества строк на одну страницу при группировке параметров изделия для постраничной печати
@@ -168,7 +169,13 @@ class Offer61 extends PrnProto {
                   classes={classes}
                 />
               </Box>
-              <Box mt={5.6} mb={1.6} fontSize={15}>
+              <Box
+                mt={5.6}
+                mb={1.6}
+                fontSize={15}
+                className={classes.hideInPrint}
+                sx={{ marginBottom: '-43px' }}
+              >
                 <Typography variant="inherit" color="textPrimary" component="p">
                   В комплектацию Вашего заказа входит:
                 </Typography>
@@ -302,153 +309,15 @@ class Offer61 extends PrnProto {
                   classes={classes}
                 />
               </Box>
-              <Box mt={5} className={classes.pageBreakBefore}>
-                <components.Header withLogo obj={obj} classes={classes} />
-              </Box>
 
-              <Box
-                mt={2.5}
-                mb={2.5}
-                fontWeight={600}
-                fontSize={15}
-                sx={{ textTransform: 'uppercase' }}
-              >
-                <Typography variant="inherit" color="error" component="p">
-                  С этими окнами обычно покупают
-                </Typography>
-              </Box>
-
-              <Box>
-                <components.GridImages
-                  images={recommendation}
-                  classes={classes}
-                />
-              </Box>
-              {/* 6 карточек */}
-
-              {/* Окна роста это  */}
-              <Box
-                mt={2.5}
-                mb={2.5}
-                fontWeight={600}
-                fontSize={15}
-                sx={{ textTransform: 'uppercase' }}
-              >
-                <Typography variant="inherit" color="error" component="p">
-                  Окна роста это
-                </Typography>
-              </Box>
-
-              {/* Вставка с 3 блоками  */}
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                mb={2.5}
-                sx={{ backgroundColor: '#E30613' }}
-              >
-                <Box fontSize={16} my={1.25} mx={2.5}>
-                  <Box fontWeight={600} fontSize={28}>
-                    <Typography
-                      variant="inherit"
-                      color="textSecondary"
-                      component="p"
-                    >
-                      300 000
-                    </Typography>
-                  </Box>
-                  <Typography
-                    variant="inherit"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    довольных клиентов
-                  </Typography>
-                </Box>
-
-                <Box fontSize={16} my={1.25} mx={2.5}>
-                  <Box fontWeight={600} fontSize={28}>
-                    <Typography
-                      variant="inherit"
-                      color="textSecondary"
-                      component="p"
-                    >
-                      2 500 000
-                    </Typography>
-                  </Box>
-                  <Typography
-                    variant="inherit"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    установленных окон
-                  </Typography>
-                </Box>
-
-                <Box fontSize={16} my={1.25} mx={2.5}>
-                  <Box fontWeight={600} fontSize={28}>
-                    <Typography
-                      variant="inherit"
-                      color="textSecondary"
-                      component="p"
-                    >
-                      25 лет
-                    </Typography>
-                  </Box>
-                  <Typography
-                    variant="inherit"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    успешной работы
-                  </Typography>
-                </Box>
-              </Box>
-
-              {/* Таблица с 6 блоками  */}
-
-              {/* Подвал и 5 иконок  */}
-
-              <Box mt={5}>
-                <components.Description title="Подберем лучшее решение:" />
-              </Box>
-              <Box mt={7}>
-                <components.LinksBlock links={assortmentLinks}>
-                  <Box color="textSecondary" fontSize="22px" mr={2.5}>
-                    <Typography
-                      variant="inherit"
-                      color="textSecondary"
-                      component="p"
-                    >
-                      Ассортимент компании ЭКООКНА
-                    </Typography>
-                  </Box>
-                </components.LinksBlock>
-              </Box>
-              <Box mt={5}>
-                <components.LinksBlock links={links}>
-                  <Box sx={{ maxWidth: '100px' }} mr={2.5}>
-                    <Typography
-                      variant="inherit"
-                      color="textSecondary"
-                      component="p"
-                    >
-                      Переходите по ссылкам:
-                    </Typography>
-                  </Box>
-                </components.LinksBlock>
-              </Box>
-              <Box mt={7} className={classes.pageBreakBefore}>
-                <components.Additions
-                  additions={additions}
-                  title="Добавьте к своему интерьеру:"
-                />
-              </Box>
-              <Box mt={7}>
-                <components.Manager
-                  title="Остались вопросы? Я на связи! "
-                  manager={manager}
-                />
-              </Box>
+              <components.PromoPage
+                obj={obj}
+                classes={classes}
+                additions={additions}
+                statistics={statistics}
+                manager={manager}
+                advantages={advantages}
+              ></components.PromoPage>
             </components.Wrapper>
           )}
         </StyledFrame>

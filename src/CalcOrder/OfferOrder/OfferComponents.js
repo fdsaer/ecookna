@@ -14,6 +14,12 @@ import ProductsTablePage from '../../Components/ProductsTablePage.js';
 import PrintingPageTemplate from '../../Components/PrintingPageTemplate.js';
 import GridImages from '../../Components/GridImages.js';
 
+// components offer 61 (Окна Роста)
+import Header61 from '../../Header/HeaderOffer61.js';
+import Footer61 from '../../Footer/FooterOffer61.js';
+import Title61 from '../../Title/TitleOffer61.js';
+import PromoPage61 from '../../PromoPage/PromoPage61.js';
+
 export {
   Header,
   Footer,
@@ -28,6 +34,10 @@ export {
   ProductParams,
   ProductsTable,
   ProductsTablePage,
+  Header61,
+  Footer61,
+  Title61,
+  PromoPage61,
   PrintingPageTemplate,
   GridImages,
 };

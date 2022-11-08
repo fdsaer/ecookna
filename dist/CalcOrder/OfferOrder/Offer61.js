@@ -2,7 +2,7 @@ import PrnProto from '../../PrnProto.js';
 import { PrintingPageTemplate } from './OfferComponents.js';
 import { fullSquare, fullWeight, getProductsList, getManagerInfo, getAddressInfo } from './OfferData.js';
 import getProductsData from './OfferTable.js';
-import { getAssortmentLinks, getLinks, getPayments61, getRecommendations61, getAdditions } from './Templates.js';
+import { getAssortmentLinks, getLinks, getPayments61, getAdditions61, getStatistics61, getAdvantages61 } from './Templates.js';
 import { chunksMaker } from '../../utilities/index.js';
 const {
   React,
@@ -11,15 +11,11 @@ const {
 } = $p.ui;
 const StyledFrame = React.lazy(() => import('../../StyledFrame/index.js'));
 
-var _ref = React.createElement(Box, {
-  mt: 5.6,
-  mb: 1.6,
-  fontSize: 15
-}, React.createElement(Typography, {
+var _ref = React.createElement(Typography, {
   variant: "inherit",
   color: "textPrimary",
   component: "p"
-}, "В комплектацию Вашего заказа входит:"));
+}, "В комплектацию Вашего заказа входит:");
 
 var _ref2 = React.createElement(Box, {
   mt: 3,
@@ -29,85 +25,6 @@ var _ref2 = React.createElement(Box, {
 var _ref3 = React.createElement(Box, {
   mb: 5
 }, React.createElement(Typography, null, "Для вашего удобства, точный расчет стоимости, заключение договора и оплата могут быть осуществлены на объекте в день проведения замера."));
-
-var _ref4 = React.createElement(Typography, {
-  variant: "inherit",
-  color: "error",
-  component: "p"
-}, "С этими окнами обычно покупают");
-
-var _ref5 = React.createElement(Typography, {
-  variant: "inherit",
-  color: "error",
-  component: "p"
-}, "Окна роста это");
-
-var _ref6 = React.createElement(Box, {
-  fontSize: 16,
-  my: 1.25,
-  mx: 2.5
-}, React.createElement(Box, {
-  fontWeight: 600,
-  fontSize: 28
-}, React.createElement(Typography, {
-  variant: "inherit",
-  color: "textSecondary",
-  component: "p"
-}, "300 000")), React.createElement(Typography, {
-  variant: "inherit",
-  color: "textSecondary",
-  component: "p"
-}, "довольных клиентов"));
-
-var _ref7 = React.createElement(Box, {
-  fontSize: 16,
-  my: 1.25,
-  mx: 2.5
-}, React.createElement(Box, {
-  fontWeight: 600,
-  fontSize: 28
-}, React.createElement(Typography, {
-  variant: "inherit",
-  color: "textSecondary",
-  component: "p"
-}, "2 500 000")), React.createElement(Typography, {
-  variant: "inherit",
-  color: "textSecondary",
-  component: "p"
-}, "установленных окон"));
-
-var _ref8 = React.createElement(Box, {
-  fontSize: 16,
-  my: 1.25,
-  mx: 2.5
-}, React.createElement(Box, {
-  fontWeight: 600,
-  fontSize: 28
-}, React.createElement(Typography, {
-  variant: "inherit",
-  color: "textSecondary",
-  component: "p"
-}, "25 лет")), React.createElement(Typography, {
-  variant: "inherit",
-  color: "textSecondary",
-  component: "p"
-}, "успешной работы"));
-
-var _ref9 = React.createElement(Box, {
-  color: "textSecondary",
-  fontSize: "22px",
-  mr: 2.5
-}, React.createElement(Typography, {
-  variant: "inherit",
-  color: "textSecondary",
-  component: "p"
-}, "Ассортимент компании ЭКООКНА"));
-
-var _ref10 = React.createElement(Typography, {
-  variant: "inherit",
-  color: "textSecondary",
-  component: "p"
-}, "Переходите по ссылкам:");
 
 class Offer61 extends PrnProto {
   componentDidMount() {
@@ -135,9 +52,10 @@ class Offer61 extends PrnProto {
     });
     import('./OfferComponents.js').then(module => {
       this.setAsyncModules({
-        Header: module.Header,
-        Footer: module.Footer,
-        Title: module.Title,
+        Header: module.Header61,
+        Footer: module.Footer61,
+        Title: module.Title61,
+        PromoPage: module.PromoPage61,
         Wrapper: module.Wrapper,
         GridImages: module.GridImages,
         Description: module.Description,
@@ -178,7 +96,13 @@ class Offer61 extends PrnProto {
         DecorIcon61: module.DecorIcon61,
         MosquitoNetsIcon61: module.MosquitoNetsIcon61,
         WindowSillsIcon61: module.WindowSillsIcon61,
-        ChildLockIcon61: module.ChildLockIcon61
+        ChildLockIcon61: module.ChildLockIcon61,
+        OwnProductionIcon61: module.OwnProductionIcon61,
+        ManagerIcon61: module.ManagerIcon61,
+        QualityIcon61: module.QualityIcon61,
+        AccessoriesIcon61: module.AccessoriesIcon61,
+        PackageOfServicesIcon61: module.PackageOfServicesIcon61,
+        MountingBrigadesIcon61: module.MountingBrigadesIcon61
       });
       this.setState({
         imagesLoaded: true
@@ -204,9 +128,10 @@ class Offer61 extends PrnProto {
     const manager = getManagerInfo(obj);
     const assortmentLinks = getAssortmentLinks(images);
     const links = getLinks(images);
-    const recommendation = getRecommendations61(images);
     const payments = getPayments61(images);
-    const additions = getAdditions(images);
+    const additions = getAdditions61(images);
+    const statistics = getStatistics61(images);
+    const advantages = getAdvantages61(images);
     const productList = products && getProductsList(products);
     const tableRowsPerPage = 25;
     const paramsRowsPerPage = 29;
@@ -247,7 +172,15 @@ class Offer61 extends PrnProto {
       withCaption: true,
       obj: obj,
       classes: classes
-    })), _ref, productList && React.createElement(React.Fragment, null, React.createElement(Box, {
+    })), React.createElement(Box, {
+      mt: 5.6,
+      mb: 1.6,
+      fontSize: 15,
+      className: classes.hideInPrint,
+      sx: {
+        marginBottom: '-43px'
+      }
+    }, _ref), productList && React.createElement(React.Fragment, null, React.createElement(Box, {
       className: classes.breakElementWithMargins
     }, chunksMaker(productList, paramsRowsPerPage).map((chunk, index) => React.createElement(PrintingPageTemplate, {
       classes: classes,
@@ -300,68 +233,14 @@ class Offer61 extends PrnProto {
       obj: obj,
       paymentList: payments,
       classes: classes
-    })), React.createElement(Box, {
-      mt: 5,
-      className: classes.pageBreakBefore
-    }, React.createElement(components.Header, {
-      withLogo: true,
+    })), React.createElement(components.PromoPage, {
       obj: obj,
-      classes: classes
-    })), React.createElement(Box, {
-      mt: 2.5,
-      mb: 2.5,
-      fontWeight: 600,
-      fontSize: 15,
-      sx: {
-        textTransform: 'uppercase'
-      }
-    }, _ref4), React.createElement(Box, null, React.createElement(components.GridImages, {
-      images: recommendation,
-      classes: classes
-    })), React.createElement(Box, {
-      mt: 2.5,
-      mb: 2.5,
-      fontWeight: 600,
-      fontSize: 15,
-      sx: {
-        textTransform: 'uppercase'
-      }
-    }, _ref5), React.createElement(Box, {
-      display: "flex",
-      justifyContent: "space-between",
-      mb: 2.5,
-      sx: {
-        backgroundColor: '#E30613'
-      }
-    }, _ref6, _ref7, _ref8), React.createElement(Box, {
-      mt: 5
-    }, React.createElement(components.Description, {
-      title: "Подберем лучшее решение:"
-    })), React.createElement(Box, {
-      mt: 7
-    }, React.createElement(components.LinksBlock, {
-      links: assortmentLinks
-    }, _ref9)), React.createElement(Box, {
-      mt: 5
-    }, React.createElement(components.LinksBlock, {
-      links: links
-    }, React.createElement(Box, {
-      sx: {
-        maxWidth: '100px'
-      },
-      mr: 2.5
-    }, _ref10))), React.createElement(Box, {
-      mt: 7,
-      className: classes.pageBreakBefore
-    }, React.createElement(components.Additions, {
+      classes: classes,
       additions: additions,
-      title: "Добавьте к своему интерьеру:"
-    })), React.createElement(Box, {
-      mt: 7
-    }, React.createElement(components.Manager, {
-      title: "Остались вопросы? Я на связи! ",
-      manager: manager
-    })))));
+      statistics: statistics,
+      manager: manager,
+      advantages: advantages
+    }))));
   }
 
 }

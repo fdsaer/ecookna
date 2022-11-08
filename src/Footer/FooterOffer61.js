@@ -1,7 +1,6 @@
 const { React, Box, Typography } = $p.ui;
 
 export default function FooterOffer61({ paymentList, classes }) {
-  console.log('paymentList', paymentList);
   return (
     <Box display="flex" className={`${classes.localFooter}`}>
       <Box

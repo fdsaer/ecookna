@@ -14,7 +14,6 @@ export default function FooterOffer61({
   paymentList,
   classes
 }) {
-  console.log('paymentList', paymentList);
   return React.createElement(Box, {
     display: "flex",
     className: `${classes.localFooter}`

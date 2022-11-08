@@ -44,6 +44,12 @@ import DecorIcon61 from '../../img/offer61/decor.jpg';
 import MosquitoNetsIcon61 from '../../img/offer61/mosquitonets.jpg';
 import WindowSillsIcon61 from '../../img/offer61/windowsills.jpg';
 import ChildLockIcon61 from '../../img/offer61/childlock.jpg';
+import OwnProductionIcon61 from '../../img/offer61/ownProduction.svg';
+import ManagerIcon61 from '../../img/offer61/manager.svg';
+import QualityIcon61 from '../../img/offer61/quality.svg';
+import AccessoriesIcon61 from '../../img/offer61/accessories.svg';
+import PackageOfServicesIcon61 from '../../img/offer61/packageOfServices.svg';
+import MountingBrigadesIcon61 from '../../img/offer61/mountingBrigades.svg';
 
 export {
   OCover1,
@@ -89,4 +95,10 @@ export {
   MosquitoNetsIcon61,
   WindowSillsIcon61,
   ChildLockIcon61,
+  OwnProductionIcon61,
+  ManagerIcon61,
+  QualityIcon61,
+  AccessoriesIcon61,
+  PackageOfServicesIcon61,
+  MountingBrigadesIcon61,
 };

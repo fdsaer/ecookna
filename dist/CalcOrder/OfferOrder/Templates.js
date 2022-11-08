@@ -78,8 +78,52 @@ export const getPayments61 = images => {
   }];
   return payments;
 };
-export const getRecommendations61 = images => {
-  const recommendations = [{
+export const getStatistics61 = () => {
+  const statistics = [{
+    id: 1,
+    title: '300 000',
+    text: 'довольных клиентов'
+  }, {
+    id: 2,
+    title: '2 500 000',
+    text: 'установленных окон'
+  }, {
+    id: 3,
+    title: '25 лет',
+    text: 'успешной работы'
+  }];
+  return statistics;
+};
+export const getAdvantages61 = images => {
+  const advantages = [{
+    id: 1,
+    image: images?.OwnProductionIcon61,
+    text: 'Собственный производственный комплекс с современным оборудованием'
+  }, {
+    id: 2,
+    image: images?.ManagerIcon61,
+    text: 'Индивидуальный менеджер для каждого клиента'
+  }, {
+    id: 3,
+    image: images?.QualityIcon61,
+    text: 'Гарантированное качество комплектующих, полного цикла изготовления и установки'
+  }, {
+    id: 4,
+    image: images?.AccessoriesIcon61,
+    text: 'Комплектующие от производителей с мировым именем: VEKA, Guardian, Roto'
+  }, {
+    id: 5,
+    image: images?.PackageOfServicesIcon61,
+    text: 'Полный пакет услуг: доставка, монтаж, обслуживание, комплексная отделка балконов и лоджий'
+  }, {
+    id: 6,
+    image: images?.MountingBrigadesIcon61,
+    text: 'Квалифицированные монтажные бригады с личной ответственностью за заказ'
+  }];
+  return advantages;
+};
+export const getAdditions61 = images => {
+  const additions = [{
     id: 1,
     image: images?.RollerBlindsIcon61,
     text: 'Рольшторы'
@@ -104,7 +148,7 @@ export const getRecommendations61 = images => {
     image: images?.ChildLockIcon61,
     text: 'Детские замки'
   }];
-  return recommendations;
+  return additions;
 };
 export const getAdditions = images => {
   const additions = [{
