@@ -161,7 +161,8 @@ class Offer59 extends PrnProto {
       manager: manager,
       obj: obj
     }), components && classes && React.createElement(components.Wrapper, {
-      classes: classes
+      classes: classes,
+      px: 3.75
     }, React.createElement(Box, {
       mt: 3,
       className: classes.hideInPrint

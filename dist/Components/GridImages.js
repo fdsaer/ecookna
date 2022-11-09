@@ -2,11 +2,14 @@ const {
   React,
   Box,
   Typography,
-  Grid
+  Grid,
+  withStyles
 } = $p.ui;
 export default function GridImages({
   images,
+  widthImage = '100%',
   width = '218px',
+  flexDirection = 'column',
   sRow = '3',
   sCol = '2'
 }) {
@@ -23,12 +26,14 @@ export default function GridImages({
     xs: 4,
     spacing: sCol
   }, React.createElement(Box, {
-    width: width
-  }, React.createElement("img", {
+    width: width,
+    display: "flex",
+    flexDirection: flexDirection
+  }, image && React.createElement("img", {
     src: image,
     style: {
       display: 'block',
-      width: '100%',
+      width: widthImage,
       height: 'auto',
       boxSizing: 'border-box'
     }

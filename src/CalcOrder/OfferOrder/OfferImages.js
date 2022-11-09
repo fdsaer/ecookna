@@ -38,18 +38,24 @@ import NonCashPaymentIcon61 from '../../img/offer61/nonCashPayment.svg';
 import CardPaymentIcon61 from '../../img/offer61/cardPayment.svg';
 import InstallmentIcon61 from '../../img/offer61/installment.svg';
 import FixedPriceIcon61 from '../../img/offer61/fixedPrice.svg';
-import RollerBlindsIcon61 from '../../img/offer61/rollerblinds.jpg';
-import HiddenHardwareIcon61 from '../../img/offer61/hiddenhardware.jpg';
-import DecorIcon61 from '../../img/offer61/decor.jpg';
-import MosquitoNetsIcon61 from '../../img/offer61/mosquitonets.jpg';
-import WindowSillsIcon61 from '../../img/offer61/windowsills.jpg';
-import ChildLockIcon61 from '../../img/offer61/childlock.jpg';
+import RollerBlindsImage61 from '../../img/offer61/rollerblinds.jpg';
+import HiddenHardwareImage61 from '../../img/offer61/hiddenhardware.jpg';
+import DecorImage61 from '../../img/offer61/decor.jpg';
+import MosquitoNetsImage61 from '../../img/offer61/mosquitonets.jpg';
+import WindowSillsImage61 from '../../img/offer61/windowsills.jpg';
+import ChildLockImage61 from '../../img/offer61/childlock.jpg';
 import OwnProductionIcon61 from '../../img/offer61/ownProduction.svg';
 import ManagerIcon61 from '../../img/offer61/manager.svg';
 import QualityIcon61 from '../../img/offer61/quality.svg';
 import AccessoriesIcon61 from '../../img/offer61/accessories.svg';
 import PackageOfServicesIcon61 from '../../img/offer61/packageOfServices.svg';
 import MountingBrigadesIcon61 from '../../img/offer61/mountingBrigades.svg';
+
+import GoldenWindowImage61 from '../../img/offer61/GoldenWindow.png';
+import PeoplesBrandImage61 from '../../img/offer61/PeoplesBrand.png';
+import CompanyOfTheYearImage61 from '../../img/offer61/CompanyOfTheYear.png';
+import QualityStarImage61 from '../../img/offer61/QualityStar.png';
+import EnvironmentallySafeImage61 from '../../img/offer61/EnvironmentallySafe.png';
 
 export {
   OCover1,
@@ -89,16 +95,21 @@ export {
   CardPaymentIcon61,
   InstallmentIcon61,
   FixedPriceIcon61,
-  RollerBlindsIcon61,
-  HiddenHardwareIcon61,
-  DecorIcon61,
-  MosquitoNetsIcon61,
-  WindowSillsIcon61,
-  ChildLockIcon61,
+  RollerBlindsImage61,
+  HiddenHardwareImage61,
+  DecorImage61,
+  MosquitoNetsImage61,
+  WindowSillsImage61,
+  ChildLockImage61,
   OwnProductionIcon61,
   ManagerIcon61,
   QualityIcon61,
   AccessoriesIcon61,
   PackageOfServicesIcon61,
   MountingBrigadesIcon61,
+  GoldenWindowImage61,
+  PeoplesBrandImage61,
+  CompanyOfTheYearImage61,
+  QualityStarImage61,
+  EnvironmentallySafeImage61,
 };

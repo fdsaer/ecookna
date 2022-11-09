@@ -9,10 +9,7 @@ export default function TitleOffer61(props) {
   return (
     <Box
       bgcolor="primary.main"
-      mx="auto"
-      boxSizing="border-box"
-      maxWidth={794}
-      className={`${classes.pageBreakAfter} ${classes.pageHeight}`}
+      className={` ${classes.wrapperPage} ${classes.pageBreakAfter} ${classes.pageHeight}`}
       sx={{ position: 'relative' }}
     >
       {/* header */}
@@ -52,7 +49,7 @@ export default function TitleOffer61(props) {
       >
         {order && (
           <Box fontSize={16} mb={2.5}>
-            <Typography color="textSecondary" component="p">
+            <Typography color={'textSecondary'} component="p">
               {order}
             </Typography>
           </Box>

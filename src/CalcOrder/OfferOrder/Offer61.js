@@ -21,6 +21,7 @@ import {
   getAdditions61,
   getStatistics61,
   getAdvantages61,
+  getAchievements61,
 } from './Templates.js';
 import { chunksMaker } from '../../utilities/index.js';
 
@@ -88,18 +89,23 @@ class Offer61 extends PrnProto {
         CardPaymentIcon61: module.CardPaymentIcon61,
         InstallmentIcon61: module.InstallmentIcon61,
         FixedPriceIcon61: module.FixedPriceIcon61,
-        RollerBlindsIcon61: module.RollerBlindsIcon61,
-        HiddenHardwareIcon61: module.HiddenHardwareIcon61,
-        DecorIcon61: module.DecorIcon61,
-        MosquitoNetsIcon61: module.MosquitoNetsIcon61,
-        WindowSillsIcon61: module.WindowSillsIcon61,
-        ChildLockIcon61: module.ChildLockIcon61,
+        RollerBlindsImage61: module.RollerBlindsImage61,
+        HiddenHardwareImage61: module.HiddenHardwareImage61,
+        DecorImage61: module.DecorImage61,
+        MosquitoNetsImage61: module.MosquitoNetsImage61,
+        WindowSillsImage61: module.WindowSillsImage61,
+        ChildLockImage61: module.ChildLockImage61,
         OwnProductionIcon61: module.OwnProductionIcon61,
         ManagerIcon61: module.ManagerIcon61,
         QualityIcon61: module.QualityIcon61,
         AccessoriesIcon61: module.AccessoriesIcon61,
         PackageOfServicesIcon61: module.PackageOfServicesIcon61,
         MountingBrigadesIcon61: module.MountingBrigadesIcon61,
+        GoldenWindowImage61: module.GoldenWindowImage61,
+        PeoplesBrandImage61: module.PeoplesBrandImage61,
+        CompanyOfTheYearImage61: module.CompanyOfTheYearImage61,
+        QualityStarImage61: module.QualityStarImage61,
+        EnvironmentallySafeImage61: module.EnvironmentallySafeImage61,
       });
       this.setState({ imagesLoaded: true });
     });
@@ -115,12 +121,11 @@ class Offer61 extends PrnProto {
     } = this;
 
     const manager = getManagerInfo(obj);
-    const assortmentLinks = getAssortmentLinks(images);
-    const links = getLinks(images);
     const payments = getPayments61(images);
     const additions = getAdditions61(images);
     const statistics = getStatistics61(images);
     const advantages = getAdvantages61(images);
+    const achievements = getAchievements61(images);
     const productList = products && getProductsList(products);
     const tableRowsPerPage = 25; // Ограничение количества строк на одну страницу при группировке таблиц для постраничной печати
     const paramsRowsPerPage = 29; // Ограничение количества строк на одну страницу при группировке параметров изделия для постраничной печати
@@ -160,7 +165,7 @@ class Offer61 extends PrnProto {
             />
           )}
           {components && classes && (
-            <components.Wrapper classes={classes}>
+            <components.Wrapper classes={classes} px={5}>
               <Box mt={3} className={classes.hideInPrint}>
                 <components.Header
                   withLogo
@@ -243,6 +248,7 @@ class Offer61 extends PrnProto {
                                   svgMaxHeight={paramsSvgMaxHeight}
                                   rowHeight={paramsRowHeight}
                                   key={index}
+                                  color="textSecondary"
                                 />
                               )
                             )}
@@ -267,7 +273,7 @@ class Offer61 extends PrnProto {
                         <>
                           {chunk.map((item) => (
                             <Box className={classes.tableMargins} key={item.id}>
-                              <Typography color="textSecondary" component="p">
+                              <Typography color="textPrimary" component="p">
                                 {item.title}
                               </Typography>
                               <components.ProductsTable
@@ -275,6 +281,7 @@ class Offer61 extends PrnProto {
                                 rows={item.rows}
                                 total={item.total}
                                 boldBorderlessHead={item.id === '3'}
+                                color={'textSecondary'}
                               />
                             </Box>
                           ))}
@@ -309,16 +316,18 @@ class Offer61 extends PrnProto {
                   classes={classes}
                 />
               </Box>
-
-              <components.PromoPage
-                obj={obj}
-                classes={classes}
-                additions={additions}
-                statistics={statistics}
-                manager={manager}
-                advantages={advantages}
-              ></components.PromoPage>
             </components.Wrapper>
+          )}
+          {components?.PromoPage && (
+            <components.PromoPage
+              obj={obj}
+              classes={classes}
+              additions={additions}
+              statistics={statistics}
+              manager={manager}
+              advantages={advantages}
+              achievements={achievements}
+            />
           )}
         </StyledFrame>
       </React.Suspense>

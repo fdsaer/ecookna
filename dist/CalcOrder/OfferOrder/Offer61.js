@@ -2,7 +2,7 @@ import PrnProto from '../../PrnProto.js';
 import { PrintingPageTemplate } from './OfferComponents.js';
 import { fullSquare, fullWeight, getProductsList, getManagerInfo, getAddressInfo } from './OfferData.js';
 import getProductsData from './OfferTable.js';
-import { getAssortmentLinks, getLinks, getPayments61, getAdditions61, getStatistics61, getAdvantages61 } from './Templates.js';
+import { getAssortmentLinks, getLinks, getPayments61, getAdditions61, getStatistics61, getAdvantages61, getAchievements61 } from './Templates.js';
 import { chunksMaker } from '../../utilities/index.js';
 const {
   React,
@@ -91,18 +91,23 @@ class Offer61 extends PrnProto {
         CardPaymentIcon61: module.CardPaymentIcon61,
         InstallmentIcon61: module.InstallmentIcon61,
         FixedPriceIcon61: module.FixedPriceIcon61,
-        RollerBlindsIcon61: module.RollerBlindsIcon61,
-        HiddenHardwareIcon61: module.HiddenHardwareIcon61,
-        DecorIcon61: module.DecorIcon61,
-        MosquitoNetsIcon61: module.MosquitoNetsIcon61,
-        WindowSillsIcon61: module.WindowSillsIcon61,
-        ChildLockIcon61: module.ChildLockIcon61,
+        RollerBlindsImage61: module.RollerBlindsImage61,
+        HiddenHardwareImage61: module.HiddenHardwareImage61,
+        DecorImage61: module.DecorImage61,
+        MosquitoNetsImage61: module.MosquitoNetsImage61,
+        WindowSillsImage61: module.WindowSillsImage61,
+        ChildLockImage61: module.ChildLockImage61,
         OwnProductionIcon61: module.OwnProductionIcon61,
         ManagerIcon61: module.ManagerIcon61,
         QualityIcon61: module.QualityIcon61,
         AccessoriesIcon61: module.AccessoriesIcon61,
         PackageOfServicesIcon61: module.PackageOfServicesIcon61,
-        MountingBrigadesIcon61: module.MountingBrigadesIcon61
+        MountingBrigadesIcon61: module.MountingBrigadesIcon61,
+        GoldenWindowImage61: module.GoldenWindowImage61,
+        PeoplesBrandImage61: module.PeoplesBrandImage61,
+        CompanyOfTheYearImage61: module.CompanyOfTheYearImage61,
+        QualityStarImage61: module.QualityStarImage61,
+        EnvironmentallySafeImage61: module.EnvironmentallySafeImage61
       });
       this.setState({
         imagesLoaded: true
@@ -126,12 +131,11 @@ class Offer61 extends PrnProto {
       images
     } = this;
     const manager = getManagerInfo(obj);
-    const assortmentLinks = getAssortmentLinks(images);
-    const links = getLinks(images);
     const payments = getPayments61(images);
     const additions = getAdditions61(images);
     const statistics = getStatistics61(images);
     const advantages = getAdvantages61(images);
+    const achievements = getAchievements61(images);
     const productList = products && getProductsList(products);
     const tableRowsPerPage = 25;
     const paramsRowsPerPage = 29;
@@ -163,7 +167,8 @@ class Offer61 extends PrnProto {
       manager: manager,
       obj: obj
     }), components && classes && React.createElement(components.Wrapper, {
-      classes: classes
+      classes: classes,
+      px: 5
     }, React.createElement(Box, {
       mt: 3,
       className: classes.hideInPrint
@@ -207,7 +212,8 @@ class Offer61 extends PrnProto {
       classes: classes,
       svgMaxHeight: paramsSvgMaxHeight,
       rowHeight: paramsRowHeight,
-      key: index
+      key: index,
+      color: "textSecondary"
     }))))))), productTableData && React.createElement(Box, {
       className: classes.breakElementWithMargins
     }, chunksMaker(productTableData, tableRowsPerPage).map((chunk, index, chunksArr) => React.createElement(PrintingPageTemplate, {
@@ -220,27 +226,29 @@ class Offer61 extends PrnProto {
       className: classes.tableMargins,
       key: item.id
     }, React.createElement(Typography, {
-      color: "textSecondary",
+      color: "textPrimary",
       component: "p"
     }, item.title), React.createElement(components.ProductsTable, {
       head: item.head,
       rows: item.rows,
       total: item.total,
-      boldBorderlessHead: item.id === '3'
+      boldBorderlessHead: item.id === '3',
+      color: 'textSecondary'
     }))), index === chunksArr.length - 1 && React.createElement(React.Fragment, null, _ref2, _ref3))))), React.createElement(Box, {
       className: classes.hideInPrint
     }, React.createElement(components.Footer, {
       obj: obj,
       paymentList: payments,
       classes: classes
-    })), React.createElement(components.PromoPage, {
+    }))), components?.PromoPage && React.createElement(components.PromoPage, {
       obj: obj,
       classes: classes,
       additions: additions,
       statistics: statistics,
       manager: manager,
-      advantages: advantages
-    }))));
+      advantages: advantages,
+      achievements: achievements
+    })));
   }
 
 }

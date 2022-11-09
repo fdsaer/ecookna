@@ -1,4 +1,5 @@
 import Header from '../Header/HeaderOffer61.js';
+import Achievements from '../Components//Achievements.js';
 import GridImages from '../Components/GridImages.js';
 const {
   React,
@@ -25,12 +26,15 @@ export default function PromoPage61(props) {
     classes,
     additions,
     statistics,
-    advantages
+    advantages,
+    achievements
   } = props;
-  console.log('advantages', advantages);
   return React.createElement(Box, {
-    mt: 5,
     className: classes.pageBreakBefore
+  }, React.createElement(Box, {
+    mt: 5,
+    px: 3.75,
+    className: `${classes.pageBreakBefore} ${classes.wrapperPage}`
   }, React.createElement(Header, {
     withLogo: true,
     obj: obj,
@@ -86,7 +90,7 @@ export default function PromoPage61(props) {
     component: "p"
   }, word))))), React.createElement(Grid, {
     container: true,
-    spacing: "3"
+    spacing: 3
   }, advantages && advantages.map(({
     id,
     image,
@@ -95,13 +99,15 @@ export default function PromoPage61(props) {
     item: true,
     key: id,
     xs: 4,
-    spacing: "2"
-  }, React.createElement(Box, null, React.createElement("img", {
+    spacing: 2
+  }, React.createElement(Box, {
+    display: "flex"
+  }, React.createElement("img", {
     src: image,
     style: {
       display: 'block',
       width: '30px',
-      height: 'auto',
+      height: '100%',
       boxSizing: 'border-box'
     }
   }), text && React.createElement(Box, {
@@ -111,5 +117,12 @@ export default function PromoPage61(props) {
     variant: "inherit",
     color: "textPrimary",
     component: "span"
-  }, text)))))));
+  }, text))))))), React.createElement(Box, {
+    sx: {
+      backgroundColor: '#EDEDED'
+    }
+  }, achievements && React.createElement(Achievements, {
+    achievements: achievements,
+    classes: classes
+  })));
 }

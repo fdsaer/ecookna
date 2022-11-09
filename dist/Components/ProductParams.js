@@ -55,7 +55,6 @@ var _ref = React.createElement(Typography, {
 
 export default function ProductParams({
   data,
-  number,
   position,
   quantity,
   svg,
@@ -63,7 +62,8 @@ export default function ProductParams({
   size,
   svgMaxHeight = 246,
   rowHeight = 23,
-  classes
+  classes,
+  color
 }) {
   return React.createElement(Box, {
     display: "flex",
@@ -80,7 +80,8 @@ export default function ProductParams({
     mb: 1.25
   }, React.createElement(Typography, {
     variant: "subtitle2",
-    component: "p"
+    component: "p",
+    color: color
   }, "Номер: ", index, " (поз. ", position, ") - ", quantity, " шт.")), React.createElement(Box, {
     pr: 1,
     pl: 3
@@ -109,7 +110,8 @@ export default function ProductParams({
       bgcolor: "primary.light",
       p: 1
     }, React.createElement(Typography, {
-      variant: "subtitle2"
+      variant: "subtitle2",
+      color: color
     }, subtitle, ":")), React.createElement(List, null, paramsList.map(({
       name,
       value,

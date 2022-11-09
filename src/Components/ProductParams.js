@@ -36,7 +36,6 @@ const ParamItem = ({ name, value, id }) => (
 
 export default function ProductParams({
   data,
-  number,
   position,
   quantity,
   svg,
@@ -45,6 +44,7 @@ export default function ProductParams({
   svgMaxHeight = 246,
   rowHeight = 23,
   classes,
+  color,
 }) {
   return (
     <Box display="flex" flexDirection="row" className={classes.productMargins}>
@@ -57,7 +57,7 @@ export default function ProductParams({
                   Номер: {number}
               </Typography> */}
 
-          <Typography variant="subtitle2" component="p">
+          <Typography variant="subtitle2" component="p" color={color}>
             Номер: {index} (поз. {position}) - {quantity} шт.
           </Typography>
         </Box>
@@ -91,7 +91,9 @@ export default function ProductParams({
                 >
                   {subtitle && paramsList.length > 0 && (
                     <Box bgcolor="primary.light" p={1}>
-                      <Typography variant="subtitle2">{subtitle}:</Typography>
+                      <Typography variant="subtitle2" color={color}>
+                        {subtitle}:
+                      </Typography>
                     </Box>
                   )}
                   <List>

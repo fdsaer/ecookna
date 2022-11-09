@@ -146,7 +146,7 @@ class Offer59 extends PrnProto {
             />
           )}
           {components && classes && (
-            <components.Wrapper classes={classes}>
+            <components.Wrapper classes={classes} px={3.75}>
               <Box mt={3} className={classes.hideInPrint}>
                 <components.Header
                   withLogo

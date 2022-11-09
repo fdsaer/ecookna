@@ -40,7 +40,8 @@ export default function ProductsTable({
   head,
   rows,
   total,
-  boldBorderlessHead
+  boldBorderlessHead,
+  color
 }) {
   return React.createElement(Table, {
     style: {

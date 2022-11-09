@@ -45,6 +45,7 @@ export default function ProductsTable({
   rows,
   total,
   boldBorderlessHead,
+  color,
 }) {
   return (
     <Table

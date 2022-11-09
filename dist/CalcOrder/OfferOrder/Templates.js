@@ -125,30 +125,59 @@ export const getAdvantages61 = images => {
 export const getAdditions61 = images => {
   const additions = [{
     id: 1,
-    image: images?.RollerBlindsIcon61,
+    image: images?.RollerBlindsImage61,
     text: 'Рольшторы'
   }, {
     id: 2,
-    image: images?.HiddenHardwareIcon61,
+    image: images?.HiddenHardwareImage61,
     text: 'Скрытая фурнитура'
   }, {
     id: 3,
-    image: images?.DecorIcon61,
+    image: images?.DecorImage61,
     text: 'Декор'
   }, {
     id: 4,
-    image: images?.MosquitoNetsIcon61,
+    image: images?.MosquitoNetsImage61,
     text: 'Москитные сетки'
   }, {
     id: 5,
-    image: images?.WindowSillsIcon61,
+    image: images?.WindowSillsImage61,
     text: 'Подоконники'
   }, {
     id: 6,
-    image: images?.ChildLockIcon61,
+    image: images?.ChildLockImage61,
     text: 'Детские замки'
   }];
   return additions;
+};
+export const getAchievements61 = images => {
+  const achievements = [{
+    id: 1,
+    image: images?.GoldenWindowImage61,
+    title: '«Золотое окно»',
+    text: '1 место в номинации «Самая известная оконная компания Москвы»'
+  }, {
+    id: 2,
+    image: images?.PeoplesBrandImage61,
+    title: 'Народная марка',
+    text: '«Народная марка» в номинации «Пластиковые окна»'
+  }, {
+    id: 3,
+    image: images?.CompanyOfTheYearImage61,
+    title: 'Компания года',
+    text: '«за индивидуальный подход к клиенту и профессионализм сотрудников»'
+  }, {
+    id: 4,
+    image: images?.QualityStarImage61,
+    title: 'Звезда качества',
+    text: '«Звезда качества» во всероссийском рейтинге товаров и услуг'
+  }, {
+    id: 5,
+    image: images?.EnvironmentallySafeImage61,
+    title: 'Экологически безопасная продукция',
+    text: 'Медаль выставки «Экологически безопасная продукция»'
+  }];
+  return achievements;
 };
 export const getAdditions = images => {
   const additions = [{

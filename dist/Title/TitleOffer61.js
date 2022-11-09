@@ -45,10 +45,7 @@ export default function TitleOffer61(props) {
   } = props;
   return React.createElement(Box, {
     bgcolor: "primary.main",
-    mx: "auto",
-    boxSizing: "border-box",
-    maxWidth: 794,
-    className: `${classes.pageBreakAfter} ${classes.pageHeight}`,
+    className: ` ${classes.wrapperPage} ${classes.pageBreakAfter} ${classes.pageHeight}`,
     sx: {
       position: 'relative'
     }
@@ -86,7 +83,7 @@ export default function TitleOffer61(props) {
     fontSize: 16,
     mb: 2.5
   }, React.createElement(Typography, {
-    color: "textSecondary",
+    color: 'textSecondary',
     component: "p"
   }, order)), title && React.createElement(Typography, {
     variant: "p",

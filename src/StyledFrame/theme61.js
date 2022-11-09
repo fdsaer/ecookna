@@ -88,12 +88,12 @@ export const theme = createTheme({
   palette: {
     primary: {
       main: '#303942',
-      light: '#dddddd',
+      light: '#E30613',
       dark: '#999999',
     },
     mode: 'dark',
     text: {
-      primary: '#1A322C',
+      primary: '#303942',
       secondary: '#FFFFFF',
     },
     error: {

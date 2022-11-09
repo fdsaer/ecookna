@@ -143,6 +143,16 @@ export default function styles(theme) {
     w100: {
       width: '100%'
     },
+    achievementMargins: {
+      '&:not(:last-child)': {
+        marginRight: theme.spacing(2.5)
+      }
+    },
+    wrapperPage: {
+      margin: '0 auto',
+      maxWidth: '794px',
+      boxSizing: 'border-box'
+    },
     logo: {
       '&:after': {
         content: '""',
