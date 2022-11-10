@@ -3,7 +3,8 @@ const {
   Typography,
   Box,
   List,
-  ListItem
+  ListItem,
+  withStyles
 } = $p.ui;
 
 const Svg = ({
@@ -62,8 +63,7 @@ export default function ProductParams({
   size,
   svgMaxHeight = 246,
   rowHeight = 23,
-  classes,
-  color
+  classes
 }) {
   return React.createElement(Box, {
     display: "flex",
@@ -76,12 +76,12 @@ export default function ProductParams({
     className: `${classes.avoidBreakInside} ${classes.breakElementWithMargins}`
   }, React.createElement(Box, {
     bgcolor: "primary.light",
+    color: "productParams.textHead",
     p: 1,
     mb: 1.25
   }, React.createElement(Typography, {
     variant: "subtitle2",
-    component: "p",
-    color: color
+    component: "p"
   }, "Номер: ", index, " (поз. ", position, ") - ", quantity, " шт.")), React.createElement(Box, {
     pr: 1,
     pl: 3
@@ -108,10 +108,10 @@ export default function ProductParams({
       key: id
     }, subtitle && paramsList.length > 0 && React.createElement(Box, {
       bgcolor: "primary.light",
+      color: "productParams.textHead",
       p: 1
     }, React.createElement(Typography, {
-      variant: "subtitle2",
-      color: color
+      variant: "subtitle2"
     }, subtitle, ":")), React.createElement(List, null, paramsList.map(({
       name,
       value,

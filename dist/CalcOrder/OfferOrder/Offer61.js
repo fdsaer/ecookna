@@ -212,8 +212,7 @@ class Offer61 extends PrnProto {
       classes: classes,
       svgMaxHeight: paramsSvgMaxHeight,
       rowHeight: paramsRowHeight,
-      key: index,
-      color: "textSecondary"
+      key: index
     }))))))), productTableData && React.createElement(Box, {
       className: classes.breakElementWithMargins
     }, chunksMaker(productTableData, tableRowsPerPage).map((chunk, index, chunksArr) => React.createElement(PrintingPageTemplate, {
@@ -232,9 +231,7 @@ class Offer61 extends PrnProto {
       head: item.head,
       rows: item.rows,
       total: item.total,
-      boldBorderlessHead: item.id === '3',
-      color: "#FFFFFF",
-      bgColorFooter: "#303942"
+      boldBorderlessHead: item.id === '3'
     }))), index === chunksArr.length - 1 && React.createElement(React.Fragment, null, _ref2, _ref3))))), React.createElement(Box, {
       className: classes.hideInPrint
     }, React.createElement(components.Footer, {

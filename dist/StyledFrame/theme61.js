@@ -98,6 +98,17 @@ export const theme = createTheme({
     },
     error: {
       main: '#E30613'
+    },
+    productParams: {
+      textHead: '#FFFFFF'
+    },
+    tableProducts: {
+      headCell: '#E30613',
+      headText: '#FFFFFF',
+      bodyCell: '#FFFFFF',
+      bodyText: '#303942',
+      footerCell: '#303942',
+      footerText: '#FFFFFF'
     }
   },
   shape: {

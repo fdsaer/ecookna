@@ -87,17 +87,28 @@ export const theme = createTheme({
   },
   palette: {
     primary: {
-      main: '#303942',
-      light: '#E30613',
+      main: '#303942', // серый цвет
+      light: '#E30613', // красный цвет
       dark: '#999999',
     },
     mode: 'dark',
     text: {
-      primary: '#303942',
-      secondary: '#FFFFFF',
+      primary: '#303942', // серый цвет
+      secondary: '#FFFFFF', // белый текст
     },
     error: {
-      main: '#E30613',
+      main: '#E30613', // красный цвет
+    },
+    productParams: {
+      textHead: '#FFFFFF',
+    },
+    tableProducts: {
+      headCell: '#E30613',
+      headText: '#FFFFFF',
+      bodyCell: '#FFFFFF',
+      bodyText: '#303942',
+      footerCell: '#303942',
+      footerText: '#FFFFFF',
     },
   },
   shape: {

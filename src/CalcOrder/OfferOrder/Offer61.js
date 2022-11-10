@@ -248,7 +248,6 @@ class Offer61 extends PrnProto {
                                   svgMaxHeight={paramsSvgMaxHeight}
                                   rowHeight={paramsRowHeight}
                                   key={index}
-                                  color="textSecondary"
                                 />
                               )
                             )}
@@ -281,8 +280,6 @@ class Offer61 extends PrnProto {
                                 rows={item.rows}
                                 total={item.total}
                                 boldBorderlessHead={item.id === '3'}
-                                color="#FFFFFF"
-                                bgColorFooter="#303942"
                               />
                             </Box>
                           ))}

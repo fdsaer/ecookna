@@ -1,4 +1,4 @@
-const { React, Typography, Box, List, ListItem } = $p.ui;
+const { React, Typography, Box, List, ListItem, withStyles } = $p.ui;
 
 const Svg = ({ source, maxHeight }) => {
   try {
@@ -44,7 +44,6 @@ export default function ProductParams({
   svgMaxHeight = 246,
   rowHeight = 23,
   classes,
-  color,
 }) {
   return (
     <Box display="flex" flexDirection="row" className={classes.productMargins}>
@@ -52,12 +51,17 @@ export default function ProductParams({
         sx={{ flex: '0 0 400px' }}
         className={`${classes.avoidBreakInside} ${classes.breakElementWithMargins}`}
       >
-        <Box bgcolor="primary.light" p={1} mb={1.25}>
+        <Box
+          bgcolor="primary.light"
+          color="productParams.textHead"
+          p={1}
+          mb={1.25}
+        >
           {/* <Typography variant="subtitle2" component="p">
                   Номер: {number}
               </Typography> */}
 
-          <Typography variant="subtitle2" component="p" color={color}>
+          <Typography variant="subtitle2" component="p">
             Номер: {index} (поз. {position}) - {quantity} шт.
           </Typography>
         </Box>
@@ -90,10 +94,12 @@ export default function ProductParams({
                   key={id}
                 >
                   {subtitle && paramsList.length > 0 && (
-                    <Box bgcolor="primary.light" p={1}>
-                      <Typography variant="subtitle2" color={color}>
-                        {subtitle}:
-                      </Typography>
+                    <Box
+                      bgcolor="primary.light"
+                      color="productParams.textHead"
+                      p={1}
+                    >
+                      <Typography variant="subtitle2">{subtitle}:</Typography>
                     </Box>
                   )}
                   <List>
