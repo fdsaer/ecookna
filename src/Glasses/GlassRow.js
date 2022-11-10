@@ -18,6 +18,8 @@ export default function GlassRow({row, glr, totals, Cell, classes, svg}) {
   totals.s.set(ox, totals.s.get(ox) + quantity * glr.s);
   totals.m.set(ox, totals.m.get(ox) + quantity * m);
   // добавляем строку заполнения
+
+  // TODO: сложночитаемо - накинуть отступы, переносы и обернуть в скобки
   return <>
     <TableRow>
       <Cell>{`${row.row}-${glr.row}`}</Cell>

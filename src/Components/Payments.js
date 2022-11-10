@@ -18,6 +18,7 @@ export default function Payments({ paymentList, classes }) {
         paymentList.map(({ image, id }) => {
           return (
             <Box key={id} sx={{ height: '76px' }}>
+              {/* TODO: alt атрибут (не обязательно */}
               <img
                 src={image}
                 style={{

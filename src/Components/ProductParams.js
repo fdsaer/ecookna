@@ -55,7 +55,7 @@ export default function ProductParams({
         <Box bgcolor="primary.light" p={1} mb={1.25}>
           {/* <Typography variant="subtitle2" component="p">
                   Номер: {number}
-              </Typography> */}
+              </Typography> TODO: удалить */}
 
           <Typography variant="subtitle2" component="p">
             Номер: {index} (поз. {position}) - {quantity} шт.

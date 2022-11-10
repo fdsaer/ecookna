@@ -5,7 +5,6 @@
 const { React } = $p.ui;
 
 const addPrintStyles = (selector) => {
-  // const css = `@page {margin: 0; margin-top: 10mm; margin-bottom: 10mm} @page :first {margin: 0}`;
   const css = `@page {margin: 0}`;
   const head = document.head || document.getElementsByTagName('head')[0];
   const style = document.createElement('style');
@@ -23,6 +22,7 @@ const removePrintStyles = (selector) => {
   });
 };
 
+// TODO: стиль наименований (camelCase)
 function add_table_titles(msg) {
   // публичные методы, экспортируемые, как свойства $p.msg
   msg.printing_form = {
@@ -61,6 +61,7 @@ function add_table_titles(msg) {
 class PrnProto extends React.Component {
   constructor(props) {
     super(props);
+    // TODO: Весь задокументированный код - удалить. Нет худших комментариев, чем подобные.
     // props.skipCss && props.skipCss();
     this.state = {
       loaded: false,

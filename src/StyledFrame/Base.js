@@ -4,7 +4,6 @@
 
 const { React, makeStyles, ThemeProvider } = $p.ui;
 import { theme } from './theme1.js';
-// import stylesBase from './stylesBase.js';
 import stylesBase from './stylesOrg2.js';
 import Loading from './Loading.js';
 

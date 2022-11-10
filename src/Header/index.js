@@ -3,7 +3,6 @@
  */
 
 const { React, makeStyles } = $p.ui;
-import HeaderBase from './HeaderBase.js';
 import HeaderOrg1 from './HeaderOrg1.js';
 import HeaderOffer from './HeaderOffer.js';
 

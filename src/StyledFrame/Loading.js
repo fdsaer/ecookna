@@ -9,7 +9,6 @@
 const {React, Typography, LinearProgress} = $p.ui;
 
 export default function Loading({text, title, classes}) {
-
   const [progress, setProgress] = React.useState(0);
   const [buffer, setBuffer] = React.useState(10);
 

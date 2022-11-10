@@ -6,7 +6,9 @@
  */
 import PrnProto from '../../PrnProto.js';
 import { PrintingPageTemplate } from './OfferComponents.js';
+
 import {
+  // TODO: неиспользуемые переменные
   fullSquare,
   fullWeight,
   getProductsList,
@@ -14,6 +16,7 @@ import {
   getAddressInfo,
 } from './OfferData.js';
 import getProductsData from './OfferTable.js';
+
 import {
   getAssortmentLinks,
   getLinks,
@@ -21,16 +24,19 @@ import {
   getPayments,
   getAdditions,
 } from './Templates.js';
+
 import { chunksMaker } from '../../utilities/index.js';
 
 const { React, Box, Typography } = $p.ui;
 
 const StyledFrame = React.lazy(() => import('../../StyledFrame/index.js'));
 
+// TODO: по проекту замешаны классовые компоненты и функциональные - стоит привести всё к функциональным компонентам
 class Offer59 extends PrnProto {
   componentDidMount() {
+    // TODO: неиспользуемые переменные
     const { attr, obj, print } = this.props;
-    console.log(obj);
+    console.log(obj); // TODO: убрать
     obj
       // метод .load_linked_refs здесь на самом деле не нужен, но почему то svg в production.characteristic не доступны
       // поэтому пока эта обертка здесь есть, а когда svg будут на своем месте ее можно будет убрать.
@@ -116,6 +122,7 @@ class Offer59 extends PrnProto {
     const order = `№${obj.number_doc} от ${moment(obj.date).format(
       'DD MMMM YYYY'
     )} г.`;
+    // TODO: неиспользуемые переменные
     let loading = '';
 
     // при наличии ссылки на externalWindow, дублируем заголовок
@@ -164,7 +171,9 @@ class Offer59 extends PrnProto {
               </Box>
               {productList && (
                 <>
-                  {/* {title && (
+                  {
+                    // TODO: удалить
+                    /* {title && (
                     <>
                       <Box mt={1.5} mb={0.75}>
                         <Typography>{title}</Typography>

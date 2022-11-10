@@ -42,7 +42,6 @@ export default function StyledFrame({
       break;
 
     default:
-      // classes = makeStyles(() => stylesBase(theme))();
       tempClasses = makeStyles(() => stylesOrg2(theme))();
   }
   setClasses(newClasses);

@@ -1,5 +1,10 @@
+// TODO: декомпозировать.
+
 export const getProductParams = (product) => {
   const glasses = product.characteristic.glasses;
+
+  // TODO: У Number нет метода round. Если он добавлен как-то неявно - следует убрать его из Number
+  //  и использовать явным образом - импортируя; иначе IDE путается
   const constructionsWeight = product.characteristic.elm_weight().round();
   const glassesWeight = product.characteristic
     .elm_weight(glasses.map((glass) => glass.elm))
@@ -28,7 +33,7 @@ const getProductGlassesParams = (product) => {
 // функция на отсеивание параметров, не проходящих фильтр
 const filterParams = (param) => {
   const value = param.value?.name || false;
-  const filters = ['автоматически', 'нет', '_', null, undefined]; // заменить на список в 1с
+  const filters = ['автоматически', 'нет', '_', null, undefined]; // TODO: заменить на список в 1с
 
   // фильтрация значений по совпадению из списка 1с (пока константа)
   if (value && filters.includes(value.toLowerCase())) return false;
@@ -47,6 +52,7 @@ const filterParams = (param) => {
 const getExtendedParams = (product) => {
   const constructionCount = product.characteristic.constructions.count();
 
+  // TODO: удалить
   console.log(product);
   const extendedParams = {};
   for (let i = 0; i <= constructionCount; i += 1) {
@@ -86,6 +92,7 @@ const getProductCharacteristics = (product) => {
     },
     {
       name: 'Проф.система',
+      // TODO: удалить
       // value: product.characteristic.prod_nom.name,
       value: product.nom.name,
       id: 2,
