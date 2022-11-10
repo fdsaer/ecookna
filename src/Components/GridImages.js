@@ -1,12 +1,12 @@
-const { React, Box, Typography, Grid, withStyles } = $p.ui;
+const { React, Box, Typography, Grid } = $p.ui;
 
 export default function GridImages({
   images,
   widthImage = '100%',
   width = '218px',
   flexDirection = 'column',
-  sRow = '3',
-  sCol = '2',
+  sRow = 3,
+  sCol = 2,
 }) {
   return (
     <Grid container spacing={sRow}>

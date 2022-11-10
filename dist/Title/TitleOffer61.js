@@ -86,7 +86,6 @@ export default function TitleOffer61(props) {
     color: 'textSecondary',
     component: "p"
   }, order)), title && React.createElement(Typography, {
-    variant: "p",
     component: "p",
     color: "textSecondary"
   }, React.createElement(Box, {

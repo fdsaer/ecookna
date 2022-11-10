@@ -281,7 +281,8 @@ class Offer61 extends PrnProto {
                                 rows={item.rows}
                                 total={item.total}
                                 boldBorderlessHead={item.id === '3'}
-                                color={'textSecondary'}
+                                color="#FFFFFF"
+                                bgColorFooter="#303942"
                               />
                             </Box>
                           ))}

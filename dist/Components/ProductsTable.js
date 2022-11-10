@@ -13,19 +13,22 @@ const StyledTableRow = withStyles(theme => ({
     backgroundColor: theme.palette.primary.light
   }
 }))(TableRow);
-const StyledTableCell = withStyles(theme => ({
-  root: {
-    padding: theme.spacing(0.5),
-    fontSize: theme.typography.body2.fontSize,
-    border: `1px solid ${theme.palette.primary.dark}`,
-    lineHeight: theme.typography.lineHeight,
-    fontWeight: theme.typography.fontWeightBold
-  },
-  head: {
-    fontWeight: theme.typography.fontWeightRegular,
-    verticalAlign: 'middle'
-  }
-}))(TableCell);
+const StyledTableCell = withStyles(theme => {
+  console.log(theme);
+  return {
+    root: {
+      padding: theme.spacing(0.5),
+      fontSize: theme.typography.body2.fontSize,
+      border: `1px solid ${theme.palette.primary.dark}`,
+      lineHeight: theme.typography.lineHeight,
+      fontWeight: theme.typography.fontWeightBold
+    },
+    head: {
+      fontWeight: theme.typography.fontWeightRegular,
+      verticalAlign: 'middle'
+    }
+  };
+})(TableCell);
 const StyledTableHeadBold = withStyles(theme => ({
   head: {
     padding: theme.spacing(0.5),
@@ -41,7 +44,8 @@ export default function ProductsTable({
   rows,
   total,
   boldBorderlessHead,
-  color
+  color,
+  bgColorFooter
 }) {
   return React.createElement(Table, {
     style: {
@@ -55,13 +59,15 @@ export default function ProductsTable({
     key: id,
     align: "left",
     style: {
-      width: width ? width : 'auto'
+      width: width ? width : 'auto',
+      color: color ? color : ''
     }
   }, text) : React.createElement(StyledTableCell, {
     key: id,
     align: "center",
     style: {
-      width: width ? width : 'auto'
+      width: width ? width : 'auto',
+      color: color ? color : ''
     }
   }, text)))), React.createElement(TableBody, null, rows && rows.map(({
     data,
@@ -91,6 +97,10 @@ export default function ProductsTable({
     id
   }, index) => React.createElement(StyledTableCell, {
     key: id,
-    colSpan: index === 0 ? head.length - total.length + 1 : 0
+    colSpan: index === 0 ? head.length - total.length + 1 : 0,
+    style: {
+      color: color ? color : '',
+      backgroundColor: bgColorFooter ? bgColorFooter : ''
+    }
   }, text)))));
 }

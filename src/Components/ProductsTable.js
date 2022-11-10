@@ -15,19 +15,23 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-const StyledTableCell = withStyles((theme) => ({
-  root: {
-    padding: theme.spacing(0.5),
-    fontSize: theme.typography.body2.fontSize,
-    border: `1px solid ${theme.palette.primary.dark}`,
-    lineHeight: theme.typography.lineHeight,
-    fontWeight: theme.typography.fontWeightBold,
-  },
-  head: {
-    fontWeight: theme.typography.fontWeightRegular,
-    verticalAlign: 'middle',
-  },
-}))(TableCell);
+const StyledTableCell = withStyles((theme) => {
+  console.log(theme);
+
+  return {
+    root: {
+      padding: theme.spacing(0.5),
+      fontSize: theme.typography.body2.fontSize,
+      border: `1px solid ${theme.palette.primary.dark}`,
+      lineHeight: theme.typography.lineHeight,
+      fontWeight: theme.typography.fontWeightBold,
+    },
+    head: {
+      fontWeight: theme.typography.fontWeightRegular,
+      verticalAlign: 'middle',
+    },
+  };
+})(TableCell);
 
 const StyledTableHeadBold = withStyles((theme) => ({
   head: {
@@ -46,6 +50,7 @@ export default function ProductsTable({
   total,
   boldBorderlessHead,
   color,
+  bgColorFooter,
 }) {
   return (
     <Table
@@ -63,6 +68,7 @@ export default function ProductsTable({
                   align="left"
                   style={{
                     width: width ? width : 'auto',
+                    color: color ? color : '',
                   }}
                 >
                   {text}
@@ -73,6 +79,7 @@ export default function ProductsTable({
                   align="center"
                   style={{
                     width: width ? width : 'auto',
+                    color: color ? color : '',
                   }}
                 >
                   {text}
@@ -115,6 +122,10 @@ export default function ProductsTable({
               <StyledTableCell
                 key={id}
                 colSpan={index === 0 ? head.length - total.length + 1 : 0}
+                style={{
+                  color: color ? color : '',
+                  backgroundColor: bgColorFooter ? bgColorFooter : '',
+                }}
               >
                 {text}
               </StyledTableCell>

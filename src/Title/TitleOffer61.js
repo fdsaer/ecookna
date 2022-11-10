@@ -55,7 +55,7 @@ export default function TitleOffer61(props) {
           </Box>
         )}
         {title && (
-          <Typography variant="p" component="p" color="textSecondary">
+          <Typography component="p" color="textSecondary">
             <Box
               fontSize={32}
               mt={2.5}

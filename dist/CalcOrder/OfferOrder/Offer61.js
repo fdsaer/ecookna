@@ -233,7 +233,8 @@ class Offer61 extends PrnProto {
       rows: item.rows,
       total: item.total,
       boldBorderlessHead: item.id === '3',
-      color: 'textSecondary'
+      color: "#FFFFFF",
+      bgColorFooter: "#303942"
     }))), index === chunksArr.length - 1 && React.createElement(React.Fragment, null, _ref2, _ref3))))), React.createElement(Box, {
       className: classes.hideInPrint
     }, React.createElement(components.Footer, {

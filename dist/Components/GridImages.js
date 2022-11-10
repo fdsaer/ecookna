@@ -2,16 +2,15 @@ const {
   React,
   Box,
   Typography,
-  Grid,
-  withStyles
+  Grid
 } = $p.ui;
 export default function GridImages({
   images,
   widthImage = '100%',
   width = '218px',
   flexDirection = 'column',
-  sRow = '3',
-  sCol = '2'
+  sRow = 3,
+  sCol = 2
 }) {
   return React.createElement(Grid, {
     container: true,
