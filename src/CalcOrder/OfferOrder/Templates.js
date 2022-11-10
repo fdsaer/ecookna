@@ -1,5 +1,7 @@
+// TODO: декомпозировать
+
 export const getAssortmentLinks = (images) => {
-  const assortmentLinks = 
+  const assortmentLinks =
   [
     {
       id: 1,
@@ -11,7 +13,7 @@ export const getAssortmentLinks = (images) => {
 };
 
 export const getLinks = (images) => {
-  const links = 
+  const links =
   [
     {
       id: 1,

@@ -3,6 +3,7 @@ const { React, Box, Typography } = $p.ui;
 
 export default function Contacts({ withLogo = true, manager, office }) {
   return (
+    // TODO: лично я предпочитаю, писать пропсы построчно. Но это дело вкуса
     <Box display="flex" flexDirection="row" fontSize={15}>
       <Box sx={{ flex: '1 1 0%' }}>
         {manager && (
@@ -36,9 +37,11 @@ export default function Contacts({ withLogo = true, manager, office }) {
             </Box>
             <Box bgcolor="background.paper" p={1}>
               <Typography variant="inherit">
-                {[office.name, office.address]
-                  .filter((value) => value)
-                  .join(', ')}
+                {
+                  [office.name, office.address]
+                    .filter((value) => value)
+                    .join(', ')
+                }
               </Typography>
             </Box>
           </>

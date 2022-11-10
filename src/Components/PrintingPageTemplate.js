@@ -1,6 +1,6 @@
 import Advantages from './Advantages.js';
 import Payments from './Payments.js';
-import ProductsTable from './ProductsTable.js';
+import ProductsTable from './ProductsTable.js';  // TODO: удалить
 const { React, Typography, Box } = $p.ui;
 
 export default function PrintingPageTemplate({
@@ -9,7 +9,7 @@ export default function PrintingPageTemplate({
   payments,
   children,
 }) {
-  // const chunkNumber = productTableData.length;
+  // const chunkNumber = productTableData.length; // TODO: удалить
   return (
     <Box
       className={`${classes.avoidBreakInside} ${classes.pageBreakBefore} ${classes.pageFrame}`}

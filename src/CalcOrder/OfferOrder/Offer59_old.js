@@ -6,6 +6,8 @@
  * Created by Evgeniy Malyarov on 03.01.2022.
  */
 
+// TODO: файл нигде не используется. Зачем его хранить? Удалить.
+
 const { React, TableCell } = $p.ui;
 import PrnProto from '../../PrnProto.js';
 
