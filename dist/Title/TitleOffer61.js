@@ -50,13 +50,13 @@ export default function TitleOffer61(props) {
       position: 'relative'
     }
   }, React.createElement(Box, {
+    bgcolor: "primary.light",
     pl: 1.8,
     pr: 1.8,
     display: "flex",
     justifyContent: "center",
     sx: {
-      position: 'relative',
-      backgroundColor: '#E30613'
+      position: 'relative'
     }
   }, React.createElement(Box, {
     pt: 3.75,
@@ -71,13 +71,13 @@ export default function TitleOffer61(props) {
       maxWidth: '100%'
     }
   }), React.createElement(Box, {
+    bgcolor: "primary.light",
     sx: {
       padding: '35px',
       width: '345px',
       position: 'absolute',
       bottom: '142px',
-      right: 0,
-      backgroundColor: '#E30613'
+      right: 0
     }
   }, order && React.createElement(Box, {
     fontSize: 16,
@@ -104,7 +104,7 @@ export default function TitleOffer61(props) {
     color: "textSecondary"
   }, description))), React.createElement(Box, {
     sx: {
-      padding: '40px',
+      padding: '40px 40px 20px 40px',
       backgroundColor: '#303942'
     }
   }, office && React.createElement(Box, {

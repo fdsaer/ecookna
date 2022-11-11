@@ -2,7 +2,7 @@ import PrnProto from '../../PrnProto.js';
 import { PrintingPageTemplate } from './OfferComponents.js';
 import { fullSquare, fullWeight, getProductsList, getManagerInfo, getAddressInfo } from './OfferData.js';
 import getProductsData from './OfferTable.js';
-import { getAssortmentLinks, getLinks, getPayments61, getAdditions61, getStatistics61, getAdvantages61, getAchievements61 } from './Templates.js';
+import { getPayments61, getAdditions61, getStatistics61, getAdvantages61, getAchievements61 } from './Templates.js';
 import { chunksMaker } from '../../utilities/index.js';
 const {
   React,
@@ -58,10 +58,6 @@ class Offer61 extends PrnProto {
         PromoPage: module.PromoPage61,
         Wrapper: module.Wrapper,
         GridImages: module.GridImages,
-        Description: module.Description,
-        Additions: module.Additions,
-        LinksBlock: module.LinksBlock,
-        Manager: module.Manager,
         ProductParams: module.ProductParams,
         ProductsTable: module.ProductsTable,
         ProductsTablePage: module.ProductsTablePage,
@@ -73,19 +69,6 @@ class Offer61 extends PrnProto {
     });
     import('./OfferImages.js').then(module => {
       this.setAsyncImages({
-        ExamplesIcon: module.ExamplesIcon,
-        FactoryIcon: module.FactoryIcon,
-        ProductionIcon: module.ProductionIcon,
-        WatchVideoIcon: module.WatchVideoIcon,
-        GarageGateImage: module.GarageGateImage,
-        BalconyDecorationImage: module.BalconyDecorationImage,
-        CurtainsImage: module.CurtainsImage,
-        HeatingRadiatorImage: module.HeatingRadiatorImage,
-        EvolvingOpacityImage: module.EvolvingOpacityImage,
-        OrangeryImage: module.OrangeryImage,
-        GlassDoorImage: module.GlassDoorImage,
-        GlassHeaterImage: module.GlassHeaterImage,
-        PhoneChargerImage: module.PhoneChargerImage,
         CashPaymentIcon61: module.CashPaymentIcon61,
         NonCashPaymentIcon61: module.NonCashPaymentIcon61,
         CardPaymentIcon61: module.CardPaymentIcon61,
@@ -149,7 +132,7 @@ class Offer61 extends PrnProto {
       externalWindow.document.title = order;
     }
 
-    console.log(`!classes`, !classes);
+    console.log(`classes`, classes);
     return React.createElement(React.Suspense, {
       fallback: "Загрузка..."
     }, React.createElement(StyledFrame, {

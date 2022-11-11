@@ -29,12 +29,10 @@ export default function PromoPage61(props) {
     advantages,
     achievements
   } = props;
-  return React.createElement(Box, {
-    className: classes.pageBreakBefore
-  }, React.createElement(Box, {
+  return React.createElement(Box, null, React.createElement(Box, {
     mt: 5,
-    px: 3.75,
-    className: `${classes.pageBreakBefore} ${classes.wrapperPage}`
+    px: 5,
+    className: `${classes.wrapperPage}`
   }, React.createElement(Header, {
     withLogo: true,
     obj: obj,
@@ -98,8 +96,7 @@ export default function PromoPage61(props) {
   }) => React.createElement(Grid, {
     item: true,
     key: id,
-    xs: 4,
-    spacing: 2
+    xs: 4
   }, React.createElement(Box, {
     display: "flex"
   }, React.createElement("img", {

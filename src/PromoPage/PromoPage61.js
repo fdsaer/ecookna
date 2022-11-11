@@ -9,13 +9,9 @@ export default function PromoPage61(props) {
     props;
 
   return (
-    <Box className={classes.pageBreakBefore}>
+    <Box>
       {/* обертка с отступами по краям */}
-      <Box
-        mt={5}
-        px={3.75}
-        className={`${classes.pageBreakBefore} ${classes.wrapperPage}`}
-      >
+      <Box mt={5} px={5} className={`${classes.wrapperPage}`}>
         {/* верхний колонтитул */}
         <Header withLogo obj={obj} classes={classes} />
 
@@ -90,7 +86,7 @@ export default function PromoPage61(props) {
         <Grid container spacing={3}>
           {advantages &&
             advantages.map(({ id, image, text }) => (
-              <Grid item key={id} xs={4} spacing={2}>
+              <Grid item key={id} xs={4}>
                 <Box display="flex">
                   <img
                     src={image}

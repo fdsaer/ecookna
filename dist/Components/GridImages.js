@@ -6,11 +6,9 @@ const {
 } = $p.ui;
 export default function GridImages({
   images,
-  widthImage = '100%',
   width = '218px',
   flexDirection = 'column',
-  sRow = 3,
-  sCol = 2
+  sRow = 3
 }) {
   return React.createElement(Grid, {
     container: true,
@@ -22,8 +20,7 @@ export default function GridImages({
   }) => React.createElement(Grid, {
     item: true,
     key: id,
-    xs: 4,
-    spacing: sCol
+    xs: 4
   }, React.createElement(Box, {
     width: width,
     display: "flex",
@@ -32,7 +29,7 @@ export default function GridImages({
     src: image,
     style: {
       display: 'block',
-      width: widthImage,
+      width: '100%',
       height: 'auto',
       boxSizing: 'border-box'
     }
@@ -41,7 +38,8 @@ export default function GridImages({
     fontSize: 16,
     sx: {
       backgroundColor: '#303942',
-      padding: '10px 16px'
+      padding: '10px 16px',
+      boxSizing: 'border-box'
     }
   }, React.createElement(Typography, {
     variant: "inherit",
