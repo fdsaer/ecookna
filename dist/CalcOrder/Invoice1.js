@@ -4,7 +4,7 @@ const {
 } = $p.ui;
 const StyledFrame = React.lazy(() => import('../StyledFrame/Base.js'));
 const Header = React.lazy(() => import('../Header/index.js'));
-const Footer = React.lazy(() => import('../Footer/index.js'));
+const Footer = React.lazy(() => import('../Footer/footerTextDate.js'));
 import PrnProto from '../PrnProto.js';
 
 var _ref = React.createElement("div", null, "Загрузка...");
