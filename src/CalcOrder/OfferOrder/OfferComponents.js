@@ -39,6 +39,8 @@ export {
   ProductParams,
   ProductsTable,
   ProductsTablePage,
+  PrintingPageTemplate,
+  GridImages,
   Header59,
   Footer59,
   Title59,
@@ -46,6 +48,4 @@ export {
   Footer61,
   Title61,
   PromoPage61,
-  PrintingPageTemplate,
-  GridImages,
 };

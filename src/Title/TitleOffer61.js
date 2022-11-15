@@ -55,17 +55,17 @@ export default function TitleOffer61(props) {
           </Box>
         )}
         {title && (
-          <Typography component="p" color="textSecondary">
-            <Box
-              fontSize={32}
-              mt={2.5}
-              mb={2.5}
-              fontWeight={500}
-              sx={{ textTransform: 'uppercase' }}
-            >
+          <Box
+            fontSize={32}
+            mt={2.5}
+            mb={2.5}
+            fontWeight={500}
+            sx={{ textTransform: 'uppercase' }}
+          >
+            <Typography color="textSecondary" variant="inherit" component="p">
               {title}
-            </Box>
-          </Typography>
+            </Typography>
+          </Box>
         )}
         {description && (
           <Box fontSize={16} mt={2.5}>

@@ -20,4 +20,4 @@ import Header61 from '../../Header/HeaderOffer61.js';
 import Footer61 from '../../Footer/FooterOffer61.js';
 import Title61 from '../../Title/TitleOffer61.js';
 import PromoPage61 from '../../PromoPage/PromoPage61.js';
-export { Header, Footer, Title, Payments, Wrapper, Description, Advantages, Additions, LinksBlock, Manager, ProductParams, ProductsTable, ProductsTablePage, Header59, Footer59, Title59, Header61, Footer61, Title61, PromoPage61, PrintingPageTemplate, GridImages };
+export { Header, Footer, Title, Payments, Wrapper, Description, Advantages, Additions, LinksBlock, Manager, ProductParams, ProductsTable, ProductsTablePage, PrintingPageTemplate, GridImages, Header59, Footer59, Title59, Header61, Footer61, Title61, PromoPage61 };

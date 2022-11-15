@@ -85,10 +85,7 @@ export default function TitleOffer61(props) {
   }, React.createElement(Typography, {
     color: 'textSecondary',
     component: "p"
-  }, order)), title && React.createElement(Typography, {
-    component: "p",
-    color: "textSecondary"
-  }, React.createElement(Box, {
+  }, order)), title && React.createElement(Box, {
     fontSize: 32,
     mt: 2.5,
     mb: 2.5,
@@ -96,6 +93,10 @@ export default function TitleOffer61(props) {
     sx: {
       textTransform: 'uppercase'
     }
+  }, React.createElement(Typography, {
+    color: "textSecondary",
+    variant: "inherit",
+    component: "p"
   }, title)), description && React.createElement(Box, {
     fontSize: 16,
     mt: 2.5

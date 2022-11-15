@@ -4,12 +4,12 @@ import { fullSquare, fullWeight, getProductsList, getManagerInfo, getAddressInfo
 import getProductsData from './OfferTable.js';
 import { getPayments61, getAdditions61, getStatistics61, getAdvantages61, getAchievements61 } from './Templates.js';
 import { chunksMaker } from '../../utilities/index.js';
+import { StyledFrame61 as StyledFrame } from '../../StyledFrame/StyledFrame.js';
 const {
   React,
   Box,
   Typography
 } = $p.ui;
-const StyledFrame = React.lazy(() => import('../../StyledFrame/index.js'));
 
 var _ref = React.createElement(Typography, {
   variant: "inherit",

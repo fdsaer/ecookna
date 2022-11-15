@@ -22,10 +22,10 @@ import {
   getAdditions,
 } from './Templates.js';
 import { chunksMaker } from '../../utilities/index.js';
+import { StyledFrame59 as StyledFrame } from '../../StyledFrame/StyledFrame.js';
 
 const { React, Box, Typography } = $p.ui;
-
-const StyledFrame = React.lazy(() => import('../../StyledFrame/index.js'));
+// const StyledFrame = React.lazy(() => import('../../StyledFrame/index.js'));
 
 class Offer59 extends PrnProto {
   componentDidMount() {

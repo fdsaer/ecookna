@@ -82,7 +82,8 @@ export default function PromoPage61(props) {
     variant: "inherit",
     color: "textSecondary",
     component: "p"
-  }, title)), text.split(' ').map(word => React.createElement(Typography, {
+  }, title)), text.split(' ').map((word, index) => React.createElement(Typography, {
+    key: index,
     variant: "inherit",
     color: "textSecondary",
     component: "p"

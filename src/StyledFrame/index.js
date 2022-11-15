@@ -3,14 +3,14 @@
  */
 
 const { React, makeStyles, ThemeProvider, CssBaseline } = $p.ui;
-import { theme as theme1 } from './theme1.js';
-import { theme as theme2 } from './theme2.js';
-import { theme as theme61 } from './theme61.js';
-import stylesBase from './stylesBase.js';
-import stylesOrg1 from './stylesOrg1.js';
-import stylesOrg59 from './stylesOrg59.js';
-import stylesOrg61 from './stylesOrg61.js';
-import stylesCss from './stylesCss.js';
+import { theme as theme1 } from './themes/theme1.js';
+import { theme as theme2 } from './themes/theme2.js';
+import { theme as theme61 } from './themes/theme61.js';
+import stylesBase from './styles/stylesBase.js';
+import stylesOrg1 from './styles/stylesOrg1.js';
+import stylesOrg59 from './styles/stylesOrg59.js';
+import stylesOrg61 from './styles/stylesOrg61.js';
+import stylesCss from './styles/stylesCss.js';
 import Loading from './Loading.js';
 
 export default function StyledFrame({

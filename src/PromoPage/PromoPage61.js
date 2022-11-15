@@ -65,8 +65,9 @@ export default function PromoPage61(props) {
                     {title}
                   </Typography>
                 </Box>
-                {text.split(' ').map((word) => (
+                {text.split(' ').map((word, index) => (
                   <Typography
+                    key={index}
                     variant="inherit"
                     color="textSecondary"
                     component="p"
