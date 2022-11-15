@@ -1,4 +1,4 @@
-const { React, Typography, Box, List, ListItem } = $p.ui;
+const { React, Typography, Box, List, ListItem, withStyles } = $p.ui;
 
 const Svg = ({ source, maxHeight }) => {
   try {
@@ -36,7 +36,6 @@ const ParamItem = ({ name, value, id }) => (
 
 export default function ProductParams({
   data,
-  number,
   position,
   quantity,
   svg,
@@ -52,7 +51,12 @@ export default function ProductParams({
         sx={{ flex: '0 0 400px' }}
         className={`${classes.avoidBreakInside} ${classes.breakElementWithMargins}`}
       >
-        <Box bgcolor="primary.light" p={1} mb={1.25}>
+        <Box
+          bgcolor="primary.light"
+          color="productParams.textHead"
+          p={1}
+          mb={1.25}
+        >
           {/* <Typography variant="subtitle2" component="p">
                   Номер: {number}
               </Typography> */}
@@ -90,7 +94,11 @@ export default function ProductParams({
                   key={id}
                 >
                   {subtitle && paramsList.length > 0 && (
-                    <Box bgcolor="primary.light" p={1}>
+                    <Box
+                      bgcolor="primary.light"
+                      color="productParams.textHead"
+                      p={1}
+                    >
                       <Typography variant="subtitle2">{subtitle}:</Typography>
                     </Box>
                   )}

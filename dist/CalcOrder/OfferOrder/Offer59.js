@@ -63,10 +63,11 @@ class Offer59 extends PrnProto {
     import('./OfferComponents.js').then(module => {
       this.setAsyncModules({
         Header: module.Header,
+        Footer: module.Footer,
+        Title: module.Title,
         Payments: module.Payments,
         Wrapper: module.Wrapper,
         Description: module.Description,
-        Advantages: module.Advantages,
         Additions: module.Additions,
         LinksBlock: module.LinksBlock,
         Manager: module.Manager,
@@ -152,20 +153,24 @@ class Offer59 extends PrnProto {
       setClasses: this.setClasses,
       title: order,
       loading: !components || !images || !loaded || !classes
-    }, components && React.createElement(components.Header, {
+    }, components && React.createElement(components.Title, {
       headerTitle: "Индивидуальное решение",
       description: "по изготовлению и установке светопрозрачных конструкций",
       order: order,
       office: getAddressInfo(obj),
-      manager: manager
+      manager: manager,
+      obj: obj
     }), components && classes && React.createElement(components.Wrapper, {
-      classes: classes
+      classes: classes,
+      px: 3.75
     }, React.createElement(Box, {
       mt: 3,
       className: classes.hideInPrint
-    }, React.createElement(components.Advantages, {
+    }, React.createElement(components.Header, {
       withLogo: true,
-      advantagesList: advantages
+      obj: obj,
+      advantagesList: advantages,
+      images: images
     })), React.createElement(Box, {
       mt: 3,
       mb: 2.5,
@@ -181,7 +186,9 @@ class Offer59 extends PrnProto {
       classes: classes,
       advantages: advantages,
       payments: payments,
-      key: chunk[0]?.index
+      key: chunk[0]?.index,
+      images: images,
+      obj: obj
     }, React.createElement(React.Fragment, null, chunk.map(({
       data,
       number,
@@ -208,7 +215,9 @@ class Offer59 extends PrnProto {
       classes: classes,
       advantages: advantages,
       payments: payments,
-      key: chunk[0]?.id
+      key: chunk[0]?.id,
+      images: images,
+      obj: obj
     }, React.createElement(React.Fragment, null, chunk.map(item => React.createElement(Box, {
       className: classes.tableMargins,
       key: item.id
@@ -222,15 +231,18 @@ class Offer59 extends PrnProto {
       boldBorderlessHead: item.id === '3'
     }))), index === chunksArr.length - 1 && React.createElement(React.Fragment, null, _ref, _ref2))))), React.createElement(Box, {
       className: classes.hideInPrint
-    }, React.createElement(components.Payments, {
+    }, React.createElement(components.Footer, {
+      obj: obj,
       paymentList: payments,
       classes: classes
     })), React.createElement(Box, {
       mt: 5,
       className: classes.pageBreakBefore
-    }, React.createElement(components.Advantages, {
+    }, React.createElement(components.Header, {
       withLogo: true,
-      advantagesList: advantages
+      obj: obj,
+      advantagesList: advantages,
+      images: images
     })), React.createElement(Box, {
       mt: 5
     }, React.createElement(components.Description, {

@@ -9,9 +9,15 @@ const {
   Box,
 } = $p.ui;
 
-const StyledTableRow = withStyles((theme) => ({
+const StyledTableHeadRow = withStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.primary.light,
+    backgroundColor: theme.palette.tableProducts.headCell,
+  },
+}))(TableRow);
+
+const StyledTableFooterRow = withStyles((theme) => ({
+  root: {
+    backgroundColor: theme.palette.tableProducts.footerCell,
   },
 }))(TableRow);
 
@@ -22,6 +28,7 @@ const StyledTableCell = withStyles((theme) => ({
     border: `1px solid ${theme.palette.primary.dark}`,
     lineHeight: theme.typography.lineHeight,
     fontWeight: theme.typography.fontWeightBold,
+    color: theme.palette.tableProducts.headText,
   },
   head: {
     fontWeight: theme.typography.fontWeightRegular,
@@ -37,6 +44,22 @@ const StyledTableHeadBold = withStyles((theme) => ({
     border: `1px solid ${theme.palette.primary.dark}`,
     fontWeight: theme.typography.fontWeightBold,
     verticalAlign: 'top',
+    color: theme.palette.tableProducts.headText,
+  },
+}))(TableCell);
+
+const StyledTableBodyCell = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(0.5),
+    fontSize: theme.typography.body2.fontSize,
+    border: `1px solid ${theme.palette.primary.dark}`,
+    lineHeight: theme.typography.lineHeight,
+    fontWeight: theme.typography.fontWeightBold,
+    color: theme.palette.tableProducts.bodyText,
+  },
+  head: {
+    fontWeight: theme.typography.fontWeightRegular,
+    verticalAlign: 'middle',
   },
 }))(TableCell);
 
@@ -54,7 +77,7 @@ export default function ProductsTable({
     >
       {head && head.length > 0 && (
         <TableHead>
-          <StyledTableRow>
+          <StyledTableHeadRow>
             {head.map(({ text, width, id }) =>
               boldBorderlessHead ? (
                 <StyledTableHeadBold
@@ -73,12 +96,13 @@ export default function ProductsTable({
                   style={{
                     width: width ? width : 'auto',
                   }}
+                  text="body"
                 >
                   {text}
                 </StyledTableCell>
               )
             )}
-          </StyledTableRow>
+          </StyledTableHeadRow>
         </TableHead>
       )}
       <TableBody>
@@ -86,7 +110,7 @@ export default function ProductsTable({
           rows.map(({ data, id }) => (
             <TableRow key={id}>
               {data.map(({ text, width, id }, index) => (
-                <StyledTableCell
+                <StyledTableBodyCell
                   key={id}
                   style={{
                     width: width ? width : 'auto',
@@ -104,11 +128,11 @@ export default function ProductsTable({
                   >
                     {text}
                   </Box>
-                </StyledTableCell>
+                </StyledTableBodyCell>
               ))}
             </TableRow>
           ))}
-        <StyledTableRow>
+        <StyledTableFooterRow>
           {total &&
             total.map(({ text, id }, index) => (
               <StyledTableCell
@@ -118,7 +142,7 @@ export default function ProductsTable({
                 {text}
               </StyledTableCell>
             ))}
-        </StyledTableRow>
+        </StyledTableFooterRow>
       </TableBody>
     </Table>
   );

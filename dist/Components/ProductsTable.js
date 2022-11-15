@@ -8,9 +8,14 @@ const {
   withStyles,
   Box
 } = $p.ui;
-const StyledTableRow = withStyles(theme => ({
+const StyledTableHeadRow = withStyles(theme => ({
   root: {
-    backgroundColor: theme.palette.primary.light
+    backgroundColor: theme.palette.tableProducts.headCell
+  }
+}))(TableRow);
+const StyledTableFooterRow = withStyles(theme => ({
+  root: {
+    backgroundColor: theme.palette.tableProducts.footerCell
   }
 }))(TableRow);
 const StyledTableCell = withStyles(theme => ({
@@ -19,7 +24,8 @@ const StyledTableCell = withStyles(theme => ({
     fontSize: theme.typography.body2.fontSize,
     border: `1px solid ${theme.palette.primary.dark}`,
     lineHeight: theme.typography.lineHeight,
-    fontWeight: theme.typography.fontWeightBold
+    fontWeight: theme.typography.fontWeightBold,
+    color: theme.palette.tableProducts.headText
   },
   head: {
     fontWeight: theme.typography.fontWeightRegular,
@@ -33,7 +39,22 @@ const StyledTableHeadBold = withStyles(theme => ({
     lineHeight: theme.typography.lineHeight,
     border: `1px solid ${theme.palette.primary.dark}`,
     fontWeight: theme.typography.fontWeightBold,
-    verticalAlign: 'top'
+    verticalAlign: 'top',
+    color: theme.palette.tableProducts.headText
+  }
+}))(TableCell);
+const StyledTableBodyCell = withStyles(theme => ({
+  root: {
+    padding: theme.spacing(0.5),
+    fontSize: theme.typography.body2.fontSize,
+    border: `1px solid ${theme.palette.primary.dark}`,
+    lineHeight: theme.typography.lineHeight,
+    fontWeight: theme.typography.fontWeightBold,
+    color: theme.palette.tableProducts.bodyText
+  },
+  head: {
+    fontWeight: theme.typography.fontWeightRegular,
+    verticalAlign: 'middle'
   }
 }))(TableCell);
 export default function ProductsTable({
@@ -46,7 +67,7 @@ export default function ProductsTable({
     style: {
       tableLayout: 'fixed'
     }
-  }, head && head.length > 0 && React.createElement(TableHead, null, React.createElement(StyledTableRow, null, head.map(({
+  }, head && head.length > 0 && React.createElement(TableHead, null, React.createElement(StyledTableHeadRow, null, head.map(({
     text,
     width,
     id
@@ -61,7 +82,8 @@ export default function ProductsTable({
     align: "center",
     style: {
       width: width ? width : 'auto'
-    }
+    },
+    text: "body"
   }, text)))), React.createElement(TableBody, null, rows && rows.map(({
     data,
     id
@@ -71,7 +93,7 @@ export default function ProductsTable({
     text,
     width,
     id
-  }, index) => React.createElement(StyledTableCell, {
+  }, index) => React.createElement(StyledTableBodyCell, {
     key: id,
     style: {
       width: width ? width : 'auto',
@@ -85,7 +107,7 @@ export default function ProductsTable({
       textOverflow: 'ellipsis',
       whiteSpace: 'nowrap'
     }
-  }, text))))), React.createElement(StyledTableRow, null, total && total.map(({
+  }, text))))), React.createElement(StyledTableFooterRow, null, total && total.map(({
     text,
     id
   }, index) => React.createElement(StyledTableCell, {

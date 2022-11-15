@@ -49,10 +49,11 @@ class Offer59 extends PrnProto {
     import('./OfferComponents.js').then((module) => {
       this.setAsyncModules({
         Header: module.Header,
+        Footer: module.Footer,
+        Title: module.Title,
         Payments: module.Payments,
         Wrapper: module.Wrapper,
         Description: module.Description,
-        Advantages: module.Advantages,
         Additions: module.Additions,
         LinksBlock: module.LinksBlock,
         Manager: module.Manager,
@@ -135,18 +136,24 @@ class Offer59 extends PrnProto {
           // err={err}
         >
           {components && (
-            <components.Header
+            <components.Title
               headerTitle="Индивидуальное решение"
               description="по изготовлению и установке светопрозрачных конструкций"
               order={order}
               office={getAddressInfo(obj)}
               manager={manager}
+              obj={obj}
             />
           )}
           {components && classes && (
-            <components.Wrapper classes={classes}>
+            <components.Wrapper classes={classes} px={3.75}>
               <Box mt={3} className={classes.hideInPrint}>
-                <components.Advantages withLogo advantagesList={advantages} />
+                <components.Header
+                  withLogo
+                  obj={obj}
+                  advantagesList={advantages}
+                  images={images}
+                />
               </Box>
               <Box
                 mt={3}
@@ -200,6 +207,8 @@ class Offer59 extends PrnProto {
                           advantages={advantages}
                           payments={payments}
                           key={chunk[0]?.index}
+                          images={images}
+                          obj={obj}
                         >
                           <>
                             {chunk.map(
@@ -243,6 +252,8 @@ class Offer59 extends PrnProto {
                         advantages={advantages}
                         payments={payments}
                         key={chunk[0]?.id}
+                        images={images}
+                        obj={obj}
                       >
                         <>
                           {chunk.map((item) => (
@@ -283,10 +294,19 @@ class Offer59 extends PrnProto {
                 </Box>
               )}
               <Box className={classes.hideInPrint}>
-                <components.Payments paymentList={payments} classes={classes} />
+                <components.Footer
+                  obj={obj}
+                  paymentList={payments}
+                  classes={classes}
+                />
               </Box>
               <Box mt={5} className={classes.pageBreakBefore}>
-                <components.Advantages withLogo advantagesList={advantages} />
+                <components.Header
+                  withLogo
+                  obj={obj}
+                  advantagesList={advantages}
+                  images={images}
+                />
               </Box>
               <Box mt={5}>
                 <components.Description title="Подберем лучшее решение:" />

@@ -1,3 +1,4 @@
+// удалить наверное потом, т.к. перенесли в headerOffer59
 import Logo from '../Components/Logo.js';
 
 const { React, Box } = $p.ui;

@@ -91,6 +91,17 @@ export const theme = createTheme({
       primary: '#1A322C',
       secondary: '#007455',
     },
+    productParams: {
+      textHead: '#1A322C',
+    },
+    tableProducts: {
+      headCell: '#dddddd',
+      headText: '#1A322C',
+      bodyCell: '#ffffff',
+      bodyText: '#1A322C',
+      footerCell: '#dddddd',
+      footerText: '#1A322C',
+    },
   },
   shape: {
     borderRadius: 6,

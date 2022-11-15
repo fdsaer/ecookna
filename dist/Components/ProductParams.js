@@ -3,7 +3,8 @@ const {
   Typography,
   Box,
   List,
-  ListItem
+  ListItem,
+  withStyles
 } = $p.ui;
 
 const Svg = ({
@@ -55,7 +56,6 @@ var _ref = React.createElement(Typography, {
 
 export default function ProductParams({
   data,
-  number,
   position,
   quantity,
   svg,
@@ -76,6 +76,7 @@ export default function ProductParams({
     className: `${classes.avoidBreakInside} ${classes.breakElementWithMargins}`
   }, React.createElement(Box, {
     bgcolor: "primary.light",
+    color: "productParams.textHead",
     p: 1,
     mb: 1.25
   }, React.createElement(Typography, {
@@ -107,6 +108,7 @@ export default function ProductParams({
       key: id
     }, subtitle && paramsList.length > 0 && React.createElement(Box, {
       bgcolor: "primary.light",
+      color: "productParams.textHead",
       p: 1
     }, React.createElement(Typography, {
       variant: "subtitle2"

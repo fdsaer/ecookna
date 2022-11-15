@@ -8,11 +8,11 @@ const {
   TableHead,
   TableRow
 } = $p.ui;
-import PrnProto from "../PrnProto.js";
-const StyledFrame = React.lazy(() => import("../StyledFrame/Base.js"));
-const Header = React.lazy(() => import("../Header/HeaderGlasses.js"));
-const Footer = React.lazy(() => import("../Footer/index.js"));
-const Products = React.lazy(() => import("../Glasses/Products.js"));
+import PrnProto from '../PrnProto.js';
+const StyledFrame = React.lazy(() => import('../StyledFrame/Base.js'));
+const Header = React.lazy(() => import('../Header/HeaderGlasses.js'));
+const Footer = React.lazy(() => import('../Footer/footerTextDate.js'));
+const Products = React.lazy(() => import('../Glasses/Products.js'));
 
 var _ref = React.createElement(Footer, null);
 
@@ -87,19 +87,19 @@ class Glasses34 extends PrnProto {
       s: new Map(),
       m: new Map()
     };
-    const title = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format("DD.MM.YYYY")}`;
+    const title = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format('DD.MM.YYYY')}`;
 
     if (externalWindow) {
       externalWindow.document.title = `${title} бла-бла-бла`;
     }
 
-    let loading = loaded ? imgs ? "" : "Формируем эскизы заполнений..." : "Читаем продукции заказа...";
+    let loading = loaded ? imgs ? '' : 'Формируем эскизы заполнений...' : 'Читаем продукции заказа...';
 
     const Cell = ({
       right,
       ...props
     }) => React.createElement(TableCell, _extends({
-      className: `${classes.tableCell} ${right ? classes.alignRight : ""}`
+      className: `${classes.tableCell} ${right ? classes.alignRight : ''}`
     }, props));
 
     return React.createElement(React.Suspense, {
@@ -122,7 +122,7 @@ class Glasses34 extends PrnProto {
 
 }
 
-Glasses34.ref = "cefdf4d0-6c86-11ec-bee3-8b4e33301a47";
-Glasses34.destination = "doc.calc_order";
-Glasses34.title = "3.4 Заполнения_ (jsx)";
+Glasses34.ref = 'cefdf4d0-6c86-11ec-bee3-8b4e33301a47';
+Glasses34.destination = 'doc.calc_order';
+Glasses34.title = '3.4 Заполнения_ (jsx)';
 export default Glasses34;

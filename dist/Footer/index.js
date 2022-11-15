@@ -1,20 +1,34 @@
 const {
   React,
-  Divider
+  makeStyles
 } = $p.ui;
-
-var _ref = React.createElement(Divider, {
-  light: true
-});
-
+import FooterOffer59 from './FooterOffer59.js';
+import FooterOffer61 from './FooterOffer61.js';
 export default function Footer(props) {
-  const {
-    obj,
-    classes
-  } = props;
-  return React.createElement("footer", {
-    className: `${classes.footer} ${classes.w100}`
-  }, _ref, React.createElement("div", {
-    className: classes.flex
-  }, React.createElement("span", null, `Распечатано ${moment().format('DD MMMM YYYY, hh:mm')}`)));
+  let Component;
+
+  switch (props.obj.manager.name) {
+    case 'Компания ФОТОТЕХ':
+    case 'ООО"ФОТОТЕХ"':
+    case 'ОКНА РОСТА ДОМ':
+      Component = FooterOffer59;
+      break;
+
+    case 'ОК Калева':
+      Component = FooterOffer61;
+      break;
+
+    case 'Касаткина Антонина':
+      Component = FooterOffer59;
+      break;
+
+    case 'Гудилина ИА':
+      Component = FooterOffer61;
+      break;
+
+    default:
+      Component = FooterOffer59;
+  }
+
+  return React.createElement(Component, props);
 }

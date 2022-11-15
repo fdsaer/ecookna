@@ -7,11 +7,11 @@
  */
 
 const { React, Table, TableBody, TableCell, TableHead, TableRow } = $p.ui;
-import PrnProto from "../PrnProto.js";
-const StyledFrame = React.lazy(() => import("../StyledFrame/Base.js")); // стили могут зависеть от организации, офиса и т.д.
-const Header = React.lazy(() => import("../Header/HeaderGlasses.js")); // заголовок
-const Footer = React.lazy(() => import("../Footer/index.js")); // подвал
-const Products = React.lazy(() => import("../Glasses/Products.js")); // табчасть
+import PrnProto from '../PrnProto.js';
+const StyledFrame = React.lazy(() => import('../StyledFrame/Base.js')); // стили могут зависеть от организации, офиса и т.д.
+const Header = React.lazy(() => import('../Header/HeaderGlasses.js')); // заголовок
+const Footer = React.lazy(() => import('../Footer/footerTextDate.js')); // подвал
+const Products = React.lazy(() => import('../Glasses/Products.js')); // табчасть
 
 class Glasses34 extends PrnProto {
   componentDidMount() {
@@ -50,27 +50,29 @@ class Glasses34 extends PrnProto {
 
   render() {
     const {
-      props: {obj, attr, externalWindow},
-      state: {imgs, loaded, err},
+      props: { obj, attr, externalWindow },
+      state: { imgs, loaded, err },
       classes,
     } = this;
 
     // в totals накопим итоги
     const totals = { imgs, q: new Map(), s: new Map(), m: new Map() };
-    const title = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format("DD.MM.YYYY")}`;
+    const title = `Заполнения заказа №${obj.number_doc} от ${moment(
+      obj.date
+    ).format('DD.MM.YYYY')}`;
     // при наличии ссылки на externalWindow, дублируем заголовок
-    if(externalWindow) {
+    if (externalWindow) {
       externalWindow.document.title = `${title} бла-бла-бла`;
     }
     let loading = loaded
       ? imgs
-        ? ""
-        : "Формируем эскизы заполнений..."
-      : "Читаем продукции заказа...";
+        ? ''
+        : 'Формируем эскизы заполнений...'
+      : 'Читаем продукции заказа...';
 
     const Cell = ({ right, ...props }) => (
       <TableCell
-        className={`${classes.tableCell} ${right ? classes.alignRight : ""}`}
+        className={`${classes.tableCell} ${right ? classes.alignRight : ''}`}
         {...props}
       />
     );
@@ -96,8 +98,8 @@ class Glasses34 extends PrnProto {
 }
 
 // идентификатор - должен быть уникальным для каждой виртуальной формулы
-Glasses34.ref = "cefdf4d0-6c86-11ec-bee3-8b4e33301a47";
-Glasses34.destination = "doc.calc_order";
-Glasses34.title = "3.4 Заполнения_ (jsx)";
+Glasses34.ref = 'cefdf4d0-6c86-11ec-bee3-8b4e33301a47';
+Glasses34.destination = 'doc.calc_order';
+Glasses34.title = '3.4 Заполнения_ (jsx)';
 
 export default Glasses34;

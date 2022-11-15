@@ -1,29 +1,32 @@
-import Advantages from './Advantages.js';
-import Payments from './Payments.js';
-import ProductsTable from './ProductsTable.js';
+import Header from '../../Header/index.js';
+import Footer from '../../Footer/index.js';
 const {
   React,
-  Typography,
   Box
 } = $p.ui;
 export default function PrintingPageTemplate({
   classes,
   advantages,
   payments,
-  children
+  children,
+  images,
+  obj
 }) {
   return React.createElement(Box, {
     className: `${classes.avoidBreakInside} ${classes.pageBreakBefore} ${classes.pageFrame}`
   }, React.createElement(Box, {
     mt: 3,
     className: classes.displayInPrint
-  }, React.createElement(Advantages, {
+  }, React.createElement(Header, {
     withLogo: true,
-    advantagesList: advantages
+    images: images,
+    obj: obj,
+    classes: classes
   })), children, React.createElement(Box, {
     className: classes.displayInPrint
-  }, React.createElement(Payments, {
+  }, React.createElement(Footer, {
     paymentList: payments,
-    classes: classes
+    classes: classes,
+    obj: obj
   })));
 }

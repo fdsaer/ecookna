@@ -6,9 +6,11 @@ const {
 } = $p.ui;
 import { theme as theme1 } from './theme1.js';
 import { theme as theme2 } from './theme2.js';
+import { theme as theme61 } from './theme61.js';
 import stylesBase from './stylesBase.js';
 import stylesOrg1 from './stylesOrg1.js';
-import stylesOrg2 from './stylesOrg2.js';
+import stylesOrg59 from './stylesOrg59.js';
+import stylesOrg61 from './stylesOrg61.js';
 import stylesCss from './stylesCss.js';
 import Loading from './Loading.js';
 
@@ -32,12 +34,17 @@ export default function StyledFrame({
     case 'ГРУППА КОМПАНИЙ':
     case 'ФЕНСТЕР ООО':
     case 'ОКНА РОСТА ДОМ':
-      tempClasses = makeStyles(() => stylesOrg2(theme))();
+      tempClasses = makeStyles(() => stylesOrg59(theme))();
       break;
 
     case 'Компания ФОТОТЕХ':
     case 'ООО"ФОТОТЕХ"':
-      tempClasses = makeStyles(() => stylesOrg2(theme))();
+      tempClasses = makeStyles(() => stylesOrg59(theme))();
+      break;
+
+    case 'ОК Калева':
+      theme = theme61;
+      tempClasses = makeStyles(() => stylesOrg61(theme))();
       break;
 
     case 'Петров ВВ':
@@ -45,8 +52,18 @@ export default function StyledFrame({
       tempClasses = makeStyles(() => stylesCss(theme))();
       break;
 
+    case 'Касаткина Антонина':
+      theme = theme1;
+      tempClasses = makeStyles(() => stylesOrg59(theme))();
+      break;
+
+    case 'Гудилина ИА':
+      theme = theme61;
+      tempClasses = makeStyles(() => stylesOrg61(theme))();
+      break;
+
     default:
-      tempClasses = makeStyles(() => stylesOrg2(theme))();
+      tempClasses = makeStyles(() => stylesOrg59(theme))();
   }
 
   setClasses(newClasses);
