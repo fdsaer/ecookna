@@ -33,7 +33,6 @@ class Offer61 extends PrnProto {
       obj,
       print
     } = this.props;
-    console.log(obj);
     obj.load_linked_refs().then(async () => {
       this.setState({
         loaded: true
@@ -132,7 +131,6 @@ class Offer61 extends PrnProto {
       externalWindow.document.title = order;
     }
 
-    console.log(`classes`, classes);
     return React.createElement(React.Suspense, {
       fallback: "Загрузка..."
     }, React.createElement(StyledFrame, {
@@ -175,7 +173,9 @@ class Offer61 extends PrnProto {
       payments: payments,
       key: chunk[0]?.index,
       images: images,
-      obj: obj
+      obj: obj,
+      Header: components.Header,
+      Footer: components.Footer
     }, React.createElement(React.Fragment, null, chunk.map(({
       data,
       number,
@@ -203,7 +203,9 @@ class Offer61 extends PrnProto {
       payments: payments,
       key: chunk[0]?.id,
       images: images,
-      obj: obj
+      obj: obj,
+      Header: components.Header,
+      Footer: components.Footer
     }, React.createElement(React.Fragment, null, chunk.map(item => React.createElement(Box, {
       className: classes.tableMargins,
       key: item.id

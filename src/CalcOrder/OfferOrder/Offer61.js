@@ -30,10 +30,7 @@ const StyledFrame = React.lazy(() => import('../../StyledFrame/index.js'));
 class Offer61 extends PrnProto {
   componentDidMount() {
     const { attr, obj, print } = this.props;
-    console.log(obj);
     obj
-      // метод .load_linked_refs здесь на самом деле не нужен, но почему то svg в production.characteristic не доступны
-      // поэтому пока эта обертка здесь есть, а когда svg будут на своем месте ее можно будет убрать.
       .load_linked_refs()
       .then(async () => {
         this.setState({ loaded: true });
@@ -122,7 +119,6 @@ class Offer61 extends PrnProto {
       externalWindow.document.title = order;
     }
 
-    console.log(`classes`, classes);
     return (
       <React.Suspense fallback="Загрузка...">
         <StyledFrame
@@ -167,34 +163,6 @@ class Offer61 extends PrnProto {
               </Box>
               {productList && (
                 <>
-                  {/* {title && (
-                  <>
-                    <Box mt={1.5} mb={0.75}>
-                      <Typography>{title}</Typography>
-                    </Box>
-                    <Box p={0.625} sx={{ borderBottom: '1px solid #999' }} mb={2.5}></Box>
-                  </>
-                )}
-                {fullSquare && fullWeight && (
-                  <Box display="flex" flexDirection="row" sx={{ flex: '0 0 400px' }}>
-                    <Box sx={{ flex: '0 0 400px' }}>
-                      <Typography variant="subtitle2" component="p">
-                        Площадь изделий, кв.м:{' '}
-                        <Typography variant="subtitle2" component="span">
-                          {fullSquare}
-                        </Typography>
-                      </Typography>
-                    </Box>
-                    <Box sx={{ flex: '1 1 0%' }} pl={5.25}>
-                      <Typography variant="subtitle2" component="p">
-                        Масса изделий, кг:{' '}
-                        <Typography variant="subtitle2" component="span">
-                          {fullWeight}
-                        </Typography>
-                      </Typography>
-                    </Box>
-                  </Box>
-                )} */}
                   <Box className={classes.breakElementWithMargins}>
                     {chunksMaker(productList, paramsRowsPerPage).map(
                       (chunk, index) => (
@@ -204,6 +172,8 @@ class Offer61 extends PrnProto {
                           key={chunk[0]?.index}
                           images={images}
                           obj={obj}
+                          Header={components.Header}
+                          Footer={components.Footer}
                         >
                           <>
                             {chunk.map(
@@ -248,6 +218,8 @@ class Offer61 extends PrnProto {
                         key={chunk[0]?.id}
                         images={images}
                         obj={obj}
+                        Header={components.Header}
+                        Footer={components.Footer}
                       >
                         <>
                           {chunk.map((item) => (

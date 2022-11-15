@@ -90,7 +90,7 @@ class Glasses34 extends PrnProto {
     const title = `Заполнения заказа №${obj.number_doc} от ${moment(obj.date).format('DD.MM.YYYY')}`;
 
     if (externalWindow) {
-      externalWindow.document.title = `${title} бла-бла-бла`;
+      externalWindow.document.title = `${title}`;
     }
 
     let loading = loaded ? imgs ? '' : 'Формируем эскизы заполнений...' : 'Читаем продукции заказа...';

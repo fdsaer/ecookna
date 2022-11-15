@@ -48,9 +48,9 @@ class Offer59 extends PrnProto {
 
     import('./OfferComponents.js').then((module) => {
       this.setAsyncModules({
-        Header: module.Header,
-        Footer: module.Footer,
-        Title: module.Title,
+        Header: module.Header59,
+        Footer: module.Footer59,
+        Title: module.Title59,
         Payments: module.Payments,
         Wrapper: module.Wrapper,
         Description: module.Description,
@@ -209,6 +209,8 @@ class Offer59 extends PrnProto {
                           key={chunk[0]?.index}
                           images={images}
                           obj={obj}
+                          Header={components.Header}
+                          Footer={components.Footer}
                         >
                           <>
                             {chunk.map(
@@ -254,6 +256,8 @@ class Offer59 extends PrnProto {
                         key={chunk[0]?.id}
                         images={images}
                         obj={obj}
+                        Header={components.Header}
+                        Footer={components.Footer}
                       >
                         <>
                           {chunk.map((item) => (
