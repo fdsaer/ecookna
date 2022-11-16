@@ -1,15 +1,14 @@
 import PrnProto from '../../PrnProto.js';
-import { PrintingPageTemplate } from './OfferComponents.js';
 import { fullSquare, fullWeight, getProductsList, getManagerInfo, getAddressInfo } from './OfferData.js';
 import getProductsData from './OfferTable.js';
 import { getAssortmentLinks, getLinks, getAdvantages, getPayments, getAdditions } from './Templates.js';
 import { chunksMaker } from '../../utilities/index.js';
-import { StyledFrame59 as StyledFrame } from '../../StyledFrame/StyledFrame.js';
 const {
   React,
   Box,
   Typography
 } = $p.ui;
+const StyledFrame = React.lazy(() => import('../../StyledFrame/StyledFrame.js'));
 
 var _ref = React.createElement(Box, {
   mt: 3,
@@ -182,7 +181,7 @@ class Offer59 extends PrnProto {
       component: "p"
     }, order)), productList && React.createElement(React.Fragment, null, React.createElement(Box, {
       className: classes.breakElementWithMargins
-    }, chunksMaker(productList, paramsRowsPerPage).map((chunk, index) => React.createElement(PrintingPageTemplate, {
+    }, chunksMaker(productList, paramsRowsPerPage).map((chunk, index) => React.createElement(components.PrintingPageTemplate, {
       classes: classes,
       advantages: advantages,
       payments: payments,
@@ -213,7 +212,7 @@ class Offer59 extends PrnProto {
       key: index
     }))))))), productTableData && React.createElement(Box, {
       className: classes.breakElementWithMargins
-    }, chunksMaker(productTableData, tableRowsPerPage).map((chunk, index, chunksArr) => React.createElement(PrintingPageTemplate, {
+    }, chunksMaker(productTableData, tableRowsPerPage).map((chunk, index, chunksArr) => React.createElement(components.PrintingPageTemplate, {
       classes: classes,
       advantages: advantages,
       payments: payments,
