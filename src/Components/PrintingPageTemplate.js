@@ -1,5 +1,5 @@
-import Header from '../../Header/index.js';
-import Footer from '../../Footer/index.js';
+// import Header from '../../Header/index.js';
+// import Footer from '../../Footer/index.js';
 const { React, Box } = $p.ui;
 
 export default function PrintingPageTemplate({
@@ -9,6 +9,8 @@ export default function PrintingPageTemplate({
   children,
   images,
   obj,
+  Header,
+  Footer,
 }) {
   // const chunkNumber = productTableData.length;
   return (

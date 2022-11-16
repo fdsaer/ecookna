@@ -62,7 +62,7 @@ class Glasses34 extends PrnProto {
     ).format('DD.MM.YYYY')}`;
     // при наличии ссылки на externalWindow, дублируем заголовок
     if (externalWindow) {
-      externalWindow.document.title = `${title} бла-бла-бла`;
+      externalWindow.document.title = `${title}`;
     }
     let loading = loaded
       ? imgs

@@ -1,12 +1,13 @@
-const { createTheme } = $p.ui;
-
+const {
+  createTheme
+} = $p.ui;
 export const theme = createTheme({
   overrides: {
     MuiList: {
       padding: {
         paddingTop: '4px',
-        paddingBottom: '4px',
-      },
+        paddingBottom: '4px'
+      }
     },
     MuiCssBaseline: {
       '@global': {
@@ -15,61 +16,61 @@ export const theme = createTheme({
             width: '210mm',
             margin: 0,
             '& *, & *::before, & *::after': {
-              printColorAdjust: 'exact',
-            },
+              printColorAdjust: 'exact'
+            }
           },
+          backgroundColor: '#FFFFFF',
           fontFamily: ['Roboto', 'Helvetica', 'Arial', 'sans-serif'].join(','),
           fontSize: '.95rem',
           fontWeight: 400,
           letterSpacing: '.01071em',
           lineHeight: 1.43,
           '& *, & *::before, & *::after': {
-            boxSizing: 'content-box',
-          },
-        },
-      },
-    },
+            boxSizing: 'content-box'
+          }
+        }
+      }
+    }
   },
-
   typography: {
     fontFamily: ['Museo', 'Open Sans', 'Arial', 'sans-serif'].join(','),
     lineHeight: 1.15,
     h1: {
-      fontSize: '53px',
+      fontSize: '53px'
     },
     h3: {
-      fontSize: '1.7rem',
+      fontSize: '1.7rem'
     },
     h4: {
-      fontSize: '0.9rem',
+      fontSize: '0.9rem'
     },
     h5: {
       fontSize: '1.4rem',
-      fontWeight: 600,
+      fontWeight: 600
     },
     body1: {
       fontFamily: ['Museo', 'Open Sans', 'Arial', 'sans-serif'].join(','),
       fontSize: '16px',
       fontWeight: 400,
-      lineHeight: 1.15,
+      lineHeight: 1.15
     },
     body2: {
       fontFamily: ['Arial', 'sans-serif'].join(','),
       fontSize: '12px',
       fontWeight: 400,
-      lineHeight: 1.15,
+      lineHeight: 1.15
     },
     subtitle2: {
       fontFamily: ['Arial', 'sans-serif'].join(','),
       fontSize: '12px',
       fontWeight: 700,
-      lineHeight: 1.15,
-    },
+      lineHeight: 1.15
+    }
   },
   transitions: {
     duration: {
-      shorter: 150,
-    },
+      shorter: 150
+    }
   },
   breakpoints: {
     values: {
@@ -77,22 +78,22 @@ export const theme = createTheme({
       lg: 1280,
       md: 794,
       sm: 640,
-      xs: 0,
-    },
+      xs: 0
+    }
   },
   palette: {
     primary: {
       main: '#BFD7B5',
       light: '#dddddd',
-      dark: '#999999',
+      dark: '#999999'
     },
     mode: 'dark',
     text: {
       primary: '#1A322C',
-      secondary: '#007455',
+      secondary: '#007455'
     },
     productParams: {
-      textHead: '#1A322C',
+      textHead: '#1A322C'
     },
     tableProducts: {
       headCell: '#dddddd',
@@ -100,10 +101,10 @@ export const theme = createTheme({
       bodyCell: '#ffffff',
       bodyText: '#1A322C',
       footerCell: '#dddddd',
-      footerText: '#1A322C',
-    },
+      footerText: '#1A322C'
+    }
   },
   shape: {
-    borderRadius: 6,
-  },
+    borderRadius: 6
+  }
 });

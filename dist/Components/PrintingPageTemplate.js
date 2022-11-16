@@ -1,5 +1,3 @@
-import Header from '../../Header/index.js';
-import Footer from '../../Footer/index.js';
 const {
   React,
   Box
@@ -10,7 +8,9 @@ export default function PrintingPageTemplate({
   payments,
   children,
   images,
-  obj
+  obj,
+  Header,
+  Footer
 }) {
   return React.createElement(Box, {
     className: `${classes.avoidBreakInside} ${classes.pageBreakBefore} ${classes.pageFrame}`

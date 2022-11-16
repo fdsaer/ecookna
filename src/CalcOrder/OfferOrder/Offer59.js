@@ -5,7 +5,6 @@
  *
  */
 import PrnProto from '../../PrnProto.js';
-import { PrintingPageTemplate } from './OfferComponents.js';
 import {
   fullSquare,
   fullWeight,
@@ -24,8 +23,9 @@ import {
 import { chunksMaker } from '../../utilities/index.js';
 
 const { React, Box, Typography } = $p.ui;
-
-const StyledFrame = React.lazy(() => import('../../StyledFrame/index.js'));
+const StyledFrame = React.lazy(() =>
+  import('../../StyledFrame/StyledFrame.js')
+);
 
 class Offer59 extends PrnProto {
   componentDidMount() {
@@ -48,9 +48,9 @@ class Offer59 extends PrnProto {
 
     import('./OfferComponents.js').then((module) => {
       this.setAsyncModules({
-        Header: module.Header,
-        Footer: module.Footer,
-        Title: module.Title,
+        Header: module.Header59,
+        Footer: module.Footer59,
+        Title: module.Title59,
         Payments: module.Payments,
         Wrapper: module.Wrapper,
         Description: module.Description,
@@ -202,13 +202,15 @@ class Offer59 extends PrnProto {
                   <Box className={classes.breakElementWithMargins}>
                     {chunksMaker(productList, paramsRowsPerPage).map(
                       (chunk, index) => (
-                        <PrintingPageTemplate
+                        <components.PrintingPageTemplate
                           classes={classes}
                           advantages={advantages}
                           payments={payments}
                           key={chunk[0]?.index}
                           images={images}
                           obj={obj}
+                          Header={components.Header}
+                          Footer={components.Footer}
                         >
                           <>
                             {chunk.map(
@@ -237,7 +239,7 @@ class Offer59 extends PrnProto {
                               )
                             )}
                           </>
-                        </PrintingPageTemplate>
+                        </components.PrintingPageTemplate>
                       )
                     )}
                   </Box>
@@ -247,13 +249,15 @@ class Offer59 extends PrnProto {
                 <Box className={classes.breakElementWithMargins}>
                   {chunksMaker(productTableData, tableRowsPerPage).map(
                     (chunk, index, chunksArr) => (
-                      <PrintingPageTemplate
+                      <components.PrintingPageTemplate
                         classes={classes}
                         advantages={advantages}
                         payments={payments}
                         key={chunk[0]?.id}
                         images={images}
                         obj={obj}
+                        Header={components.Header}
+                        Footer={components.Footer}
                       >
                         <>
                           {chunk.map((item) => (
@@ -288,7 +292,7 @@ class Offer59 extends PrnProto {
                             </>
                           )}
                         </>
-                      </PrintingPageTemplate>
+                      </components.PrintingPageTemplate>
                     )
                   )}
                 </Box>

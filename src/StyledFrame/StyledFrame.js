@@ -1,16 +1,10 @@
-/**
- * Маршрутизатор стилей верхнего уровня
- */
-
 const { React, makeStyles, ThemeProvider, CssBaseline } = $p.ui;
 import { theme as theme1 } from './themes/theme1.js';
-import { theme as theme2 } from './themes/theme2.js';
 import { theme as theme61 } from './themes/theme61.js';
-import stylesBase from './styles/stylesBase.js';
-import stylesOrg1 from './styles/stylesOrg1.js';
+
 import stylesOrg59 from './styles/stylesOrg59.js';
 import stylesOrg61 from './styles/stylesOrg61.js';
-import stylesCss from './styles/stylesCss.js';
+
 import Loading from './Loading.js';
 
 export default function StyledFrame({
@@ -20,41 +14,14 @@ export default function StyledFrame({
   title,
   loading,
   loadingText = 'Загрузка...',
+  stylesKey,
   ...props
 }) {
   let tempClasses;
   let theme = theme1;
-  const [newClasses, setNewClasses] = React.useState('');
-  switch (props.obj.manager.name) {
-    // switch (props.obj.organization.name) {
-    case 'ЕВРООКНА':
-    case 'ГРУППА КОМПАНИЙ':
-    case 'ФЕНСТЕР ООО':
-    case 'ОКНА РОСТА ДОМ':
-      tempClasses = makeStyles(() => stylesOrg59(theme))();
-      break;
-
-    case 'Компания ФОТОТЕХ':
-    case 'ООО"ФОТОТЕХ"':
-      tempClasses = makeStyles(() => stylesOrg59(theme))();
-      break;
-
-    case 'ОК Калева':
-      theme = theme61;
-      tempClasses = makeStyles(() => stylesOrg61(theme))();
-      break;
-
-    case 'Петров ВВ':
-      theme = theme2;
-      tempClasses = makeStyles(() => stylesCss(theme))();
-      break;
-
-    case 'Касаткина Антонина':
-      theme = theme1;
-      tempClasses = makeStyles(() => stylesOrg59(theme))();
-      break;
-
-    case 'Гудилина ИА':
+  const [newClasses, setNewClasses] = React.useState(undefined);
+  switch (stylesKey) {
+    case 61:
       theme = theme61;
       tempClasses = makeStyles(() => stylesOrg61(theme))();
       break;
@@ -62,7 +29,7 @@ export default function StyledFrame({
     default:
       tempClasses = makeStyles(() => stylesOrg59(theme))();
   }
-  setClasses(newClasses);
+  setClasses(tempClasses);
   React.useEffect(() => {
     setNewClasses(tempClasses);
   }, [classes]);

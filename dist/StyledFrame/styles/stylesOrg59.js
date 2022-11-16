@@ -140,68 +140,6 @@ export default function styles(theme) {
     },
     w100: {
       width: '100%'
-    },
-    achievementMargins: {
-      '&:not(:last-child)': {
-        marginRight: theme.spacing(2.5)
-      }
-    },
-    wrapperPage: {
-      margin: '0 auto',
-      maxWidth: '794px',
-      boxSizing: 'border-box'
-    },
-    logo: {
-      '&:after': {
-        content: '""',
-        width: 0,
-        height: 0,
-        bottom: '-25px',
-        left: 0,
-        right: 0,
-        position: 'absolute',
-        margin: '0 auto',
-        borderLeft: '10px solid transparent',
-        borderRight: '68px solid transparent',
-        borderTop: '25px solid #E30613'
-      }
-    },
-    headerLine: {
-      borderTop: '1px solid #E30613',
-      textTransform: 'uppercase',
-      fontSize: '14px',
-      paddingTop: '7px',
-      fontWeight: 600,
-      marginTop: '20px',
-      position: 'relative',
-      zIndex: 22,
-      '&:before': {
-        zIndex: 25,
-        content: '""',
-        width: 0,
-        height: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        position: 'absolute',
-        margin: '0 auto',
-        borderLeft: '10px solid transparent',
-        borderRight: '55px solid transparent',
-        borderTop: '25px solid #fff'
-      },
-      '&:after': {
-        content: '""',
-        width: 0,
-        height: 0,
-        bottom: '-1px',
-        left: 0,
-        right: 0,
-        position: 'absolute',
-        margin: '0 auto',
-        borderLeft: '10px solid transparent',
-        borderRight: '55px solid transparent',
-        borderTop: '25px solid #E30613'
-      }
     }
   };
 }

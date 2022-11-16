@@ -1,5 +1,4 @@
 import PrnProto from '../../PrnProto.js';
-import { PrintingPageTemplate } from './OfferComponents.js';
 import { fullSquare, fullWeight, getProductsList, getManagerInfo, getAddressInfo } from './OfferData.js';
 import getProductsData from './OfferTable.js';
 import { getAssortmentLinks, getLinks, getAdvantages, getPayments, getAdditions } from './Templates.js';
@@ -9,7 +8,7 @@ const {
   Box,
   Typography
 } = $p.ui;
-const StyledFrame = React.lazy(() => import('../../StyledFrame/index.js'));
+const StyledFrame = React.lazy(() => import('../../StyledFrame/StyledFrame.js'));
 
 var _ref = React.createElement(Box, {
   mt: 3,
@@ -62,9 +61,9 @@ class Offer59 extends PrnProto {
     });
     import('./OfferComponents.js').then(module => {
       this.setAsyncModules({
-        Header: module.Header,
-        Footer: module.Footer,
-        Title: module.Title,
+        Header: module.Header59,
+        Footer: module.Footer59,
+        Title: module.Title59,
         Payments: module.Payments,
         Wrapper: module.Wrapper,
         Description: module.Description,
@@ -182,13 +181,15 @@ class Offer59 extends PrnProto {
       component: "p"
     }, order)), productList && React.createElement(React.Fragment, null, React.createElement(Box, {
       className: classes.breakElementWithMargins
-    }, chunksMaker(productList, paramsRowsPerPage).map((chunk, index) => React.createElement(PrintingPageTemplate, {
+    }, chunksMaker(productList, paramsRowsPerPage).map((chunk, index) => React.createElement(components.PrintingPageTemplate, {
       classes: classes,
       advantages: advantages,
       payments: payments,
       key: chunk[0]?.index,
       images: images,
-      obj: obj
+      obj: obj,
+      Header: components.Header,
+      Footer: components.Footer
     }, React.createElement(React.Fragment, null, chunk.map(({
       data,
       number,
@@ -211,13 +212,15 @@ class Offer59 extends PrnProto {
       key: index
     }))))))), productTableData && React.createElement(Box, {
       className: classes.breakElementWithMargins
-    }, chunksMaker(productTableData, tableRowsPerPage).map((chunk, index, chunksArr) => React.createElement(PrintingPageTemplate, {
+    }, chunksMaker(productTableData, tableRowsPerPage).map((chunk, index, chunksArr) => React.createElement(components.PrintingPageTemplate, {
       classes: classes,
       advantages: advantages,
       payments: payments,
       key: chunk[0]?.id,
       images: images,
-      obj: obj
+      obj: obj,
+      Header: components.Header,
+      Footer: components.Footer
     }, React.createElement(React.Fragment, null, chunk.map(item => React.createElement(Box, {
       className: classes.tableMargins,
       key: item.id

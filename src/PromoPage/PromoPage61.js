@@ -10,9 +10,7 @@ export default function PromoPage61(props) {
 
   return (
     <Box>
-      {/* обертка с отступами по краям */}
       <Box mt={5} px={5} className={`${classes.wrapperPage}`}>
-        {/* верхний колонтитул */}
         <Header withLogo obj={obj} classes={classes} />
 
         <Box
@@ -27,7 +25,6 @@ export default function PromoPage61(props) {
           </Typography>
         </Box>
 
-        {/* 6 карточек рекомендаций*/}
         <Box>
           <GridImages images={additions} classes={classes} />
         </Box>
@@ -44,7 +41,6 @@ export default function PromoPage61(props) {
           </Typography>
         </Box>
 
-        {/* 3 блока статистики  */}
         <Box
           display="flex"
           justifyContent="space-between"
@@ -69,8 +65,9 @@ export default function PromoPage61(props) {
                     {title}
                   </Typography>
                 </Box>
-                {text.split(' ').map((word) => (
+                {text.split(' ').map((word, index) => (
                   <Typography
+                    key={index}
                     variant="inherit"
                     color="textSecondary"
                     component="p"
@@ -82,7 +79,6 @@ export default function PromoPage61(props) {
             ))}
         </Box>
 
-        {/* 6 блоков преимуществ  */}
         <Grid container spacing={3}>
           {advantages &&
             advantages.map(({ id, image, text }) => (
@@ -114,9 +110,7 @@ export default function PromoPage61(props) {
         </Grid>
       </Box>
 
-      {/* Блоки без обертки */}
       <Box sx={{ backgroundColor: '#EDEDED' }}>
-        {/* Подвал. 5 иконок достижений  */}
         {achievements && (
           <Achievements achievements={achievements} classes={classes} />
         )}
