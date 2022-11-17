@@ -5,6 +5,7 @@
  *
  */
 import PrnProto from '../../PrnProto.js';
+import OfferDialogWrapper from './OfferDialogWrapper.js'
 import {
   fullSquare,
   fullWeight,
@@ -29,11 +30,16 @@ const StyledFrame = React.lazy(() =>
 
 class Offer59 extends PrnProto {
   componentDidMount() {
-    const { attr, obj, print, externalWindow } = this.props;
+    const {
+      attr,
+      obj,
+      print,
+      externalWindow,
+      renderAutoLines: autoLines
+    } = this.props;
+
     console.log(obj);
-    let autoLines = externalWindow.confirm(
-      'Нужно ли рисовать размерные линии в эскизах?'
-    );
+
     obj
       .load_linked_refs()
       .then(async () => {
@@ -77,6 +83,10 @@ class Offer59 extends PrnProto {
         ProductsTable: module.ProductsTable,
         ProductsTablePage: module.ProductsTablePage,
         PrintingPageTemplate: module.PrintingPageTemplate,
+      });
+
+      this.setAsyncModules({
+        ...module
       });
       this.setState({ componentsLoaded: true });
     });
@@ -378,9 +388,21 @@ class Offer59 extends PrnProto {
   }
 }
 
-// идентификатор - должен быть уникальным для каждой виртуальной формулы
-Offer59.ref = 'cefdf4d0-6c86-11ec-bee3-8b4e33301a48';
-Offer59.destination = 'doc.calc_order';
-Offer59.title = 'КП Экоокна 2022 – тест';
+class Offer59Wrapper extends React.Component {
+  render() {
+    return (
+      <OfferDialogWrapper
+        component={Offer59}
+        {...this.props}
+      />
+    )
+  }
+}
 
-export default Offer59;
+// идентификатор - должен быть уникальным для каждой виртуальной формулы
+Offer59Wrapper.ref = 'cefdf4d0-6c86-11ec-bee3-8b4e33301a48';
+Offer59Wrapper.destination = 'doc.calc_order';
+Offer59Wrapper.title = 'КП Экоокна 2022 – тест';
+
+
+export default Offer59Wrapper;
