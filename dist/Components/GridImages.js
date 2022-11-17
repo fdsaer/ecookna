@@ -7,7 +7,7 @@ const {
 export default function GridImages({
   images,
   width = '218px',
-  sRow = 3
+  sRow = 2
 }) {
   return React.createElement(Grid, {
     container: true,
@@ -20,9 +20,7 @@ export default function GridImages({
     item: true,
     key: id,
     xs: 4
-  }, image && React.createElement(Box, {
-    width: width
-  }, React.createElement("img", {
+  }, image && React.createElement(Box, null, React.createElement("img", {
     src: image,
     style: {
       display: 'block',
@@ -31,7 +29,6 @@ export default function GridImages({
       boxSizing: 'border-box'
     }
   })), text && React.createElement(Box, {
-    width: width,
     fontWeight: 600,
     fontSize: 16,
     sx: {

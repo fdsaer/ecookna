@@ -5,7 +5,6 @@
  *
  */
 import PrnProto from '../../PrnProto.js';
-import { PrintingPageTemplate } from './OfferComponents.js';
 import {
   fullSquare,
   fullWeight,
@@ -22,10 +21,11 @@ import {
   getAchievements61,
 } from './Templates.js';
 import { chunksMaker } from '../../utilities/index.js';
-import { StyledFrame61 as StyledFrame } from '../../StyledFrame/StyledFrame.js';
 
 const { React, Box, Typography } = $p.ui;
-// const StyledFrame = React.lazy(() => import('../../StyledFrame/index.js'));
+const StyledFrame = React.lazy(() =>
+  import('../../StyledFrame/StyledFrame.js')
+);
 
 class Offer61 extends PrnProto {
   componentDidMount() {
@@ -128,6 +128,7 @@ class Offer61 extends PrnProto {
           setClasses={this.setClasses}
           title={order}
           loading={!components || !images || !loaded || !classes}
+          stylesKey={61}
           // err={err}
         >
           {components?.Title && (
@@ -166,7 +167,7 @@ class Offer61 extends PrnProto {
                   <Box className={classes.breakElementWithMargins}>
                     {chunksMaker(productList, paramsRowsPerPage).map(
                       (chunk, index) => (
-                        <PrintingPageTemplate
+                        <components.PrintingPageTemplate
                           classes={classes}
                           payments={payments}
                           key={chunk[0]?.index}
@@ -202,7 +203,7 @@ class Offer61 extends PrnProto {
                               )
                             )}
                           </>
-                        </PrintingPageTemplate>
+                        </components.PrintingPageTemplate>
                       )
                     )}
                   </Box>
@@ -212,7 +213,7 @@ class Offer61 extends PrnProto {
                 <Box className={classes.breakElementWithMargins}>
                   {chunksMaker(productTableData, tableRowsPerPage).map(
                     (chunk, index, chunksArr) => (
-                      <PrintingPageTemplate
+                      <components.PrintingPageTemplate
                         classes={classes}
                         payments={payments}
                         key={chunk[0]?.id}
@@ -254,7 +255,7 @@ class Offer61 extends PrnProto {
                             </>
                           )}
                         </>
-                      </PrintingPageTemplate>
+                      </components.PrintingPageTemplate>
                     )
                   )}
                 </Box>

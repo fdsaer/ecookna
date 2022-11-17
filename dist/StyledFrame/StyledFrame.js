@@ -9,23 +9,34 @@ import { theme as theme61 } from './themes/theme61.js';
 import stylesOrg59 from './styles/stylesOrg59.js';
 import stylesOrg61 from './styles/stylesOrg61.js';
 import Loading from './Loading.js';
-export const StyledFrame61 = props => StyledFrame(theme61, stylesOrg61, props);
-export const StyledFrame59 = props => StyledFrame(theme1, stylesOrg59, props);
 
 var _ref = React.createElement(CssBaseline, null);
 
-export function StyledFrame(theme, stylesOrg, {
+export default function StyledFrame({
   children,
   setClasses,
   classes,
   title,
   loading,
   loadingText = 'Загрузка...',
+  stylesKey,
   ...props
 }) {
-  const [newClasses, setNewClasses] = React.useState('');
-  const tempClasses = makeStyles(() => stylesOrg(theme))();
-  setClasses(newClasses);
+  let tempClasses;
+  let theme = theme1;
+  const [newClasses, setNewClasses] = React.useState(undefined);
+
+  switch (stylesKey) {
+    case 61:
+      theme = theme61;
+      tempClasses = makeStyles(() => stylesOrg61(theme))();
+      break;
+
+    default:
+      tempClasses = makeStyles(() => stylesOrg59(theme))();
+  }
+
+  setClasses(tempClasses);
   React.useEffect(() => {
     setNewClasses(tempClasses);
   }, [classes]);

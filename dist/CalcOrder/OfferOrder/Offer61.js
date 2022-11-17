@@ -1,15 +1,14 @@
 import PrnProto from '../../PrnProto.js';
-import { PrintingPageTemplate } from './OfferComponents.js';
 import { fullSquare, fullWeight, getProductsList, getManagerInfo, getAddressInfo } from './OfferData.js';
 import getProductsData from './OfferTable.js';
 import { getPayments61, getAdditions61, getStatistics61, getAdvantages61, getAchievements61 } from './Templates.js';
 import { chunksMaker } from '../../utilities/index.js';
-import { StyledFrame61 as StyledFrame } from '../../StyledFrame/StyledFrame.js';
 const {
   React,
   Box,
   Typography
 } = $p.ui;
+const StyledFrame = React.lazy(() => import('../../StyledFrame/StyledFrame.js'));
 
 var _ref = React.createElement(Typography, {
   variant: "inherit",
@@ -139,7 +138,8 @@ class Offer61 extends PrnProto {
       classes: classes,
       setClasses: this.setClasses,
       title: order,
-      loading: !components || !images || !loaded || !classes
+      loading: !components || !images || !loaded || !classes,
+      stylesKey: 61
     }, components?.Title && React.createElement(components.Title, {
       title: "Коммерческое предложение",
       description: "по изготовлению и установке светопрозрачных конструкций",
@@ -168,7 +168,7 @@ class Offer61 extends PrnProto {
       }
     }, _ref), productList && React.createElement(React.Fragment, null, React.createElement(Box, {
       className: classes.breakElementWithMargins
-    }, chunksMaker(productList, paramsRowsPerPage).map((chunk, index) => React.createElement(PrintingPageTemplate, {
+    }, chunksMaker(productList, paramsRowsPerPage).map((chunk, index) => React.createElement(components.PrintingPageTemplate, {
       classes: classes,
       payments: payments,
       key: chunk[0]?.index,
@@ -198,7 +198,7 @@ class Offer61 extends PrnProto {
       key: index
     }))))))), productTableData && React.createElement(Box, {
       className: classes.breakElementWithMargins
-    }, chunksMaker(productTableData, tableRowsPerPage).map((chunk, index, chunksArr) => React.createElement(PrintingPageTemplate, {
+    }, chunksMaker(productTableData, tableRowsPerPage).map((chunk, index, chunksArr) => React.createElement(components.PrintingPageTemplate, {
       classes: classes,
       payments: payments,
       key: chunk[0]?.id,

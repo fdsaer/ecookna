@@ -19,6 +19,7 @@ export const theme = createTheme({
               printColorAdjust: 'exact'
             }
           },
+          backgroundColor: '#FFFFFF',
           fontFamily: ['Roboto', 'Helvetica', 'Arial', 'sans-serif'].join(','),
           fontSize: '.95rem',
           fontWeight: 400,

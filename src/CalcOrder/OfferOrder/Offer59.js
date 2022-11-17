@@ -5,7 +5,6 @@
  *
  */
 import PrnProto from '../../PrnProto.js';
-import { PrintingPageTemplate } from './OfferComponents.js';
 import {
   fullSquare,
   fullWeight,
@@ -22,10 +21,11 @@ import {
   getAdditions,
 } from './Templates.js';
 import { chunksMaker } from '../../utilities/index.js';
-import { StyledFrame59 as StyledFrame } from '../../StyledFrame/StyledFrame.js';
 
 const { React, Box, Typography } = $p.ui;
-// const StyledFrame = React.lazy(() => import('../../StyledFrame/index.js'));
+const StyledFrame = React.lazy(() =>
+  import('../../StyledFrame/StyledFrame.js')
+);
 
 class Offer59 extends PrnProto {
   componentDidMount() {
@@ -202,7 +202,7 @@ class Offer59 extends PrnProto {
                   <Box className={classes.breakElementWithMargins}>
                     {chunksMaker(productList, paramsRowsPerPage).map(
                       (chunk, index) => (
-                        <PrintingPageTemplate
+                        <components.PrintingPageTemplate
                           classes={classes}
                           advantages={advantages}
                           payments={payments}
@@ -239,7 +239,7 @@ class Offer59 extends PrnProto {
                               )
                             )}
                           </>
-                        </PrintingPageTemplate>
+                        </components.PrintingPageTemplate>
                       )
                     )}
                   </Box>
@@ -249,7 +249,7 @@ class Offer59 extends PrnProto {
                 <Box className={classes.breakElementWithMargins}>
                   {chunksMaker(productTableData, tableRowsPerPage).map(
                     (chunk, index, chunksArr) => (
-                      <PrintingPageTemplate
+                      <components.PrintingPageTemplate
                         classes={classes}
                         advantages={advantages}
                         payments={payments}
@@ -292,7 +292,7 @@ class Offer59 extends PrnProto {
                             </>
                           )}
                         </>
-                      </PrintingPageTemplate>
+                      </components.PrintingPageTemplate>
                     )
                   )}
                 </Box>

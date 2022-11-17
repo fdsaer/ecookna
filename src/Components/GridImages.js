@@ -1,13 +1,13 @@
 const { React, Box, Typography, Grid } = $p.ui;
 
-export default function GridImages({ images, width = '218px', sRow = 3 }) {
+export default function GridImages({ images, width = '218px', sRow = 2 }) {
   return (
     <Grid container spacing={sRow}>
       {images &&
         images.map(({ id, image, text }) => (
           <Grid item key={id} xs={4}>
             {image && (
-              <Box width={width}>
+              <Box>
                 <img
                   src={image}
                   style={{
@@ -21,7 +21,6 @@ export default function GridImages({ images, width = '218px', sRow = 3 }) {
             )}
             {text && (
               <Box
-                width={width}
                 fontWeight={600}
                 fontSize={16}
                 sx={{
