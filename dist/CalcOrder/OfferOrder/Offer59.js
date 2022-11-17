@@ -40,24 +40,47 @@ class Offer59 extends PrnProto {
     const {
       attr,
       obj,
-      print
+      print,
+      externalWindow
     } = this.props;
     console.log(obj);
+    let autoLines = externalWindow.confirm('Нужно ли рисовать размерные линии в эскизах?');
     obj.load_linked_refs().then(async () => {
       this.setState({
         loaded: true
       });
       const products = obj.production;
+      const imgs = new Map();
+
+      for (const {
+        characteristic
+      } of obj.production) {
+        imgs.set(characteristic, [0]);
+      }
+
+      const attr = {
+        res: new Map()
+      };
+
+      for (const [ox] of imgs) {
+        attr.builder_props = { ...attr.builder_props,
+          auto_lines: !!autoLines,
+          custom_lines: false,
+          txts: false
+        };
+        await ox.draw(attr);
+      }
+
       this.setState({
         products
+      });
+      this.setState({
+        svgImgs: attr.res
       });
     }).catch(err => {
       this.setState({
         err: err.message
       });
-    });
-    this.setState({
-      loaded: true
     });
     import('./OfferComponents.js').then(module => {
       this.setAsyncModules({
@@ -118,19 +141,26 @@ class Offer59 extends PrnProto {
       },
       state: {
         loaded,
-        products
+        products,
+        svgImgs
       },
       classes,
       components,
       images
     } = this;
+    const totals = {
+      svgImgs,
+      q: new Map(),
+      s: new Map(),
+      m: new Map()
+    };
     const manager = getManagerInfo(obj);
     const assortmentLinks = getAssortmentLinks(images);
     const links = getLinks(images);
     const advantages = getAdvantages(images);
     const payments = getPayments(images);
     const additions = getAdditions(images);
-    const productList = products && getProductsList(products);
+    const productList = products && totals && getProductsList(products, totals);
     const tableRowsPerPage = 25;
     const paramsRowsPerPage = 29;
     const paramsSvgMaxHeight = 246;
@@ -151,7 +181,7 @@ class Offer59 extends PrnProto {
       classes: classes,
       setClasses: this.setClasses,
       title: order,
-      loading: !components || !images || !loaded || !classes
+      loading: !components || !images || !svgImgs || !loaded || !classes
     }, components && React.createElement(components.Title, {
       headerTitle: "Индивидуальное решение",
       description: "по изготовлению и установке светопрозрачных конструкций",

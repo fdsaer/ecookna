@@ -29,22 +29,38 @@ const StyledFrame = React.lazy(() =>
 
 class Offer59 extends PrnProto {
   componentDidMount() {
-    const { attr, obj, print } = this.props;
+    const { attr, obj, print, externalWindow } = this.props;
     console.log(obj);
+    let autoLines = externalWindow.confirm(
+      'Нужно ли рисовать размерные линии в эскизах?'
+    );
     obj
-      // метод .load_linked_refs здесь на самом деле не нужен, но почему то svg в production.characteristic не доступны
-      // поэтому пока эта обертка здесь есть, а когда svg будут на своем месте ее можно будет убрать.
       .load_linked_refs()
       .then(async () => {
         this.setState({ loaded: true });
         // получим список заполнений, которым нужны эскизы
         const products = obj.production;
+        const imgs = new Map();
+        for (const { characteristic } of obj.production) {
+          imgs.set(characteristic, [0]);
+        }
+        const attr = { res: new Map() };
+        for (const [ox] of imgs) {
+          attr.builder_props = {
+            ...attr.builder_props,
+            auto_lines: !!autoLines,
+            custom_lines: false,
+            txts: false,
+          };
+          await ox.draw(attr);
+        }
         this.setState({ products });
+        this.setState({ svgImgs: attr.res });
       })
       .catch((err) => {
         this.setState({ err: err.message });
       });
-    this.setState({ loaded: true });
+    // this.setState({ loaded: true });
 
     import('./OfferComponents.js').then((module) => {
       this.setAsyncModules({
@@ -96,19 +112,20 @@ class Offer59 extends PrnProto {
   render() {
     const {
       props: { obj, attr, externalWindow },
-      state: { loaded, products },
+      state: { loaded, products, svgImgs },
       classes,
       components,
       images,
     } = this;
 
+    const totals = { svgImgs, q: new Map(), s: new Map(), m: new Map() };
     const manager = getManagerInfo(obj);
     const assortmentLinks = getAssortmentLinks(images);
     const links = getLinks(images);
     const advantages = getAdvantages(images);
     const payments = getPayments(images);
     const additions = getAdditions(images);
-    const productList = products && getProductsList(products);
+    const productList = products && totals && getProductsList(products, totals);
     const tableRowsPerPage = 25; // Ограничение количества строк на одну страницу при группировке таблиц для постраничной печати
     const paramsRowsPerPage = 29; // Ограничение количества строк на одну страницу при группировке параметров изделия для постраничной печати
     const paramsSvgMaxHeight = 246; // Высота SVG подобрана таким образом, чтобы рисунок занимал максимальное место
@@ -132,7 +149,7 @@ class Offer59 extends PrnProto {
           classes={classes}
           setClasses={this.setClasses}
           title={order}
-          loading={!components || !images || !loaded || !classes}
+          loading={!components || !images || !svgImgs || !loaded || !classes}
           // err={err}
         >
           {components && (

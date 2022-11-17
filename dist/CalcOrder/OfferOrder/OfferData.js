@@ -123,9 +123,12 @@ const getProductCharacteristics = product => {
   }];
 };
 
-export const getProductsList = products => {
+export const getProductsList = (products, totals) => {
   return products.map((product, index) => {
-    const sysName = product.characteristic.sys.name;
+    const ox = product.characteristic;
+    console.log(totals);
+    const img = totals.svgImgs.get(ox);
+    const sysName = ox.sys.name;
     const filters = ['водоотлив'];
 
     if (product.characteristic.svg && !filters.includes(sysName.toLowerCase())) {
@@ -134,7 +137,7 @@ export const getProductsList = products => {
         number: product.row,
         position: product.row,
         quantity: product.quantity,
-        svg: product.characteristic.svg,
+        svg: img && img.imgs[`${ox.origin?.insert_type?.is?.('mosquito') ? 's' : 'l'}0`],
         data,
         size: data.reduce((acc, {
           size
