@@ -38,8 +38,6 @@ class Offer59 extends PrnProto {
       externalWindow,
     } = this.props;
 
-    console.log(autoLines);
-
     obj
       .load_linked_refs()
       .then(async () => {
