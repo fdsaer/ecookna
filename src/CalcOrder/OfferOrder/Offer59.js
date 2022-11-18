@@ -5,7 +5,6 @@
  *
  */
 import PrnProto from '../../PrnProto.js';
-import OfferDialogWrapper from './OfferDialogWrapper.js'
 import {
   fullSquare,
   fullWeight,
@@ -31,14 +30,15 @@ const StyledFrame = React.lazy(() =>
 class Offer59 extends PrnProto {
   componentDidMount() {
     const {
-      attr,
+      attr: {
+        renderAutoLines: autoLines
+      },
       obj,
       print,
       externalWindow,
-      renderAutoLines: autoLines
     } = this.props;
 
-    console.log(obj);
+    console.log(autoLines);
 
     obj
       .load_linked_refs()
@@ -388,21 +388,32 @@ class Offer59 extends PrnProto {
   }
 }
 
-class Offer59Wrapper extends React.Component {
-  render() {
-    return (
-      <OfferDialogWrapper
-        component={Offer59}
-        {...this.props}
-      />
-    )
-  }
+// идентификатор - должен быть уникальным для каждой виртуальной формулы
+Offer59.ref = 'cefdf4d0-6c86-11ec-bee3-8b4e33301a48';
+Offer59.destination = 'doc.calc_order';
+Offer59.title = 'КП Экоокна 2022 – тест';
+Offer59.beforeOpen = async () => {
+  const {dialogs} = $p.ui;
+
+  const list = [
+    {value: 'hide', text: 'Скрыть'},
+    {value: 'show', text: 'Показать'}
+  ]
+
+  const needAutoLinesString = await dialogs.input_value({
+    title: 'Размерные линии',
+    text: 'Способ отрисовки размерных линий',
+    list: [
+      {value: 'hide', text: 'Скрыть'},
+      {value: 'show', text: 'Показать'}
+    ],
+    initialValue: list[0],
+  })
+
+  return {
+    needAutoLines: needAutoLinesString === 'show'
+  };
 }
 
-// идентификатор - должен быть уникальным для каждой виртуальной формулы
-Offer59Wrapper.ref = 'cefdf4d0-6c86-11ec-bee3-8b4e33301a48';
-Offer59Wrapper.destination = 'doc.calc_order';
-Offer59Wrapper.title = 'КП Экоокна 2022 – тест';
 
-
-export default Offer59Wrapper;
+export default Offer59;
